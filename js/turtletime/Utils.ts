@@ -16,8 +16,8 @@ namespace TurtleTime {
      * @param action An action to perform on an object of type T.
      */
     export function applyOnSubelements<T>(jaggedArray : Array<Array<T>>, action : (item : T) => void) : void {
-        this.entities.forEach(function (innerList : Array<T>) : void {
-            innerList.forEach(function (subElement : T) : void {
+        jaggedArray.forEach(function (innerArray : Array<T>) : void {
+            innerArray.forEach(function (subElement : T) : void {
                 action(subElement);
             })
         });

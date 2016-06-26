@@ -17,7 +17,7 @@ namespace TurtleTime {
         create() : void {
             this.entities = [ [new Turtle(100, 100), new Turtle(200, 200)] ];
             // Create sprites for all entities
-            applyOnSubelements(this.entities, (item : Entity) : void => item.assignSprite(this.game.add.sprite(0, 0)));
+            applyOnSubelements(this.entities, (item : Entity) : void => item.assignSprite(this.game.add.sprite(0, 0, 'turtle')));
         }
 
         update() : void {
