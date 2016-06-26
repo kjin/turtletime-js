@@ -7,7 +7,7 @@ import Point = Phaser.Point;
 import Sprite = Phaser.Sprite;
 
 namespace TurtleTime {
-    class TurtleTimeGame {
+    export class TurtleTimeGame {
         game:Game = new Game(540, 960, Phaser.AUTO, '', {preload: this.preload, create: this.create, update: this.update});
         turtles:Array<Turtle>;
 
@@ -26,3 +26,5 @@ namespace TurtleTime {
         }
     }
 }
+
+new TurtleTime.TurtleTimeGame();
