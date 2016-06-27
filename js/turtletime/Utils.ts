@@ -23,15 +23,18 @@ namespace TurtleTime {
     }
 
     /**
-     * Performs an action to each sub element in a jagged two-dimensional array.
-     * @param jaggedArray An array of arrays of type T objects.
+     * Performs an action to each sub element in an object whose properties are arrays of objects.
+     * @param obj An object whose properties are arrays of type T objects.
      * @param action An action to perform on an object of type T.
      */
-    export function applyOnSubelements<T>(jaggedArray : Array<Array<T>>, action : (item : T) => void) : void {
-        jaggedArray.forEach(function (innerArray : Array<T>) : void {
-            innerArray.forEach(function (subElement : T) : void {
-                action(subElement);
-            })
-        });
+    export function applyOnSubelements<T>(obj : any, action : (item : T) => void) : void {
+        for (var innerArrayName in obj) {
+            if (obj.hasOwnProperty(innerArrayName)) {
+                var innerArray = obj[innerArrayName];
+                innerArray.forEach(function (subElement:T):void {
+                    action(subElement);
+                })
+            }
+        }
     }
 }
