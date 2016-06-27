@@ -8,7 +8,10 @@ import Sprite = Phaser.Sprite;
 namespace TurtleTime {
     export interface GameState {
         entities : {
-            turtles : Array<Turtle>
+            misc : Array<Entity>,
+            turtles : Array<Turtle>,
+            chairs : Array<Chair>,
+            tables : Array<Table>
         }
     }
 
@@ -19,12 +22,16 @@ namespace TurtleTime {
         preload() : void {
             game.load.spritesheet('turtle', 'assets/turtle.png', 45, 60);
             game.load.image('highlightCircle', 'assets/highlightCircle.png');
+            game.load.spritesheet('tableandchair', 'assets/tableandchair.png', 52, 52);
         }
 
         create() : void {
             this.gameState = {
                 entities : {
-                    turtles : [new Turtle(100, 100), new Turtle(200, 200)]
+                    misc: [],
+                    turtles : [new Turtle(10, 10), new Turtle(20, 20)],
+                    chairs : [],
+                    tables: [new Table(20, 10)]
                 }
             };
             this.controllers = [new TurtleController()];

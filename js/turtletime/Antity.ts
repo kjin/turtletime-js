@@ -5,19 +5,20 @@ module TurtleTime {
     export abstract class Entity {
         public position : Point;
         public direction : Direction;
-        public spriteID : String;
-        public currentAction : String;
-        public effect : String;
+        public spriteSpecs : SpriteSpecs;
+        public currentAction : string;
+        public effect : string;
         public sprite : EntityView;
 
-        constructor(x:number, y:number, spriteID:String) {
+        constructor(x:number, y:number, spriteSpecs:SpriteSpecs) {
             this.position = new Point(x, y);
-            this.spriteID = spriteID;
+            this.spriteSpecs = spriteSpecs;
             this.direction = Direction.Down;
+            this.effect = "hidden";
         }
 
         assignSprite() : void {
-            this.sprite = new EntityView(this.spriteID);
+            this.sprite = new EntityView(this.spriteSpecs);
             this.updateView();
         }
 

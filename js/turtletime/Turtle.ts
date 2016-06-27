@@ -4,9 +4,13 @@ module TurtleTime {
         brain : LoopBrain;
 
         constructor(x:number, y:number) {
-            super(x, y, 'turtle');
+            super(x, y, {
+                spriteID: 'turtle',
+                scale: 0.5
+            });
             this.currentAction = 'stand';
-            var side = 10;
+            this.effect = 'normal';
+            var side = 1;
             this.brain = new LoopBrain(0.01, [
                 {
                     lowerBoundT: 0,
