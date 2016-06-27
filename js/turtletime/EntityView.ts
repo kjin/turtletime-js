@@ -21,6 +21,14 @@ module TurtleTime {
             return this._mainSprite.animations;
         }
 
+        get x() : number {
+            return this._mainSprite.x;
+        }
+
+        get y() : number {
+            return this._mainSprite.y;
+        }
+
         update(entity : Entity) : void {
             this._mainSprite.x = entity.position.x * COORDINATE_SCALE;
             this._mainSprite.y = entity.position.y * COORDINATE_SCALE;

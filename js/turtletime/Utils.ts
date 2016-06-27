@@ -2,7 +2,9 @@ module TurtleTime {
     export var EffectCircleDictionary = {
         unselectable: 0xff0000ff,
         hidden: 0xffffff00,
-        normal: 0xffffffff
+        normal: 0xffffffff,
+        highlighted: 0xffff00ff,
+        selected: 0x00ff00ff
     };
 
     export function setTintAndAlpha(sprite : Sprite, value : number) : void {
