@@ -10,6 +10,18 @@ namespace TurtleTime {
         Right
     }
 
+    export function getFirstCharacter(dir : Direction) : string {
+        if (dir == Direction.Up) {
+            return 'u';
+        } else if (dir == Direction.Left) {
+            return 'l';
+        } else if (dir == Direction.Right) {
+            return 'r';
+        } else {
+            return 'd';
+        }
+    }
+
     /**
      * Performs an action to each sub element in a jagged two-dimensional array.
      * @param jaggedArray An array of arrays of type T objects.

@@ -2,25 +2,27 @@ module TurtleTime {
     /**
      * Represents any physical object in the cafe.
      */
-    export class Entity {
-        protected position : Point;
-        protected direction : Direction;
-        protected spriteID : String;
-        protected currentAction : String;
-        protected sprite : Sprite;
+    export abstract class Entity {
+        public position : Point;
+        public direction : Direction;
+        public spriteID : String;
+        public currentAction : String;
+        public effect : String;
+        public sprite : EntityView;
 
-        constructor(x:number, y:number) {
+        constructor(x:number, y:number, spriteID:String) {
             this.position = new Point(x, y);
+            this.spriteID = spriteID;
+            this.direction = Direction.Down;
         }
 
-        assignSprite(sprite : Sprite) : void {
-            this.sprite = sprite;
-            this.updateSprite();
+        assignSprite() : void {
+            this.sprite = new EntityView(this.spriteID);
+            this.updateView();
         }
 
-        updateSprite() : void {
-            this.sprite.x = this.position.x;
-            this.sprite.y = this.position.y;
+        updateView() : void {
+            this.sprite.update(this);
         }
     }
 }

@@ -7,24 +7,26 @@ import Sprite = Phaser.Sprite;
 
 namespace TurtleTime {
     export class TurtleTimeGame {
-        game : Game = new Game(540, 960, Phaser.AUTO, '', {preload: this.preload, create: this.create, update: this.update});
         entities : Array<Array<Entity>>;
+        controllers : Array<Controller>;
 
         preload() : void {
-            this.game.load.spritesheet('turtle', 'assets/turtle.png', 45, 60);
+            game.load.spritesheet('turtle', 'assets/turtle.png', 45, 60);
+            game.load.image('highlightCircle', 'assets/highlightCircle.png');
         }
 
         create() : void {
             this.entities = [ [new Turtle(100, 100), new Turtle(200, 200)] ];
             // Create sprites for all entities
-            applyOnSubelements(this.entities, (item : Entity) : void => item.assignSprite(this.game.add.sprite(0, 0, 'turtle')));
+            applyOnSubelements(this.entities, (item : Entity) : void => item.assignSprite());
         }
 
         update() : void {
             // Update drawing
-            applyOnSubelements(this.entities, (item : Entity) : void => item.updateSprite() );
+            applyOnSubelements(this.entities, (item : Entity) : void => item.updateView() );
         }
     }
-}
 
-new TurtleTime.TurtleTimeGame();
+    var turtleTimeGame : TurtleTimeGame = new TurtleTimeGame();
+    export var game : Game = new Game(540, 960, Phaser.AUTO, '', {preload: turtleTimeGame.preload, create: turtleTimeGame.create, update: turtleTimeGame.update});
+}
