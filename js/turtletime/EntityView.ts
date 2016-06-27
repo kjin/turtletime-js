@@ -29,6 +29,18 @@ module TurtleTime {
             return this._mainSprite.y;
         }
 
+        get width() : number {
+            return this._mainSprite.scale.x * this._mainSprite.texture.frame.width;
+        }
+
+        get height() : number {
+            return this._mainSprite.scale.y * this._mainSprite.texture.frame.height;
+        }
+
+        contains(x : number, y : number) : boolean {
+            return Math.abs(x - this.x) <= this.width / 2 && Math.abs(y - this.y) <= this.height / 2;
+        }
+
         update(entity : Entity) : void {
             this._mainSprite.x = entity.position.x * COORDINATE_SCALE;
             this._mainSprite.y = entity.position.y * COORDINATE_SCALE;

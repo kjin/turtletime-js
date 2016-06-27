@@ -3,6 +3,7 @@ module TurtleTime {
         unselectable: 0xff0000ff,
         hidden: 0xffffff00,
         normal: 0xffffffff,
+        over: 0xff0000ff,
         highlighted: 0xffff00ff,
         selected: 0x00ff00ff
     };

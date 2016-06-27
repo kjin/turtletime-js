@@ -7,6 +7,7 @@ import Sprite = Phaser.Sprite;
 
 namespace TurtleTime {
     export interface GameState {
+        selectionModel : SelectionModel,
         entities : {
             misc : Array<Entity>,
             turtles : Array<Turtle>,
@@ -27,6 +28,7 @@ namespace TurtleTime {
 
         create() : void {
             this.gameState = {
+                selectionModel : new SelectionModel(),
                 entities : {
                     misc: [],
                     turtles : [new Turtle(10, 10), new Turtle(20, 20)],
@@ -34,11 +36,12 @@ namespace TurtleTime {
                     tables: [new Table(20, 10)]
                 }
             };
-            this.controllers = [new TurtleController()];
+            this.controllers = [new TurtleController(), new InputController()];
             // Set controllers
             this.controllers.forEach((function (controller : Controller) { controller.initialize(this.gameState); }).bind(this));
             // Create sprites for all entities
             applyOnSubelements(this.gameState.entities, (item : Entity) : void => item.assignSprite());
+            this.gameState.selectionModel.initializeView();
         }
 
         update() : void {
@@ -46,6 +49,7 @@ namespace TurtleTime {
             this.controllers.forEach(function (controller : Controller) { controller.update(1.0/60); });
             // Update drawing
             applyOnSubelements(this.gameState.entities, (item : Entity) : void => item.updateView());
+            this.gameState.selectionModel.updateView();
         }
     }
 

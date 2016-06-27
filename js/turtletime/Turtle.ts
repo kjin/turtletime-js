@@ -6,12 +6,12 @@ module TurtleTime {
         constructor(x:number, y:number) {
             super(x, y, {
                 spriteID: 'turtle',
-                scale: 0.5
+                scale: 1.0
             });
             this.currentAction = 'stand';
             this.effect = 'normal';
             var side = 1;
-            this.brain = new LoopBrain(0.01, [
+            this.brain = new LoopBrain(0.001, [
                 {
                     lowerBoundT: 0,
                     upperBoundT: 0.5,
