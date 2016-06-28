@@ -15,10 +15,16 @@ module TurtleTime {
                     turtle.brain.update();
                     var px : number = game.input.activePointer.x;
                     var py : number = game.input.activePointer.y;
-                    if (turtle.sprite.contains(px, py)) {
+                    if (turtle.view.contains(px, py)) {
+                        if (game.input.activePointer.justReleased()) {
+                            if (this._writeState.selectionModel.entity == turtle) {
+                                this._writeState.selectionModel.entity = null;
+                            } else {
+                                this._writeState.selectionModel.entity = turtle;
+                            }
+                        }
                         if (game.input.activePointer.isDown) {
                             turtle.effect = "highlighted";
-                            this._writeState.selectionModel.entity = turtle;
                         } else {
                             turtle.effect = "over";
                         }

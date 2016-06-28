@@ -1,12 +1,23 @@
 module TurtleTime {
     import LoopBrain = TurtleTime.Behavior.LoopBehavior;
-    export class Turtle extends Entity {
+    export class Turtle extends EntityModel {
         brain : LoopBrain;
 
         constructor(x:number, y:number) {
             super(x, y, {
                 spriteID: 'turtle',
-                scale: 1.0
+                scale: 1.0,
+                animations: [
+                    {
+                        name: "stand",
+                        frames: [
+                            { direction: Direction.Left, frames: [0] },
+                            { direction: Direction.Down, frames: [1] },
+                            { direction: Direction.Right, frames: [2] },
+                            { direction: Direction.Up, frames: [3] }
+                        ]
+                    }
+                ]
             });
             this.currentAction = 'stand';
             this.effect = 'normal';
@@ -31,14 +42,6 @@ module TurtleTime {
                     }
                 }
             ]);
-        }
-
-        assignSprite() : void {
-            super.assignSprite();
-            this.sprite.animations.add('l-stand', [0]);
-            this.sprite.animations.add('d-stand', [1]);
-            this.sprite.animations.add('r-stand', [2]);
-            this.sprite.animations.add('u-stand', [3]);
         }
     }
 }

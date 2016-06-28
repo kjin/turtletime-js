@@ -1,27 +1,15 @@
-module TurtleTime {
-    export class SelectionModel {
-        private _dirty : boolean = true;
-        private _entity : Entity;
-        view : SelectionView;
+///<reference path="abstract/VisibleModel.ts"/>
 
-        get entity() : Entity {
+module TurtleTime {
+    export class SelectionModel extends VisibleModel {
+        private _entity : EntityModel;
+
+        get entity() : EntityModel {
             return this._entity;
         }
 
-        set entity(value : Entity) {
+        set entity(value : EntityModel) {
             this._entity = value;
-            this._dirty = true;
-        }
-
-        initializeView() : void {
-            this.view = new SelectionView();
-        }
-
-        updateView() : void {
-            if (this._dirty) {
-                this.view.update(this);
-            }
-            // this._dirty = false;
         }
     }
 }

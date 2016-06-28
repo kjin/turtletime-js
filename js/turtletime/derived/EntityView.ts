@@ -1,24 +1,42 @@
+///<reference path="../abstract/View.ts"/>
+
 module TurtleTime {
     import AnimationManager = Phaser.AnimationManager;
-    export interface SpriteSpecs {
-        spriteID : String;
-        scale : number;
+
+    export interface SpriteDirectionalFrameData {
+        direction : Direction,
+        frames : Array<number>
     }
 
-    export class EntityView {
+    export interface SpriteAnimation {
+        name : string,
+        frames : Array<SpriteDirectionalFrameData>
+    }
+
+    export interface SpriteSpecs {
+        spriteID : String,
+        scale : number,
+        animations : Array<SpriteAnimation>
+    }
+
+    export class EntityView extends View<EntityModel> {
         private _mainSprite : Sprite;
         private _highlightCircle : Sprite;
 
-        constructor(specs : SpriteSpecs) {
+        constructor(model : EntityModel) {
+            super(model);
+            var specs = model.spriteSpecs;
             this._mainSprite = game.add.sprite(0, 0, specs.spriteID);
             this._mainSprite.anchor = new Point(0.5, 0.5);
             this._mainSprite.scale = new Point(specs.scale, specs.scale);
             this._highlightCircle = game.add.sprite(0, 0, 'highlightCircle');
             this._highlightCircle.anchor = new Point(0.5, 0.5);
-        }
-
-        get animations() : AnimationManager {
-            return this._mainSprite.animations;
+            // add animations
+            specs.animations.forEach((animation : SpriteAnimation) : void => {
+                animation.frames.forEach((frameData : SpriteDirectionalFrameData) : void => {
+                    this._mainSprite.animations.add(getFirstCharacter(frameData.direction) + '-' + animation.name, frameData.frames);
+                });
+            });
         }
 
         get x() : number {
@@ -41,13 +59,13 @@ module TurtleTime {
             return Math.abs(x - this.x) <= this.width / 2 && Math.abs(y - this.y) <= this.height / 2;
         }
 
-        update(entity : Entity) : void {
-            this._mainSprite.x = entity.position.x * COORDINATE_SCALE;
-            this._mainSprite.y = entity.position.y * COORDINATE_SCALE;
+        update() : void {
+            this._mainSprite.x = this.model.position.x * COORDINATE_SCALE;
+            this._mainSprite.y = this.model.position.y * COORDINATE_SCALE;
             this._highlightCircle.x = this._mainSprite.x;
             this._highlightCircle.y = this._mainSprite.y - 2 * COORDINATE_SCALE * this._mainSprite.scale.y;
-            this._mainSprite.animations.play(getFirstCharacter(entity.direction) + "-" + entity.currentAction);
-            setTintAndAlpha(this._highlightCircle, EffectCircleDictionary[entity.effect]);
+            this._mainSprite.animations.play(getFirstCharacter(this.model.direction) + "-" + this.model.currentAction);
+            setTintAndAlpha(this._highlightCircle, EffectCircleDictionary[this.model.effect]);
         }
     }
 }

@@ -1,15 +1,26 @@
+///<reference path="abstract/View.ts"/>
+
+import Sprite = Phaser.Sprite;
+
 module TurtleTime {
     import Text = Phaser.Text;
-    export class SelectionView {
+    export class SelectionView extends View<SelectionModel> {
         private _text : Text;
 
-        constructor() {
-            this._text = game.add.text(0, 0, "Dummy.", { fontSize: '32px', fill: '#ffffff' });
+        constructor(model : SelectionModel) {
+            super(model);
+            this._text = game.add.text(0, 600, "Example text", { fontSize: '12px', fill: '#ffffff' });
         }
 
-        update(selectionModel : SelectionModel) : void {
-            if (selectionModel.entity != null) {
-                this._text.text = selectionModel.entity.position.toString();
+        contains(x : number, y : number) : boolean {
+            return false;
+        }
+
+        update() : void {
+            if (this.model.entity != null) {
+                this._text.text = this.model.entity.position.toString();
+            } else {
+                this._text.text = "Example text";
             }
         }
     }
