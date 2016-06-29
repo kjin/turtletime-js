@@ -65,7 +65,7 @@ module TurtleTime {
             this._highlightCircle.x = this._mainSprite.x;
             this._highlightCircle.y = this._mainSprite.y - 2 * COORDINATE_SCALE * this._mainSprite.scale.y;
             this._mainSprite.animations.play(getFirstCharacter(this.model.direction) + "-" + this.model.currentAction);
-            setTintAndAlpha(this._highlightCircle, EffectCircleDictionary[this.model.effect]);
+            setTintAndAlpha(this._highlightCircle, EffectCircleDictionary[this.model.currentStatus]);
         }
     }
 }

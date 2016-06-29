@@ -17,9 +17,9 @@ module TurtleTime {
                 (turtle : Turtle) : void => {
                     turtle.brain.update();
                     if (this._readState.selectionModel.entity == turtle) {
-                        turtle.effect = "selected";
+                        turtle.currentStatus = "selected";
                     } else {
-                        turtle.effect = "normal";
+                        turtle.currentStatus = "normal";
                     }
                 }
             );

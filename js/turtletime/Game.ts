@@ -19,7 +19,7 @@ namespace TurtleTime {
             selectionModel : new SelectionModel(),
             entities : {
                 turtles : [new Turtle(10, 10), new Turtle(20, 20)],
-                chairs : [],
+                chairs : [new Chair(11, 10)],
                 tables: [new Table(20, 10)]
             }
         };

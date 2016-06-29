@@ -4,23 +4,9 @@ module TurtleTime {
         brain : LoopBrain;
 
         constructor(x:number, y:number) {
-            super(x, y, {
-                spriteID: 'turtle',
-                scale: 1.0,
-                animations: [
-                    {
-                        name: "stand",
-                        frames: [
-                            { direction: Direction.Left, frames: [0] },
-                            { direction: Direction.Down, frames: [1] },
-                            { direction: Direction.Right, frames: [2] },
-                            { direction: Direction.Up, frames: [3] }
-                        ]
-                    }
-                ]
-            });
+            super(x, y, SpriteSpecs.turtles["turtleBasic"]);
             this.currentAction = 'stand';
-            this.effect = 'normal';
+            this.currentStatus = 'normal';
             var side = 1;
             this.brain = new LoopBrain(0.001, [
                 {

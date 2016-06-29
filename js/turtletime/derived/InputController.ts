@@ -24,9 +24,9 @@ module TurtleTime {
                             }
                         }
                         if (game.input.activePointer.isDown) {
-                            turtle.effect = "highlighted";
+                            turtle.currentStatus = "highlighted";
                         } else {
-                            turtle.effect = "over";
+                            turtle.currentStatus = "over";
                         }
                     }
                 }
