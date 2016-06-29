@@ -3,6 +3,10 @@ namespace TurtleTime {
         abstract update() : void;
 
         abstract contains(x : number, y : number) : boolean;
+
+        abstract getLayerNumber() : number;
+
+        abstract bringToTop() : void;
     }
 
     export abstract class View<T extends VisibleModel> {
@@ -16,5 +20,9 @@ namespace TurtleTime {
         update() : void {}
 
         contains(x : number, y : number) : boolean { return false; }
+
+        getLayerNumber() : number { return this.model.layerNumber; }
+
+        abstract bringToTop() : void;
     }
 }

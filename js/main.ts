@@ -12,6 +12,8 @@ namespace TurtleTime {
             this.gameState = createModel();
             this.controllers = createControllers();
             this.views = initializeView(this.gameState);
+            this.views.sort((a : BaseView, b : BaseView) : number => (a.getLayerNumber() - b.getLayerNumber()));
+            this.views.forEach((view : BaseView) => view.bringToTop());
             // Set controllers
             this.controllers.forEach((function (controller : Controller) { controller.initialize(this.gameState); }).bind(this));
         }

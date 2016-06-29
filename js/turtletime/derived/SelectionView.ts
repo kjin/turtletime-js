@@ -1,4 +1,4 @@
-///<reference path="abstract/View.ts"/>
+///<reference path="../abstract/View.ts"/>
 
 import Sprite = Phaser.Sprite;
 
@@ -22,6 +22,10 @@ module TurtleTime {
             } else {
                 this._text.text = "Example text";
             }
+        }
+
+        bringToTop() : void {
+            this._text.bringToTop();
         }
     }
 }

@@ -5,6 +5,7 @@ module TurtleTime {
 
         constructor(x:number, y:number) {
             super(x, y, SpriteSpecs.turtles["turtleBasic"]);
+            this.layerNumber = LAYER_SPRITE_TURTLE;
             this.currentAction = 'stand';
             this.currentStatus = 'normal';
             var side = 1;

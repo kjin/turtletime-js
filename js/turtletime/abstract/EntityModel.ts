@@ -1,3 +1,5 @@
+///<reference path="VisibleModel.ts"/>
+
 import Point = Phaser.Point;
 
 module TurtleTime {

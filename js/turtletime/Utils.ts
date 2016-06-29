@@ -4,6 +4,10 @@ module TurtleTime {
      * @type {number}
      */
     export var COORDINATE_SCALE : number = 20;
+    export var LAYER_SPRITE_TURTLE : number = 29;
+    export var LAYER_UI : number = 30;
+    export var LAYER_SPRITE_CHAIR : number = 20;
+    export var LAYER_SPRITE_TABLE : number = 21;
 
     /**
      * An enumeration of the different directions an entity can face.

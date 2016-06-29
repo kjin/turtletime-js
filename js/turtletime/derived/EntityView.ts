@@ -67,5 +67,10 @@ module TurtleTime {
             this._mainSprite.animations.play(getFirstCharacter(this.model.direction) + "-" + this.model.currentAction);
             setTintAndAlpha(this._highlightCircle, EffectCircleDictionary[this.model.currentStatus]);
         }
+
+        bringToTop() : void {
+            this._mainSprite.bringToTop();
+            this._highlightCircle.bringToTop();
+        }
     }
 }
