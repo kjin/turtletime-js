@@ -14,7 +14,7 @@ module TurtleTime {
      * An enumeration of the different directions an entity can face.
      */
     export enum Direction {
-        Up = 1,
+        Up = 0,
         Down,
         Left,
         Right

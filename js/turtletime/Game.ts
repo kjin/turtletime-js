@@ -1,4 +1,12 @@
 namespace TurtleTime {
+    export interface UserData {
+        cafeState: {
+            turtles: Array<EntityData>,
+            chairs: Array<EntityData>,
+            tables: Array<EntityData>
+        }
+    }
+
     export interface GameState {
         inputState: InputModel,
         selectionModel:SelectionModel,
@@ -10,26 +18,21 @@ namespace TurtleTime {
     }
 
     export function preloadGame():void {
-        game.load.spritesheet('turtle', 'assets/turtle.png', 45, 60);
-        game.load.image('highlightCircle', 'assets/highlightCircle.png');
-        game.load.spritesheet('tableandchair', 'assets/tableandchair.png', 52, 52);
+        game.load.spritesheet('turtle', 'assets/textures/turtle.png', 45, 60);
+        game.load.image('highlightCircle', 'assets/textures/highlightCircle.png');
+        game.load.spritesheet('tableandchair', 'assets/textures/tableandchair.png', 52, 52);
+        game.load.json('user_data', 'assets/json/new_user_data.json');
     }
     
     export function createModel() : GameState {
+        var userData : UserData = game.cache.getJSON('user_data');
         return {
             inputState : new InputModel(),
             selectionModel : new SelectionModel(),
             entities : {
-                turtles : [
-                    new Turtle({ position: new Point(5, 5), direction: Direction.Down, appearanceID: "turtleBasic", actionStatus: "stand" }),
-                    new Turtle({ position: new Point(10, 10), direction: Direction.Down, appearanceID: "turtleBasic", actionStatus: "stand" })
-                ],
-                chairs : [
-                    new Chair({ position: new Point(8, 5), direction: Direction.Down, appearanceID: "chairBasic", actionStatus: "stand"})
-                ],
-                tables: [
-                    new Table({ position: new Point(10, 5), direction: Direction.Down, appearanceID: "tableBasic", actionStatus: "stand"})
-                ]
+                turtles : userData.cafeState.turtles.map((e : EntityData, i : number, arr : Array<EntityData>) : Turtle => new Turtle(e)),
+                chairs : userData.cafeState.chairs.map((e : EntityData, i : number, arr : Array<EntityData>) : Chair => new Chair(e)),
+                tables: userData.cafeState.tables.map((e : EntityData, i : number, arr : Array<EntityData>) : Table => new Table(e))
             }
         };
     }

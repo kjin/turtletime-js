@@ -1,0 +1,14 @@
+{
+  "cafeState": {
+    "turtles": [
+      { "position": [5, 5], "direction": 1, "appearanceID": "turtleBasic", "actionStatus": "stand" },
+      { "position": [10, 10], "direction": 1, "appearanceID": "turtleBasic", "actionStatus": "stand" }
+    ],
+    "chairs": [
+      { "position": [8, 5], "direction": 1, "appearanceID": "chairBasic", "actionStatus": "stand" }
+    ],
+    "tables": [
+      { "position": [10, 5], "direction": 1, "appearanceID": "tableBasic", "actionStatus": "stand" }
+    ]
+  }
+}

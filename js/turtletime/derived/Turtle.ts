@@ -1,16 +1,16 @@
 module TurtleTime {
-    import LoopBrain = TurtleTime.Behavior.LoopBehavior;
+    import LoopBehavior = TurtleTime.Behavior.LoopBehavior;
     export class Turtle extends EntityModel {
-        brain : LoopBrain;
+        brain : LoopBehavior;
 
         constructor(entityData : EntityData) {
             super(entityData);
             this.layerNumber = LAYER_SPRITE_TURTLE;
             this.currentStatus = 'normal';
             var side = 1;
-            var x = entityData.position.x;
-            var y = entityData.position.y;
-            this.brain = new LoopBrain(0.01, [
+            var x = entityData.position[0];
+            var y = entityData.position[1];
+            this.brain = new LoopBehavior(0.01, [
                 {
                     lowerBoundT: 0,
                     upperBoundT: 0.5,

@@ -15,7 +15,7 @@ module TurtleTime {
 
         constructor(entityData : EntityData) {
             super();
-            this.position = entityData.position;
+            this.position = new Point(entityData.position[0], entityData.position[1]);
             this.direction = entityData.direction;
             this.spriteSpecs = SpriteSpecs[this.getEntityClass()][entityData.appearanceID];
             this.currentAction = entityData.actionStatus;
