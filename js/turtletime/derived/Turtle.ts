@@ -10,7 +10,7 @@ module TurtleTime {
             var side = 1;
             var x = entityData.position.x;
             var y = entityData.position.y;
-            this.brain = new LoopBrain(0.001, [
+            this.brain = new LoopBrain(0.01, [
                 {
                     lowerBoundT: 0,
                     upperBoundT: 0.5,

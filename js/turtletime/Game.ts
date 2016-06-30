@@ -1,11 +1,12 @@
 namespace TurtleTime {
-    export class GameState {
-        selectionModel:SelectionModel;
+    export interface GameState {
+        inputState: InputModel,
+        selectionModel:SelectionModel,
         entities:{
             turtles:Array<Turtle>,
             chairs:Array<Chair>,
             tables:Array<Table>
-        };
+        }
     }
 
     export function preloadGame():void {
@@ -16,6 +17,7 @@ namespace TurtleTime {
     
     export function createModel() : GameState {
         return {
+            inputState : new InputModel(),
             selectionModel : new SelectionModel(),
             entities : {
                 turtles : [

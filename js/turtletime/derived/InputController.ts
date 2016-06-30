@@ -4,33 +4,16 @@ module TurtleTime {
     export class InputController extends GameController<ReadState, WriteState> {
         initialize(gameState:TurtleTime.GameState):void {
             this._writeState = {
-                selectionModel: gameState.selectionModel,
-                turtles: gameState.entities.turtles
+                inputState: gameState.inputState
             }
         }
 
         update(dt:number):void {
-            this._writeState.turtles.forEach(
-                (turtle : Turtle) : void => {
-                    turtle.brain.update();
-                    var px : number = game.input.activePointer.x;
-                    var py : number = game.input.activePointer.y;
-                    if (turtle.view.contains(px, py)) {
-                        if (game.input.activePointer.justReleased()) {
-                            if (this._writeState.selectionModel.entity == turtle) {
-                                this._writeState.selectionModel.entity = null;
-                            } else {
-                                this._writeState.selectionModel.entity = turtle;
-                            }
-                        }
-                        if (game.input.activePointer.isDown) {
-                            turtle.currentStatus = "highlighted";
-                        } else {
-                            turtle.currentStatus = "over";
-                        }
-                    }
-                }
-            );
+            // update input first
+            this._writeState.inputState.setCurrentMouseState(
+                game.input.activePointer.x,
+                game.input.activePointer.y,
+                game.input.activePointer.isDown);
         }
     }
 
@@ -40,8 +23,7 @@ module TurtleTime {
         }
 
         export interface WriteState {
-            selectionModel : SelectionModel,
-            turtles : Array<Turtle>
+            inputState : InputModel
         }
     }
 }

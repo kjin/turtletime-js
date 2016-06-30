@@ -5,14 +5,17 @@ module TurtleTime {
     export class TurtleController extends GameController<ReadState, WriteState> {
         initialize(gameState : GameState) : void {
             this._readState = {
+                inputState: gameState.inputState,
                 selectionModel: gameState.selectionModel
             };
             this._writeState = {
+                selectionModel: gameState.selectionModel,
                 turtles: gameState.entities.turtles
             };
         }
 
         update(dt : number) : void {
+            var inputState = this._readState.inputState;
             this._writeState.turtles.forEach(
                 (turtle : Turtle) : void => {
                     turtle.brain.update();
@@ -21,6 +24,20 @@ module TurtleTime {
                     } else {
                         turtle.currentStatus = "normal";
                     }
+                    if (turtle.view.contains(inputState.inputX, inputState.inputY)) {
+                        if (inputState.isPressed) {
+                            turtle.currentStatus = "highlighted";
+                        } else {
+                            turtle.currentStatus = "over";
+                        }
+                        if (inputState.justReleased) {
+                            if (this._writeState.selectionModel.entity == turtle) {
+                                this._writeState.selectionModel.entity = null;
+                            } else {
+                                this._writeState.selectionModel.entity = turtle;
+                            }
+                        }
+                    }
                 }
             );
         }
@@ -28,10 +45,12 @@ module TurtleTime {
 
     export module TurtleController {
         export interface ReadState {
+            inputState : InputModel,
             selectionModel : SelectionModel
         }
 
         export interface WriteState {
+            selectionModel : SelectionModel
             turtles : Array<Turtle>
         }
     }
