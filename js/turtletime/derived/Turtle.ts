@@ -3,12 +3,13 @@ module TurtleTime {
     export class Turtle extends EntityModel {
         brain : LoopBrain;
 
-        constructor(x:number, y:number) {
-            super(x, y, SpriteSpecs.turtles["turtleBasic"]);
+        constructor(entityData : EntityData) {
+            super(entityData);
             this.layerNumber = LAYER_SPRITE_TURTLE;
-            this.currentAction = 'stand';
             this.currentStatus = 'normal';
             var side = 1;
+            var x = entityData.position.x;
+            var y = entityData.position.y;
             this.brain = new LoopBrain(0.001, [
                 {
                     lowerBoundT: 0,
@@ -30,5 +31,7 @@ module TurtleTime {
                 }
             ]);
         }
+
+        getEntityClass() : string { return "turtle"; }
     }
 }

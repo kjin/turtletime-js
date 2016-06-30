@@ -3,7 +3,8 @@ module TurtleTime {
      * The number of pixels on-screen per cafe unit.
      * @type {number}
      */
-    export var COORDINATE_SCALE : number = 20;
+    export var COORDINATE_SCALE : number = 32;
+
     export var LAYER_SPRITE_TURTLE : number = 29;
     export var LAYER_UI : number = 30;
     export var LAYER_SPRITE_CHAIR : number = 20;
@@ -29,10 +30,11 @@ module TurtleTime {
     };
 
     export var SpriteSpecs = {
-        turtles: {
+        turtle: {
             turtleBasic: {
                 spriteID: 'turtle',
                 scale: 1.0,
+                anchor: [0.5, 0.8],
                 animations: [
                     {
                         name: "stand",
@@ -46,10 +48,11 @@ module TurtleTime {
                 ]
             }
         },
-        chairs: {
+        chair: {
             chairBasic: {
                 spriteID: 'tableandchair',
                 scale: 1,
+                anchor: [0.5, 0.5],
                 animations: [
                     {
                         name: "stand",
@@ -63,18 +66,19 @@ module TurtleTime {
                 ]
             }
         },
-        tables: {
+        table: {
             tableBasic: {
                 spriteID: 'tableandchair',
                 scale: 1,
+                anchor: [0.5, 0.5],
                 animations: [
                     {
                         name: "stand",
                         frames: [
-                            {direction: Direction.Left, frames: [1]},
-                            {direction: Direction.Down, frames: [1]},
-                            {direction: Direction.Right, frames: [1]},
-                            {direction: Direction.Up, frames: [1]}
+                            {direction: Direction.Left, frames: [0]},
+                            {direction: Direction.Down, frames: [0]},
+                            {direction: Direction.Right, frames: [0]},
+                            {direction: Direction.Up, frames: [0]}
                         ]
                     }
                 ]

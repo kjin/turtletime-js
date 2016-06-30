@@ -13,12 +13,15 @@ module TurtleTime {
         public currentStatus : string;
         public spriteSpecs : SpriteSpecs;
 
-        constructor(x:number, y:number, spriteSpecs:SpriteSpecs) {
+        constructor(entityData : EntityData) {
             super();
-            this.position = new Point(x, y);
-            this.spriteSpecs = spriteSpecs;
-            this.direction = Direction.Down;
+            this.position = entityData.position;
+            this.direction = entityData.direction;
+            this.spriteSpecs = SpriteSpecs[this.getEntityClass()][entityData.appearanceID];
+            this.currentAction = entityData.actionStatus;
             this.currentStatus = "hidden";
         }
+
+        protected abstract getEntityClass() : string;
     }
 }

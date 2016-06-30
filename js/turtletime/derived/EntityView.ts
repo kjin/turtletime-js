@@ -16,6 +16,7 @@ module TurtleTime {
     export interface SpriteSpecs {
         spriteID : String,
         scale : number,
+        anchor: Array<number>,
         animations : Array<SpriteAnimation>
     }
 
@@ -27,7 +28,7 @@ module TurtleTime {
             super(model);
             var specs = model.spriteSpecs;
             this._mainSprite = game.add.sprite(0, 0, specs.spriteID);
-            this._mainSprite.anchor = new Point(0.5, 0.5);
+            this._mainSprite.anchor = new Point(specs.anchor[0], specs.anchor[1]);
             this._mainSprite.scale = new Point(specs.scale, specs.scale);
             this._highlightCircle = game.add.sprite(0, 0, 'highlightCircle');
             this._highlightCircle.anchor = new Point(0.5, 0.5);

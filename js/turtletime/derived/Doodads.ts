@@ -1,17 +1,19 @@
 module TurtleTime {
     export class Table extends EntityModel {
-        constructor(x:number, y:number) {
-            super(x, y, SpriteSpecs.tables["tableBasic"]);
+        constructor(entityData : EntityData) {
+            super(entityData);
             this.layerNumber = LAYER_SPRITE_TABLE;
-            this.currentAction = 'stand';
         }
+
+        getEntityClass() : string { return "table"; }
     }
 
     export class Chair extends EntityModel {
-        constructor(x:number, y:number) {
-            super(x, y, SpriteSpecs.chairs["chairBasic"]);
+        constructor(entityData : EntityData) {
+            super(entityData);
             this.layerNumber = LAYER_SPRITE_CHAIR;
-            this.currentAction = 'stand';
         }
+
+        getEntityClass() : string { return "chair"; }
     }
 }

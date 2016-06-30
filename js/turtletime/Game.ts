@@ -18,9 +18,16 @@ namespace TurtleTime {
         return {
             selectionModel : new SelectionModel(),
             entities : {
-                turtles : [new Turtle(10, 10), new Turtle(20, 20)],
-                chairs : [new Chair(11, 10)],
-                tables: [new Table(20, 10)]
+                turtles : [
+                    new Turtle({ position: new Point(5, 5), direction: Direction.Down, appearanceID: "turtleBasic", actionStatus: "stand" }),
+                    new Turtle({ position: new Point(10, 10), direction: Direction.Down, appearanceID: "turtleBasic", actionStatus: "stand" })
+                ],
+                chairs : [
+                    new Chair({ position: new Point(8, 5), direction: Direction.Down, appearanceID: "chairBasic", actionStatus: "stand"})
+                ],
+                tables: [
+                    new Table({ position: new Point(10, 5), direction: Direction.Down, appearanceID: "tableBasic", actionStatus: "stand"})
+                ]
             }
         };
     }
