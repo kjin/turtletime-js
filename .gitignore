@@ -15,3 +15,6 @@ obj/
 *.js
 *.js.map
 !*.min.js
+
+# User Data
+user_data.json

@@ -7,9 +7,11 @@ namespace TurtleTime {
         gameState : GameState;
         controllers : Array<Controller>;
         views : Array<BaseView>;
+        time : number;
 
         create() : void {
-            this.gameState = createModel();
+            this.time = 0;
+            this.gameState = loadModel();
             this.controllers = createControllers();
             this.views = initializeView(this.gameState);
             this.views.sort((a : BaseView, b : BaseView) : number => (a.getLayerNumber() - b.getLayerNumber()));
@@ -21,7 +23,12 @@ namespace TurtleTime {
         update() : void {
             // Update controllers
             this.controllers.forEach(function (controller : Controller) { controller.update(1.0/60); });
-            this.views.forEach(function (view : BaseView) { view.update(); })
+            this.views.forEach(function (view : BaseView) { view.update(); });
+            this.time++;
+            // save once per second
+            if (this.time % 60 == 0) {
+                saveModel(this.gameState);
+            }
         }
     }
     var turtleTimeGame : TurtleTimeGame = new TurtleTimeGame();
