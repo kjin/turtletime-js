@@ -26,7 +26,7 @@ namespace TurtleTime {
     
     export function loadModel() : GameState {
         var userData : UserData = JSON.parse(localStorage.getItem('user_data'));
-        if (userData == null) {
+        if (userData == null || checkGlobalOption('nosave')) {
             userData = game.cache.getJSON('user_data_new');
         }
         return {
@@ -41,6 +41,9 @@ namespace TurtleTime {
     }
 
     export function saveModel(gameState : GameState) : void {
+        if (checkGlobalOption('nosave')) {
+            return;
+        }
         var userData : UserData = {
             cafeState: {
                 turtles: gameState.entities.turtles.map((e: Turtle, i : number, arr : Array<Turtle>) : EntityData => e.serialize()),

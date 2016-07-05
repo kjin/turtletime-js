@@ -35,7 +35,7 @@ module TurtleTime {
             // add animations
             specs.animations.forEach((animation : SpriteAnimation) : void => {
                 animation.frames.forEach((frameData : SpriteDirectionalFrameData) : void => {
-                    this._mainSprite.animations.add(getFirstCharacter(frameData.direction) + '-' + animation.name, frameData.frames);
+                    this._mainSprite.animations.add(Direction.getFirstCharacter(frameData.direction) + '-' + animation.name, frameData.frames);
                 });
             });
         }
@@ -61,11 +61,11 @@ module TurtleTime {
         }
 
         update() : void {
-            this._mainSprite.x = this.model.position.x * COORDINATE_SCALE;
-            this._mainSprite.y = this.model.position.y * COORDINATE_SCALE;
+            this._mainSprite.x = this.model.position.x * COORDINATE_SCALE + COORDINATE_SCALE / 2;
+            this._mainSprite.y = this.model.position.y * COORDINATE_SCALE + COORDINATE_SCALE / 2;
             this._highlightCircle.x = this._mainSprite.x;
             this._highlightCircle.y = this._mainSprite.y - 2 * COORDINATE_SCALE * this._mainSprite.scale.y;
-            this._mainSprite.animations.play(getFirstCharacter(this.model.direction) + "-" + this.model.currentAction);
+            this._mainSprite.animations.play(Direction.getFirstCharacter(this.model.direction) + "-" + this.model.currentAction);
             setTintAndAlpha(this._highlightCircle, EffectCircleDictionary[this.model.currentStatus]);
         }
 

@@ -18,7 +18,7 @@ module TurtleTime {
             var inputState = this._readState.inputState;
             this._writeState.turtles.forEach(
                 (turtle : Turtle) : void => {
-                    turtle.brain.update();
+                    turtle.behavior.update();
                     if (this._readState.selectionModel.entity == turtle) {
                         turtle.currentStatus = "selected";
                     } else {

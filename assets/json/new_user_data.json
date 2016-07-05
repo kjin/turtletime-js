@@ -1,14 +1,23 @@
 {
   "cafeState": {
     "turtles": [
-      { "position": [5, 5], "direction": 1, "appearanceID": "turtleBasic", "actionStatus": "stand" },
-      { "position": [10, 10], "direction": 1, "appearanceID": "turtleBasic", "actionStatus": "stand" }
+      { "position": [5, 5], "direction": 2, "appearanceID": "turtleBasic", "actionStatus": "stand" }
     ],
     "chairs": [
-      { "position": [8, 5], "direction": 1, "appearanceID": "chairBasic", "actionStatus": "stand" }
+      { "position": [0, 1], "direction": 2, "appearanceID": "chairBasic", "actionStatus": "stand" },
+      { "position": [1, 1], "direction": 2, "appearanceID": "chairBasic", "actionStatus": "stand" },
+      { "position": [2, 1], "direction": 2, "appearanceID": "chairBasic", "actionStatus": "stand" },
+      { "position": [3, 1], "direction": 2, "appearanceID": "chairBasic", "actionStatus": "stand" },
+      { "position": [4, 1], "direction": 2, "appearanceID": "chairBasic", "actionStatus": "stand" },
+      { "position": [5, 1], "direction": 2, "appearanceID": "chairBasic", "actionStatus": "stand" },
+      { "position": [2, 8], "direction": 4, "appearanceID": "chairBasic", "actionStatus": "stand" },
+      { "position": [6, 8], "direction": 3, "appearanceID": "chairBasic", "actionStatus": "stand" },
+      { "position": [10, 8], "direction": 4, "appearanceID": "chairBasic", "actionStatus": "stand" },
+      { "position": [14, 8], "direction": 3, "appearanceID": "chairBasic", "actionStatus": "stand" }
     ],
     "tables": [
-      { "position": [10, 5], "direction": 1, "appearanceID": "tableBasic", "actionStatus": "stand" }
+      { "position": [4, 8], "direction": 1, "appearanceID": "tableBasic", "actionStatus": "stand" },
+      { "position": [12, 8], "direction": 1, "appearanceID": "tableBasic", "actionStatus": "stand" }
     ]
   }
 }
