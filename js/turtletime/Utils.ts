@@ -6,11 +6,13 @@ module TurtleTime {
     export var COORDINATE_SCALE : number = 32;
 
     export var TURTLE_SPEED : number = 0.01;
+    export var TURTLE_SPAWN_PROBABILITY_PER_SECOND : number = 0.1;
 
     export var LAYER_SPRITE_TURTLE : number = 29;
     export var LAYER_UI : number = 30;
-    export var LAYER_SPRITE_CHAIR : number = 20;
-    export var LAYER_SPRITE_TABLE : number = 21;
+    export var LAYER_SPRITE_DOOR : number = 20;
+    export var LAYER_SPRITE_CHAIR : number = 21;
+    export var LAYER_SPRITE_TABLE : number = 22;
 
     /**
      * An enumeration of the different directions an entity can face.
@@ -81,6 +83,24 @@ module TurtleTime {
                             {direction: Direction.Down, frames: [0]},
                             {direction: Direction.Right, frames: [0]},
                             {direction: Direction.Up, frames: [0]}
+                        ]
+                    }
+                ]
+            }
+        },
+        door: {
+            doorBasic: {
+                spriteID: 'tableandchair',
+                scale: 1,
+                anchor: [0.5, 0.5],
+                animations: [
+                    {
+                        name: "stand",
+                        frames: [
+                            {direction: Direction.Left, frames: [1]},
+                            {direction: Direction.Down, frames: [1]},
+                            {direction: Direction.Right, frames: [1]},
+                            {direction: Direction.Up, frames: [1]}
                         ]
                     }
                 ]
@@ -161,5 +181,9 @@ module TurtleTime {
             return false;
         }
         return globalOptions.includes(value);
+    }
+
+    export function getRandomElement<T>(arr : Array<T>) : T {
+        return arr[Math.floor(Math.random() * arr.length)];
     }
 }

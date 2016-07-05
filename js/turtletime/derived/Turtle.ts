@@ -1,6 +1,8 @@
 module TurtleTime {
-    import LoopBehavior = TurtleTime.Behavior.LoopBehavior;
     import FollowPathBehavior = TurtleTime.Behavior.FollowPathBehavior;
+
+    
+
     export class Turtle extends EntityModel {
         behavior : Behavior;
         intermediateTargetPosition : Point;

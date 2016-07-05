@@ -16,4 +16,13 @@ module TurtleTime {
 
         getEntityClass() : string { return "chair"; }
     }
+
+    export class Door extends EntityModel {
+        constructor(entityData : EntityData) {
+            super(entityData);
+            this.layerNumber = LAYER_SPRITE_DOOR;
+        }
+
+        getEntityClass() : string { return "door"; }
+    }
 }

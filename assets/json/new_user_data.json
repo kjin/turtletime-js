@@ -18,6 +18,9 @@
     "tables": [
       { "position": [4, 8], "direction": 1, "appearanceID": "tableBasic", "actionStatus": "stand" },
       { "position": [12, 8], "direction": 1, "appearanceID": "tableBasic", "actionStatus": "stand" }
+    ],
+    "doors": [
+      { "position": [8, 1], "direction": 1, "appearanceID": "doorBasic", "actionStatus": "stand" }
     ]
   }
 }

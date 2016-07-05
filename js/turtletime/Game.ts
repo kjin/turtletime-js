@@ -3,7 +3,8 @@ namespace TurtleTime {
         cafeState: {
             turtles: Array<EntityData>,
             chairs: Array<EntityData>,
-            tables: Array<EntityData>
+            tables: Array<EntityData>,
+            doors: Array<EntityData>
         }
     }
 
@@ -13,7 +14,8 @@ namespace TurtleTime {
         entities:{
             turtles:Array<Turtle>,
             chairs:Array<Chair>,
-            tables:Array<Table>
+            tables:Array<Table>,
+            doors:Array<Door>
         }
     }
 
@@ -33,9 +35,11 @@ namespace TurtleTime {
             inputState : new InputModel(),
             selectionModel : new SelectionModel(),
             entities : {
+                // TODO See if there's a way to make this neater with generics and/or iteration over members,
                 turtles : userData.cafeState.turtles.map((e : EntityData, i : number, arr : Array<EntityData>) : Turtle => new Turtle(e)),
                 chairs : userData.cafeState.chairs.map((e : EntityData, i : number, arr : Array<EntityData>) : Chair => new Chair(e)),
-                tables: userData.cafeState.tables.map((e : EntityData, i : number, arr : Array<EntityData>) : Table => new Table(e))
+                tables: userData.cafeState.tables.map((e : EntityData, i : number, arr : Array<EntityData>) : Table => new Table(e)),
+                doors: userData.cafeState.doors.map((e : EntityData, i : number, arr : Array<EntityData>) : Door => new Door(e))
             }
         };
     }
@@ -48,14 +52,15 @@ namespace TurtleTime {
             cafeState: {
                 turtles: gameState.entities.turtles.map((e: Turtle, i : number, arr : Array<Turtle>) : EntityData => e.serialize()),
                 chairs: gameState.entities.chairs.map((e: Chair, i : number, arr : Array<Chair>) : EntityData => e.serialize()),
-                tables: gameState.entities.tables.map((e: Table, i : number, arr : Array<Table>) : EntityData => e.serialize())
+                tables: gameState.entities.tables.map((e: Table, i : number, arr : Array<Table>) : EntityData => e.serialize()),
+                doors: gameState.entities.doors.map((e: Door, i : number, arr : Array<Door>) : EntityData => e.serialize())
             }
         };
         localStorage.setItem('user_data', JSON.stringify(userData));
     }
 
     export function createControllers() : Array<Controller> {
-        return [new TurtleController(), new InputController()];
+        return [new TurtleController(), new InputController(), new TurtleSpawnController()];
     }
 
     export function initializeView(gameState : GameState) : Array<BaseView> {

@@ -1,8 +1,6 @@
 module TurtleTime {
-    import ReadState = TurtleTime.InputController.ReadState;
-    import WriteState = TurtleTime.InputController.WriteState;
-    export class InputController extends GameController<ReadState, WriteState> {
-        initialize(gameState:TurtleTime.GameState):void {
+    export class InputController extends Controller {
+        initialize(gameState:GameState, gameView : Array<BaseView>):void {
             this._writeState = {
                 inputState: gameState.inputState
             }
@@ -14,16 +12,6 @@ module TurtleTime {
                 game.input.activePointer.x,
                 game.input.activePointer.y,
                 game.input.activePointer.isDown);
-        }
-    }
-
-    export module InputController {
-        export interface ReadState {
-
-        }
-
-        export interface WriteState {
-            inputState : InputModel
         }
     }
 }
