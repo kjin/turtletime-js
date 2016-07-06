@@ -14,8 +14,7 @@ module TurtleTime {
         public spriteSpecs : SpriteSpecs;
         private _appearanceID : string;
 
-        constructor(entityData : EntityData) {
-            super();
+        initialize(entityData : EntityData) : void {
             this.position = new Point(entityData.position[0], entityData.position[1]);
             this.direction = entityData.direction;
             this.spriteSpecs = SpriteSpecs[this.getEntityClass()][entityData.appearanceID];
@@ -25,13 +24,16 @@ module TurtleTime {
         }
 
         protected abstract getEntityClass() : string;
+
+        protected abstract getAdditionalData() : any;
         
         serialize() : EntityData {
             return {
                 position: [this.position.x, this.position.y],
                 direction: this.direction,
                 appearanceID: this._appearanceID,
-                actionStatus: this.currentAction
+                actionStatus: this.currentAction,
+                additionalData: this.getAdditionalData()
             };
         }
     }

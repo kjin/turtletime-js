@@ -25,6 +25,11 @@ namespace TurtleTime {
         game.load.spritesheet('tableandchair', 'assets/textures/tableandchair.png', 52, 52);
         game.load.json('user_data_new', 'assets/json/new_user_data.json');
     }
+
+    function mapDataToState<T extends EntityModel>(type: { new(): T}, dataArray: Array<EntityData>): Array<T> {
+        return dataArray.map((e : EntityData, i : number, arr : Array<EntityData>) : T =>
+            { var result : T = new type(); result.initialize(e); return result; });
+    }
     
     export function loadModel() : GameState {
         var userData : UserData = JSON.parse(localStorage.getItem('user_data'));
@@ -35,11 +40,10 @@ namespace TurtleTime {
             inputState : new InputModel(),
             selectionModel : new SelectionModel(),
             entities : {
-                // TODO See if there's a way to make this neater with generics and/or iteration over members,
-                turtles : userData.cafeState.turtles.map((e : EntityData, i : number, arr : Array<EntityData>) : Turtle => new Turtle(e)),
-                chairs : userData.cafeState.chairs.map((e : EntityData, i : number, arr : Array<EntityData>) : Chair => new Chair(e)),
-                tables: userData.cafeState.tables.map((e : EntityData, i : number, arr : Array<EntityData>) : Table => new Table(e)),
-                doors: userData.cafeState.doors.map((e : EntityData, i : number, arr : Array<EntityData>) : Door => new Door(e))
+                turtles : mapDataToState(Turtle, userData.cafeState.turtles),
+                chairs : mapDataToState(Chair, userData.cafeState.chairs),
+                tables: mapDataToState(Table, userData.cafeState.tables),
+                doors: mapDataToState(Door, userData.cafeState.doors)
             }
         };
     }
