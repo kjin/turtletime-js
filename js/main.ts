@@ -6,16 +6,14 @@ namespace TurtleTime {
     class TurtleTimeGame {
         gameState : GameState;
         controllers : Array<Controller>;
-        views : Array<BaseView>;
+        views : GameView;
         time : number;
 
         create() : void {
             this.time = 0;
             this.gameState = loadModel();
             this.controllers = createControllers();
-            this.views = initializeView(this.gameState);
-            this.views.sort((a : BaseView, b : BaseView) : number => (a.getLayerNumber() - b.getLayerNumber()));
-            this.views.forEach((view : BaseView) => view.bringToTop());
+            this.views = new GameView();
             // Set controllers
             this.controllers.forEach((function (controller : Controller) { controller.initialize(this.gameState, this.views); }).bind(this));
         }
@@ -23,7 +21,13 @@ namespace TurtleTime {
         update() : void {
             // Update controllers
             this.controllers.forEach(function (controller : Controller) { controller.update(1.0/60); });
-            this.views.forEach(function (view : BaseView) { view.update(); });
+            for (var property in this.gameState.entities) {
+                if (this.gameState.entities.hasOwnProperty(property)) {
+                    var entityCollection : AbstractEntityCollection = this.gameState.entities[property];
+                    entityCollection.update(this.views);
+                }
+            }
+            this.views.update();
             this.time++;
             // save once per second
             if (this.time % 60 == 0) {
