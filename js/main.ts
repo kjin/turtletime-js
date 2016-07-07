@@ -1,5 +1,6 @@
 ///<reference path="defs/phaser.comments.d.ts"/>
 ///<reference path="turtletime/Game.ts"/>
+///<reference path="turtletime/core/GameView.ts"/>
 
 import Game = Phaser.Game;
 namespace TurtleTime {

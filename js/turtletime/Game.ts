@@ -1,3 +1,6 @@
+///<reference path="core/GameView.ts"/>
+import GameState = TurtleTime.GameState;
+import GameView = TurtleTime.GameView;
 namespace TurtleTime {
     export interface UserData {
         cafeState: {
@@ -8,9 +11,15 @@ namespace TurtleTime {
         }
     }
 
+    export interface GameData {
+        turtleData: Map<string, TurtleData>,
+        spriteSpecs: SpriteData
+    }
+
     export interface GameState {
         inputState: InputModel,
         selectionModel:SelectionModel,
+        infoboxModel:InfoboxModel,
         entities:{
             turtles:EntityCollection<Turtle>,
             chairs:EntityCollection<Chair>,
@@ -19,11 +28,15 @@ namespace TurtleTime {
         }
     }
 
+    export var gameData : GameData = null;
+
     export function preloadGame():void {
         game.load.spritesheet('turtle', 'assets/textures/turtle.png', 45, 60);
         game.load.image('highlightCircle', 'assets/textures/highlightCircle.png');
         game.load.spritesheet('tableandchair', 'assets/textures/tableandchair.png', 52, 52);
         game.load.json('user_data_new', 'assets/json/new_user_data.json');
+        game.load.json('turtle_data', 'assets/json/turtles.json');
+        game.load.json('sprite_data', 'assets/json/sprites.json');
     }
     
     export function loadModel() : GameState {
@@ -31,9 +44,23 @@ namespace TurtleTime {
         if (userData == null || checkGlobalOption('nosave')) {
             userData = game.cache.getJSON('user_data_new');
         }
+        gameData = {
+            turtleData: ((json : any) : Map<string, TurtleData> => {
+                var result : Map<string, TurtleData> = new Map();
+                var turtles = json["turtles"];
+                for (var turtle in turtles) {
+                    if (turtles.hasOwnProperty(turtle)) {
+                        result.set(turtle, turtles[turtle]);
+                    }
+                }
+                return result;
+            })(game.cache.getJSON('turtle_data')),
+            spriteSpecs: new SpriteData(game.cache.getJSON('sprite_data'))
+        };
         return {
             inputState : new InputModel(),
             selectionModel : new SelectionModel(),
+            infoboxModel : new InfoboxModel(),
             entities : {
                 turtles : new EntityCollection(Turtle, userData.cafeState.turtles),
                 chairs : new EntityCollection(Chair, userData.cafeState.chairs),
@@ -41,6 +68,10 @@ namespace TurtleTime {
                 doors: new EntityCollection(Door, userData.cafeState.doors)
             }
         };
+    }
+
+    export function initializeView(gameState : GameState, view : GameView) : void {
+        view.add(new InfoboxView(gameState.infoboxModel));
     }
 
     export function saveModel(gameState : GameState) : void {

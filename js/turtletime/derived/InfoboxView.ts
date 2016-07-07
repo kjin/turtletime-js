@@ -4,10 +4,10 @@ import Sprite = Phaser.Sprite;
 
 module TurtleTime {
     import Text = Phaser.Text;
-    export class SelectionView extends View<SelectionModel> {
+    export class InfoboxView extends View<InfoboxModel> {
         private _text : Text;
 
-        constructor(model : SelectionModel) {
+        constructor(model : InfoboxModel) {
             super(model);
             this._text = game.add.text(0, 600, "Example text", { fontSize: '12px', fill: '#ffffff' });
         }
@@ -17,8 +17,8 @@ module TurtleTime {
         }
 
         update() : void {
-            if (this.model.entity != null) {
-                this._text.text = this.model.entity.position.toString();
+            if (this.model.text != null) {
+                this._text.text = this.model.text;
             } else {
                 this._text.text = "Example text";
             }

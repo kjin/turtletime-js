@@ -1,0 +1,14 @@
+{
+  "turtles": {
+    "greenie": {
+      "name": "Greenie",
+      "description": "Loves the color green, but ironically colorblind",
+      "likes": [
+        "Green Eggs"
+      ],
+      "dislikes": [
+        "Ham"
+      ]
+    }
+  }
+}

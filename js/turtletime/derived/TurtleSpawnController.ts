@@ -21,7 +21,7 @@ module TurtleTime {
                 this._writeState.turtles.add({
                     position: [door.position.x, door.position.y],
                     direction: door.direction,
-                    appearanceID: "turtleBasic",
+                    appearanceID: "greenie",
                     actionStatus: "stand",
                     additionalData: {
                         targetPosition: [chair.position.x, chair.position.y]

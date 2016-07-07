@@ -17,7 +17,7 @@ module TurtleTime {
         initialize(entityData : EntityData) : void {
             this.position = new Point(entityData.position[0], entityData.position[1]);
             this.direction = entityData.direction;
-            this.spriteSpecs = SpriteSpecs[this.getEntityClass()][entityData.appearanceID];
+            this.spriteSpecs = gameData.spriteSpecs.getSpriteSpecs(this.getEntityClass(), entityData.appearanceID);
             this._appearanceID = entityData.appearanceID;
             this.currentAction = entityData.actionStatus;
             this.currentStatus = "hidden";

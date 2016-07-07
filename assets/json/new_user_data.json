@@ -1,7 +1,7 @@
 {
   "cafeState": {
     "turtles": [
-      { "position": [5, 5], "direction": 2, "appearanceID": "turtleBasic", "actionStatus": "stand", "additionalData": {
+      { "position": [5, 5], "direction": 2, "appearanceID": "greenie", "actionStatus": "stand", "additionalData": {
         "targetPosition": [7, 6]
       } }
     ],

@@ -3,23 +3,6 @@
 module TurtleTime {
     import AnimationManager = Phaser.AnimationManager;
 
-    export interface SpriteDirectionalFrameData {
-        direction : Direction,
-        frames : Array<number>
-    }
-
-    export interface SpriteAnimation {
-        name : string,
-        frames : Array<SpriteDirectionalFrameData>
-    }
-
-    export interface SpriteSpecs {
-        spriteID : String,
-        scale : number,
-        anchor: Array<number>,
-        animations : Array<SpriteAnimation>
-    }
-
     export class EntityView extends View<EntityModel> {
         private _mainSprite : Sprite;
         private _highlightCircle : Sprite;
