@@ -15,7 +15,7 @@ module TurtleTime {
 
         getAdditionalData() : any {
             return {
-                targetPosition: this.targetPosition,
+                targetPosition: [this.targetPosition.x, this.targetPosition.y]
             };
         }
     }

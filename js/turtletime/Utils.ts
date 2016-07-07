@@ -1,9 +1,4 @@
 module TurtleTime {
-    /**
-     * The number of pixels on-screen per cafe unit.
-     * @type {number}
-     */
-    export var COORDINATE_SCALE : number = 32;
 
     export var TURTLE_SPEED : number = 0.01;
     export var TURTLE_SPAWN_PROBABILITY_PER_SECOND : number = 0.1;
@@ -110,5 +105,23 @@ module TurtleTime {
 
     export function getRandomElement<T>(arr : Array<T>) : T {
         return arr[Math.floor(Math.random() * arr.length)];
+    }
+
+    /**
+     * Converts a point in room coordinates to one in screen coordinates.
+     * @param point A point in room coordinates.
+     * @returns {Phaser.Point} A point in screen coordinates.
+     */
+    export function roomToScreen(point : Point) : Point {
+        return new Point(point.x * gameData.roomScale + gameData.roomScale / 2, point.y * gameData.roomScale + gameData.roomScale / 2);
+    }
+
+    /**
+     * Converts a point in screen coordinates to one in room coordinates.
+     * @param point A point in screen coordinates.
+     * @returns {Phaser.Point} A point in room coordinates.
+     */
+    export function screenToRoom(point : Point) : Point {
+        return new Point((point.x - gameData.roomScale / 2) / gameData.roomScale, (point.y - gameData.roomScale / 2) / gameData.roomScale);
     }
 }

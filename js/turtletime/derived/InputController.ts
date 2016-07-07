@@ -8,7 +8,7 @@ module TurtleTime {
 
         update(dt:number):void {
             // update input first
-            this._writeState.inputState.setCurrentMouseState(
+            this._writeState.inputState.setMouseState(
                 game.input.activePointer.x,
                 game.input.activePointer.y,
                 game.input.activePointer.isDown);

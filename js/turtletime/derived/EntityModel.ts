@@ -1,4 +1,4 @@
-///<reference path="VisibleModel.ts"/>
+///<reference path="../abstract/VisibleModel.ts"/>
 
 import Point = Phaser.Point;
 
@@ -12,13 +12,17 @@ module TurtleTime {
         public currentAction : string;
         public currentStatus : string;
         public spriteSpecs : SpriteSpecs;
-        private _appearanceID : string;
+        public appearanceID : string;
+
+        get animationString() : string {
+            return Direction.getFirstCharacter(this.direction) + "-" + this.currentAction;
+        }
 
         initialize(entityData : EntityData) : void {
             this.position = new Point(entityData.position[0], entityData.position[1]);
             this.direction = entityData.direction;
             this.spriteSpecs = gameData.spriteSpecs.getSpriteSpecs(this.getEntityClass(), entityData.appearanceID);
-            this._appearanceID = entityData.appearanceID;
+            this.appearanceID = entityData.appearanceID;
             this.currentAction = entityData.actionStatus;
             this.currentStatus = "hidden";
         }
@@ -31,7 +35,7 @@ module TurtleTime {
             return {
                 position: [this.position.x, this.position.y],
                 direction: this.direction,
-                appearanceID: this._appearanceID,
+                appearanceID: this.appearanceID,
                 actionStatus: this.currentAction,
                 additionalData: this.getAdditionalData()
             };

@@ -13,7 +13,8 @@ namespace TurtleTime {
 
     export interface GameData {
         turtleData: Map<string, TurtleData>,
-        spriteSpecs: SpriteData
+        spriteSpecs: SpriteData,
+        roomScale: number
     }
 
     export interface GameState {
@@ -55,7 +56,8 @@ namespace TurtleTime {
                 }
                 return result;
             })(game.cache.getJSON('turtle_data')),
-            spriteSpecs: new SpriteData(game.cache.getJSON('sprite_data'))
+            spriteSpecs: new SpriteData(game.cache.getJSON('sprite_data')),
+            roomScale: 32
         };
         return {
             inputState : new InputModel(),
@@ -70,8 +72,11 @@ namespace TurtleTime {
         };
     }
 
-    export function initializeView(gameState : GameState, view : GameView) : void {
+    export function createView(gameState : GameState) : GameView {
+        var view : GameView = new GameView();
         view.add(new InfoboxView(gameState.infoboxModel));
+        view.add(new SelectionView(gameState.selectionModel));
+        return view;
     }
 
     export function saveModel(gameState : GameState) : void {
@@ -90,7 +95,7 @@ namespace TurtleTime {
     }
 
     export function createControllers() : Array<Controller> {
-        return [new TurtleController(), new InputController(), new TurtleSpawnController()];
+        return [new TurtleController(), new InputController(), new TurtleSpawnController(), new DragController()];
     }
 
     export function updateModel(gameState : GameState) : void {

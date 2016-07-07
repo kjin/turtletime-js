@@ -4,23 +4,14 @@ module TurtleTime {
     import AnimationManager = Phaser.AnimationManager;
 
     export class EntityView extends View<EntityModel> {
-        private _mainSprite : Sprite;
+        private _mainSprite : EntitySpriteWrapper;
         private _highlightCircle : Sprite;
 
         constructor(model : EntityModel) {
             super(model);
-            var specs = model.spriteSpecs;
-            this._mainSprite = game.add.sprite(0, 0, specs.spriteID);
-            this._mainSprite.anchor = new Point(specs.anchor[0], specs.anchor[1]);
-            this._mainSprite.scale = new Point(specs.scale, specs.scale);
+            this._mainSprite = new EntitySpriteWrapper(model.spriteSpecs);
             this._highlightCircle = game.add.sprite(0, 0, 'highlightCircle');
             this._highlightCircle.anchor = new Point(0.5, 0.5);
-            // add animations
-            specs.animations.forEach((animation : SpriteAnimation) : void => {
-                animation.frames.forEach((frameData : SpriteDirectionalFrameData) : void => {
-                    this._mainSprite.animations.add(Direction.getFirstCharacter(frameData.direction) + '-' + animation.name, frameData.frames);
-                });
-            });
         }
 
         get x() : number {
@@ -32,11 +23,11 @@ module TurtleTime {
         }
 
         get width() : number {
-            return this._mainSprite.scale.x * this._mainSprite.texture.frame.width;
+            return this._mainSprite.width;
         }
 
         get height() : number {
-            return this._mainSprite.scale.y * this._mainSprite.texture.frame.height;
+            return this._mainSprite.height;
         }
 
         contains(x : number, y : number) : boolean {
@@ -44,11 +35,12 @@ module TurtleTime {
         }
 
         update() : void {
-            this._mainSprite.x = this.model.position.x * COORDINATE_SCALE + COORDINATE_SCALE / 2;
-            this._mainSprite.y = this.model.position.y * COORDINATE_SCALE + COORDINATE_SCALE / 2;
+            var screenPos : Point = roomToScreen(this.model.position);
+            this._mainSprite.x = screenPos.x;
+            this._mainSprite.y = screenPos.y;
+            this._mainSprite.animation = this.model.animationString;
             this._highlightCircle.x = this._mainSprite.x;
-            this._highlightCircle.y = this._mainSprite.y - 2 * COORDINATE_SCALE * this._mainSprite.scale.y;
-            this._mainSprite.animations.play(Direction.getFirstCharacter(this.model.direction) + "-" + this.model.currentAction);
+            this._highlightCircle.y = this._mainSprite.y - 2 * gameData.roomScale * this.model.spriteSpecs.scale;
             setTintAndAlpha(this._highlightCircle, EffectCircleDictionary[this.model.currentStatus]);
         }
 

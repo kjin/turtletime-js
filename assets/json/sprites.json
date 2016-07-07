@@ -15,6 +15,22 @@
           ]
         }
       ]
+    },
+    "greenie2": {
+      "spriteID": "turtle",
+      "scale": 1.0,
+      "anchor": [0.5, 0.8],
+      "animations": [
+        {
+          "name": "stand",
+          "frames": [
+            { "direction": 2, "frames": [0] },
+            { "direction": 1, "frames": [1] },
+            { "direction": 3, "frames": [2] },
+            { "direction": 0, "frames": [3] }
+          ]
+        }
+      ]
     }
   },
   "chair": {

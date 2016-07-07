@@ -1,15 +1,16 @@
 ///<reference path="../abstract/VisibleModel.ts"/>
 
 module TurtleTime {
-    export class SelectionModel {
-        private _entity : EntityModel;
+    export class SelectionModel extends VisibleModel {
+        entity : EntityModel;
+        isBeingDragged : boolean = false;
+        // if entity is being dragged, then where is the mouse?
+        currentDragPosition : Point = null;
+        deltaDragPosition : Point = new Point(0, 0);
 
-        get entity() : EntityModel {
-            return this._entity;
-        }
-
-        set entity(value : EntityModel) {
-            this._entity = value;
+        constructor() {
+            super();
+            this.layerNumber = LAYER_UI;
         }
     }
 }

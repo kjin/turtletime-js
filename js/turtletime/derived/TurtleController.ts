@@ -8,6 +8,7 @@ module TurtleTime {
             };
             this._writeState = {
                 selectionModel: gameState.selectionModel,
+                infoboxModel: gameState.infoboxModel,
                 turtles: gameState.entities.turtles
             };
         }
@@ -46,22 +47,34 @@ module TurtleTime {
 
         private processInput(turtle : Turtle) : void {
             var inputState = this._readState.inputState;
+            if (this._writeState.selectionModel.isBeingDragged) {
+                return;
+            } else if (this._writeState.selectionModel.currentDragPosition != null) {
+                var roomPos = screenToRoom(this._writeState.selectionModel.currentDragPosition);
+                this._writeState.selectionModel.currentDragPosition = null;
+                turtle.targetPosition.x = Math.floor(roomPos.x + 0.5);
+                turtle.targetPosition.y = Math.floor(roomPos.y + 0.5);
+            }
             if (this._readState.selectionModel.entity == turtle) {
                 turtle.currentStatus = "selected";
             } else {
                 turtle.currentStatus = "normal";
             }
             if (turtle.view.contains(inputState.inputX, inputState.inputY)) {
-                if (inputState.isPressed) {
-                    turtle.currentStatus = "highlighted";
-                } else {
-                    turtle.currentStatus = "over";
-                }
-                if (inputState.justReleased) {
+                turtle.currentStatus = "over";
+                if (inputState.justPressed) {
                     if (this._writeState.selectionModel.entity == turtle) {
                         this._writeState.selectionModel.entity = null;
+                        this._writeState.infoboxModel.text = "";
                     } else {
                         this._writeState.selectionModel.entity = turtle;
+                        this._writeState.infoboxModel.text = (() : string => {
+                            var turtleData : TurtleData = gameData.turtleData.get(turtle.appearanceID);
+                            return "Name: " + turtleData.name + "\n" +
+                                "Description: " + turtleData.description + "\n" +
+                                "Likes: " + turtleData.likes + "\n" +
+                                "Dislikes: " + turtleData.dislikes;
+                        })();
                     }
                 }
             }

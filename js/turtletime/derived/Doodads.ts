@@ -1,3 +1,5 @@
+///<reference path="EntityModel.ts"/>
+
 module TurtleTime {
     export class Table extends EntityModel {
         initialize(entityData : EntityData) : void {

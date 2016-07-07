@@ -17,7 +17,7 @@ namespace TurtleTime {
             this.model.view = this;
         }
 
-        update() : void {}
+        abstract update() : void;
 
         contains(x : number, y : number) : boolean { return false; }
 

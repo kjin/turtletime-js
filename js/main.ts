@@ -14,7 +14,7 @@ namespace TurtleTime {
             this.time = 0;
             this.gameState = loadModel();
             this.controllers = createControllers();
-            this.views = new GameView();
+            this.views = createView(this.gameState);
             // Set controllers
             this.controllers.forEach((function (controller : Controller) { controller.initialize(this.gameState, this.views); }).bind(this));
         }
