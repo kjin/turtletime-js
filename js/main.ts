@@ -4,6 +4,12 @@
 
 import Game = Phaser.Game;
 namespace TurtleTime {
+    export var debugText : string = "";
+
+    export function debugLog(text : string) {
+        debugText += text + "\n";
+    }
+
     class TurtleTimeGame {
         gameState : GameState;
         controllers : Array<Controller>;
@@ -20,6 +26,7 @@ namespace TurtleTime {
         }
 
         update() : void {
+            debugText = "";
             // Update controllers
             this.controllers.forEach(function (controller : Controller) { controller.update(1.0/60); });
             for (var property in this.gameState.entities) {

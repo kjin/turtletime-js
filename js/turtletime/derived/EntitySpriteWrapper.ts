@@ -31,12 +31,36 @@ module TurtleTime {
             return this._sprite.y;
         }
 
+        get anchorX() : number {
+            return this._sprite.anchor.x;
+        }
+
+        get anchorY() : number {
+            return this._sprite.anchor.y;
+        }
+
+        get rotation() : number {
+            return this._sprite.rotation;
+        }
+
         set x(value : number) {
             this._sprite.x = value;
         }
 
         set y(value : number) {
             this._sprite.y = value;
+        }
+
+        set anchorX(value : number) {
+            this._sprite.anchor.x = value;
+        }
+
+        set anchorY(value : number) {
+            this._sprite.anchor.y = value;
+        }
+
+        set rotation(value : number) {
+            this._sprite.rotation = value;
         }
 
         get alpha() : number {

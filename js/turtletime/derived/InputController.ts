@@ -12,6 +12,7 @@ module TurtleTime {
                 game.input.activePointer.x,
                 game.input.activePointer.y,
                 game.input.activePointer.isDown);
+            debugLog("drag=" + this._writeState.inputState.isDragged);
         }
     }
 }

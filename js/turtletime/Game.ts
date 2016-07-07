@@ -75,7 +75,8 @@ namespace TurtleTime {
     export function createView(gameState : GameState) : GameView {
         var view : GameView = new GameView();
         view.add(new InfoboxView(gameState.infoboxModel));
-        view.add(new SelectionView(gameState.selectionModel));
+        view.add(new DragView(gameState.selectionModel));
+        view.add(new DebugView());
         return view;
     }
 

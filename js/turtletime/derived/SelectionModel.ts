@@ -7,11 +7,27 @@ module TurtleTime {
         isBeingDragged : boolean = false;
         // if entity is being dragged, then where is the mouse?
         currentDragPosition : Point = null;
-        deltaDragPosition : Point = new Point(0, 0);
+        prevDragPosition : Point = new Point(0, 0);
 
         constructor() {
             super();
             this.layerNumber = LAYER_UI;
+        }
+
+        get deltaDragX() : number {
+            if (this.currentDragPosition == null) {
+                return 0;
+            } else {
+                return this.currentDragPosition.x - this.prevDragPosition.x;
+            }
+        }
+
+        get deltaDragY() : number {
+            if (this.currentDragPosition == null) {
+                return 0;
+            } else {
+                return this.currentDragPosition.y - this.prevDragPosition.y;
+            }
         }
     }
 }

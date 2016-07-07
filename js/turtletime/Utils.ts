@@ -5,6 +5,7 @@ module TurtleTime {
 
     export var LAYER_SPRITE_TURTLE : number = 29;
     export var LAYER_UI : number = 30;
+    export var LAYER_DEBUG : number = 1000; // always highest layer
     export var LAYER_SPRITE_DOOR : number = 20;
     export var LAYER_SPRITE_CHAIR : number = 21;
     export var LAYER_SPRITE_TABLE : number = 22;
