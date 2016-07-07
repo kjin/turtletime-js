@@ -12,6 +12,11 @@ module TurtleTime {
         }
 
         update(dt:number):void {
+            // temporary - if greenie2 is already there, just stop everything
+            if (this._writeState.turtles.underlyingArray.length == 2) {
+                return;
+            }
+
             var TURTLE_SPAWN_PROBABILITY_PER_FRAME = 1 - Math.pow(1 - TURTLE_SPAWN_PROBABILITY_PER_SECOND, dt); // hacky ._.
             if (Math.random() < TURTLE_SPAWN_PROBABILITY_PER_FRAME) {
                 // pick a random door

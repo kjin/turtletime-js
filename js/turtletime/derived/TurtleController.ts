@@ -49,11 +49,13 @@ module TurtleTime {
             var inputState = this._readState.inputState;
             if (this._writeState.selectionModel.isBeingDragged) {
                 return;
-            } else if (this._writeState.selectionModel.currentDragPosition != null) {
-                var roomPos = screenToRoom(this._writeState.selectionModel.currentDragPosition);
-                this._writeState.selectionModel.currentDragPosition = null;
-                turtle.targetPosition.x = Math.floor(roomPos.x + 0.5);
-                turtle.targetPosition.y = Math.floor(roomPos.y + 0.5);
+            } else if (this._writeState.selectionModel.entity == turtle) {
+                if (this._writeState.selectionModel.currentDragPosition != null) {
+                    var roomPos = screenToRoom(this._writeState.selectionModel.currentDragPosition);
+                    this._writeState.selectionModel.currentDragPosition = null;
+                    turtle.targetPosition.x = Math.floor(roomPos.x + 0.5);
+                    turtle.targetPosition.y = Math.floor(roomPos.y + 0.5);
+                }
             }
             if (this._readState.selectionModel.entity == turtle) {
                 turtle.currentStatus = "selected";
@@ -62,20 +64,24 @@ module TurtleTime {
             }
             if (turtle.view.contains(inputState.inputX, inputState.inputY)) {
                 turtle.currentStatus = "over";
-                if (inputState.justPressed) {
-                    if (this._writeState.selectionModel.entity == turtle) {
-                        this._writeState.selectionModel.entity = null;
-                        this._writeState.infoboxModel.text = "";
-                    } else {
-                        this._writeState.selectionModel.entity = turtle;
-                        this._writeState.infoboxModel.text = (() : string => {
-                            var turtleData : TurtleData = gameData.turtleData.get(turtle.appearanceID);
-                            return "Name: " + turtleData.name + "\n" +
-                                "Description: " + turtleData.description + "\n" +
-                                "Likes: " + turtleData.likes + "\n" +
-                                "Dislikes: " + turtleData.dislikes;
-                        })();
-                    }
+                // conditions for selection
+                if (inputState.justPressed && this._writeState.selectionModel.entity != turtle) {
+                    this._writeState.selectionModel.entity = turtle;
+                    this._writeState.selectionModel.selectedOnClick = this._readState.inputState.clickNumber;
+                    this._writeState.infoboxModel.text = (() : string => {
+                        var turtleData : TurtleData = gameData.turtleData.get(turtle.appearanceID);
+                        return "Name: " + turtleData.name + "\n" +
+                            "Description: " + turtleData.description + "\n" +
+                            "Likes: " + turtleData.likes + "\n" +
+                            "Dislikes: " + turtleData.dislikes;
+                    })();
+                }
+                // conditions for deselection
+                if (inputState.justReleased &&
+                    this._writeState.selectionModel.entity == turtle &&
+                    this._writeState.selectionModel.selectedOnClick != this._readState.inputState.clickNumber) {
+                    this._writeState.selectionModel.entity = null;
+                    this._writeState.infoboxModel.text = "";
                 }
             }
         }

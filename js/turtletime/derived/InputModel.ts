@@ -1,6 +1,6 @@
 module TurtleTime {
     export class InputModel {
-        static DRAG_THRESHOLD_PIXELS : number = 30;
+        static DRAG_THRESHOLD_PIXELS : number = 50;
 
         private _prevPressed : boolean;
         private _currPressed : boolean;
@@ -9,11 +9,13 @@ module TurtleTime {
         private _inputX : number;
         private _inputY : number;
         private _isDragged : boolean;
+        private _clickNumber : number;
 
         constructor() {
             this._prevPressed = this._currPressed = false;
             this._inputX = 0;
             this._inputY = 0;
+            this._clickNumber = 0;
         }
 
         setMouseState(x : number, y : number, isDown : boolean) : void {
@@ -21,16 +23,17 @@ module TurtleTime {
             this._currPressed = isDown;
             this._inputX = x;
             this._inputY = y;
+            if (this.justPressed) {
+                this._atClickX = this._inputX;
+                this._atClickY = this._inputY;
+                this._clickNumber++;
+            }
             if (this._currPressed) {
                 this._isDragged = this._isDragged ||
                     MathExtensions.dist2(this.atClickX, this.atClickY, this.inputX, this.inputY) >=
                     InputModel.DRAG_THRESHOLD_PIXELS * InputModel.DRAG_THRESHOLD_PIXELS;
             } else {
                 this._isDragged = false;
-            }
-            if (this.justPressed) {
-                this._atClickX = this._inputX;
-                this._atClickY = this._inputY;
             }
         }
 
@@ -51,5 +54,7 @@ module TurtleTime {
         get atClickY() : number { return this._atClickY; }
         
         get isDragged() : boolean { return this._isDragged; }
+
+        get clickNumber() : number { return this._clickNumber; }
     }
 }

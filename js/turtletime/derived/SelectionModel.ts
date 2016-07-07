@@ -3,6 +3,7 @@
 module TurtleTime {
     export class SelectionModel extends VisibleModel {
         entity : EntityModel;
+        selectedOnClick : number = -1;
         isBeingDragged : boolean = false;
         // if entity is being dragged, then where is the mouse?
         currentDragPosition : Point = null;
