@@ -1,8 +1,9 @@
 module TurtleTime {
 
-    export var TURTLE_SPEED : number = 0.01;
+    export var TURTLE_SPEED : number = 0.1;
     export var TURTLE_SPAWN_PROBABILITY_PER_SECOND : number = 0.1;
 
+    export var LAYER_FLOOR : number = 0;
     export var LAYER_SPRITE_TURTLE : number = 29;
     export var LAYER_UI : number = 30;
     export var LAYER_DEBUG : number = 1000; // always highest layer
@@ -114,7 +115,18 @@ module TurtleTime {
      * @returns {Phaser.Point} A point in screen coordinates.
      */
     export function roomToScreen(point : Point) : Point {
-        return new Point(point.x * gameData.roomScale + gameData.roomScale / 2, point.y * gameData.roomScale + gameData.roomScale / 2);
+        return roomToScreenXY(point.x, point.y);
+    }
+
+    /**
+     * Converts a point in room coordinates to one in screen coordinates.
+     * @param x The x-coordinate of the point in room coordinates.
+     * @param y The y-coordinate of the point in room coordinates.
+     * @returns {Phaser.Point} A point in screen coordinates.
+     */
+    export function roomToScreenXY(x : number, y : number) : Point {
+        return new Point(x * gameData.roomScale + (gameData.screenSize.x - gameData.maxRoomSize.x * gameData.roomScale) / 2,
+                         y * gameData.roomScale + (gameData.screenSize.y - gameData.maxRoomSize.y * gameData.roomScale) / 2);
     }
 
     /**
@@ -123,6 +135,17 @@ module TurtleTime {
      * @returns {Phaser.Point} A point in room coordinates.
      */
     export function screenToRoom(point : Point) : Point {
-        return new Point((point.x - gameData.roomScale / 2) / gameData.roomScale, (point.y - gameData.roomScale / 2) / gameData.roomScale);
+        return screenToRoomXY(point.x, point.y);
+    }
+
+    /**
+     * Converts a point in screen coordinates to one in room coordinates.
+     * @param x The x-coordinate of the point in screen coordinates.
+     * @param y The y-coordinate of the point in screen coordinates.
+     * @returns {Phaser.Point} A point in room coordinates.
+     */
+    export function screenToRoomXY(x : number, y : number) : Point {
+        return new Point((x - (gameData.screenSize.x - gameData.maxRoomSize.x * gameData.roomScale) / 2) / gameData.roomScale,
+                         (y - (gameData.screenSize.y - gameData.maxRoomSize.y * gameData.roomScale) / 2) / gameData.roomScale);
     }
 }

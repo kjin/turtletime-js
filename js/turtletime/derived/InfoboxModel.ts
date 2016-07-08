@@ -5,6 +5,7 @@ module TurtleTime {
         constructor() {
             super();
             this.text = "";
+            this.layerNumber = LAYER_UI;
         }
     }
 }

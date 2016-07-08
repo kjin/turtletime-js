@@ -24,5 +24,6 @@
     "doors": [
       { "position": [8, 1], "direction": 1, "appearanceID": "doorBasic", "actionStatus": "stand", "additionalData": {} }
     ]
-  }
+  },
+  "room": [20, 20]
 }

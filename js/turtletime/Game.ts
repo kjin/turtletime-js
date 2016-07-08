@@ -8,13 +8,16 @@ namespace TurtleTime {
             chairs: Array<EntityData>,
             tables: Array<EntityData>,
             doors: Array<EntityData>
-        }
+        },
+        room: Array<number>
     }
 
     export interface GameData {
         turtleData: Map<string, TurtleData>,
         spriteSpecs: SpriteData,
-        roomScale: number
+        roomScale: number,
+        maxRoomSize: Point,
+        screenSize: Point
     }
 
     export interface GameState {
@@ -26,7 +29,8 @@ namespace TurtleTime {
             chairs:EntityCollection<Chair>,
             tables:EntityCollection<Table>,
             doors:EntityCollection<Door>
-        }
+        },
+        roomModel: RoomModel
     }
 
     export var gameData : GameData = null;
@@ -44,6 +48,9 @@ namespace TurtleTime {
         var userData : UserData = JSON.parse(localStorage.getItem('user_data'));
         if (userData == null || checkGlobalOption('nosave')) {
             userData = game.cache.getJSON('user_data_new');
+            if (localStorage.getItem('user_data')) {
+                localStorage.removeItem('user_data');
+            }
         }
         gameData = {
             turtleData: ((json : any) : Map<string, TurtleData> => {
@@ -57,7 +64,9 @@ namespace TurtleTime {
                 return result;
             })(game.cache.getJSON('turtle_data')),
             spriteSpecs: new SpriteData(game.cache.getJSON('sprite_data')),
-            roomScale: 32
+            roomScale: 32,
+            maxRoomSize: new Point(userData.room[0], userData.room[1]),
+            screenSize: new Point(window.innerWidth, window.innerHeight)
         };
         return {
             inputState : new InputModel(),
@@ -68,12 +77,14 @@ namespace TurtleTime {
                 chairs : new EntityCollection(Chair, userData.cafeState.chairs),
                 tables: new EntityCollection(Table, userData.cafeState.tables),
                 doors: new EntityCollection(Door, userData.cafeState.doors)
-            }
+            },
+            roomModel: new RoomModel(userData.room[0], userData.room[1])
         };
     }
 
     export function createView(gameState : GameState) : GameView {
         var view : GameView = new GameView();
+        view.add(new RoomView(gameState.roomModel));
         view.add(new InfoboxView(gameState.infoboxModel));
         view.add(new DragView(gameState.selectionModel));
         view.add(new DebugView());
@@ -90,7 +101,8 @@ namespace TurtleTime {
                 chairs: gameState.entities.chairs.serialize(),
                 tables: gameState.entities.tables.serialize(),
                 doors: gameState.entities.doors.serialize()
-            }
+            },
+            room: [gameState.roomModel.width, gameState.roomModel.height]
         };
         localStorage.setItem('user_data', JSON.stringify(userData));
     }

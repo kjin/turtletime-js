@@ -10,6 +10,8 @@ module TurtleTime {
         constructor(model : EntityModel) {
             super(model);
             this._mainSprite = new EntitySpriteWrapper(model.spriteSpecs);
+            this._width = this._mainSprite.width;
+            this._height = this._mainSprite.height;
             this._highlightCircle = game.add.sprite(0, 0, 'highlightCircle');
             this._highlightCircle.anchor = new Point(0.5, 0.5);
         }
@@ -22,20 +24,12 @@ module TurtleTime {
             return this._mainSprite.y;
         }
 
-        get width() : number {
-            return this._mainSprite.width;
-        }
-
-        get height() : number {
-            return this._mainSprite.height;
-        }
-
         contains(x : number, y : number) : boolean {
             return Math.abs(x - this.x) <= this.width / 2 && Math.abs(y - this.y) <= this.height / 2;
         }
 
         update() : void {
-            var screenPos : Point = roomToScreen(this.model.position);
+            var screenPos : Point = roomToScreenXY(this.model.position.x + 0.5, this.model.position.y + 0.5);
             this._mainSprite.x = screenPos.x;
             this._mainSprite.y = screenPos.y;
             this._mainSprite.animation = this.model.animationString;
