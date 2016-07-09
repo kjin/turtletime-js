@@ -1,13 +1,18 @@
+//<reference path="../core/Controller.ts"/>
+//<reference path="../model/GameState.ts"/>
+//<reference path="../model/Doodads.ts"/>
+//<reference path="../model/Turtle.ts"/>
+//<reference path="../data/DataDefinitions.ts"/>
+
 module TurtleTime {
-    export class TurtleSpawnController extends Controller {
-        initialize(gameState:GameState, gameView : Array<BaseView>):void {
+    export class TurtleSpawnController extends Controller<GameState> {
+        initialize(gameState:GameState):void {
             this._readState = {
                 doors: gameState.entities.doors,
                 chairs: gameState.entities.chairs
             };
             this._writeState = {
-                turtles: gameState.entities.turtles,
-                gameView: gameView
+                turtles: gameState.entities.turtles
             };
         }
 

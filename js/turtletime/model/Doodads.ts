@@ -1,4 +1,6 @@
-///<reference path="EntityModel.ts"/>
+///<reference path="../core/EntityModel.ts"/>
+///<reference path="../data/DataDefinitions.ts"/>
+///<reference path="../data/Constants.ts"/>
 
 module TurtleTime {
     export class Table extends EntityModel {

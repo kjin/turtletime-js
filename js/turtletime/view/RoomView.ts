@@ -1,3 +1,6 @@
+///<reference path="../core/View.ts"/>
+///<reference path="../model/RoomModel.ts"/>
+
 module TurtleTime {
     export class RoomView extends View<RoomModel> {
         private _floorTile : Phaser.TileSprite;

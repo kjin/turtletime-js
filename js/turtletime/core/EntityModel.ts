@@ -1,4 +1,7 @@
-///<reference path="../abstract/VisibleModel.ts"/>
+///<reference path="../Utils.ts"/>
+///<reference path="./VisibleModel.ts"/>
+///<reference path="../data/DataDefinitions.ts"/>
+///<reference path="../data/SpriteSpecs.ts"/>
 
 import Point = Phaser.Point;
 

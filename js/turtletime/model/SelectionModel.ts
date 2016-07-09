@@ -1,4 +1,5 @@
-///<reference path="../abstract/VisibleModel.ts"/>
+///<reference path="../core/EntityModel.ts"/>
+///<reference path="../data/Constants.ts"/>
 
 module TurtleTime {
     export class SelectionModel extends VisibleModel {

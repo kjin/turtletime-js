@@ -1,3 +1,6 @@
+///<reference path="../Utils.ts"/>
+///<reference path="../data/SpriteSpecs.ts"/>
+
 module TurtleTime {
     // A helper class
     export class EntitySpriteWrapper {

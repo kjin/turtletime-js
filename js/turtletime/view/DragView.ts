@@ -1,3 +1,7 @@
+///<reference path="../core/View.ts"/>
+///<reference path="EntitySpriteWrapper.ts"/>
+///<reference path="../model/SelectionModel.ts"/>
+
 module TurtleTime {
     import Sprite = Phaser.Sprite;
     export class DragView extends View<SelectionModel> {

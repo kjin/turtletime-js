@@ -1,3 +1,6 @@
+///<reference path="../core/VisibleModel.ts"/>
+///<reference path="../data/Constants.ts"/>
+
 module TurtleTime {
     export class RoomModel extends VisibleModel {
         width : number;

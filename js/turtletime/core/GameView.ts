@@ -1,3 +1,5 @@
+///<reference path="BaseView.ts"/>
+
 module TurtleTime {
     export class GameView {
         private _views : Array<BaseView>;

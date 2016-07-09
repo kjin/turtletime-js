@@ -1,3 +1,6 @@
+///<reference path="../data/Constants.ts"/>
+///<reference path="../core/BaseView.ts"/>
+
 module TurtleTime {
     export class DebugView extends BaseView {
         private _text : Phaser.Text;

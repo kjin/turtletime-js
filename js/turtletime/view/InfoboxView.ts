@@ -1,4 +1,5 @@
-///<reference path="../abstract/View.ts"/>
+///<reference path="../core/View.ts"/>
+///<reference path="../model/InfoboxModel.ts"/>
 
 import Sprite = Phaser.Sprite;
 

@@ -1,4 +1,7 @@
-///<reference path="../abstract/View.ts"/>
+///<reference path="../data/Constants.ts"/>
+///<reference path="../core/View.ts"/>
+///<reference path="EntitySpriteWrapper.ts"/>
+///<reference path="../model/SelectionModel.ts"/>
 
 module TurtleTime {
     import AnimationManager = Phaser.AnimationManager;

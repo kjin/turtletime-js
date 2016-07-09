@@ -1,3 +1,8 @@
+///<reference path="../data/DataDefinitions.ts"/>
+///<reference path="EntityModel.ts"/>
+///<reference path="GameView.ts"/>
+// TODO Move logic dealing with view out, since view should only see model (even within core)
+
 module TurtleTime {
     export abstract class AbstractEntityCollection {
         abstract update(gameView : GameView) : void;
@@ -5,7 +10,8 @@ module TurtleTime {
 
     /**
      * A class representing a managed collection of entities in the game.
-     * It accounts for entities that have just been added/removed.
+     * It accounts for entities that have just been added/removed, so that external logic
+     * can operate on these entities.
      */
     export class EntityCollection<T extends EntityModel> extends AbstractEntityCollection {
         private _type : { new() : T };

@@ -1,38 +1,9 @@
+///<reference path="model/GameState.ts"/>
+///<reference path="data/DataDefinitions.ts"/>
+///<reference path="core/Controller.ts"/>
 ///<reference path="core/GameView.ts"/>
-import GameState = TurtleTime.GameState;
-import GameView = TurtleTime.GameView;
+
 namespace TurtleTime {
-    export interface UserData {
-        cafeState: {
-            turtles: Array<EntityData>,
-            chairs: Array<EntityData>,
-            tables: Array<EntityData>,
-            doors: Array<EntityData>
-        },
-        room: RoomData
-    }
-
-    export interface GameData {
-        turtleData: Map<string, TurtleData>,
-        spriteSpecs: SpriteData,
-        roomScale: number,
-        maxRoomSize: Point,
-        screenSize: Point
-    }
-
-    export interface GameState {
-        inputState: InputModel,
-        selectionModel:SelectionModel,
-        infoboxModel:InfoboxModel,
-        entities:{
-            turtles:EntityCollection<Turtle>,
-            chairs:EntityCollection<Chair>,
-            tables:EntityCollection<Table>,
-            doors:EntityCollection<Door>
-        },
-        roomModel: RoomModel
-    }
-
     export var gameData : GameData = null;
 
     export function preloadGame():void {
@@ -110,7 +81,7 @@ namespace TurtleTime {
         localStorage.setItem('user_data', JSON.stringify(userData));
     }
 
-    export function createControllers() : Array<Controller> {
+    export function createControllers() : Array<Controller<GameState>> {
         return [new TurtleController(), new InputController(), new TurtleSpawnController(), new DragController()];
     }
 

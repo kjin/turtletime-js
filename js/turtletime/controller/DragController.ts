@@ -1,6 +1,9 @@
+//<reference path="../core/Controller.ts"/>
+//<reference path="../model/GameState.ts"/>
+
 module TurtleTime {
-    export class DragController extends Controller {
-        initialize(gameState:GameState, gameView:Array<BaseView>):void {
+    export class DragController extends Controller<GameState> {
+        initialize(gameState:GameState):void {
             this._readState = {
                 inputModel: gameState.inputState
             }
@@ -30,6 +33,9 @@ module TurtleTime {
                 } else {
                     this._writeState.selectionModel.isBeingDragged = false;
                 }
+            } else {
+                // let's drag the screen around
+                
             }
         }
     }

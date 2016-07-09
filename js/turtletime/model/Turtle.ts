@@ -1,3 +1,7 @@
+///<reference path="../core/EntityModel.ts"/>
+///<reference path="../data/DataDefinitions.ts"/>
+///<reference path="../data/Constants.ts"/>
+
 module TurtleTime {
     export class Turtle extends EntityModel {
         intermediateTargetPosition : Point;

@@ -1,7 +1,12 @@
+//<reference path="../core/Controller.ts"/>
+//<reference path="../model/GameState.ts"/>
+//<reference path="../model/Turtle.ts"/>
+//<reference path="../model/InputModel.ts"/>
+//<reference path="../data/DataDefinitions.ts"/>
+
 module TurtleTime {
-    import toDirection = TurtleTime.Direction.toDirection;
-    export class TurtleController extends Controller {
-        initialize(gameState : GameState, gameView : Array<BaseView>) : void {
+    export class TurtleController extends Controller<GameState> {
+        initialize(gameState : GameState) : void {
             this._readState = {
                 inputState: gameState.inputState,
                 selectionModel: gameState.selectionModel
@@ -46,7 +51,7 @@ module TurtleTime {
         }
 
         private processInput(turtle : Turtle) : void {
-            var inputState = this._readState.inputState;
+            var inputState : InputModel = this._readState.inputState;
             if (this._writeState.selectionModel.isBeingDragged) {
                 return;
             } else if (this._writeState.selectionModel.entity == turtle) {
