@@ -9,7 +9,7 @@ namespace TurtleTime {
             tables: Array<EntityData>,
             doors: Array<EntityData>
         },
-        room: Array<number>
+        room: RoomData
     }
 
     export interface GameData {
@@ -39,6 +39,9 @@ namespace TurtleTime {
         game.load.spritesheet('turtle', 'assets/textures/turtle.png', 45, 60);
         game.load.image('highlightCircle', 'assets/textures/highlightCircle.png');
         game.load.spritesheet('tableandchair', 'assets/textures/tableandchair.png', 52, 52);
+        game.load.image('tile', 'assets/textures/tile.png');
+        game.load.image('brick', 'assets/textures/brick.png');
+        game.load.image('brick_top', 'assets/textures/bricktop.png');
         game.load.json('user_data_new', 'assets/json/new_user_data.json');
         game.load.json('turtle_data', 'assets/json/turtles.json');
         game.load.json('sprite_data', 'assets/json/sprites.json');
@@ -65,7 +68,7 @@ namespace TurtleTime {
             })(game.cache.getJSON('turtle_data')),
             spriteSpecs: new SpriteData(game.cache.getJSON('sprite_data')),
             roomScale: 32,
-            maxRoomSize: new Point(userData.room[0], userData.room[1]),
+            maxRoomSize: new Point(userData.room.size[0], userData.room.size[1]),
             screenSize: new Point(window.innerWidth, window.innerHeight)
         };
         return {
@@ -78,7 +81,7 @@ namespace TurtleTime {
                 tables: new EntityCollection(Table, userData.cafeState.tables),
                 doors: new EntityCollection(Door, userData.cafeState.doors)
             },
-            roomModel: new RoomModel(userData.room[0], userData.room[1])
+            roomModel: new RoomModel(userData.room)
         };
     }
 
@@ -102,7 +105,7 @@ namespace TurtleTime {
                 tables: gameState.entities.tables.serialize(),
                 doors: gameState.entities.doors.serialize()
             },
-            room: [gameState.roomModel.width, gameState.roomModel.height]
+            room: gameState.roomModel.serialize()
         };
         localStorage.setItem('user_data', JSON.stringify(userData));
     }

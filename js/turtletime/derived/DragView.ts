@@ -8,7 +8,7 @@ module TurtleTime {
                 if (this.sprite == null) {
                     this.sprite = new EntitySpriteWrapper(this.model.entity.spriteSpecs);
                     this.sprite.anchorY -= 0.5;
-                    this.sprite.alpha = 0.25;
+                    this.sprite.alpha = 0.5;
                 }
                 this.sprite.x = this.model.currentDragPosition.x;
                 this.sprite.y = this.model.currentDragPosition.y;

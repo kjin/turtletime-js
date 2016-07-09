@@ -25,5 +25,10 @@
       { "position": [8, 1], "direction": 1, "appearanceID": "doorBasic", "actionStatus": "stand", "additionalData": {} }
     ]
   },
-  "room": [20, 20]
+  "room": {
+    "size": [20, 16],
+    "wallHeight": 3,
+    "floorPattern": "tile",
+    "wallPattern": "brick"
+  }
 }
