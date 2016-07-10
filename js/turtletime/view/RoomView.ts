@@ -6,6 +6,7 @@ module TurtleTime {
         private _floorTile : Phaser.TileSprite;
         private _wallTile : Phaser.TileSprite;
         private _wallTileTop : Phaser.TileSprite;
+        private _graphics : Phaser.Graphics;
         
         constructor(model : RoomModel) {
             super(model);
@@ -36,9 +37,22 @@ module TurtleTime {
                         this.model.wallPattern);
                 }
             }
+            this._graphics = game.add.graphics(0, 0);
         }
 
         update():void {
+            if (checkGlobalOption('debugmode')) {
+                this._graphics.clear();
+                this._graphics.lineStyle(0, 0x000000, 0);
+                this._graphics.beginFill(0xff0000, 0.75);
+                twoDForEach(this.model.roomLayout, (cell:Array<EntityData>, x:number, y:number) => {
+                    if (cell.length > 0) {
+                        var topLeft:Point = roomToScreen(new Point(x, y));
+                        this._graphics.drawRect(topLeft.x, topLeft.y, gameData.roomScale, gameData.roomScale);
+                    }
+                });
+                this._graphics.endFill();
+            }
         }
 
         bringToTop():void {

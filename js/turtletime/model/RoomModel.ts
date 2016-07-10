@@ -9,6 +9,9 @@ module TurtleTime {
         floorPattern : string;
         wallPattern : string;
 
+        // Room layout
+        roomLayout : Array<Array<Array<EntityData>>>;
+
         constructor(data : RoomData) {
             super();
             this.width = data.size[0];
@@ -17,6 +20,29 @@ module TurtleTime {
             this.wallPattern = data.wallPattern;
             this.wallHeight = data.wallHeight;
             this.layerNumber = LAYER_FLOOR;
+
+            this.roomLayout = new Array<Array<Array<EntityData>>>(this.width);
+            for (var i : number = 0; i < this.width; i++) {
+                this.roomLayout[i] = new Array<Array<EntityData>>(this.height);
+                for (var j : number = 0; j < this.height; j++) {
+                    this.roomLayout[i][j] = [];
+                }
+            }
+        }
+
+        isInRoom(point : Point) : boolean {
+            return this.isInRoomXY(point.x, point.y);
+        }
+
+        isInRoomXY(x : number, y : number) : boolean {
+            return x >= 0 && x < this.width && y >= 0 && y < this.height;
+        }
+
+        clamp(point : Point) : void {
+            if (point.x < 0) point.x = 0;
+            if (point.x >= this.width) point.x = this.width - 1;
+            if (point.y < 0) point.y = 0;
+            if (point.y >= this.height) point.y = this.height - 1;
         }
 
         serialize() : RoomData {

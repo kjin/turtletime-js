@@ -1,6 +1,7 @@
 //<reference path="../core/Controller.ts"/>
 //<reference path="../model/GameState.ts"/>
 //<reference path="../model/Turtle.ts"/>
+//<reference path="../model/RoomModel.ts"/>
 //<reference path="../model/InputModel.ts"/>
 //<reference path="../data/DataDefinitions.ts"/>
 
@@ -9,7 +10,8 @@ module TurtleTime {
         initialize(gameState : GameState) : void {
             this._readState = {
                 inputState: gameState.inputState,
-                selectionModel: gameState.selectionModel
+                selectionModel: gameState.selectionModel,
+                roomModel: gameState.roomModel
             };
             this._writeState = {
                 selectionModel: gameState.selectionModel,
@@ -20,6 +22,9 @@ module TurtleTime {
 
         // called from processMovement
         private processPathfinding(turtle : Turtle) : void {
+            if (this._writeState.selectionModel.isBeingDragged) {
+                return;
+            }
             // Assume that turtle is at intermediateTargetPosition and wants to get to targetPosition
             if (turtle.intermediateTargetPosition.distance(turtle.targetPosition) < 1) {
                 turtle.intermediateTargetPosition.set(turtle.targetPosition.x, turtle.targetPosition.y);
@@ -61,6 +66,7 @@ module TurtleTime {
                     this._writeState.selectionModel.currentDragPosition = null;
                     turtle.targetPosition.x = Math.floor(roomPos.x);
                     turtle.targetPosition.y = Math.floor(roomPos.y);
+                    this._readState.roomModel.clamp(turtle.targetPosition);
                 }
             }
             if (this._readState.selectionModel.entity == turtle) {

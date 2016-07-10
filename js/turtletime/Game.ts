@@ -19,6 +19,7 @@ namespace TurtleTime {
     }
     
     export function loadModel() : GameState {
+        game.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT;
         var userData : UserData = JSON.parse(localStorage.getItem('user_data'));
         if (userData == null || checkGlobalOption('nosave')) {
             userData = game.cache.getJSON('user_data_new');
@@ -40,7 +41,7 @@ namespace TurtleTime {
             spriteSpecs: new SpriteData(game.cache.getJSON('sprite_data')),
             roomScale: 32,
             maxRoomSize: new Point(userData.room.size[0], userData.room.size[1]),
-            screenSize: new Point(window.innerWidth, window.innerHeight)
+            screenSize: new Point(game.width, game.height)
         };
         return {
             inputState : new InputModel(),
@@ -82,7 +83,7 @@ namespace TurtleTime {
     }
 
     export function createControllers() : Array<Controller<GameState>> {
-        return [new TurtleController(), new InputController(), new TurtleSpawnController(), new DragController()];
+        return [new RoomLayoutController(), new TurtleController(), new InputController(), new TurtleSpawnController(), new DragController()];
     }
 
     export function updateModel(gameState : GameState) : void {

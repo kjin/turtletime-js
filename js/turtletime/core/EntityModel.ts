@@ -30,7 +30,7 @@ module TurtleTime {
             this.currentStatus = "hidden";
         }
 
-        protected abstract getEntityClass() : string;
+        abstract getEntityClass() : string;
 
         protected abstract getAdditionalData() : any;
         

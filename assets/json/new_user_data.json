@@ -12,21 +12,21 @@
       { "position": [3, 1], "direction": 2, "appearanceID": "chairBasic", "actionStatus": "stand", "additionalData": {} },
       { "position": [4, 1], "direction": 2, "appearanceID": "chairBasic", "actionStatus": "stand", "additionalData": {} },
       { "position": [5, 1], "direction": 2, "appearanceID": "chairBasic", "actionStatus": "stand", "additionalData": {} },
-      { "position": [2, 8], "direction": 4, "appearanceID": "chairBasic", "actionStatus": "stand", "additionalData": {} },
-      { "position": [6, 8], "direction": 3, "appearanceID": "chairBasic", "actionStatus": "stand", "additionalData": {} },
-      { "position": [10, 8], "direction": 4, "appearanceID": "chairBasic", "actionStatus": "stand", "additionalData": {} },
-      { "position": [14, 8], "direction": 3, "appearanceID": "chairBasic", "actionStatus": "stand", "additionalData": {} }
+      { "position": [0, 8], "direction": 4, "appearanceID": "chairBasic", "actionStatus": "stand", "additionalData": {} },
+      { "position": [4, 8], "direction": 3, "appearanceID": "chairBasic", "actionStatus": "stand", "additionalData": {} },
+      { "position": [7, 8], "direction": 4, "appearanceID": "chairBasic", "actionStatus": "stand", "additionalData": {} },
+      { "position": [11, 8], "direction": 3, "appearanceID": "chairBasic", "actionStatus": "stand", "additionalData": {} }
     ],
     "tables": [
-      { "position": [4, 8], "direction": 1, "appearanceID": "tableBasic", "actionStatus": "stand", "additionalData": {} },
-      { "position": [12, 8], "direction": 1, "appearanceID": "tableBasic", "actionStatus": "stand", "additionalData": {} }
+      { "position": [2, 8], "direction": 1, "appearanceID": "tableBasic", "actionStatus": "stand", "additionalData": {} },
+      { "position": [9, 8], "direction": 1, "appearanceID": "tableBasic", "actionStatus": "stand", "additionalData": {} }
     ],
     "doors": [
       { "position": [8, 1], "direction": 1, "appearanceID": "doorBasic", "actionStatus": "stand", "additionalData": {} }
     ]
   },
   "room": {
-    "size": [20, 16],
+    "size": [12, 16],
     "wallHeight": 3,
     "floorPattern": "tile",
     "wallPattern": "brick"

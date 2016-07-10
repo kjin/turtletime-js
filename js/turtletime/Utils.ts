@@ -68,6 +68,12 @@ module TurtleTime {
         }
     }
 
+    export function twoDForEach<T>(arr : Array<Array<T>>, callback : (e : T, x : number, y : number) => void) {
+        arr.forEach((innerArr : Array<T>, x : number) : void => {
+            innerArr.forEach((element : T, y : number) : void => callback(element, x, y));
+        });
+    }
+
     /**
      * Performs an action to each sub element in an object whose properties are arrays of objects.
      * @param obj An object whose properties are arrays of type T objects.

@@ -6,6 +6,8 @@
 module TurtleTime {
     export abstract class AbstractEntityCollection {
         abstract update(gameView : GameView) : void;
+
+        abstract forEachModel(callback: (value: EntityModel) => void) : void;
     }
 
     /**
@@ -68,6 +70,10 @@ module TurtleTime {
 
         forEach(callback: (value: T) => void) {
             this._entities.forEach(callback);
+        }
+
+        forEachModel(callback: (value: EntityModel) => void) : void {
+            this.forEach((value : T) => callback(value));
         }
 
         get underlyingArray() : Array<T> {

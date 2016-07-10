@@ -38,5 +38,6 @@ namespace TurtleTime {
         }
     }
     var turtleTimeGame : TurtleTimeGame = new TurtleTimeGame();
-    export var game : Game = new Game(window.innerWidth, window.innerHeight, Phaser.AUTO, '', {preload: preloadGame, create: turtleTimeGame.create, update: turtleTimeGame.update});
+    var scale_factor : number = (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) ? 0.5 : 1;
+    export var game : Game = new Game(window.innerWidth * scale_factor, window.innerHeight * scale_factor, Phaser.AUTO, '', {preload: preloadGame, create: turtleTimeGame.create, update: turtleTimeGame.update});
 }
