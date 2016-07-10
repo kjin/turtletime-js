@@ -28,6 +28,7 @@ module TurtleTime {
             this.appearanceID = entityData.appearanceID;
             this.currentAction = entityData.actionStatus;
             this.currentStatus = "hidden";
+            this.layerNumber = LAYER_SPRITE;
         }
 
         abstract getEntityClass() : string;

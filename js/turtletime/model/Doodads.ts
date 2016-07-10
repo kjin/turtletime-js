@@ -6,7 +6,6 @@ module TurtleTime {
     export class Table extends EntityModel {
         initialize(entityData : EntityData) : void {
             super.initialize(entityData);
-            this.layerNumber = LAYER_SPRITE_TABLE;
         }
 
         getEntityClass() : string { return "table"; }
@@ -21,7 +20,6 @@ module TurtleTime {
 
         initialize(entityData : EntityData) : void {
             super.initialize(entityData);
-            this.layerNumber = LAYER_SPRITE_CHAIR;
         }
 
         getEntityClass() : string { return "chair"; }
@@ -36,7 +34,6 @@ module TurtleTime {
     export class Door extends EntityModel {
         initialize(entityData : EntityData) : void {
             super.initialize(entityData);
-            this.layerNumber = LAYER_SPRITE_DOOR;
         }
 
         getEntityClass() : string { return "door"; }

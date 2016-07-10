@@ -27,18 +27,33 @@ module TurtleTime {
             }
             // Assume that turtle is at intermediateTargetPosition and wants to get to targetPosition
             if (turtle.intermediateTargetPosition.distance(turtle.targetPosition) < 1) {
+                var onObjects : Array<EntityModel> =
+                    this._readState.roomModel.roomLayout[turtle.targetPosition.x][turtle.targetPosition.y];
+                for (var i : number = 0; i < onObjects.length; i++) {
+                    if (onObjects[i] != turtle) {
+                        turtle.direction = onObjects[i].direction;
+                        break;
+                    }
+                }
                 turtle.intermediateTargetPosition.set(turtle.targetPosition.x, turtle.targetPosition.y);
                 return;
             }
-            // goal: set turtle.intermediateTargetPosition according to the best path
-            var nextDirection : Point = aStarTraversal(
-                turtle.intermediateTargetPosition,
-                turtle.targetPosition,
-                this._readState.roomModel.width,
-                MathExtensions.dist2,
-                this._readState.roomModel.isUnoccupiedSpaceXY.bind(this._readState.roomModel)
-            );
-            turtle.intermediateTargetPosition.add(nextDirection.x, nextDirection.y);
+            if (turtle.sleep == 0) {
+                // goal: set turtle.intermediateTargetPosition according to the best path
+                var nextDirection:Point = aStarTraversal(
+                    turtle.intermediateTargetPosition,
+                    turtle.targetPosition,
+                    this._readState.roomModel.width,
+                    MathExtensions.dist2,
+                    this._readState.roomModel.isUnoccupiedSpaceXY.bind(this._readState.roomModel)
+                );
+                if (nextDirection.x == 0 && nextDirection.y == 0) {
+                    turtle.sleep = 100;
+                }
+                turtle.intermediateTargetPosition.add(nextDirection.x, nextDirection.y);
+            } else {
+                turtle.sleep--;
+            }
         }
 
         private processMovement(turtle : Turtle) : void {

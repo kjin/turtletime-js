@@ -164,9 +164,9 @@ module TurtleTime {
         var getScore = (map : Map<number, number>, key : number) : number => {
             return map.has(key) ? map.get(key) : Infinity;
         };
-        var encode = (x : number, y : number) : number => (maxX * y + x);
-        var decodeX = (v : number) : number => (v % maxX);
-        var decodeY = (v : number) : number => (Math.floor(v / maxX));
+        var encode = (x : number, y : number) : number => ((maxX + 2) * y + x + 1);
+        var decodeX = (v : number) : number => (v % (maxX + 2) - 1);
+        var decodeY = (v : number) : number => (Math.floor(v / (maxX + 2)));
         var extractFirstNode = (chain : Map<number, number>, from : number) : number => {
             var output = "" + from;
             while (chain.has(from)) {
