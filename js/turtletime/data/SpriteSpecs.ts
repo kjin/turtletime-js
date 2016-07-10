@@ -12,6 +12,7 @@ module TurtleTime {
     export interface SpriteSpecs {
         spriteID : String,
         scale : number,
+        dimensions : Array<number>,
         anchor: Array<number>,
         animations : Array<SpriteAnimation>
     }

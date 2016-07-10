@@ -56,7 +56,7 @@ module TurtleTime {
         // TODO i am an awful person and even more awful programmer
         getLayerNumber() : number {
             return this.model.layerNumber +
-                0.01 * this.model.position.y +
+                0.01 * (this.model.position.y + this.model.dimensions.y - 1) +
                 0.0001 * this.model.position.x +
                 0.000001 * (this._bob ? 1 : 0);
         }
