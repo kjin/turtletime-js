@@ -45,7 +45,8 @@ module TurtleTime {
                     turtle.targetPosition,
                     this._readState.roomModel.width,
                     MathExtensions.dist2,
-                    this._readState.roomModel.isUnoccupiedSpaceXY.bind(this._readState.roomModel)
+                    this._readState.roomModel.isUnoccupiedSpaceXY.bind(this._readState.roomModel),
+                    turtle.direction
                 );
                 if (nextDirection.x == 0 && nextDirection.y == 0) {
                     turtle.sleep = 100;

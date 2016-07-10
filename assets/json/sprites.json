@@ -9,10 +9,10 @@
         {
           "name": "stand",
           "frames": [
-            { "direction": 2, "frames": [0] },
-            { "direction": 1, "frames": [1] },
-            { "direction": 3, "frames": [2] },
-            { "direction": 0, "frames": [3] }
+            { "direction": 3, "frames": [0] },
+            { "direction": 2, "frames": [1] },
+            { "direction": 4, "frames": [2] },
+            { "direction": 1, "frames": [3] }
           ]
         }
       ]
@@ -26,10 +26,10 @@
         {
           "name": "stand",
           "frames": [
-            { "direction": 2, "frames": [0] },
-            { "direction": 1, "frames": [1] },
-            { "direction": 3, "frames": [2] },
-            { "direction": 0, "frames": [3] }
+            { "direction": 3, "frames": [0] },
+            { "direction": 2, "frames": [1] },
+            { "direction": 4, "frames": [2] },
+            { "direction": 1, "frames": [3] }
           ]
         }
       ]
@@ -45,10 +45,10 @@
         {
           "name": "stand",
           "frames": [
-            {"direction": 2, "frames": [1]},
-            {"direction": 1, "frames": [1]},
             {"direction": 3, "frames": [1]},
-            {"direction": 0, "frames": [1]}
+            {"direction": 2, "frames": [1]},
+            {"direction": 4, "frames": [1]},
+            {"direction": 1, "frames": [1]}
           ]
         }
       ]
@@ -64,10 +64,10 @@
         {
           "name": "stand",
           "frames": [
-            {"direction": 2, "frames": [0]},
-            {"direction": 1, "frames": [0]},
             {"direction": 3, "frames": [0]},
-            {"direction": 0, "frames": [0]}
+            {"direction": 2, "frames": [0]},
+            {"direction": 4, "frames": [0]},
+            {"direction": 1, "frames": [0]}
           ]
         }
       ]
@@ -83,10 +83,10 @@
         {
           "name": "stand",
           "frames": [
-            {"direction": 2, "frames": [1]},
-            {"direction": 1, "frames": [1]},
             {"direction": 3, "frames": [1]},
-            {"direction": 0, "frames": [1]}
+            {"direction": 2, "frames": [1]},
+            {"direction": 4, "frames": [1]},
+            {"direction": 1, "frames": [1]}
           ]
         }
       ]

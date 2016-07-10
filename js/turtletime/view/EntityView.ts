@@ -44,7 +44,7 @@ module TurtleTime {
             this._mainSprite.y = screenPos.y - (this._bob ? (2 * squareWave(this._time)) : 0);
             this._mainSprite.animation = this.model.animationString;
             this._highlightCircle.x = this._mainSprite.x;
-            this._highlightCircle.y = this._mainSprite.y - 2 * gameData.roomScale * this.model.spriteSpecs.scale;
+            this._highlightCircle.y = this._mainSprite.y - 2 * gameData.roomScale[1] * this.model.spriteSpecs.scale;
             setTintAndAlpha(this._highlightCircle, EffectCircleDictionary[this.model.currentStatus]);
         }
 

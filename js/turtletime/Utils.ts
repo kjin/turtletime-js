@@ -11,7 +11,8 @@ module TurtleTime {
      * An enumeration of the different directions an entity can face.
      */
     export enum Direction {
-        Up = 0,
+        None = 0,
+        Up = 1,
         Down,
         Left,
         Right
@@ -28,6 +29,9 @@ module TurtleTime {
         export function toDirection(vector : Point) : Direction {
             var a = vector.x;
             var b = vector.y;
+            if (a == 0 && b == 0) {
+                return Direction.None;
+            }
             if (Math.abs(a) >= Math.abs(b)) { // either left or right
                 if (a >= 0) {
                     return Direction.Right;
@@ -62,9 +66,10 @@ module TurtleTime {
                 return new Point(-1, 0);
             } else if (dir == Direction.Right) {
                 return new Point(1, 0);
-            } else {
+            } else if (dir == Direction.Down) {
                 return new Point(0, 1);
             }
+            return new Point(0, 0);
         }
     }
 
@@ -118,8 +123,8 @@ module TurtleTime {
      * @returns {Phaser.Point} A point in screen coordinates.
      */
     export function roomToScreenXY(x : number, y : number) : Point {
-        return new Point(x * gameData.roomScale + (gameData.screenSize.x - gameData.maxRoomSize.x * gameData.roomScale) / 2,
-                         y * gameData.roomScale + (gameData.screenSize.y - gameData.maxRoomSize.y * gameData.roomScale) / 2);
+        return new Point(x * gameData.roomScale[0] + (gameData.screenSize.x - gameData.maxRoomSize.x * gameData.roomScale[0]) / 2,
+                         y * gameData.roomScale[1] + (gameData.screenSize.y - gameData.maxRoomSize.y * gameData.roomScale[1]) / 2);
     }
 
     /**
@@ -138,8 +143,8 @@ module TurtleTime {
      * @returns {Phaser.Point} A point in room coordinates.
      */
     export function screenToRoomXY(x : number, y : number) : Point {
-        return new Point((x - (gameData.screenSize.x - gameData.maxRoomSize.x * gameData.roomScale) / 2) / gameData.roomScale,
-                         (y - (gameData.screenSize.y - gameData.maxRoomSize.y * gameData.roomScale) / 2) / gameData.roomScale);
+        return new Point((x - (gameData.screenSize.x - gameData.maxRoomSize.x * gameData.roomScale[0]) / 2) / gameData.roomScale[0],
+                         (y - (gameData.screenSize.y - gameData.maxRoomSize.y * gameData.roomScale[1]) / 2) / gameData.roomScale[1]);
     }
 
     /**
@@ -151,6 +156,7 @@ module TurtleTime {
      * @param maxX The maximum x-value of the search space.
      * @param heuristicCostEstimate A heuristic for estimating the cost between two nodes.
      * @param isValidSpace A function that returns true if a space can be entered.
+     * @param hint A particular direction the traversal algorithm should favor for the first step.
      * @returns {Phaser.Point} A direction to move. If there is no path at all, (0, 0) will be returned.
      */
     export function aStarTraversal(
@@ -158,7 +164,8 @@ module TurtleTime {
         end : Point,
         maxX : number,
         heuristicCostEstimate : (x1 : number, y1 : number, x2 : number, y2 : number) => number,
-        isValidSpace : (x : number, y : number) => boolean
+        isValidSpace : (x : number, y : number) => boolean,
+        hint : Direction = Direction.None
     ) : Point {
         // convenience functions
         var getScore = (map : Map<number, number>, key : number) : number => {
@@ -185,6 +192,7 @@ module TurtleTime {
         var neighbors : Array<number> = [0, 0, 0, 0];
         var encodedStart = encode(start.x, start.y);
         var encodedEnd = encode(end.x, end.y);
+        var hintVector : Point = Direction.toVector(hint);
 
         var closedSet : Set<number> = new Set();
         var openSet : Set<number> = new Set<number>();
@@ -227,7 +235,12 @@ module TurtleTime {
                 if ((neighbor != encodedEnd && !isValidSpace(neighborX, neighborY)) || closedSet.has(neighbor)) {
                     return;
                 }
-                var tentative_gScore = gScore.get(current) + 1;
+                var tentative_gScore = getScore(gScore, current);
+                if (neighborX - currentX == hintVector.x && neighborY - currentY == hintVector.y) {
+                    tentative_gScore += 0.5;
+                } else {
+                    tentative_gScore += 1.0;
+                }
                 if (!openSet.has(neighbor)) {
                     openSet.add(neighbor);
                 } else if (tentative_gScore >= getScore(gScore, neighbor)) {

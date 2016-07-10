@@ -48,7 +48,7 @@ module TurtleTime {
                 twoDForEach(this.model.roomLayout, (cell:Array<EntityData>, x:number, y:number) => {
                     if (cell.length > 0) {
                         var topLeft:Point = roomToScreen(new Point(x, y));
-                        this._graphics.drawRect(topLeft.x, topLeft.y, gameData.roomScale, gameData.roomScale);
+                        this._graphics.drawRect(topLeft.x, topLeft.y, gameData.roomScale[0], gameData.roomScale[1]);
                     }
                 });
                 this._graphics.endFill();

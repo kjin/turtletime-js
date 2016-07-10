@@ -16,6 +16,9 @@ module TurtleTime {
         wallPattern: string
     }
 
+    /**
+     * Data about each individual turtle.
+     */
     export interface TurtleData {
         name: string,
         description: string,
@@ -23,6 +26,9 @@ module TurtleTime {
         dislikes: Array<string>
     }
 
+    /**
+     * User-specific data; serializable.
+     */
     export interface UserData {
         cafeState: {
             turtles: Array<EntityData>,
@@ -33,10 +39,13 @@ module TurtleTime {
         room: RoomData
     }
 
+    /**
+     * Static, globally-accessible data.
+     */
     export interface GameData {
         turtleData: Map<string, TurtleData>,
         spriteSpecs: SpriteData,
-        roomScale: number,
+        roomScale: Array<number>,
         maxRoomSize: Point,
         screenSize: Point
     }

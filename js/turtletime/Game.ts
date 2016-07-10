@@ -39,7 +39,7 @@ namespace TurtleTime {
                 return result;
             })(game.cache.getJSON('turtle_data')),
             spriteSpecs: new SpriteData(game.cache.getJSON('sprite_data')),
-            roomScale: 32,
+            roomScale: [32, 24],
             maxRoomSize: new Point(userData.room.size[0], userData.room.size[1]),
             screenSize: new Point(game.width, game.height)
         };
