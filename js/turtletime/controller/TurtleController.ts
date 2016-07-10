@@ -80,7 +80,7 @@ module TurtleTime {
                 return;
             } else if (this._writeState.selectionModel.entity == turtle) {
                 if (this._writeState.selectionModel.currentDragPosition != null) {
-                    var roomPos = screenToRoomXY(this._writeState.selectionModel.currentDragPosition.x,
+                    var roomPos = screenToRoom(this._writeState.selectionModel.currentDragPosition.x,
                         this._writeState.selectionModel.currentDragPosition.y + turtle.view.height / 2);
                     this._writeState.selectionModel.currentDragPosition = null;
                     turtle.targetPosition.x = Math.floor(roomPos.x);

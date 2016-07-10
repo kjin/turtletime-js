@@ -40,7 +40,10 @@ module TurtleTime {
             turtles: Array<EntityData>,
             chairs: Array<EntityData>,
             tables: Array<EntityData>,
-            doors: Array<EntityData>
+            doors: Array<EntityData>,
+            wallDecor: Array<EntityData>,
+            roomDecor: Array<EntityData>,
+            food: Array<EntityData>
         },
         room: RoomData
     }

@@ -27,11 +27,16 @@
     ],
     "doors": [
       { "position": [10, 15], "direction": 1, "appearanceID": "doorBasic", "actionStatus": "stand", "additionalData": {} }
-    ]
+    ],
+    "wallDecor": [
+      { "position": [8, 0], "direction": 1, "appearanceID": "blackboard", "actionStatus": "stand", "additionalData": {} }
+    ],
+    "roomDecor": [],
+    "food": []
   },
   "room": {
     "size": [12, 16],
-    "wallHeight": 3,
+    "wallHeight": 2,
     "floorPattern": "tile",
     "wallPattern": "brick"
   }

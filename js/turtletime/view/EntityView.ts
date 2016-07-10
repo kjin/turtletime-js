@@ -38,7 +38,12 @@ module TurtleTime {
         }
 
         update() : void {
-            var screenPos : Point = roomToScreenXY(this.model.position.x + 0.5, this.model.position.y + 0.5);
+            var screenPos : Point;
+            if (this.model.onWall()) {
+                screenPos = wallToScreen(this.model.position.x + 0.5, this.model.position.y + 0.5);
+            } else {
+                screenPos = roomToScreen(this.model.position.x + 0.5, this.model.position.y + 0.5);
+            }
             this._time += 0.05;
             this._mainSprite.x = screenPos.x;
             this._mainSprite.y = screenPos.y - (this._bob ? (2 * squareWave(this._time)) : 0);

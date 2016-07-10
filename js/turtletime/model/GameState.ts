@@ -15,7 +15,8 @@ module TurtleTime {
             turtles:EntityCollection<Turtle>,
             chairs:EntityCollection<Chair>,
             tables:EntityCollection<Table>,
-            doors:EntityCollection<Door>
+            doors:EntityCollection<Door>,
+            wallDecor:EntityCollection<WallDecoration>
         },
         roomModel: RoomModel,
         uiModel: UIModel

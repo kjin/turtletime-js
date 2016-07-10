@@ -109,31 +109,24 @@ module TurtleTime {
 
     /**
      * Converts a point in room coordinates to one in screen coordinates.
-     * @param point A point in room coordinates.
-     * @returns {Phaser.Point} A point in screen coordinates.
-     */
-    export function roomToScreen(point : Point) : Point {
-        return roomToScreenXY(point.x, point.y);
-    }
-
-    /**
-     * Converts a point in room coordinates to one in screen coordinates.
      * @param x The x-coordinate of the point in room coordinates.
      * @param y The y-coordinate of the point in room coordinates.
      * @returns {Phaser.Point} A point in screen coordinates.
      */
-    export function roomToScreenXY(x : number, y : number) : Point {
+    export function roomToScreen(x : number, y : number) : Point {
         return new Point(x * gameData.roomScale[0] + (gameData.screenSize.x - gameData.maxRoomSize.x * gameData.roomScale[0]) / 2,
                          y * gameData.roomScale[1] + (gameData.screenSize.y - gameData.maxRoomSize.y * gameData.roomScale[1]) / 2);
     }
 
     /**
-     * Converts a point in screen coordinates to one in room coordinates.
-     * @param point A point in screen coordinates.
-     * @returns {Phaser.Point} A point in room coordinates.
+     * Converts a point in wall coordinates to one in screen coordinates.
+     * @param x The x-coordinate of the point in wall coordinates.
+     * @param y The y-coordinate of the point in wall coordinates.
+     * @returns {Phaser.Point} A point in screen coordinates.
      */
-    export function screenToRoom(point : Point) : Point {
-        return screenToRoomXY(point.x, point.y);
+    export function wallToScreen(x : number, y : number) : Point {
+        return new Point(x * gameData.roomScale[0] + (gameData.screenSize.x - gameData.maxRoomSize.x * gameData.roomScale[0]) / 2,
+            -y * gameData.roomScale[0] + (gameData.screenSize.y - gameData.maxRoomSize.y * gameData.roomScale[1]) / 2);
     }
 
     /**
@@ -142,7 +135,7 @@ module TurtleTime {
      * @param y The y-coordinate of the point in screen coordinates.
      * @returns {Phaser.Point} A point in room coordinates.
      */
-    export function screenToRoomXY(x : number, y : number) : Point {
+    export function screenToRoom(x : number, y : number) : Point {
         return new Point((x - (gameData.screenSize.x - gameData.maxRoomSize.x * gameData.roomScale[0]) / 2) / gameData.roomScale[0],
                          (y - (gameData.screenSize.y - gameData.maxRoomSize.y * gameData.roomScale[1]) / 2) / gameData.roomScale[1]);
     }

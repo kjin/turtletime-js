@@ -10,8 +10,8 @@ module TurtleTime {
         
         constructor(model : RoomModel) {
             super(model);
-            var topLeft : Point = roomToScreen(new Point(0, 0));
-            var bottomRight : Point = roomToScreen(new Point(this.model.width, this.model.height));
+            var topLeft : Point = roomToScreen(0, 0);
+            var bottomRight : Point = roomToScreen(this.model.width, this.model.height);
             this._floorTile = game.add.tileSprite(
                 topLeft.x,
                 topLeft.y,
@@ -47,7 +47,7 @@ module TurtleTime {
                 this._graphics.beginFill(0xff0000, 0.75);
                 twoDForEach(this.model.roomLayout, (cell:Array<EntityData>, x:number, y:number) => {
                     if (cell.length > 0) {
-                        var topLeft:Point = roomToScreen(new Point(x, y));
+                        var topLeft:Point = roomToScreen(x, y);
                         this._graphics.drawRect(topLeft.x, topLeft.y, gameData.roomScale[0], gameData.roomScale[1]);
                     }
                 });

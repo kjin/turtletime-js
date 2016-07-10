@@ -13,6 +13,7 @@ namespace TurtleTime {
         game.load.image('tile', 'assets/textures/tile.png');
         game.load.image('brick', 'assets/textures/brick.png');
         game.load.image('brick_top', 'assets/textures/bricktop.png');
+        game.load.image('blackboard', 'assets/textures/blackboard.png');
         game.load.json('user_data_new', 'assets/json/new_user_data.json');
         game.load.json('turtle_data', 'assets/json/turtles.json');
         game.load.json('sprite_data', 'assets/json/sprites.json');
@@ -52,7 +53,8 @@ namespace TurtleTime {
                 turtles : new EntityCollection(Turtle, userData.cafeState.turtles),
                 chairs : new EntityCollection(Chair, userData.cafeState.chairs),
                 tables: new EntityCollection(Table, userData.cafeState.tables),
-                doors: new EntityCollection(Door, userData.cafeState.doors)
+                doors: new EntityCollection(Door, userData.cafeState.doors),
+                wallDecor: new EntityCollection(WallDecoration, userData.cafeState.wallDecor)
             },
             roomModel: new RoomModel(userData.room),
             uiModel: new UIModel(game.cache.getJSON('ui_data'))
@@ -78,7 +80,10 @@ namespace TurtleTime {
                 turtles: gameState.entities.turtles.serialize(),
                 chairs: gameState.entities.chairs.serialize(),
                 tables: gameState.entities.tables.serialize(),
-                doors: gameState.entities.doors.serialize()
+                doors: gameState.entities.doors.serialize(),
+                wallDecor: gameState.entities.wallDecor.serialize(),
+                roomDecor: [],
+                food: []
             },
             room: gameState.roomModel.serialize()
         };

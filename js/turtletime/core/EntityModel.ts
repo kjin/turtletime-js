@@ -35,6 +35,10 @@ module TurtleTime {
 
         abstract getEntityClass() : string;
 
+        onWall() : boolean {
+            return false;
+        }
+
         protected abstract getAdditionalData() : any;
         
         serialize() : EntityData {

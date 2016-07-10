@@ -42,4 +42,18 @@ module TurtleTime {
             return {};
         }
     }
+
+    export class WallDecoration extends EntityModel {
+        initialize(entityData : EntityData) : void {
+            super.initialize(entityData);
+        }
+
+        getEntityClass() : string { return "wallDecor"; }
+
+        onWall() : boolean { return true; }
+
+        getAdditionalData() : any {
+            return {};
+        }
+    }
 }

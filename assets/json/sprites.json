@@ -91,5 +91,24 @@
         }
       ]
     }
+  },
+  "wallDecor": {
+    "blackboard": {
+      "spriteID": "blackboard",
+      "scale": 1,
+      "dimensions": [2, 2],
+      "anchor": [0.25, 0.7],
+      "animations": [
+        {
+          "name": "stand",
+          "frames": [
+            {"direction": 1, "frames": [0]},
+            {"direction": 2, "frames": [0]},
+            {"direction": 3, "frames": [0]},
+            {"direction": 4, "frames": [0]}
+          ]
+        }
+      ]
+    }
   }
 }
