@@ -30,12 +30,12 @@ module TurtleTime {
             }
         }
 
-        isInRoom(point : Point) : boolean {
-            return this.isInRoomXY(point.x, point.y);
-        }
-
         isInRoomXY(x : number, y : number) : boolean {
             return x >= 0 && x < this.width && y >= 0 && y < this.height;
+        }
+
+        isUnoccupiedSpaceXY(x : number, y : number) : boolean {
+            return this.isInRoomXY(x, y) && this.roomLayout[x][y].length == 0;
         }
 
         clamp(point : Point) : void {

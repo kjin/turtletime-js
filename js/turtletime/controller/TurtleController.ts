@@ -30,12 +30,15 @@ module TurtleTime {
                 turtle.intermediateTargetPosition.set(turtle.targetPosition.x, turtle.targetPosition.y);
                 return;
             }
-            var direction : Point = new Point(
-                turtle.targetPosition.x - turtle.intermediateTargetPosition.x,
-                turtle.targetPosition.y - turtle.intermediateTargetPosition.y
+            // goal: set turtle.intermediateTargetPosition according to the best path
+            var nextDirection : Point = aStarTraversal(
+                turtle.intermediateTargetPosition,
+                turtle.targetPosition,
+                this._readState.roomModel.width,
+                MathExtensions.dist2,
+                this._readState.roomModel.isUnoccupiedSpaceXY.bind(this._readState.roomModel)
             );
-            direction = Direction.toVector(Direction.toDirection(direction));
-            turtle.intermediateTargetPosition.add(direction.x, direction.y);
+            turtle.intermediateTargetPosition.add(nextDirection.x, nextDirection.y);
         }
 
         private processMovement(turtle : Turtle) : void {

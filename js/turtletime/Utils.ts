@@ -141,4 +141,104 @@ module TurtleTime {
         return new Point((x - (gameData.screenSize.x - gameData.maxRoomSize.x * gameData.roomScale) / 2) / gameData.roomScale,
                          (y - (gameData.screenSize.y - gameData.maxRoomSize.y * gameData.roomScale) / 2) / gameData.roomScale);
     }
+
+    /**
+     * Given start and end points on a 2D grid, as well as a method of evaluating whether a space may be moved to,
+     * return the best direction for an object at the start point to move in order to most efficiently get to the end
+     * point.
+     * @param start The start point for the traversal.
+     * @param end The end point for the traversal.
+     * @param maxX The maximum x-value of the search space.
+     * @param heuristicCostEstimate A heuristic for estimating the cost between two nodes.
+     * @param isValidSpace A function that returns true if a space can be entered.
+     * @returns {Phaser.Point} A direction to move. If there is no path at all, (0, 0) will be returned.
+     */
+    export function aStarTraversal(
+        start : Point,
+        end : Point,
+        maxX : number,
+        heuristicCostEstimate : (x1 : number, y1 : number, x2 : number, y2 : number) => number,
+        isValidSpace : (x : number, y : number) => boolean
+    ) : Point {
+        // convenience functions
+        var getScore = (map : Map<number, number>, key : number) : number => {
+            return map.has(key) ? map.get(key) : Infinity;
+        };
+        var encode = (x : number, y : number) : number => (maxX * y + x);
+        var decodeX = (v : number) : number => (v % maxX);
+        var decodeY = (v : number) : number => (Math.floor(v / maxX));
+        var extractFirstNode = (chain : Map<number, number>, from : number) : number => {
+            var output = "" + from;
+            while (chain.has(from)) {
+                var next : number = chain.get(from);
+                output += " => " + next;
+                if (next == encode(start.x, start.y)) {
+                    debugLog(output);
+                    return from;
+                }
+                from = next;
+            }
+            debugLog("uh oh");
+            return 0; // won't reach here
+        };
+        // cached value so we don't use so many constructions
+        var neighbors : Array<number> = [0, 0, 0, 0];
+        var encodedStart = encode(start.x, start.y);
+        var encodedEnd = encode(end.x, end.y);
+
+        var closedSet : Set<number> = new Set();
+        var openSet : Set<number> = new Set<number>();
+        openSet.add(encodedStart);
+        var cameFrom : Map<number, number> = new Map<number, number>();
+
+        var gScore : Map<number, number> = new Map<number, number>();
+        gScore.set(encodedStart, 0);
+        var fScore : Map<number, number> = new Map<number, number>();
+        fScore.set(encodedStart, heuristicCostEstimate(start.x, start.y, end.x, end.y));
+
+        while (openSet.size > 0) {
+            var current : number = (() : number => {
+                var lowest : number = null;
+                var lowestScore : number = Infinity;
+                openSet.forEach((element : number) : void => {
+                    if (getScore(fScore, element) < lowestScore) {
+                        lowest = element;
+                        lowestScore = getScore(fScore, element);
+                    }
+                });
+                return lowest;
+            })();
+            if (current == encodedEnd) {
+                var firstNode = extractFirstNode(cameFrom, encode(end.x, end.y));
+                return new Point(decodeX(firstNode) - start.x, decodeY(firstNode) - start.y);
+            }
+
+            openSet.delete(current);
+            closedSet.add(current);
+            var currentX = decodeX(current);
+            var currentY = decodeY(current);
+            neighbors[0] = encode(currentX + 1, currentY);
+            neighbors[1] = encode(currentX - 1, currentY);
+            neighbors[2] = encode(currentX, currentY + 1);
+            neighbors[3] = encode(currentX, currentY - 1);
+            neighbors.forEach((neighbor : number) : void => {
+                var neighborX = decodeX(neighbor);
+                var neighborY = decodeY(neighbor);
+                if ((neighbor != encodedEnd && !isValidSpace(neighborX, neighborY)) || closedSet.has(neighbor)) {
+                    return;
+                }
+                var tentative_gScore = gScore.get(current) + 1;
+                if (!openSet.has(neighbor)) {
+                    openSet.add(neighbor);
+                } else if (tentative_gScore >= getScore(gScore, neighbor)) {
+                    return;
+                }
+
+                cameFrom.set(neighbor, current);
+                gScore.set(neighbor, tentative_gScore);
+                fScore.set(neighbor, tentative_gScore + heuristicCostEstimate(neighborX, neighborY, end.x, end.y));
+            });
+        }
+        return new Point(0, 0);
+    }
 }
