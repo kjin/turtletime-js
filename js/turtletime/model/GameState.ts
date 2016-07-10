@@ -17,6 +17,7 @@ module TurtleTime {
             tables:EntityCollection<Table>,
             doors:EntityCollection<Door>
         },
-        roomModel: RoomModel
+        roomModel: RoomModel,
+        uiModel: UIModel
     }
 }

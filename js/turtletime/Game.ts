@@ -16,6 +16,7 @@ namespace TurtleTime {
         game.load.json('user_data_new', 'assets/json/new_user_data.json');
         game.load.json('turtle_data', 'assets/json/turtles.json');
         game.load.json('sprite_data', 'assets/json/sprites.json');
+        game.load.json('ui_data', 'assets/json/ui.json');
     }
     
     export function loadModel() : GameState {
@@ -53,7 +54,8 @@ namespace TurtleTime {
                 tables: new EntityCollection(Table, userData.cafeState.tables),
                 doors: new EntityCollection(Door, userData.cafeState.doors)
             },
-            roomModel: new RoomModel(userData.room)
+            roomModel: new RoomModel(userData.room),
+            uiModel: new UIModel(game.cache.getJSON('ui_data'))
         };
     }
 
@@ -63,6 +65,7 @@ namespace TurtleTime {
         view.add(new InfoboxView(gameState.infoboxModel));
         view.add(new DragView(gameState.selectionModel));
         view.add(new DebugView());
+        view.add(new UIView(gameState.uiModel));
         return view;
     }
 

@@ -16,6 +16,12 @@ module TurtleTime {
         wallPattern: string
     }
 
+    export interface UIData {
+        id: string,
+        rect: Array<Array<number>>,
+        children: Array<UIData>
+    }
+
     /**
      * Data about each individual turtle.
      */
