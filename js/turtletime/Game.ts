@@ -23,7 +23,7 @@ namespace TurtleTime {
     export function loadModel() : GameState {
         game.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT;
         var userData : UserData = JSON.parse(localStorage.getItem('user_data'));
-        if (userData == null || checkGlobalOption('nosave')) {
+        if (userData == null || checkGlobalOption('noload')) {
             userData = game.cache.getJSON('user_data_new');
             if (localStorage.getItem('user_data')) {
                 localStorage.removeItem('user_data');

@@ -1,3 +1,9 @@
+<?php
+    $globalOptions = '';
+    if (isset($_GET['globalOptions'])) {
+        $globalOptions = $_GET['globalOptions'];
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,12 +15,13 @@
             border: 0;
         }
     </style>
-    <title>Turtle Time!</title>
+    <title>Turtle Time - Custom Options Enabled</title>
 </head>
-
 <script>
     // global stuff
-    localStorage.setItem("globalOptions", "");
+    <?php
+        echo 'localStorage.setItem("globalOptions", "' . $globalOptions . '")';
+    ?>
 </script>
 <script src="js/phaser.min.js"></script>
 <script src="js/main.js"></script>
