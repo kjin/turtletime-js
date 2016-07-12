@@ -13,7 +13,11 @@ module TurtleTime {
             // add animations
             specs.animations.forEach((animation : SpriteAnimation) : void => {
                 animation.frames.forEach((frameData : SpriteDirectionalFrameData) : void => {
-                    this._sprite.animations.add(Direction.getFirstCharacter(frameData.direction) + '-' + animation.name, frameData.frames);
+                    var numericalDirection : Direction = Direction.getDirection(frameData.direction);
+                    if (numericalDirection & Direction.Left) { this._sprite.animations.add('left-' + animation.name, frameData.frames); }
+                    if (numericalDirection & Direction.Right) { this._sprite.animations.add('right-' + animation.name, frameData.frames); }
+                    if (numericalDirection & Direction.Up) { this._sprite.animations.add('up-' + animation.name, frameData.frames); }
+                    if (numericalDirection & Direction.Down) { this._sprite.animations.add('down-' + animation.name, frameData.frames); }
                 });
             });
         }

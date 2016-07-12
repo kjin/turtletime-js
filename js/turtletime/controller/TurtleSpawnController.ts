@@ -30,7 +30,7 @@ module TurtleTime {
                 var chair : Chair = getRandomElement<Chair>(this._readState.chairs.underlyingArray);
                 this._writeState.turtles.add({
                     position: [door.position.x, door.position.y],
-                    direction: door.direction,
+                    direction: Direction.getDirectionalString(door.direction),
                     appearanceID: "greenie2",
                     actionStatus: "stand",
                     additionalData: {

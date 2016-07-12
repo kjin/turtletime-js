@@ -1,6 +1,6 @@
 module TurtleTime {
     export interface SpriteDirectionalFrameData {
-        direction : Direction,
+        direction : string,
         frames : Array<number>
     }
 

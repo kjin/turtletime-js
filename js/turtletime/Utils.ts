@@ -13,10 +13,22 @@ module TurtleTime {
     export enum Direction {
         None = 0,
         Up = 1,
-        Down,
-        Left,
-        Right
+        Down = 2,
+        Left = 4,
+        Right = 8,
+        UpLeft = 5,
+        UpRight = 9,
+        DownLeft = 6,
+        DownRight = 10,
+        Horizontal = 12,
+        Vertical = 3,
+        All = 15
     }
+
+    var directionalStrings : Array<string> = [
+        "none", "up", "down", "vertical", "left", "upleft", "downleft", "invalid",
+        "right", "upright", "downright", "invalid", "horizontal", "invalid", "invalid", "all"
+    ];
 
     export function setTintAndAlpha(sprite : Sprite, value : number) : void {
         var tint = (value & 0xffffff00) >>> 8;
@@ -47,16 +59,12 @@ module TurtleTime {
             }
         }
 
-        export function getFirstCharacter(dir : Direction) : string {
-            if (dir == Direction.Up) {
-                return 'u';
-            } else if (dir == Direction.Left) {
-                return 'l';
-            } else if (dir == Direction.Right) {
-                return 'r';
-            } else {
-                return 'd';
-            }
+        export function getDirectionalString(dir : Direction) : string {
+            return directionalStrings[dir];
+        }
+
+        export function getDirection(directionalString : string) : Direction {
+            return Math.max(directionalStrings.findIndex((value : string) : boolean =>  (value == directionalString)), 0);
         }
 
         export function toVector(dir : Direction) : Point {

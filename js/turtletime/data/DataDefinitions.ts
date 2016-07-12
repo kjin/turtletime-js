@@ -3,7 +3,7 @@
 module TurtleTime {
     export interface EntityData {
         position:Array<number>,
-        direction:number,
+        direction:string,
         actionStatus:string,
         appearanceID:string,
         additionalData:any

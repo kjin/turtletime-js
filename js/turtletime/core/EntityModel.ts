@@ -19,12 +19,12 @@ module TurtleTime {
         public appearanceID : string;
 
         get animationString() : string {
-            return Direction.getFirstCharacter(this.direction) + "-" + this.currentAction;
+            return Direction.getDirectionalString(this.direction) + "-" + this.currentAction;
         }
 
         initialize(entityData : EntityData) : void {
             this.position = new Point(entityData.position[0], entityData.position[1]);
-            this.direction = entityData.direction;
+            this.direction = Direction.getDirection(entityData.direction);
             this.spriteSpecs = gameData.spriteSpecs.getSpriteSpecs(this.getEntityClass(), entityData.appearanceID);
             this.dimensions = new Point(this.spriteSpecs.dimensions[0], this.spriteSpecs.dimensions[1]);
             this.appearanceID = entityData.appearanceID;
@@ -44,7 +44,7 @@ module TurtleTime {
         serialize() : EntityData {
             return {
                 position: [this.position.x, this.position.y],
-                direction: this.direction,
+                direction: Direction.getDirectionalString(this.direction),
                 appearanceID: this.appearanceID,
                 actionStatus: this.currentAction,
                 additionalData: this.getAdditionalData()
