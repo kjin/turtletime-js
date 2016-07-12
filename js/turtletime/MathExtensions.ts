@@ -23,4 +23,17 @@ namespace MathExtensions {
         }
         return (x - Math.floor(x) < 0.5) ? 0 : 1;
     }
+
+    /**
+     * If x is positive, returns the fractional part of x. If x is negative, returns one minus the fractional
+     * part of x instead.
+     * @param x The input argument.
+     * @returns {number} A number within the range [0, 1].
+     */
+    export function sawtoothWave(x : number) : number {
+        if (x < 0) {
+            return 1 - x + Math.ceil(x);
+        }
+        return x - Math.floor(x);
+    }
 }

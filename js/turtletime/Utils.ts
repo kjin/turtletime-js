@@ -144,8 +144,20 @@ module TurtleTime {
      * @returns {Phaser.Point} A point in room coordinates.
      */
     export function screenToRoom(x : number, y : number) : Point {
-        return new Point((x - (gameData.screenSize.x - gameData.maxRoomSize.x * gameData.roomScale[0]) / 2) / gameData.roomScale[0],
-                         (y - (gameData.screenSize.y - gameData.maxRoomSize.y * gameData.roomScale[1]) / 2) / gameData.roomScale[1]);
+        var result : Point = new Point();
+        screenToRoomPoint(result, x, y);
+        return result;
+    }
+
+    /**
+     * Sets a point to a pair of screen coordinates converted to room coordinates.
+     * @param point The Point object to set.
+     * @param x The x-coordinate of the point in screen coordinates.
+     * @param y The y-coordinate of the point in screen coordinates.
+     */
+    export function screenToRoomPoint(point : Point, x : number, y : number) : void {
+        point.x = (x - (gameData.screenSize.x - gameData.maxRoomSize.x * gameData.roomScale[0]) / 2) / gameData.roomScale[0];
+        point.y = (y - (gameData.screenSize.y - gameData.maxRoomSize.y * gameData.roomScale[1]) / 2) / gameData.roomScale[1];
     }
 
     /**
@@ -176,17 +188,13 @@ module TurtleTime {
         var decodeX = (v : number) : number => (v % (maxX + 2) - 1);
         var decodeY = (v : number) : number => (Math.floor(v / (maxX + 2)));
         var extractFirstNode = (chain : Map<number, number>, from : number) : number => {
-            var output = "" + from;
             while (chain.has(from)) {
                 var next : number = chain.get(from);
-                output += " => " + next;
                 if (next == encode(start.x, start.y)) {
-                    debugLog(output);
                     return from;
                 }
                 from = next;
             }
-            debugLog("uh oh");
             return 0; // won't reach here
         };
         // cached value so we don't use so many constructions

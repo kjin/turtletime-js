@@ -30,6 +30,11 @@ module TurtleTime {
                     }
                     this._writeState.selectionModel.currentDragPosition.x = this._readState.inputModel.inputX;
                     this._writeState.selectionModel.currentDragPosition.y = this._readState.inputModel.inputY;
+                    screenToRoomPoint(this._writeState.selectionModel.currentDragPositionInRoom, this._writeState.selectionModel.currentDragPosition.x,
+                        this._writeState.selectionModel.currentDragPosition.y +
+                        this._writeState.selectionModel.entity.view.height / 2);
+                    this._writeState.selectionModel.currentDragPositionInRoom.x = Math.floor(this._writeState.selectionModel.currentDragPositionInRoom.x);
+                    this._writeState.selectionModel.currentDragPositionInRoom.y = Math.floor(this._writeState.selectionModel.currentDragPositionInRoom.y);
                 } else {
                     this._writeState.selectionModel.isBeingDragged = false;
                 }

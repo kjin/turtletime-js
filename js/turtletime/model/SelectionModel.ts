@@ -8,6 +8,7 @@ module TurtleTime {
         isBeingDragged : boolean = false;
         // if entity is being dragged, then where is the mouse?
         currentDragPosition : Point = null;
+        currentDragPositionInRoom : Point = new Point();
         prevDragPosition : Point = new Point(0, 0);
 
         constructor() {

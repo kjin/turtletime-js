@@ -80,11 +80,9 @@ module TurtleTime {
                 return;
             } else if (this._writeState.selectionModel.entity == turtle) {
                 if (this._writeState.selectionModel.currentDragPosition != null) {
-                    var roomPos = screenToRoom(this._writeState.selectionModel.currentDragPosition.x,
-                        this._writeState.selectionModel.currentDragPosition.y + turtle.view.height / 2);
                     this._writeState.selectionModel.currentDragPosition = null;
-                    turtle.targetPosition.x = Math.floor(roomPos.x);
-                    turtle.targetPosition.y = Math.floor(roomPos.y);
+                    turtle.targetPosition.x = this._writeState.selectionModel.currentDragPositionInRoom.x;
+                    turtle.targetPosition.y = this._writeState.selectionModel.currentDragPositionInRoom.y;
                     this._readState.roomModel.clamp(turtle.targetPosition);
                 }
             }
