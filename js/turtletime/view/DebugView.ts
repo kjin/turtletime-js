@@ -7,7 +7,7 @@ module TurtleTime {
 
         constructor() {
             super();
-            this._text = game.add.text(0, 0, "", { fontSize: '12px', fill: '#00ff00' });
+            this._text = GAME_ENGINE.game.add.text(0, 0, "", { fontSize: '12px', fill: '#00ff00' });
         }
 
         update():void {

@@ -10,7 +10,7 @@ module TurtleTime {
 
         constructor(model : InfoboxModel) {
             super(model);
-            this._text = game.add.text(0, 400, "", { fontSize: '12px', fill: '#ffffff' });
+            this._text = GAME_ENGINE.game.add.text(0, 400, "", { fontSize: '12px', fill: '#ffffff' });
         }
 
         contains(x : number, y : number) : boolean {

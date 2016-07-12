@@ -11,7 +11,7 @@ module TurtleTime {
 
         constructor(model : SelectionModel) {
             super(model);
-            this._graphics = game.add.graphics(0, 0);
+            this._graphics = GAME_ENGINE.game.add.graphics(0, 0);
         }
 
         update() : void {
@@ -31,10 +31,10 @@ module TurtleTime {
                 this._graphics.clear();
                 this._graphics.beginFill(0x6666ff, 1 - t);
                 this._graphics.drawEllipse(
-                    topLeft.x + gameData.roomScale[0] / 2,
-                    topLeft.y + gameData.roomScale[1] / 2,
-                    t * gameData.roomScale[0] / 1.5,
-                    t * gameData.roomScale[1] / 1.5);
+                    topLeft.x + GAME_ENGINE.globalData.roomScale[0] / 2,
+                    topLeft.y + GAME_ENGINE.globalData.roomScale[1] / 2,
+                    t * GAME_ENGINE.globalData.roomScale[0] / 1.5,
+                    t * GAME_ENGINE.globalData.roomScale[1] / 1.5);
                 this._graphics.endFill();
             } else if (this._sprite != null) {
                 this._sprite.destroy();

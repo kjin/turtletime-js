@@ -1,5 +1,5 @@
-//<reference path="../core/Controller.ts"/>
-//<reference path="../model/GameState.ts"/>
+///<reference path="../core/Controller.ts"/>
+///<reference path="../model/GameState.ts"/>
 
 module TurtleTime {
     export class DragController extends Controller<GameState> {

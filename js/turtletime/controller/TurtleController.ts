@@ -98,7 +98,7 @@ module TurtleTime {
                     this._writeState.selectionModel.entity = turtle;
                     this._writeState.selectionModel.selectedOnClick = this._readState.inputState.clickNumber;
                     this._writeState.infoboxModel.text = (() : string => {
-                        var turtleData : TurtleData = gameData.turtleData.get(turtle.appearanceID);
+                        var turtleData : TurtleData = GAME_ENGINE.globalData.turtleData.get(turtle.appearanceID);
                         return "Name: " + turtleData.name + "\n" +
                             "Description: " + turtleData.description + "\n" +
                             "Likes: " + turtleData.likes + "\n" +

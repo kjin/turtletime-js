@@ -18,7 +18,7 @@ module TurtleTime {
             this._mainSprite = new EntitySpriteWrapper(model.spriteSpecs);
             this._width = this._mainSprite.width;
             this._height = this._mainSprite.height;
-            this._highlightCircle = game.add.sprite(0, 0, 'highlightCircle');
+            this._highlightCircle = GAME_ENGINE.game.add.sprite(0, 0, 'highlightCircle');
             this._highlightCircle.anchor = new Point(0.5, 0.5);
             if (this.model.getEntityClass() == "turtle") { // TODO: BAD CODE
                 this._bob = true;
@@ -49,7 +49,7 @@ module TurtleTime {
             this._mainSprite.y = screenPos.y - (this._bob ? (2 * squareWave(this._time)) : 0);
             this._mainSprite.animation = this.model.animationString;
             this._highlightCircle.x = this._mainSprite.x;
-            this._highlightCircle.y = this._mainSprite.y - 2 * gameData.roomScale[1] * this.model.spriteSpecs.scale;
+            this._highlightCircle.y = this._mainSprite.y - 2 * GAME_ENGINE.globalData.roomScale[1] * this.model.spriteSpecs.scale;
             setTintAndAlpha(this._highlightCircle, EffectCircleDictionary[this.model.currentStatus]);
         }
 

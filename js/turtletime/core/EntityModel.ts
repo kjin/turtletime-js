@@ -25,7 +25,7 @@ module TurtleTime {
         initialize(entityData : EntityData) : void {
             this.position = new Point(entityData.position[0], entityData.position[1]);
             this.direction = Direction.getDirection(entityData.direction);
-            this.spriteSpecs = gameData.spriteSpecs.getSpriteSpecs(this.getEntityClass(), entityData.appearanceID);
+            this.spriteSpecs = GAME_ENGINE.globalData.spriteSpecs.getSpriteSpecs(this.getEntityClass(), entityData.appearanceID);
             this.dimensions = new Point(this.spriteSpecs.dimensions[0], this.spriteSpecs.dimensions[1]);
             this.appearanceID = entityData.appearanceID;
             this.currentAction = entityData.actionStatus;

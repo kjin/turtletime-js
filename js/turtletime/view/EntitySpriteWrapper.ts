@@ -7,7 +7,7 @@ module TurtleTime {
         private _sprite : Sprite;
 
         constructor(specs : SpriteSpecs) {
-            this._sprite = game.add.sprite(0, 0, specs.spriteID);
+            this._sprite = GAME_ENGINE.game.add.sprite(0, 0, specs.spriteID);
             this._sprite.anchor = new Point(specs.anchor[0], specs.anchor[1]);
             this._sprite.scale = new Point(specs.scale, specs.scale);
             // add animations

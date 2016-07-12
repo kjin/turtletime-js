@@ -12,7 +12,7 @@ module TurtleTime {
             super(model);
             var topLeft : Point = roomToScreen(0, 0);
             var bottomRight : Point = roomToScreen(this.model.width, this.model.height);
-            this._floorTile = game.add.tileSprite(
+            this._floorTile = GAME_ENGINE.game.add.tileSprite(
                 topLeft.x,
                 topLeft.y,
                 bottomRight.x - topLeft.x,
@@ -20,16 +20,16 @@ module TurtleTime {
                 this.model.floorPattern);
             if (this.model.wallHeight > 0) {
                 var wallTop = this.model.wallPattern + "_top";
-                var topHeight = game.cache.getBaseTexture(wallTop).height;
-                this._wallTileTop = game.add.tileSprite(
+                var topHeight = GAME_ENGINE.game.cache.getBaseTexture(wallTop).height;
+                this._wallTileTop = GAME_ENGINE.game.add.tileSprite(
                     topLeft.x,
                     topLeft.y - topHeight * this.model.wallHeight,
                     bottomRight.x - topLeft.x,
                     topHeight,
                     wallTop);
                 if (this.model.wallHeight > 1) {
-                    var sectionHeight = game.cache.getBaseTexture(this.model.wallPattern).height;
-                    this._wallTile = game.add.tileSprite(
+                    var sectionHeight = GAME_ENGINE.game.cache.getBaseTexture(this.model.wallPattern).height;
+                    this._wallTile = GAME_ENGINE.game.add.tileSprite(
                         topLeft.x,
                         topLeft.y - sectionHeight * (this.model.wallHeight - 1),
                         bottomRight.x - topLeft.x,
@@ -37,7 +37,7 @@ module TurtleTime {
                         this.model.wallPattern);
                 }
             }
-            this._graphics = game.add.graphics(0, 0);
+            this._graphics = GAME_ENGINE.game.add.graphics(0, 0);
         }
 
         update():void {
@@ -48,7 +48,7 @@ module TurtleTime {
                 twoDForEach(this.model.roomLayout, (cell:Array<EntityData>, x:number, y:number) => {
                     if (cell.length > 0) {
                         var topLeft:Point = roomToScreen(x, y);
-                        this._graphics.drawRect(topLeft.x, topLeft.y, gameData.roomScale[0], gameData.roomScale[1]);
+                        this._graphics.drawRect(topLeft.x, topLeft.y, GAME_ENGINE.globalData.roomScale[0], GAME_ENGINE.globalData.roomScale[1]);
                     }
                 });
                 this._graphics.endFill();

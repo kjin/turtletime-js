@@ -41,9 +41,10 @@ module TurtleTime {
 
         constructor(model : UIModel) {
             super();
-            this._graphics = game.add.graphics(0, 0);
+            this._graphics = GAME_ENGINE.game.add.graphics(0, 0);
             this._rootNode = new UIViewNode(model);
-            this._rootNode.assignScreenDimensions(new Rectangle(0, 0, gameData.screenSize.x, gameData.screenSize.y));
+            this._rootNode.assignScreenDimensions(
+                new Rectangle(0, 0, GAME_ENGINE.globalData.screenSize.x, GAME_ENGINE.globalData.screenSize.y));
         }
 
         update():void {

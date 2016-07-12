@@ -12,9 +12,9 @@ module TurtleTime {
         update(dt:number):void {
             // update input first
             this._writeState.inputState.setMouseState(
-                game.input.activePointer.x,
-                game.input.activePointer.y,
-                game.input.activePointer.isDown);
+                GAME_ENGINE.game.input.activePointer.x,
+                GAME_ENGINE.game.input.activePointer.y,
+                GAME_ENGINE.game.input.activePointer.isDown);
             // debugLog("drag=" + this._writeState.inputState.isDragged);
         }
     }
