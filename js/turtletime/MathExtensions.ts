@@ -12,6 +12,17 @@ namespace MathExtensions {
     }
 
     /**
+     * Linearly interpolates a value between a and b.
+     * @param a The value to return at t = 0.
+     * @param b The value to return at t = 1.
+     * @param t The interpolation parameter.
+     * @returns {number} The linearly interpolated result.
+     */
+    export function lerp(a : number, b : number, t : number) : number {
+        return (1 - t) * a + t * b;
+    }
+
+    /**
      * If x is positive, returns 0 if the fractional part of x is less than 0.5, and 1 otherwise.
      * If x is negative, the above return values are reversed.
      * @param x The input argument.

@@ -138,8 +138,8 @@ module TurtleTime {
      * @returns {Phaser.Point} A point in screen coordinates.
      */
     export function roomToScreen(x : number, y : number) : Point {
-        return new Point(x * GAME_ENGINE.globalData.roomScale[0] + (GAME_ENGINE.globalData.screenSize.x - GAME_ENGINE.globalData.maxRoomSize.x * GAME_ENGINE.globalData.roomScale[0]) / 2,
-                         y * GAME_ENGINE.globalData.roomScale[1] + (GAME_ENGINE.globalData.screenSize.y - GAME_ENGINE.globalData.maxRoomSize.y * GAME_ENGINE.globalData.roomScale[1]) / 2);
+        return new Point(x * GAME_ENGINE.globalData.roomScale[0] + GAME_ENGINE.cameraPosition.x,
+                         y * GAME_ENGINE.globalData.roomScale[1] + GAME_ENGINE.cameraPosition.y);
     }
 
     /**
@@ -149,8 +149,8 @@ module TurtleTime {
      * @returns {Phaser.Point} A point in screen coordinates.
      */
     export function wallToScreen(x : number, y : number) : Point {
-        return new Point(x * GAME_ENGINE.globalData.roomScale[0] + (GAME_ENGINE.globalData.screenSize.x - GAME_ENGINE.globalData.maxRoomSize.x * GAME_ENGINE.globalData.roomScale[0]) / 2,
-            -y * GAME_ENGINE.globalData.roomScale[0] + (GAME_ENGINE.globalData.screenSize.y - GAME_ENGINE.globalData.maxRoomSize.y * GAME_ENGINE.globalData.roomScale[1]) / 2);
+        return new Point(x * GAME_ENGINE.globalData.roomScale[0] + GAME_ENGINE.cameraPosition.x,
+            -y * GAME_ENGINE.globalData.roomScale[0] + GAME_ENGINE.cameraPosition.y);
     }
 
     /**
@@ -172,8 +172,8 @@ module TurtleTime {
      * @param y The y-coordinate of the point in screen coordinates.
      */
     export function screenToRoomPoint(point : Point, x : number, y : number) : void {
-        point.x = (x - (GAME_ENGINE.globalData.screenSize.x - GAME_ENGINE.globalData.maxRoomSize.x * GAME_ENGINE.globalData.roomScale[0]) / 2) / GAME_ENGINE.globalData.roomScale[0];
-        point.y = (y - (GAME_ENGINE.globalData.screenSize.y - GAME_ENGINE.globalData.maxRoomSize.y * GAME_ENGINE.globalData.roomScale[1]) / 2) / GAME_ENGINE.globalData.roomScale[1];
+        point.x = (x - GAME_ENGINE.cameraPosition.x) / GAME_ENGINE.globalData.roomScale[0];
+        point.y = (y - GAME_ENGINE.cameraPosition.y) / GAME_ENGINE.globalData.roomScale[1];
     }
 
     /**

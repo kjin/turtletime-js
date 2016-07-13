@@ -9,6 +9,7 @@ module TurtleTime {
     export interface GameState {
         inputState: InputModel,
         selectionModel:SelectionModel,
+        cameraModel:CameraModel,
         entities:{
             turtles:EntityCollection<Turtle>,
             chairs:EntityCollection<Chair>,

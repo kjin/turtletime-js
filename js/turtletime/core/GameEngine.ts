@@ -20,6 +20,11 @@ namespace TurtleTime {
          * The data here should remain read-only.
          */
         globalData : GameData;
+        /**
+         * The camera's position on-screen.
+         * This value is used by a lot of objects, so it's probably not worth passing it around.
+         */
+        cameraPosition : Point = new Point();
 
         constructor() {
             var scale_factor : number = (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) ? 0.5 : 1;

@@ -105,13 +105,13 @@ module TurtleTime {
                             "Dislikes: " + turtleData.dislikes;
                     })();
                 }
-                // conditions for deselection
-                if (inputState.justReleased &&
-                    this._writeState.selectionModel.entity == turtle &&
-                    this._writeState.selectionModel.selectedOnClick != this._readState.inputState.clickNumber) {
-                    this._writeState.selectionModel.entity = null;
-                    this._writeState.infoboxModel.text = "";
-                }
+            }
+            // conditions for deselection
+            if (inputState.justPressed &&
+                this._writeState.selectionModel.entity == turtle &&
+                this._writeState.selectionModel.selectedOnClick != this._readState.inputState.clickNumber) {
+                this._writeState.selectionModel.entity = null;
+                this._writeState.infoboxModel.text = "";
             }
         }
 

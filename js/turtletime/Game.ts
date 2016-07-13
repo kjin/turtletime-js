@@ -54,6 +54,7 @@ namespace TurtleTime {
             return {
                 inputState : new InputModel(),
                 selectionModel : new SelectionModel(),
+                cameraModel : new CameraModel(),
                 entities : {
                     turtles : new EntityCollection(Turtle, userData.cafeState.turtles),
                     chairs : new EntityCollection(Chair, userData.cafeState.chairs),
@@ -68,7 +69,14 @@ namespace TurtleTime {
         }
 
         protected createControllers():Array<Controller<GameState>> {
-            return [new AssociationController(), new RoomLayoutController(), new TurtleController(), new InputController(), new TurtleSpawnController(), new DragController()];
+            return [
+                new CameraController(),
+                new AssociationController(),
+                new RoomLayoutController(),
+                new TurtleController(),
+                new InputController(),
+                new TurtleSpawnController(),
+                new DragController()];
         }
 
         protected createView(gameState:GameState):GameView {

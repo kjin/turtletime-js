@@ -7,6 +7,8 @@ module TurtleTime {
         private _wallTile : Phaser.TileSprite;
         private _wallTileTop : Phaser.TileSprite;
         private _graphics : Phaser.Graphics;
+        private _topHeight : number;
+        private _sectionHeight : number;
         
         constructor(model : RoomModel) {
             super(model);
@@ -20,20 +22,20 @@ module TurtleTime {
                 this.model.floorPattern);
             if (this.model.wallHeight > 0) {
                 var wallTop = this.model.wallPattern + "_top";
-                var topHeight = GAME_ENGINE.game.cache.getBaseTexture(wallTop).height;
+                this._topHeight = GAME_ENGINE.game.cache.getBaseTexture(wallTop).height;
                 this._wallTileTop = GAME_ENGINE.game.add.tileSprite(
                     topLeft.x,
-                    topLeft.y - topHeight * this.model.wallHeight,
+                    topLeft.y - this._topHeight * this.model.wallHeight,
                     bottomRight.x - topLeft.x,
-                    topHeight,
+                    this._topHeight,
                     wallTop);
                 if (this.model.wallHeight > 1) {
-                    var sectionHeight = GAME_ENGINE.game.cache.getBaseTexture(this.model.wallPattern).height;
+                    this._sectionHeight = GAME_ENGINE.game.cache.getBaseTexture(this.model.wallPattern).height;
                     this._wallTile = GAME_ENGINE.game.add.tileSprite(
                         topLeft.x,
-                        topLeft.y - sectionHeight * (this.model.wallHeight - 1),
+                        topLeft.y - this._sectionHeight * (this.model.wallHeight - 1),
                         bottomRight.x - topLeft.x,
-                        sectionHeight * (this.model.wallHeight - 1),
+                        this._sectionHeight * (this.model.wallHeight - 1),
                         this.model.wallPattern);
                 }
             }
@@ -52,6 +54,17 @@ module TurtleTime {
                     }
                 });
                 this._graphics.endFill();
+            }
+            var topLeft : Point = roomToScreen(0, 0);
+            this._floorTile.x = topLeft.x;
+            this._floorTile.y = topLeft.y;
+            if (this.model.wallHeight > 0) {
+                this._wallTileTop.x = topLeft.x;
+                this._wallTileTop.y = topLeft.y - this._topHeight * this.model.wallHeight;
+                if (this.model.wallHeight > 1) {
+                    this._wallTile.x = topLeft.x;
+                    this._wallTile.y = topLeft.y - this._sectionHeight * (this.model.wallHeight - 1);
+                }
             }
         }
 
