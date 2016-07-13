@@ -17,6 +17,7 @@ namespace TurtleTime {
             game.load.image('aloe', 'assets/textures/aloe.png');
             game.load.image('banana', 'assets/textures/banana.png');
             game.load.image('grandson', 'assets/textures/grandson.png');
+            game.load.image('shadow', 'assets/textures/shadow.png');
             game.load.json('user_data_new', 'assets/json/new_user_data.json');
             game.load.json('turtle_data', 'assets/json/turtles.json');
             game.load.json('sprite_data', 'assets/json/sprites.json');
@@ -67,7 +68,7 @@ namespace TurtleTime {
         }
 
         protected createControllers():Array<Controller<GameState>> {
-            return [new RoomLayoutController(), new TurtleController(), new InputController(), new TurtleSpawnController(), new DragController()];
+            return [new AssociationController(), new RoomLayoutController(), new TurtleController(), new InputController(), new TurtleSpawnController(), new DragController()];
         }
 
         protected createView(gameState:GameState):GameView {

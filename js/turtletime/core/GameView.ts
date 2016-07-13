@@ -18,7 +18,7 @@ module TurtleTime {
         update() : void {
             this._allGroup.sort('name');
             this._groups.forEach((group : Group) : void => {
-                group.sort('y', Group.SORT_DESCENDING);
+                group.sort('name', Group.SORT_ASCENDING);
             });
             this._views.forEach(function (view : BaseView) { view.update(); });
         }

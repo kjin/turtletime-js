@@ -7,6 +7,7 @@ module TurtleTime {
         internalDimensions : Rectangle;
         children : Array<UIModel>;
         text : string = "";
+        visible : boolean = false;
 
         constructor(data : UIData) {
             super();

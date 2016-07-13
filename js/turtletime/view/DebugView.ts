@@ -12,7 +12,7 @@ module TurtleTime {
         }
 
         update():void {
-            this._text.text = debugText;
+            this._text.text = GAME_ENGINE.debugText;
         }
 
         contains(x:number, y:number):boolean {

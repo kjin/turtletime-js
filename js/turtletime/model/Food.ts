@@ -2,9 +2,7 @@ module TurtleTime {
     export class Food extends EntityModel {
         onTable : Table;
 
-        getEntityClass():string {
-            return "food";
-        }
+        getEntityClass() : EntityType { return EntityType.Food; }
 
         protected getAdditionalData():any {
             return {};

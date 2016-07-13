@@ -35,9 +35,12 @@ module TurtleTime {
         }
 
         draw(graphics : Graphics):void {
-            graphics.drawRect(this.screenDimensions.x, this.screenDimensions.y, this.screenDimensions.width, this.screenDimensions.height);
+            if (this.model.visible) {
+                graphics.drawRect(this.screenDimensions.x, this.screenDimensions.y, this.screenDimensions.width, this.screenDimensions.height);
+                this.children.forEach((child : UIViewNode) : void => child.draw(graphics));
+            }
+            this._text.visible = this.model.visible;
             this._text.text = this.model.text;
-            this.children.forEach((child : UIViewNode) : void => child.draw(graphics));
         }
 
         update():void {

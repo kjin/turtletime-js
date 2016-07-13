@@ -26,7 +26,8 @@ module TurtleTime {
         initialize(entityData : EntityData) : void {
             this.position = new Point(entityData.position[0], entityData.position[1]);
             this.direction = Direction.getDirection(entityData.direction);
-            this.spriteSpecs = GAME_ENGINE.globalData.spriteSpecs.getSpriteSpecs(this.getEntityClass(), entityData.appearanceID);
+            this.spriteSpecs = GAME_ENGINE.globalData.spriteSpecs
+                .getSpriteSpecs(EntityType.toString(this.getEntityClass()), entityData.appearanceID);
             this.dimensions = new Point(this.spriteSpecs.dimensions[0], this.spriteSpecs.dimensions[1]);
             this.appearanceID = entityData.appearanceID;
             this.currentAction = entityData.actionStatus;
@@ -34,11 +35,7 @@ module TurtleTime {
             this.layerNumber = LAYER_SPRITE;
         }
 
-        abstract getEntityClass() : string;
-
-        onWall() : boolean {
-            return false;
-        }
+        abstract getEntityClass() : EntityType;
 
         overlaps(other : EntityModel) : boolean {
             return new Rectangle(this.position.x, this.position.y, this.dimensions.x - 0.5, this.dimensions.y - 0.5)

@@ -1,10 +1,24 @@
 namespace TurtleTime {
+    /**
+     * Represents the engine of the game itself.
+     */
     export abstract class GameEngine {
         private gameState : GameState;
         private controllers : Array<Controller<GameState>>;
         private views : GameView;
+        debugText : string = "";
+        /**
+         * The current time.
+         */
         time : number;
+        /**
+         * A reference to the underlying Phaser.Game object. Use with care.
+         */
         game : Phaser.Game;
+        /**
+         * A reference to all of the game's globally available data.
+         * The data here should remain read-only.
+         */
         globalData : GameData;
 
         constructor() {
@@ -27,7 +41,7 @@ namespace TurtleTime {
         }
 
         private update() : void {
-            debugText = "";
+            this.debugText = "";
             // Update controllers
             this.controllers.forEach(function (controller : Controller<GameState>) { controller.update(1.0/60); });
             for (var property in this.gameState.entities) {
@@ -38,6 +52,14 @@ namespace TurtleTime {
             }
             this.views.update();
             this.time += 1/60.0;
+        }
+
+        debugPrint(text : string) {
+            this.debugText += text;
+        }
+
+        debugPrintln(text : string) {
+            this.debugText += text + "\n";
         }
 
         protected abstract preloadAssets(game : Phaser.Game) : void;

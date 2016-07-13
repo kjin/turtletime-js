@@ -8,7 +8,7 @@ module TurtleTime {
             super.initialize(entityData);
         }
 
-        getEntityClass() : string { return "table"; }
+        getEntityClass() : EntityType { return EntityType.Table; }
 
         getAdditionalData() : any {
             return {};
@@ -22,7 +22,7 @@ module TurtleTime {
             super.initialize(entityData);
         }
 
-        getEntityClass() : string { return "chair"; }
+        getEntityClass() : EntityType { return EntityType.Chair; }
 
         getAdditionalData() : any {
             return {
@@ -36,7 +36,7 @@ module TurtleTime {
             super.initialize(entityData);
         }
 
-        getEntityClass() : string { return "door"; }
+        getEntityClass() : EntityType { return EntityType.Door; }
 
         getAdditionalData() : any {
             return {};
@@ -48,9 +48,7 @@ module TurtleTime {
             super.initialize(entityData);
         }
 
-        getEntityClass() : string { return "wallDecor"; }
-
-        onWall() : boolean { return true; }
+        getEntityClass() : EntityType { return EntityType.WallDecor; }
 
         getAdditionalData() : any {
             return {};

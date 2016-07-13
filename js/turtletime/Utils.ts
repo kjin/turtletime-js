@@ -2,12 +2,6 @@
 
 module TurtleTime {
     import Sprite = Phaser.Sprite;
-    export var debugText : string = "";
-
-    export function debugLog(text : string) {
-        debugText += text + "\n";
-    }
-
     /**
      * An enumeration of the different directions an entity can face.
      */
@@ -26,10 +20,16 @@ module TurtleTime {
         All = 15
     }
 
-    var directionalStrings : Array<string> = [
-        "none", "up", "down", "vertical", "left", "upleft", "downleft", "invalid",
-        "right", "upright", "downright", "invalid", "horizontal", "invalid", "invalid", "all"
-    ];
+    export enum EntityType {
+        FloorDecor = 0,
+        Door = 1,
+        Chair = 2,
+        Table = 3,
+        RoomDecor = 4,
+        Food = 5,
+        WallDecor = 6,
+        Turtle = 7
+    }
 
     export function setTintAndAlpha(sprite : Sprite, value : number) : void {
         var tint = (value & 0xffffff00) >>> 8;
@@ -38,7 +38,22 @@ module TurtleTime {
         sprite.alpha = alpha;
     }
 
+    export module EntityType {
+        var entityStrings : Array<string> = [
+            "floorDecor", "door", "chair", "table", "roomDecor", "food", "wallDecor", "turtle"
+        ];
+
+        export function toString(entityType : EntityType) : string {
+            return entityStrings[entityType];
+        }
+    }
+
     export module Direction {
+        var directionalStrings : Array<string> = [
+            "none", "up", "down", "vertical", "left", "upleft", "downleft", "invalid",
+            "right", "upright", "downright", "invalid", "horizontal", "invalid", "invalid", "all"
+        ];
+
         export function toDirection(vector : Point) : Direction {
             var a = vector.x;
             var b = vector.y;

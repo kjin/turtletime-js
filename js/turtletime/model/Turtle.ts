@@ -17,7 +17,7 @@ module TurtleTime {
             this.sleep = 0;
         }
 
-        getEntityClass() : string { return "turtle"; }
+        getEntityClass() : EntityType { return EntityType.Turtle; }
 
         getAdditionalData() : any {
             return {

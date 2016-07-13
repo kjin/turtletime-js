@@ -53,7 +53,7 @@
       "path": "tableandchair.png",
       "scale": 1,
       "dimensions": [2, 2],
-      "anchor": [0.19, 0.25],
+      "anchor": [0.5, 0.5],
       "animations": [ { "name": "default", "frames": [ {"direction": "all", "frames": [0] } ] } ]
     }
   },
@@ -73,7 +73,7 @@
       "path": "blackboard.png",
       "scale": 1,
       "dimensions": [2, 2],
-      "anchor": [0.25, 0.7],
+      "anchor": [0.5, 0.25],
       "animations": [ { "name": "default", "frames": [ {"direction": "all", "frames": [0] } ] } ]
     }
   },
