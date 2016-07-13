@@ -6,6 +6,7 @@ module TurtleTime {
         id : string;
         internalDimensions : Rectangle;
         children : Array<UIModel>;
+        text : string = "";
 
         constructor(data : UIData) {
             super();
@@ -17,6 +18,18 @@ module TurtleTime {
             );
             this.id = data.id;
             this.children = data.children.map((childData : UIData) : UIModel => new UIModel(childData));
+        }
+
+        getChild(path : string) : UIModel {
+            var splitPath : Array<string> = path.split('.');
+            var child : UIModel = this.children.find((child : UIModel) : boolean => child.id == splitPath[0]);
+            if (child == null) {
+                return null;
+            }
+            if (path.indexOf('.') == -1) {
+                return child;
+            }
+            return child.getChild(path.substring(path.indexOf('.') + 1));
         }
 
         serialize() : UIData {

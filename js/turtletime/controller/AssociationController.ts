@@ -14,7 +14,14 @@ module TurtleTime {
         }
 
         update(dt:number):void {
-            
+            this._writeState.food.forEach((food : Food) : void => {
+                if (food.onTable == null) {
+                    var table : Table = this._readState.tables.find(food.overlaps);
+                    if (table != null) {
+                        food.onTable = table;
+                    }
+                }
+            });
         }
     }
 }

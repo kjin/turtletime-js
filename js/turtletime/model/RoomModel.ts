@@ -10,7 +10,7 @@ module TurtleTime {
         wallPattern : string;
 
         // Room layout
-        roomLayout : Array<Array<Array<EntityData>>>;
+        roomLayout : Array<Array<Array<EntityModel>>>;
 
         constructor(data : RoomData) {
             super();
@@ -21,9 +21,9 @@ module TurtleTime {
             this.wallHeight = data.wallHeight;
             this.layerNumber = LAYER_FLOOR;
 
-            this.roomLayout = new Array<Array<Array<EntityData>>>(this.width);
+            this.roomLayout = new Array<Array<Array<EntityModel>>>(this.width);
             for (var i : number = 0; i < this.width; i++) {
-                this.roomLayout[i] = new Array<Array<EntityData>>(this.height);
+                this.roomLayout[i] = new Array<Array<EntityModel>>(this.height);
                 for (var j : number = 0; j < this.height; j++) {
                     this.roomLayout[i][j] = [];
                 }

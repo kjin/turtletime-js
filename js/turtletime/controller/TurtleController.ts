@@ -15,7 +15,7 @@ module TurtleTime {
             };
             this._writeState = {
                 selectionModel: gameState.selectionModel,
-                infoboxModel: gameState.infoboxModel,
+                infoboxModel: gameState.uiModel.getChild("infobox.text"),
                 turtles: gameState.entities.turtles
             };
         }

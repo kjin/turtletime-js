@@ -6,6 +6,7 @@
 import Point = Phaser.Point;
 
 module TurtleTime {
+    import Rectangle = Phaser.Rectangle;
     /**
      * Represents any physical object in the cafe.
      */
@@ -37,6 +38,11 @@ module TurtleTime {
 
         onWall() : boolean {
             return false;
+        }
+
+        overlaps(other : EntityModel) : boolean {
+            return new Rectangle(this.position.x, this.position.y, this.dimensions.x - 0.5, this.dimensions.y - 0.5)
+                .intersects(new Rectangle(other.position.x, other.position.y, other.dimensions.x - 0.5, other.dimensions.y - 0.5));
         }
 
         protected abstract getAdditionalData() : any;

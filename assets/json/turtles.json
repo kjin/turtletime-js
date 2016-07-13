@@ -12,7 +12,7 @@
     },
     "greenie2": {
       "name": "Greenie 2",
-      "description": "Like Greenie, except adds the number 2 to the end of every uttered sentence,\nand also not that crazy about green",
+      "description": "Like Greenie, except adds the number 2 to the end of every uttered sentence, and also not that crazy about green",
       "likes": [
         "Green Eggs 2"
       ],

@@ -34,7 +34,7 @@ namespace TurtleTime {
                 })(game.cache.getJSON('turtle_data')),
                 spriteSpecs: new SpriteData(game.cache.getJSON('sprite_data')),
                 roomScale: [32, 24],
-                maxRoomSize: new Point(20, 20),
+                maxRoomSize: new Point(12, 16),
                 screenSize: new Point(game.width, game.height)
             };
         }
@@ -50,7 +50,6 @@ namespace TurtleTime {
             return {
                 inputState : new InputModel(),
                 selectionModel : new SelectionModel(),
-                infoboxModel : new InfoboxModel(),
                 entities : {
                     turtles : new EntityCollection(Turtle, userData.cafeState.turtles),
                     chairs : new EntityCollection(Chair, userData.cafeState.chairs),
@@ -71,7 +70,6 @@ namespace TurtleTime {
         protected createView(gameState:GameState):GameView {
             var view : GameView = new GameView();
             view.add(new RoomView(gameState.roomModel));
-            view.add(new InfoboxView(gameState.infoboxModel));
             view.add(new DragView(gameState.selectionModel));
             view.add(new DebugView());
             view.add(new UIView(gameState.uiModel));

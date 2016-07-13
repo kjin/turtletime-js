@@ -4,11 +4,18 @@ module TurtleTime {
     class UIViewNode extends View<UIModel> {
         screenDimensions : Rectangle;
         children : Array<UIViewNode>;
+        private _text : Phaser.Text;
 
         constructor(model : UIModel) {
             super(model);
             this.screenDimensions = new Rectangle(0, 0, 0, 0);
             this.children = model.children.map((childData : UIModel) : UIViewNode => new UIViewNode(childData));
+            this._text = GAME_ENGINE.game.add.text(0, 0, "", {
+                font: 'Courier New',
+                fontSize: '12px',
+                fill: '#ffffff',
+                wordWrap: true
+            });
         }
 
         assignScreenDimensions(parentRectangle : Rectangle) : void {
@@ -16,6 +23,8 @@ module TurtleTime {
             this.screenDimensions.y = parentRectangle.y + parentRectangle.height * this.model.internalDimensions.y;
             this.screenDimensions.width = parentRectangle.width * this.model.internalDimensions.width;
             this.screenDimensions.height = parentRectangle.height * this.model.internalDimensions.height;
+            this._text.setTextBounds(this.screenDimensions.x, this.screenDimensions.y, this.screenDimensions.width, this.screenDimensions.height);
+            this._text.wordWrapWidth = this.screenDimensions.width;
             this.children.forEach((child : UIViewNode) : void => child.assignScreenDimensions(this.screenDimensions));
         }
 
@@ -25,6 +34,7 @@ module TurtleTime {
 
         draw(graphics : Graphics):void {
             graphics.drawRect(this.screenDimensions.x, this.screenDimensions.y, this.screenDimensions.width, this.screenDimensions.height);
+            this._text.text = this.model.text;
             this.children.forEach((child : UIViewNode) : void => child.draw(graphics));
         }
 
