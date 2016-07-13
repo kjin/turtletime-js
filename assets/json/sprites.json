@@ -2,6 +2,7 @@
   "turtle": {
     "greenie": {
       "spriteID": "turtle",
+      "path": "turtle.png",
       "scale": 1.0,
       "dimensions": [1, 1],
       "anchor": [0.5, 0.8],
@@ -19,6 +20,7 @@
     },
     "greenie2": {
       "spriteID": "turtle",
+      "path": "turtle.png",
       "scale": 1.0,
       "dimensions": [1, 1],
       "anchor": [0.5, 0.8],
@@ -38,6 +40,7 @@
   "chair": {
     "chairBasic": {
       "spriteID": "tableandchair",
+      "path": "tableandchair.png",
       "scale": 1,
       "dimensions": [1, 1],
       "anchor": [0.5, 0.5],
@@ -47,6 +50,7 @@
   "table": {
     "tableBasic": {
       "spriteID": "tableandchair",
+      "path": "tableandchair.png",
       "scale": 1,
       "dimensions": [2, 2],
       "anchor": [0.19, 0.25],
@@ -56,6 +60,7 @@
   "door": {
     "doorBasic": {
       "spriteID": "tableandchair",
+      "path": "tableandchair.png",
       "scale": 1,
       "dimensions": [1, 1],
       "anchor": [0.5, 0.5],
@@ -65,9 +70,36 @@
   "wallDecor": {
     "blackboard": {
       "spriteID": "blackboard",
+      "path": "blackboard.png",
       "scale": 1,
       "dimensions": [2, 2],
       "anchor": [0.25, 0.7],
+      "animations": [ { "name": "default", "frames": [ {"direction": "all", "frames": [0] } ] } ]
+    }
+  },
+  "food": {
+    "aloe": {
+      "spriteID": "aloe",
+      "path": "aloe.png",
+      "scale": 2,
+      "dimensions": [1, 1],
+      "anchor": [0.5, 0.75],
+      "animations": [ { "name": "default", "frames": [ {"direction": "all", "frames": [0] } ] } ]
+    },
+    "banana": {
+      "spriteID": "banana",
+      "path": "banana.png",
+      "scale": 2,
+      "dimensions": [1, 1],
+      "anchor": [0.5, 0.5],
+      "animations": [ { "name": "default", "frames": [ {"direction": "all", "frames": [0] } ] } ]
+    },
+    "grandson": {
+      "spriteID": "grandson",
+      "path": "grandson.png",
+      "scale": 2,
+      "dimensions": [1, 1],
+      "anchor": [0.5, 0.5],
       "animations": [ { "name": "default", "frames": [ {"direction": "all", "frames": [0] } ] } ]
     }
   }

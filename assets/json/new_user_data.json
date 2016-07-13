@@ -32,7 +32,11 @@
       { "position": [8, 0], "direction": "up", "appearanceID": "blackboard", "actionStatus": "default", "additionalData": {} }
     ],
     "roomDecor": [],
-    "food": []
+    "food": [
+      { "position": [1, 8], "direction": "up", "appearanceID": "aloe", "actionStatus": "default", "additionalData": {} },
+      { "position": [1, 9], "direction": "up", "appearanceID": "banana", "actionStatus": "default", "additionalData": {} },
+      { "position": [10, 9], "direction": "up", "appearanceID": "grandson", "actionStatus": "default", "additionalData": {} }
+    ]
   },
   "room": {
     "size": [12, 16],

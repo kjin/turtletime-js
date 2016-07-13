@@ -37,11 +37,7 @@ namespace TurtleTime {
                 }
             }
             this.views.update();
-            this.time++;
-            // save once per second
-            if (this.time % 60 == 0) {
-                this.saveModel(this.gameState);
-            }
+            this.time += 1/60.0;
         }
 
         protected abstract preloadAssets(game : Phaser.Game) : void;

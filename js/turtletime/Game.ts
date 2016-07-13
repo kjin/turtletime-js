@@ -14,6 +14,9 @@ namespace TurtleTime {
             game.load.image('brick', 'assets/textures/brick.png');
             game.load.image('brick_top', 'assets/textures/bricktop.png');
             game.load.image('blackboard', 'assets/textures/blackboard.png');
+            game.load.image('aloe', 'assets/textures/aloe.png');
+            game.load.image('banana', 'assets/textures/banana.png');
+            game.load.image('grandson', 'assets/textures/grandson.png');
             game.load.json('user_data_new', 'assets/json/new_user_data.json');
             game.load.json('turtle_data', 'assets/json/turtles.json');
             game.load.json('sprite_data', 'assets/json/sprites.json');

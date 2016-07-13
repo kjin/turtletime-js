@@ -11,7 +11,6 @@ module TurtleTime {
     export class EntityView extends View<EntityModel> {
         private _mainSprite : EntitySpriteWrapper;
         private _highlightCircle : Sprite;
-        private _time : number = 0;
         private _bob : boolean = false;
 
         constructor(model : EntityModel) {
@@ -46,9 +45,8 @@ module TurtleTime {
             } else {
                 screenPos = roomToScreen(this.model.position.x + 0.5, this.model.position.y + 0.5);
             }
-            this._time += 0.05;
             this._mainSprite.x = screenPos.x;
-            this._mainSprite.y = screenPos.y - (this._bob ? (2 * squareWave(this._time)) : 0);
+            this._mainSprite.y = screenPos.y - (this._bob ? (2 * squareWave(GAME_ENGINE.time)) : 0);
             this._mainSprite.animation = this.model.animationString;
             this._highlightCircle.x = this._mainSprite.x;
             this._highlightCircle.y = this._mainSprite.y - 2 * GAME_ENGINE.globalData.roomScale[1] * this.model.spriteSpecs.scale;
