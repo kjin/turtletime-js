@@ -1,6 +1,7 @@
 ///<reference path="../defs/phaser.comments.d.ts"/>
 
 module TurtleTime {
+    import Sprite = Phaser.Sprite;
     export var debugText : string = "";
 
     export function debugLog(text : string) {

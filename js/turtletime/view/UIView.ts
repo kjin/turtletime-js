@@ -1,3 +1,5 @@
+///<reference path="../core/BaseView.ts"/>
+
 module TurtleTime {
     import Rectangle = Phaser.Rectangle;
     import Graphics = Phaser.Graphics;
@@ -43,6 +45,15 @@ module TurtleTime {
 
         bringToTop():void {
         }
+
+        enumerateGameObjects():Array<PIXI.DisplayObject> {
+            var result : Array<PIXI.DisplayObject> = [ this._text ];
+            // I hate this code why did it take me so much time to write this
+            this.children.map((child : UIViewNode) : Array<PIXI.DisplayObject> => child.enumerateGameObjects())
+                .forEach((element : Array<PIXI.DisplayObject>) : void => element
+                    .forEach((innerElement : PIXI.DisplayObject) : void => { result.push(innerElement); return; }));
+            return result;
+        }
     }
 
     export class UIView extends BaseView {
@@ -73,7 +84,8 @@ module TurtleTime {
             return LAYER_UI;
         }
 
-        bringToTop():void {
+        enumerateGameObjects():Array<PIXI.DisplayObject> {
+            return this._rootNode.enumerateGameObjects().concat(this._graphics);
         }
     }
 }

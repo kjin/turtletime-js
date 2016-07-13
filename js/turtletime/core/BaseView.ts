@@ -1,4 +1,5 @@
 module TurtleTime {
+    import DisplayObject = PIXI.DisplayObject;
     export abstract class BaseView {
         protected _width : number;
         protected _height : number;
@@ -12,7 +13,7 @@ module TurtleTime {
         get height() : number { return this._height; }
 
         abstract getLayerNumber() : number;
-
-        abstract bringToTop() : void;
+        
+        abstract enumerateGameObjects() : Array<DisplayObject>;
     }
 }

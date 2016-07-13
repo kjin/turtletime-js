@@ -45,7 +45,7 @@ module TurtleTime {
                 this._graphics.clear();
                 this._graphics.lineStyle(0, 0x000000, 0);
                 this._graphics.beginFill(0xff0000, 0.75);
-                twoDForEach(this.model.roomLayout, (cell:Array<EntityData>, x:number, y:number) => {
+                twoDForEach(this.model.roomLayout, (cell:Array<EntityModel>, x:number, y:number) : void => {
                     if (cell.length > 0) {
                         var topLeft:Point = roomToScreen(x, y);
                         this._graphics.drawRect(topLeft.x, topLeft.y, GAME_ENGINE.globalData.roomScale[0], GAME_ENGINE.globalData.roomScale[1]);
@@ -55,8 +55,8 @@ module TurtleTime {
             }
         }
 
-        bringToTop():void {
-            // good thing this is the lowest layer
+        enumerateGameObjects():Array<PIXI.DisplayObject> {
+            return [this._floorTile, this._wallTile, this._wallTileTop, this._graphics];
         }
     }
 }

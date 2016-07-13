@@ -6,6 +6,7 @@
 module TurtleTime {
     import AnimationManager = Phaser.AnimationManager;
     import squareWave = MathExtensions.squareWave;
+    import Sprite = Phaser.Sprite;
 
     export class EntityView extends View<EntityModel> {
         private _mainSprite : EntitySpriteWrapper;
@@ -15,7 +16,8 @@ module TurtleTime {
 
         constructor(model : EntityModel) {
             super(model);
-            this._mainSprite = new EntitySpriteWrapper(model.spriteSpecs);
+            this._mainSprite = new EntitySpriteWrapper();
+            this._mainSprite.reset(model.spriteSpecs);
             this._width = this._mainSprite.width;
             this._height = this._mainSprite.height;
             this._highlightCircle = GAME_ENGINE.game.add.sprite(0, 0, 'highlightCircle');
@@ -53,17 +55,13 @@ module TurtleTime {
             setTintAndAlpha(this._highlightCircle, EffectCircleDictionary[this.model.currentStatus]);
         }
 
-        bringToTop() : void {
-            this._mainSprite.bringToTop();
-            this._highlightCircle.bringToTop();
-        }
-
         // TODO i am an awful person and even more awful programmer
         getLayerNumber() : number {
-            return this.model.layerNumber +
-                0.01 * (this.model.position.y + this.model.dimensions.y - 1) +
-                0.0001 * this.model.position.x +
-                0.000001 * (this._bob ? 1 : 0);
+            return this.model.layerNumber + (this._bob ? 1 : 0);
+        }
+
+        enumerateGameObjects():Array<PIXI.DisplayObject> {
+            return [ this._mainSprite.underlyingSprite, this._highlightCircle ];
         }
     }
 }

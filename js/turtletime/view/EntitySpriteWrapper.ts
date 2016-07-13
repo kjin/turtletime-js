@@ -3,11 +3,16 @@
 
 module TurtleTime {
     // A helper class
+    import Sprite = Phaser.Sprite;
     export class EntitySpriteWrapper {
         private _sprite : Sprite;
 
-        constructor(specs : SpriteSpecs) {
-            this._sprite = GAME_ENGINE.game.add.sprite(0, 0, specs.spriteID);
+        constructor() {
+            this._sprite = GAME_ENGINE.game.add.sprite(0, 0);
+        }
+
+        reset(specs : SpriteSpecs) : void {
+            this._sprite.loadTexture(specs.spriteID);
             this._sprite.anchor = new Point(specs.anchor[0], specs.anchor[1]);
             this._sprite.scale = new Point(specs.scale, specs.scale);
             // add animations
@@ -88,6 +93,10 @@ module TurtleTime {
 
         get height() : number {
             return this._sprite.scale.y * this._sprite.texture.frame.height;
+        }
+
+        get underlyingSprite() : Sprite {
+            return this._sprite;
         }
     }
 }

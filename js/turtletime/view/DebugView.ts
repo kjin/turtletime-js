@@ -2,6 +2,7 @@
 ///<reference path="../core/BaseView.ts"/>
 
 module TurtleTime {
+    import DisplayObject = PIXI.DisplayObject;
     export class DebugView extends BaseView {
         private _text : Phaser.Text;
 
@@ -22,8 +23,8 @@ module TurtleTime {
             return LAYER_DEBUG;
         }
 
-        bringToTop():void {
-            this._text.bringToTop();
+        enumerateGameObjects():Array<DisplayObject> {
+            return [this._text];
         }
     }
 }

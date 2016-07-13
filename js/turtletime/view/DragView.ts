@@ -12,12 +12,14 @@ module TurtleTime {
         constructor(model : SelectionModel) {
             super(model);
             this._graphics = GAME_ENGINE.game.add.graphics(0, 0);
+            this._sprite = new EntitySpriteWrapper();
+            this._sprite.alpha = 0;
         }
 
         update() : void {
             if (this.model.isBeingDragged) {
-                if (this._sprite == null) {
-                    this._sprite = new EntitySpriteWrapper(this.model.entity.spriteSpecs);
+                if (this._sprite.alpha == 0) {
+                    this._sprite.reset(this.model.entity.spriteSpecs);
                     this._sprite.anchorY -= 0.5;
                     this._sprite.alpha = 0.5;
                 }
@@ -36,18 +38,15 @@ module TurtleTime {
                     t * GAME_ENGINE.globalData.roomScale[0] / 1.5,
                     t * GAME_ENGINE.globalData.roomScale[1] / 1.5);
                 this._graphics.endFill();
-            } else if (this._sprite != null) {
-                this._sprite.destroy();
-                this._sprite = null;
+            } else if (this._sprite.alpha != 0) {
+                this._sprite.alpha = 0;
                 this._graphics.clear();
             }
             this._time += 0.05;
         }
 
-        bringToTop():void {
-            if (this._sprite != null) {
-                this._sprite.bringToTop();
-            }
+        enumerateGameObjects():Array<PIXI.DisplayObject> {
+            return [this._sprite.underlyingSprite, this._graphics];
         }
     }
 }

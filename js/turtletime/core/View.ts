@@ -11,12 +11,8 @@ namespace TurtleTime {
             this.model.view = this;
         }
 
-        abstract update() : void;
-
         contains(x : number, y : number) : boolean { return false; }
 
         getLayerNumber() : number { return this.model.layerNumber; }
-
-        abstract bringToTop() : void;
     }
 }
