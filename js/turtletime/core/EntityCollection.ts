@@ -46,14 +46,14 @@ module TurtleTime {
 
         remove(entityModel : T) : void {
             var index : number = 0;
-            for (; index < this._preEntities.length; index++) {
-                if (this._preEntities[index] == entityModel) {
+            for (; index < this._entities.length; index++) {
+                if (this._entities[index] == entityModel) {
                     break;
                 }
             }
-            if (index < this._preEntities.length) {
-                this._postEntities.push(this._preEntities[index]);
-                this._preEntities = this._preEntities.splice(index, 1);
+            if (index < this._entities.length) {
+                this._postEntities.push(this._entities[index]);
+                this._entities.splice(index, 1);
             }
         }
 

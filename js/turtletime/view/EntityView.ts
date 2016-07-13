@@ -53,12 +53,14 @@ module TurtleTime {
                 screenPos = wallToScreen(this.model.position.x + this.model.dimensions.x / 2, this.model.position.y + this.model.dimensions.y / 2);
             } else {
                 screenPos = roomToScreen(this.model.position.x + this.model.dimensions.x / 2, this.model.position.y + this.model.dimensions.y / 2);
-                if (this.model.getEntityClass() == EntityType.Food && (<Food>this.model).onTable) {
+                if (this.model.getEntityClass() == EntityType.Food && (<Food>this.model).table) {
                     screenPos.y -= 10; // account for the height of the table
                 }
             }
             this._mainSprite.x = screenPos.x;
-            this._mainSprite.y = screenPos.y - (this._bob ? (2 * squareWave(2 * GAME_ENGINE.time)) : 0);
+            //lo
+            var yOffset = this._bob ? (2 * squareWave(((<Turtle>this.model).chair != null && (<Turtle>this.model).chair.food != null ? 16 : 2) * GAME_ENGINE.time)) : 0;
+            this._mainSprite.y = screenPos.y - yOffset;
             this._mainSprite.animation = this.model.animationString;
             this._highlightCircle.x = this._mainSprite.x;
             this._highlightCircle.y = this._mainSprite.y - 2 * GAME_ENGINE.globalData.roomScale[1] * this.model.spriteSpecs.scale;

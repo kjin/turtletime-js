@@ -6,6 +6,7 @@ module TurtleTime {
     export class Turtle extends EntityModel {
         intermediateTargetPosition : Point;
         targetPosition : Point;
+        chair : Chair;
         // put turtle to sleep if it can't find a path to an object
         sleep : number;
 

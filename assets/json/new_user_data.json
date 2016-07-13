@@ -1,9 +1,8 @@
 {
   "cafeState": {
     "turtles": [
-      { "position": [5, 6], "direction": "down", "appearanceID": "greenie", "actionStatus": "stand", "additionalData": {
-        "targetPosition": [5, 6]
-      } }
+      { "position": [5, 6], "direction": "down", "appearanceID": "greenie", "actionStatus": "stand", "additionalData": { "targetPosition": [5, 6] } },
+      { "position": [3, 6], "direction": "down", "appearanceID": "greenie2", "actionStatus": "stand", "additionalData": { "targetPosition": [7, 6] } }
     ],
     "chairs": [
       { "position": [0, 15], "direction": "up", "appearanceID": "chairBasic", "actionStatus": "default", "additionalData": {} },
@@ -12,18 +11,18 @@
       { "position": [3, 15], "direction": "up", "appearanceID": "chairBasic", "actionStatus": "default", "additionalData": {} },
       { "position": [4, 15], "direction": "up", "appearanceID": "chairBasic", "actionStatus": "default", "additionalData": {} },
       { "position": [5, 15], "direction": "up", "appearanceID": "chairBasic", "actionStatus": "default", "additionalData": {} },
-      { "position": [0, 8], "direction": "right", "appearanceID": "chairBasic", "actionStatus": "default", "additionalData": {} },
-      { "position": [3, 8], "direction": "left", "appearanceID": "chairBasic", "actionStatus": "default", "additionalData": {} },
-      { "position": [8, 8], "direction": "right", "appearanceID": "chairBasic", "actionStatus": "default", "additionalData": {} },
-      { "position": [11, 8], "direction": "left", "appearanceID": "chairBasic", "actionStatus": "default", "additionalData": {} }
+      { "position": [4, 8], "direction": "right", "appearanceID": "chairBasic", "actionStatus": "default", "additionalData": {} },
+      { "position": [7, 8], "direction": "left", "appearanceID": "chairBasic", "actionStatus": "default", "additionalData": {} },
+      { "position": [11, 8], "direction": "right", "appearanceID": "chairBasic", "actionStatus": "default", "additionalData": {} },
+      { "position": [14, 8], "direction": "left", "appearanceID": "chairBasic", "actionStatus": "default", "additionalData": {} },
+      { "position": [4, 9], "direction": "right", "appearanceID": "chairBasic", "actionStatus": "default", "additionalData": {} },
+      { "position": [7, 9], "direction": "left", "appearanceID": "chairBasic", "actionStatus": "default", "additionalData": {} },
+      { "position": [11, 9], "direction": "right", "appearanceID": "chairBasic", "actionStatus": "default", "additionalData": {} },
+      { "position": [14, 9], "direction": "left", "appearanceID": "chairBasic", "actionStatus": "default", "additionalData": {} }
     ],
     "tables": [
-      { "position": [1, 8], "direction": "down", "appearanceID": "tableBasic", "actionStatus": "default", "additionalData": {} },
-      { "position": [9, 8], "direction": "down", "appearanceID": "tableBasic", "actionStatus": "default", "additionalData": {} },
-      { "position": [2, 4], "direction": "down", "appearanceID": "tableBasic", "actionStatus": "default", "additionalData": {} },
-      { "position": [4, 4], "direction": "down", "appearanceID": "tableBasic", "actionStatus": "default", "additionalData": {} },
-      { "position": [4, 2], "direction": "down", "appearanceID": "tableBasic", "actionStatus": "default", "additionalData": {} },
-      { "position": [4, 0], "direction": "down", "appearanceID": "tableBasic", "actionStatus": "default", "additionalData": {} }
+      { "position": [5, 8], "direction": "down", "appearanceID": "tableBasic", "actionStatus": "default", "additionalData": {} },
+      { "position": [12, 8], "direction": "down", "appearanceID": "tableBasic", "actionStatus": "default", "additionalData": {} }
     ],
     "doors": [
       { "position": [10, 15], "direction": "up", "appearanceID": "doorBasic", "actionStatus": "default", "additionalData": {} }
@@ -33,13 +32,13 @@
     ],
     "roomDecor": [],
     "food": [
-      { "position": [1, 8], "direction": "up", "appearanceID": "aloe", "actionStatus": "default", "additionalData": {} },
-      { "position": [1, 9], "direction": "up", "appearanceID": "banana", "actionStatus": "default", "additionalData": {} },
-      { "position": [10, 9], "direction": "up", "appearanceID": "grandson", "actionStatus": "default", "additionalData": {} }
+      { "position": [5, 8], "direction": "up", "appearanceID": "aloe", "actionStatus": "default", "additionalData": { "hp": 100 } },
+      { "position": [5, 9], "direction": "up", "appearanceID": "banana", "actionStatus": "default", "additionalData": { "hp": 50 } },
+      { "position": [13, 9], "direction": "up", "appearanceID": "grandson", "actionStatus": "default", "additionalData": { "hp": 20 } }
     ]
   },
   "room": {
-    "size": [12, 16],
+    "size": [24, 16],
     "wallHeight": 2,
     "floorPattern": "tile",
     "wallPattern": "brick"

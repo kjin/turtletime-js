@@ -16,7 +16,8 @@ module TurtleTime {
             this._writeState = {
                 selectionModel: gameState.selectionModel,
                 infoboxModel: gameState.uiModel.getChild("infobox.text"),
-                turtles: gameState.entities.turtles
+                turtles: gameState.entities.turtles,
+                food : gameState.entities.food
             };
         }
 
@@ -26,17 +27,25 @@ module TurtleTime {
                 return;
             }
             // Assume that turtle is at intermediateTargetPosition and wants to get to targetPosition
-            if (turtle.intermediateTargetPosition.distance(turtle.targetPosition) < 1) {
+            var distanceFromTarget : number = turtle.intermediateTargetPosition.distance(turtle.targetPosition);
+            if (distanceFromTarget < 1) {
                 var onObjects : Array<EntityModel> =
                     this._readState.roomModel.roomLayout[turtle.targetPosition.x][turtle.targetPosition.y];
                 for (var i : number = 0; i < onObjects.length; i++) {
-                    if (onObjects[i] != turtle) {
+                    if (onObjects[i].getEntityClass() == EntityType.Chair) {
                         turtle.direction = onObjects[i].direction;
+                        turtle.chair = <Chair>onObjects[i];
+                        turtle.chair.turtle = turtle;
                         break;
                     }
                 }
                 turtle.intermediateTargetPosition.set(turtle.targetPosition.x, turtle.targetPosition.y);
                 return;
+            } else {
+                if (turtle.chair != null) {
+                    turtle.chair.turtle = null;
+                }
+                turtle.chair = null;
             }
             if (turtle.sleep == 0) {
                 // goal: set turtle.intermediateTargetPosition according to the best path
@@ -107,11 +116,21 @@ module TurtleTime {
                 }
             }
             // conditions for deselection
-            if (inputState.justPressed &&
+            else if (inputState.justPressed &&
                 this._writeState.selectionModel.entity == turtle &&
                 this._writeState.selectionModel.selectedOnClick != this._readState.inputState.clickNumber) {
                 this._writeState.selectionModel.entity = null;
                 this._writeState.infoboxModel.text = "";
+            }
+        }
+
+        processEatingFood(turtle : Turtle) {
+            if (turtle.chair != null && turtle.chair.food != null) {
+                turtle.chair.food.hp--;
+                if (turtle.chair.food.hp == 0) {
+                    this._writeState.food.remove(turtle.chair.food);
+                    turtle.chair.food = null;
+                }
             }
         }
 
@@ -120,6 +139,7 @@ module TurtleTime {
                 (turtle : Turtle) : void => {
                     this.processMovement(turtle);
                     this.processInput(turtle);
+                    this.processEatingFood(turtle);
                 }
             );
         }

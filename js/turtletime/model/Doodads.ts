@@ -17,6 +17,8 @@ module TurtleTime {
 
     export class Chair extends EntityModel {
         isWaitingChair : boolean;
+        turtle : Turtle;
+        food : Food;
 
         initialize(entityData : EntityData) : void {
             super.initialize(entityData);

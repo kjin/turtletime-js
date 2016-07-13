@@ -41,7 +41,7 @@ module TurtleTime {
         remove(view : BaseView) : void {
             var index : number = this._views.findIndex((e : BaseView) => (e == view));
             if (index >= 0) {
-                this._views = this._views.splice(index, 1);
+                this._views.splice(index, 1);
             }
             var group : Group = this._groups.get(view.getLayerNumber());
             view.enumerateGameObjects().forEach((gameObject : DisplayObject) : void => {
@@ -49,6 +49,7 @@ module TurtleTime {
                     return;
                 }
                 group.remove(gameObject);
+                // gameObject.destroy();
             });
         }
     }
