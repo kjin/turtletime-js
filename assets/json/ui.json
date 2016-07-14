@@ -44,6 +44,157 @@
         "size": ["50px", "50px"]
       },
       "children": []
+    },
+    {
+      "id": "menu",
+      "container": {
+        "anchor": [0.5, 0.5],
+        "position": ["50%", "50%"],
+        "size": ["100%", "50%"],
+        "maxSizePixels": [500, 650]
+      },
+      "children": [
+        {
+          "id": "header",
+          "container": {
+            "anchor": [0, 0],
+            "position": ["5px", "5px"],
+            "size": ["100%-45px", "30px"]
+          },
+          "children": []
+        },
+        {
+          "id": "exit",
+          "container": {
+            "anchor": [1, 0],
+            "position": ["100%", "0%"],
+            "size": ["40px", "40px"]
+          },
+          "children": []
+        },
+        {
+          "id": "body",
+          "container": {
+            "anchor": [0, 1],
+            "position": ["0%", "100%"],
+            "size": ["100%", "100%-40px"]
+          },
+          "children": [
+            {
+              "id": "profile",
+              "container": {
+                "anchor": [0.5, 0.5],
+                "position": ["25%", "25%"],
+                "size": ["25%", "25%"]
+              },
+              "children": [
+                {
+                  "id": "icon",
+                  "container": {
+                    "anchor": [0.5, 0],
+                    "position": ["50%", "0%"],
+                    "size": ["64px", "64px"]
+                  },
+                  "children": []
+                },
+                {
+                  "id": "text",
+                  "container": {
+                    "anchor": [0.5, 1],
+                    "position": ["50%", "100%"],
+                    "size": ["100%", "100%-72px"]
+                  },
+                  "children": []
+                }
+              ]
+            },
+            {
+              "id": "menu",
+              "container": {
+                "anchor": [0.5, 0.5],
+                "position": ["75%", "25%"],
+                "size": ["25%", "25%"]
+              },
+              "children": [
+                {
+                  "id": "icon",
+                  "container": {
+                    "anchor": [0.5, 0],
+                    "position": ["50%", "0%"],
+                    "size": ["64px", "64px"]
+                  },
+                  "children": []
+                },
+                {
+                  "id": "text",
+                  "container": {
+                    "anchor": [0.5, 1],
+                    "position": ["50%", "100%"],
+                    "size": ["100%", "100%-72px"]
+                  },
+                  "children": []
+                }
+              ]
+            },
+            {
+              "id": "turtles",
+              "container": {
+                "anchor": [0.5, 0.5],
+                "position": ["25%", "75%"],
+                "size": ["25%", "25%"]
+              },
+              "children": [
+                {
+                  "id": "icon",
+                  "container": {
+                    "anchor": [0.5, 0],
+                    "position": ["50%", "0%"],
+                    "size": ["64px", "64px"]
+                  },
+                  "children": []
+                },
+                {
+                  "id": "text",
+                  "container": {
+                    "anchor": [0.5, 1],
+                    "position": ["50%", "100%"],
+                    "size": ["100%", "100%-72px"]
+                  },
+                  "children": []
+                }
+              ]
+            },
+            {
+              "id": "settings",
+              "container": {
+                "anchor": [0.5, 0.5],
+                "position": ["75%", "75%"],
+                "size": ["25%", "25%"]
+              },
+              "children": [
+                {
+                  "id": "icon",
+                  "container": {
+                    "anchor": [0.5, 0],
+                    "position": ["50%", "0%"],
+                    "size": ["64px", "64px"]
+                  },
+                  "children": []
+                },
+                {
+                  "id": "text",
+                  "container": {
+                    "anchor": [0.5, 1],
+                    "position": ["50%", "100%"],
+                    "size": ["100%", "100%-72px"]
+                  },
+                  "children": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ]
 }

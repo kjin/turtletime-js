@@ -21,7 +21,8 @@
 <script src="js/editor.js"></script>
 <script>
     setup("assets/json/ui.json", "uiData", "noload,nosave,uiEdit",
-        JSON.stringify({id: "unnamed", container: { anchor: [0, 0], position: ["0%", "0%"], size: ["100%", "100%"] }, children: []}, null, 2));
+        JSON.stringify({id: "unnamed", container: { anchor: [0, 0], position: ["0%", "0%"], size: ["100%", "100%"] }, children: []}, null, 2)
+                .replace(/\[\s*(.*)\s*,\s*(.*)\s*\]/g, "[$1, $2]"));
 </script>
 </body>
 </html>
