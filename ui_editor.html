@@ -8,9 +8,10 @@
 <body>
 <div id="left-half">
     <div id="editor"></div>
+        <button onclick="insert()" class="button">Insert New Object (Ctrl+I)</button>
     <div id="button-div">
         <button onclick="reset()" class="button">Reset</button>
-        <button onclick="load()" class="button">Save & Apply UI Layout</button>
+        <button onclick="load()" class="button">Save & Apply UI Layout (Ctrl+B)</button>
     </div>
 </div>
 <div id="right-half">
@@ -19,7 +20,8 @@
 <script src="https://cdn.jsdelivr.net/ace/1.2.3/min/ace.js" type="text/javascript" charset="utf-8"></script>
 <script src="js/editor.js"></script>
 <script>
-    setup("assets/json/ui.json", "uiData", "noload,nosave,uiEdit");
+    setup("assets/json/ui.json", "uiData", "noload,nosave,uiEdit",
+        JSON.stringify({id: "unnamed", container: { anchor: [0, 0], position: ["0%", "0%"], size: ["100%", "100%"] }, children: []}, null, 2));
 </script>
 </body>
 </html>
