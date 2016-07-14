@@ -59,6 +59,7 @@ module TurtleTime {
     export class UIView extends BaseView {
         private _graphics : Graphics;
         private _rootNode : UIViewNode;
+        private _editMode : boolean
 
         constructor(model : UIModel) {
             super();
@@ -66,14 +67,17 @@ module TurtleTime {
             this._rootNode = new UIViewNode(model);
             this._rootNode.assignScreenDimensions(
                 new Rectangle(0, 0, GAME_ENGINE.globalData.screenSize.x, GAME_ENGINE.globalData.screenSize.y));
+            this._editMode = checkGlobalOption('uiEdit');
         }
 
         update():void {
-            this._graphics.clear();
-            this._graphics.lineStyle(2, 0xffffff, 1.0);
-            this._graphics.beginFill(0xffffff, 0.05);
-            this._rootNode.draw(this._graphics);
-            this._graphics.endFill();
+            if (this._editMode) {
+                this._graphics.clear();
+                this._graphics.lineStyle(2, 0xffffff, 1.0);
+                this._graphics.beginFill(0xffffff, 0.05);
+                this._rootNode.draw(this._graphics);
+                this._graphics.endFill();
+            }
         }
 
         contains(x:number, y:number):boolean {

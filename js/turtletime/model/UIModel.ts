@@ -14,7 +14,10 @@ module TurtleTime {
             this.container = new UIContainer(data.container);
             this.id = data.id;
             this.children = data.children.map((childData : UIData) : UIModel => new UIModel(childData));
-            if (checkGlobalOption("debugMode")) {
+            if (data.hasOwnProperty("visible")) {
+                this.visible = data["visible"];
+            }
+            if (checkGlobalOption("debugMode") || checkGlobalOption("uiEdit")) {
                 this.text = this.id;
             }
         }
@@ -29,6 +32,10 @@ module TurtleTime {
                 return child;
             }
             return child.getChild(path.substring(path.indexOf('.') + 1));
+        }
+
+        getAllChildren() : Array<UIModel> {
+            return this.children;
         }
     }
 }

@@ -14,6 +14,7 @@
         "size": ["100%", "20%"],
         "maxSizePixels": [600, 150]
       },
+      "visible": false,
       "children": [
         {
           "id": "picture",

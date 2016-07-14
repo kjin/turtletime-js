@@ -18,10 +18,11 @@ namespace TurtleTime {
             game.load.image('banana', 'assets/textures/banana.png');
             game.load.image('grandson', 'assets/textures/grandson.png');
             game.load.image('shadow', 'assets/textures/shadow.png');
-            game.load.json('user_data_new', 'assets/json/new_user_data.json');
-            game.load.json('turtle_data', 'assets/json/turtles.json');
-            game.load.json('sprite_data', 'assets/json/sprites.json');
-            game.load.json('ui_data', 'assets/json/ui.json');
+            game.load.json('newUserData', 'assets/json/new_user_data.json');
+            game.load.json('emptyUserData', 'assets/json/empty_user_data.json');
+            game.load.json('turtleData', 'assets/json/turtles.json');
+            game.load.json('spriteData', 'assets/json/sprites.json');
+            game.load.json('uiData', 'assets/json/ui.json');
         }
 
         protected loadData(game:Phaser.Game):GameData {
@@ -35,8 +36,8 @@ namespace TurtleTime {
                         }
                     }
                     return result;
-                })(game.cache.getJSON('turtle_data')),
-                spriteSpecs: new SpriteData(game.cache.getJSON('sprite_data')),
+                })(game.cache.getJSON('turtleData')),
+                spriteSpecs: new SpriteData(game.cache.getJSON('spriteData')),
                 roomScale: [32, 24],
                 maxRoomSize: new Point(12, 16),
                 screenSize: new Point(game.width, game.height)
@@ -44,12 +45,17 @@ namespace TurtleTime {
         }
 
         protected loadModel(game : Phaser.Game):GameState {
-            var userData : UserData = JSON.parse(localStorage.getItem('user_data'));
+            var userData : UserData = JSON.parse(localStorage.getItem('userData'));
             if (userData == null || checkGlobalOption('noload')) {
-                userData = game.cache.getJSON('user_data_new');
-                if (localStorage.getItem('user_data')) {
-                    localStorage.removeItem('user_data');
+                userData = game.cache.getJSON('newUserData');
+                if (localStorage.getItem('userData')) {
+                    localStorage.removeItem('userData');
                 }
+            }
+            var uiData : UIData = game.cache.getJSON('uiData');
+            if (checkGlobalOption('uiEdit')) {
+                userData = game.cache.getJSON('emptyUserData');
+                uiData = JSON.parse(localStorage.getItem('uiData'));
             }
             return {
                 inputState : new InputModel(),
@@ -64,26 +70,43 @@ namespace TurtleTime {
                     food: new EntityCollection(Food, userData.cafeState.food)
                 },
                 roomModel: new RoomModel(userData.room),
-                uiModel: new UIModel(game.cache.getJSON('ui_data'))
+                uiModel: (() : UIModel => {
+                    var result = new UIModel(uiData);
+                    if (!checkGlobalOption('uiEdit')) {
+                        result.getAllChildren().forEach((child : UIModel) : void => {
+                            child.visible = false;
+                        });
+                    }
+                    return result;
+                })()
             };
         }
 
         protected createControllers():Array<Controller<GameState>> {
-            return [
-                new CameraController(),
-                new AssociationController(),
-                new RoomLayoutController(),
-                new TurtleController(),
-                new InputController(),
-                new TurtleSpawnController(),
-                new DragController()];
+            if (checkGlobalOption('uiEdit')) {
+                return [
+                    new InputController()
+                ]
+            } else {
+                return [
+                    new CameraController(),
+                    new AssociationController(),
+                    new RoomLayoutController(),
+                    new TurtleController(),
+                    new InputController(),
+                    new TurtleSpawnController(),
+                    new DragController()
+                ];
+            }
         }
 
         protected createView(gameState:GameState):GameView {
             var view : GameView = new GameView();
-            view.add(new RoomView(gameState.roomModel));
-            view.add(new DragView(gameState.selectionModel));
-            view.add(new DebugView());
+            if (!checkGlobalOption('uiEdit')) {
+                view.add(new RoomView(gameState.roomModel));
+                view.add(new DragView(gameState.selectionModel));
+                view.add(new DebugView());
+            }
             view.add(new UIView(gameState.uiModel));
             return view;
         }
@@ -104,7 +127,7 @@ namespace TurtleTime {
                 },
                 room: gameState.roomModel.serialize()
             };
-            localStorage.setItem('user_data', JSON.stringify(userData));
+            localStorage.setItem('userData', JSON.stringify(userData));
         }
     }
 }

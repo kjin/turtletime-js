@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cafe Layout Editor</title>
+    <link rel='stylesheet' href='css/editor.css'>
+</head>
+<body>
+<div id="left-half">
+    <div id="editor"></div>
+    <div id="button-div">
+        <button onclick="reset()" class="button">Reset</button>
+        <button onclick="load()" class="button">Save & Apply Room Layout</button>
+    </div>
+</div>
+<div id="right-half">
+    <iframe id="frame"></iframe>
+</div>
+<script src="https://cdn.jsdelivr.net/ace/1.2.3/min/ace.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/editor.js"></script>
+<script>
+    setup("assets/json/new_user_data.json", "userData", "noload,nosave");
+</script>
+</body>
+</html>

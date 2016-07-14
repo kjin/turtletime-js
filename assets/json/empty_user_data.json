@@ -1,0 +1,17 @@
+{
+  "cafeState": {
+    "turtles": [],
+    "chairs": [],
+    "tables": [],
+    "doors": [],
+    "wallDecor": [],
+    "roomDecor": [],
+    "food": []
+  },
+  "room": {
+    "size": [0, 0],
+    "wallHeight": 0,
+    "floorPattern": "",
+    "wallPattern": ""
+  }
+}
