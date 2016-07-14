@@ -20,11 +20,8 @@ module TurtleTime {
             });
         }
 
-        assignScreenDimensions(parentRectangle : Rectangle) : void {
-            this.screenDimensions.x = parentRectangle.x + parentRectangle.width * this.model.internalDimensions.x;
-            this.screenDimensions.y = parentRectangle.y + parentRectangle.height * this.model.internalDimensions.y;
-            this.screenDimensions.width = parentRectangle.width * this.model.internalDimensions.width;
-            this.screenDimensions.height = parentRectangle.height * this.model.internalDimensions.height;
+        assignScreenDimensions(parentDimensions : Rectangle) : void {
+            this.screenDimensions = this.model.container.eval(parentDimensions);
             this._text.setTextBounds(this.screenDimensions.x, this.screenDimensions.y, this.screenDimensions.width, this.screenDimensions.height);
             this._text.wordWrapWidth = this.screenDimensions.width;
             this.children.forEach((child : UIViewNode) : void => child.assignScreenDimensions(this.screenDimensions));

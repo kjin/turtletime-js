@@ -4,21 +4,19 @@ module TurtleTime {
     import Rectangle = Phaser.Rectangle;
     export class UIModel extends VisibleModel {
         id : string;
-        internalDimensions : Rectangle;
+        container : UIContainer;
         children : Array<UIModel>;
         text : string = "";
-        visible : boolean = false;
+        visible : boolean = true;
 
         constructor(data : UIData) {
             super();
-            this.internalDimensions = new Rectangle(
-                data.rect[0][0],
-                data.rect[1][0],
-                data.rect[0][1] - data.rect[0][0],
-                data.rect[1][1] - data.rect[1][0]
-            );
+            this.container = new UIContainer(data.container);
             this.id = data.id;
             this.children = data.children.map((childData : UIData) : UIModel => new UIModel(childData));
+            if (checkGlobalOption("debugMode")) {
+                this.text = this.id;
+            }
         }
 
         getChild(path : string) : UIModel {
@@ -31,15 +29,6 @@ module TurtleTime {
                 return child;
             }
             return child.getChild(path.substring(path.indexOf('.') + 1));
-        }
-
-        serialize() : UIData {
-            return {
-                id: this.id,
-                rect: [[this.internalDimensions.x, this.internalDimensions.width - this.internalDimensions.x],
-                       [this.internalDimensions.y, this.internalDimensions.height - this.internalDimensions.y]],
-                children: this.children.map((childModel : UIModel) : UIData => childModel.serialize())
-            };
         }
     }
 }

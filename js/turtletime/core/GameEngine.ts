@@ -59,12 +59,12 @@ namespace TurtleTime {
             this.time += 1/60.0;
         }
 
-        debugPrint(text : string) {
-            this.debugText += text;
+        debugPrint(text : any) {
+            this.debugText += "" + text;
         }
 
-        debugPrintln(text : string) {
-            this.debugText += text + "\n";
+        debugPrintln(text : any) {
+            this.debugText += "" + text + "\n";
         }
 
         protected abstract preloadAssets(game : Phaser.Game) : void;
