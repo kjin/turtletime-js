@@ -22,6 +22,21 @@ module TurtleTime {
             }
         }
 
+        getDeepestElementContaining(x : number, y : number) : UIModel {
+            // probe into view
+            if (this.visible && this.view.contains(x, y)) {
+                var result : UIModel = this;
+                this.children.forEach((child : UIModel) => {
+                    var childResult = child.getDeepestElementContaining(x, y);
+                    if (childResult != null) {
+                        result = childResult;
+                    }
+                });
+                return result;
+            }
+            return null;
+        }
+
         getChild(path : string) : UIModel {
             var splitPath : Array<string> = path.split('.');
             var child : UIModel = this.children.find((child : UIModel) : boolean => child.id == splitPath[0]);

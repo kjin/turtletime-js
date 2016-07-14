@@ -19,6 +19,7 @@ module TurtleTime {
             food:EntityCollection<Food>
         },
         roomModel: RoomModel,
-        uiModel: UIModel
+        uiModel: UIModel,
+        uiInteractionModel: UIInteractionModel
     }
 }

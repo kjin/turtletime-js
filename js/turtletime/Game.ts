@@ -70,22 +70,16 @@ namespace TurtleTime {
                     food: new EntityCollection(Food, userData.cafeState.food)
                 },
                 roomModel: new RoomModel(userData.room),
-                uiModel: (() : UIModel => {
-                    var result = new UIModel(uiData);
-                    if (!checkGlobalOption('uiEdit')) {
-                        result.getAllChildren().forEach((child : UIModel) : void => {
-                            child.visible = false;
-                        });
-                    }
-                    return result;
-                })()
+                uiModel: new UIModel(uiData),
+                uiInteractionModel: new UIInteractionModel()
             };
         }
 
         protected createControllers():Array<Controller<GameState>> {
             if (checkGlobalOption('uiEdit')) {
                 return [
-                    new InputController()
+                    new InputController(),
+                    new UIController()
                 ]
             } else {
                 return [
@@ -95,7 +89,8 @@ namespace TurtleTime {
                     new TurtleController(),
                     new InputController(),
                     new TurtleSpawnController(),
-                    new DragController()
+                    new DragController(),
+                    new UIController()
                 ];
             }
         }
@@ -107,7 +102,7 @@ namespace TurtleTime {
                 view.add(new DragView(gameState.selectionModel));
                 view.add(new DebugView());
             }
-            view.add(new UIView(gameState.uiModel));
+            view.add(new UIView(gameState.uiModel, gameState.uiInteractionModel));
             return view;
         }
 

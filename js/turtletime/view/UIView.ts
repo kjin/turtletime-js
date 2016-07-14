@@ -31,13 +31,21 @@ module TurtleTime {
             return this.screenDimensions.contains(x, y);
         }
 
-        draw(graphics : Graphics):void {
+        draw(graphics : Graphics, interactionModel : UIInteractionModel):void {
             if (this.model.visible) {
+                graphics.lineStyle(2, 0xffffff, 1.0);
+                if (interactionModel.mouseOver(this.model)) {
+                    this._text.text = this.model.text;
+                    graphics.beginFill(0xff0000, 0.2);
+                } else {
+                    this._text.text = "";
+                    graphics.beginFill(0xffffff, 0.05);
+                }
                 graphics.drawRect(this.screenDimensions.x, this.screenDimensions.y, this.screenDimensions.width, this.screenDimensions.height);
-                this.children.forEach((child : UIViewNode) : void => child.draw(graphics));
+                graphics.endFill();
+                this.children.forEach((child : UIViewNode) : void => child.draw(graphics, interactionModel));
             }
             this._text.visible = this.model.visible;
-            this._text.text = this.model.text;
         }
 
         update():void {
@@ -59,10 +67,12 @@ module TurtleTime {
     export class UIView extends BaseView {
         private _graphics : Graphics;
         private _rootNode : UIViewNode;
-        private _editMode : boolean
+        private _editMode : boolean;
+        private _interactionModel : UIInteractionModel;
 
-        constructor(model : UIModel) {
+        constructor(model : UIModel, interactionModel : UIInteractionModel) {
             super();
+            this._interactionModel = interactionModel;
             this._graphics = GAME_ENGINE.game.add.graphics(0, 0);
             this._rootNode = new UIViewNode(model);
             this._rootNode.assignScreenDimensions(
@@ -73,10 +83,7 @@ module TurtleTime {
         update():void {
             if (this._editMode) {
                 this._graphics.clear();
-                this._graphics.lineStyle(2, 0xffffff, 1.0);
-                this._graphics.beginFill(0xffffff, 0.05);
-                this._rootNode.draw(this._graphics);
-                this._graphics.endFill();
+                this._rootNode.draw(this._graphics, this._interactionModel);
             }
         }
 
