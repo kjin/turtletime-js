@@ -49,11 +49,14 @@
     {
       "id": "menuButton",
       "container": {
-        "anchor": [0, 0],
-        "position": ["5px", "5px"],
+        "anchor": [0.5, 0.5],
+        "position": ["30px", "30px"],
         "size": ["50px", "50px"]
       },
-      "appearance": { "normal": {} },
+      "appearance": { "normal": {
+        "spriteID": "menuButton",
+        "tint": "0xFFFFFF"
+      } },
       "children": []
     },
     {

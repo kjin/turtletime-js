@@ -23,7 +23,7 @@ module TurtleTime {
     }
 
     export interface UISpriteData {
-        id: string,
+        spriteID: string,
         tint : number
     }
 

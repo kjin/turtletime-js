@@ -95,6 +95,22 @@ module TurtleTime {
             return this._sprite.scale.y * this._sprite.texture.frame.height;
         }
 
+        get visible() : boolean {
+            return this._sprite.visible;
+        }
+
+        set visible(value : boolean) {
+            this._sprite.visible = value;
+        }
+
+        get tint() : number {
+            return this._sprite.tint;
+        }
+
+        set tint(value : number) {
+            this._sprite.tint = value;
+        }
+
         get underlyingSprite() : Sprite {
             return this._sprite;
         }

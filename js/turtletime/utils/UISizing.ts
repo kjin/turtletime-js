@@ -79,5 +79,13 @@ module TurtleTime {
                 width,
                 height);
         }
+
+        get anchorX() : number {
+            return this._anchor.x;
+        }
+
+        get anchorY() : number {
+            return this._anchor.y;
+        }
     }
 }

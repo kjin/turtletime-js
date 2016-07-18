@@ -7,6 +7,7 @@ module TurtleTime {
         screenDimensions : Rectangle;
         children : Array<UIViewNode>;
         private _text : Phaser.Text;
+        private _sprite : EntitySpriteWrapper;
         private _editMode : boolean;
 
         constructor(model : UIModel) {
@@ -15,12 +16,15 @@ module TurtleTime {
             this.screenDimensions = new Rectangle(0, 0, 0, 0);
             this.children = model.children.map((childData : UIModel) : UIViewNode => new UIViewNode(childData));
             if (this.model.appearance.normal instanceof UIText || this._editMode) {
-                this._text = GAME_ENGINE.game.add.text(0, 0, "", {
+                this._text = GAME_ENGINE.game.add.text(0, 0, (<UIText>this.model.appearance.normal).text, {
                     font: 'Courier New',
                     fontSize: '12px',
                     fill: '#ffffff',
                     wordWrap: true
                 });
+            } else if (this.model.appearance.normal instanceof UISprite) {
+                this._sprite = new EntitySpriteWrapper();
+                this._sprite.reset(GAME_ENGINE.globalData.spriteSpecs.getSpriteSpecs("ui", (<UISprite>this.model.appearance.normal).spriteID));
             }
         }
 
@@ -29,6 +33,9 @@ module TurtleTime {
             if (this._text != null) {
                 this._text.setTextBounds(this.screenDimensions.x, this.screenDimensions.y, this.screenDimensions.width, this.screenDimensions.height);
                 this._text.wordWrapWidth = this.screenDimensions.width;
+            } else if (this._sprite != null) {
+                this._sprite.x = this.screenDimensions.x + this.screenDimensions.width * this.model.container.anchorX;
+                this._sprite.y = this.screenDimensions.y + this.screenDimensions.height * this.model.container.anchorY;
             }
             this.children.forEach((child : UIViewNode) : void => child.assignScreenDimensions(this.screenDimensions));
         }
@@ -52,11 +59,14 @@ module TurtleTime {
                 }
                 graphics.drawRect(this.screenDimensions.x, this.screenDimensions.y, this.screenDimensions.width, this.screenDimensions.height);
                 graphics.endFill();
-            } else if (this._text != null) {
-                if (this.model.visible) {
+            } else if (this.model.visible) {
+                if (this._text != null) {
                     this._text.visible = this.model.visible;
                     this._text.text = (<UIText>this.model.appearance.normal).text;
                     this._text.tint = (<UIText>this.model.appearance.normal).tint;
+                } else if (this._sprite != null) {
+                    this._sprite.visible = this.model.visible;
+                    this._sprite.tint = (<UISprite>this.model.appearance.normal).tint;
                 }
             }
             if (this._editMode || this.model.visible) {
@@ -67,11 +77,13 @@ module TurtleTime {
         update():void {
         }
 
-        bringToTop():void {
-        }
-
         enumerateGameObjects():Array<PIXI.DisplayObject> {
-            var result : Array<PIXI.DisplayObject> = [ this._text ];
+            var result : Array<PIXI.DisplayObject> = [];
+            if (this._text != null) {
+                result = [ this._text ];
+            } else if (this._sprite != null) {
+                result = [ this._sprite.underlyingSprite ];
+            }
             // I hate this code why did it take me so much time to write this
             this.children.map((child : UIViewNode) : Array<PIXI.DisplayObject> => child.enumerateGameObjects())
                 .forEach((element : Array<PIXI.DisplayObject>) : void => element

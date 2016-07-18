@@ -2,12 +2,12 @@ module TurtleTime {
     export abstract class AbstractUIAppearanceModule {}
     
     export class UISprite extends AbstractUIAppearanceModule {
-        image : string;
+        spriteID : string;
         tint : number;
         
         constructor(data : UISpriteData) {
             super();
-            this.image = data.id;
+            this.spriteID = data.spriteID;
             this.tint = data.tint;
         }
     }
@@ -34,7 +34,7 @@ module TurtleTime {
 
         constructor(data : UIAppearanceData) {
             var createModule = (innerData : UISpriteData|UITextData|{}) : AbstractUIAppearanceModule => {
-                if (innerData.hasOwnProperty("image")) {
+                if (innerData.hasOwnProperty("spriteID")) {
                     return new UISprite(<UISpriteData>innerData);
                 } else if (innerData.hasOwnProperty("text")) {
                     return new UIText(<UITextData>innerData);
