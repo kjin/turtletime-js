@@ -6,19 +6,17 @@ module TurtleTime {
         id : string;
         container : UIContainer;
         children : Array<UIModel>;
-        text : string = "";
         visible : boolean = true;
+        appearance : UIAppearance;
 
         constructor(data : UIData) {
             super();
             this.container = new UIContainer(data.container);
             this.id = data.id;
             this.children = data.children.map((childData : UIData) : UIModel => new UIModel(childData));
+            this.appearance = new UIAppearance(data.appearance);
             if (data.hasOwnProperty("visible")) {
                 this.visible = data["visible"];
-            }
-            if (checkGlobalOption("debugMode") || checkGlobalOption("uiEdit")) {
-                this.text = this.id;
             }
         }
 

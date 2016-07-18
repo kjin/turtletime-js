@@ -7,23 +7,29 @@ module TurtleTime {
         screenDimensions : Rectangle;
         children : Array<UIViewNode>;
         private _text : Phaser.Text;
+        private _editMode : boolean;
 
         constructor(model : UIModel) {
             super(model);
+            this._editMode = checkGlobalOption('uiEdit');
             this.screenDimensions = new Rectangle(0, 0, 0, 0);
             this.children = model.children.map((childData : UIModel) : UIViewNode => new UIViewNode(childData));
-            this._text = GAME_ENGINE.game.add.text(0, 0, "", {
-                font: 'Courier New',
-                fontSize: '12px',
-                fill: '#ffffff',
-                wordWrap: true
-            });
+            if (this.model.appearance.normal instanceof UIText || this._editMode) {
+                this._text = GAME_ENGINE.game.add.text(0, 0, "", {
+                    font: 'Courier New',
+                    fontSize: '12px',
+                    fill: '#ffffff',
+                    wordWrap: true
+                });
+            }
         }
 
         assignScreenDimensions(parentDimensions : Rectangle) : void {
             this.screenDimensions = this.model.container.eval(parentDimensions);
-            this._text.setTextBounds(this.screenDimensions.x, this.screenDimensions.y, this.screenDimensions.width, this.screenDimensions.height);
-            this._text.wordWrapWidth = this.screenDimensions.width;
+            if (this._text != null) {
+                this._text.setTextBounds(this.screenDimensions.x, this.screenDimensions.y, this.screenDimensions.width, this.screenDimensions.height);
+                this._text.wordWrapWidth = this.screenDimensions.width;
+            }
             this.children.forEach((child : UIViewNode) : void => child.assignScreenDimensions(this.screenDimensions));
         }
 
@@ -31,21 +37,31 @@ module TurtleTime {
             return this.screenDimensions.contains(x, y);
         }
 
-        draw(graphics : Graphics, interactionModel : UIInteractionModel):void {
-            if (this.model.visible) {
+        draw(graphics : Graphics, interactionModel : UIInteractionModel, parentVisible : boolean = true):void {
+            if (this._editMode) {
                 graphics.lineStyle(2, 0xffffff, 1.0);
                 if (interactionModel.mouseOver(this.model)) {
-                    this._text.text = this.model.text;
+                    this._text.text = this.model.id;
                     graphics.beginFill(0xff0000, 0.2);
-                } else {
+                } else if (this.model.visible && parentVisible) {
                     this._text.text = "";
                     graphics.beginFill(0xffffff, 0.05);
+                } else {
+                    graphics.lineStyle(1, 0xffffff, 0.5);
+                    graphics.beginFill(0x000000, 0.05);
                 }
                 graphics.drawRect(this.screenDimensions.x, this.screenDimensions.y, this.screenDimensions.width, this.screenDimensions.height);
                 graphics.endFill();
-                this.children.forEach((child : UIViewNode) : void => child.draw(graphics, interactionModel));
+            } else if (this._text != null) {
+                if (this.model.visible) {
+                    this._text.visible = this.model.visible;
+                    this._text.text = (<UIText>this.model.appearance.normal).text;
+                    this._text.tint = (<UIText>this.model.appearance.normal).tint;
+                }
             }
-            this._text.visible = this.model.visible;
+            if (this._editMode || this.model.visible) {
+                this.children.forEach((child : UIViewNode) : void => child.draw(graphics, interactionModel, this.model.visible && parentVisible));
+            }
         }
 
         update():void {
@@ -81,10 +97,8 @@ module TurtleTime {
         }
 
         update():void {
-            if (this._editMode) {
-                this._graphics.clear();
-                this._rootNode.draw(this._graphics, this._interactionModel);
-            }
+            this._graphics.clear();
+            this._rootNode.draw(this._graphics, this._interactionModel);
         }
 
         contains(x:number, y:number):boolean {

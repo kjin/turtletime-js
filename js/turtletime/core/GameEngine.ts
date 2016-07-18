@@ -27,7 +27,7 @@ namespace TurtleTime {
         cameraPosition : Point = new Point();
 
         constructor() {
-            var scale_factor : number = (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) ? 0.5 : 1;
+            var scale_factor : number = (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) ? 1 : 1;
             this.game = new Phaser.Game(window.innerWidth * scale_factor, window.innerHeight * scale_factor, Phaser.AUTO, '', {
                 preload: () => this.preloadAssets(this.game),
                 create: this.create.bind(this),

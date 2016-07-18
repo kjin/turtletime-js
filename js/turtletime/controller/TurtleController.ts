@@ -15,7 +15,7 @@ module TurtleTime {
             };
             this._writeState = {
                 selectionModel: gameState.selectionModel,
-                infoboxModel: gameState.uiModel.getChild("infobox.text"),
+                infoboxModel: gameState.uiModel.getChild("infobox"),
                 turtles: gameState.entities.turtles,
                 food : gameState.entities.food
             };
@@ -106,13 +106,14 @@ module TurtleTime {
                 if (inputState.justPressed && this._writeState.selectionModel.entity != turtle) {
                     this._writeState.selectionModel.entity = turtle;
                     this._writeState.selectionModel.selectedOnClick = this._readState.inputState.clickNumber;
-                    this._writeState.infoboxModel.text = (() : string => {
+                    this._writeState.infoboxModel.getChild("text").appearance.normal.text = (() : string => {
                         var turtleData : TurtleData = GAME_ENGINE.globalData.turtleData.get(turtle.appearanceID);
                         return "Name: " + turtleData.name + "\n" +
                             "Description: " + turtleData.description + "\n" +
                             "Likes: " + turtleData.likes + "\n" +
                             "Dislikes: " + turtleData.dislikes;
                     })();
+                    this._writeState.infoboxModel.visible = true;
                 }
             }
             // conditions for deselection
@@ -120,7 +121,8 @@ module TurtleTime {
                 this._writeState.selectionModel.entity == turtle &&
                 this._writeState.selectionModel.selectedOnClick != this._readState.inputState.clickNumber) {
                 this._writeState.selectionModel.entity = null;
-                this._writeState.infoboxModel.text = "";
+                this._writeState.infoboxModel.visible = false;
+                this._writeState.infoboxModel.getChild("text").appearance.normal.text = "";
             }
         }
 

@@ -22,9 +22,25 @@ module TurtleTime {
         size: Array<string>
     }
 
+    export interface UISpriteData {
+        id: string,
+        tint : number
+    }
+
+    export interface UITextData {
+        text: string,
+        justify: Array<number>,
+        tint: string
+    }
+
+    export interface UIAppearanceData {
+        normal: UISpriteData|UITextData|{}
+    }
+
     export interface UIData {
         id: string,
         container: UIContainerData,
+        appearance: UIAppearanceData,
         children: Array<UIData>
     }
 
