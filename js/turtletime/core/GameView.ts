@@ -52,5 +52,9 @@ module TurtleTime {
                 // gameObject.destroy();
             });
         }
+
+        onResizeViewport(oldWidth : number, oldHeight : number, newWidth : number, newHeight : number) : void {
+            this._views.forEach((view : BaseView) => view.onResizeViewport(oldWidth, oldHeight, newWidth, newHeight));
+        }
     }
 }

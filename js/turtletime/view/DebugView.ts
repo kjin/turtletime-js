@@ -26,5 +26,7 @@ module TurtleTime {
         enumerateGameObjects():Array<DisplayObject> {
             return [this._text];
         }
+
+        onResizeViewport(oldWidth:number, oldHeight:number, newWidth:number, newHeight:number):void {}
     }
 }

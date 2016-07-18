@@ -1,5 +1,5 @@
 module TurtleTime {
-    export class CameraModel {
+    export class CameraModel extends VisibleModel {
         targetPosition : Point = new Point();
         smoothingRate : number = 0.5;
 

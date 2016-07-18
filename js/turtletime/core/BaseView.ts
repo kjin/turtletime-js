@@ -15,5 +15,7 @@ module TurtleTime {
         abstract getLayerNumber() : number;
         
         abstract enumerateGameObjects() : Array<DisplayObject>;
+
+        abstract onResizeViewport(oldWidth : number, oldHeight : number, newWidth : number, newHeight : number) : void;
     }
 }

@@ -124,5 +124,10 @@ module TurtleTime {
         enumerateGameObjects():Array<PIXI.DisplayObject> {
             return this._rootNode.enumerateGameObjects().concat(this._graphics);
         }
+
+        onResizeViewport(oldWidth : number, oldHeight : number, newWidth : number, newHeight : number):void {
+            this._rootNode.assignScreenDimensions(
+                new Rectangle(0, 0, GAME_ENGINE.globalData.screenSize.x, GAME_ENGINE.globalData.screenSize.y));
+        }
     }
 }

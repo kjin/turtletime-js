@@ -1,6 +1,6 @@
 namespace TurtleTime {
     export class CameraController extends Controller<GameState> {
-        initialize(gameState:TurtleTime.GameState):void {
+        initialize(gameState:GameState):void {
             this._writeState = {
                 camera: gameState.cameraModel
             };

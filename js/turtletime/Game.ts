@@ -101,6 +101,7 @@ namespace TurtleTime {
                 view.add(new RoomView(gameState.roomModel));
                 view.add(new DragView(gameState.selectionModel));
                 view.add(new DebugView());
+                view.add(new CameraView(gameState.cameraModel));
             }
             view.add(new UIView(gameState.uiModel, gameState.uiInteractionModel));
             return view;

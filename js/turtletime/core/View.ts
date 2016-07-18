@@ -11,8 +11,8 @@ namespace TurtleTime {
             this.model.view = this;
         }
 
-        contains(x : number, y : number) : boolean { return false; }
-
         getLayerNumber() : number { return this.model.layerNumber; }
+
+        onResizeViewport(oldWidth:number, oldHeight:number, newWidth:number, newHeight:number):void {}
     }
 }

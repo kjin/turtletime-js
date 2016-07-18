@@ -68,6 +68,10 @@ module TurtleTime {
             }
         }
 
+        contains(x:number, y:number):boolean {
+            return false; // TODO
+        }
+
         enumerateGameObjects():Array<PIXI.DisplayObject> {
             return [this._floorTile, this._wallTile, this._wallTileTop, this._graphics];
         }

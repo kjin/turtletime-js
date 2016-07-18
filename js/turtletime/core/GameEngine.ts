@@ -32,10 +32,16 @@ namespace TurtleTime {
                 preload: () => this.preloadAssets(this.game),
                 create: this.create.bind(this),
                 update: this.update.bind(this)});
+            window.addEventListener("resize", (() => {
+                var oldWidth = this.game.width;
+                var oldHeight = this.game.height;
+                this.game.scale.setGameSize(window.innerWidth * scale_factor, window.innerHeight * scale_factor);
+                this.views.onResizeViewport(oldWidth, oldHeight, this.game.width, this.game.height);
+            }).bind(this));
         }
 
         private create() : void {
-            this.game.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT;
+            // this.game.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT;
             this.time = 0;
             this.globalData = this.loadData(this.game);
             this.gameState = this.loadModel(this.game);

@@ -45,6 +45,10 @@ module TurtleTime {
             this._time += 0.05;
         }
 
+        contains(x:number, y:number):boolean {
+            return false;
+        }
+
         enumerateGameObjects():Array<PIXI.DisplayObject> {
             return [this._sprite.underlyingSprite, this._graphics];
         }
