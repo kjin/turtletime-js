@@ -1,6 +1,6 @@
 module TurtleTime {
     export class InputModel {
-        static DRAG_THRESHOLD_PIXELS : number = 50;
+        static DRAG_THRESHOLD_PIXELS : number = 20;
 
         private _prevPressed : boolean;
         private _currPressed : boolean;

@@ -36,6 +36,8 @@ namespace TurtleTime {
                 var oldWidth = this.game.width;
                 var oldHeight = this.game.height;
                 this.game.scale.setGameSize(window.innerWidth * scale_factor, window.innerHeight * scale_factor);
+                this.globalData.screenSize.x = this.game.width;
+                this.globalData.screenSize.y = this.game.height;
                 this.views.onResizeViewport(oldWidth, oldHeight, this.game.width, this.game.height);
             }).bind(this));
         }

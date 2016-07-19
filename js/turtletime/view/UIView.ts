@@ -9,22 +9,40 @@ module TurtleTime {
         private _text : Phaser.Text;
         private _sprite : EntitySpriteWrapper;
         private _editMode : boolean;
+        protected _treeHeight : number;
 
         constructor(model : UIModel) {
             super(model);
             this._editMode = checkGlobalOption('uiEdit');
             this.screenDimensions = new Rectangle(0, 0, 0, 0);
             this.children = model.children.map((childData : UIModel) : UIViewNode => new UIViewNode(childData));
-            if (this.model.appearance.normal instanceof UIText || this._editMode) {
-                this._text = GAME_ENGINE.game.add.text(0, 0, (<UIText>this.model.appearance.normal).text, {
+            if (this.children.length > 0) {
+                this._treeHeight = this.children[0]._treeHeight + 1;
+            } else {
+                this._treeHeight = 0;
+            }
+            if (this._editMode) {
+                this._text = GAME_ENGINE.game.add.text(0, 0, "", {
                     font: 'Courier New',
                     fontSize: '12px',
                     fill: '#ffffff',
                     wordWrap: true
                 });
-            } else if (this.model.appearance.normal instanceof UISprite) {
-                this._sprite = new EntitySpriteWrapper();
-                this._sprite.reset(GAME_ENGINE.globalData.spriteSpecs.getSpriteSpecs("ui", (<UISprite>this.model.appearance.normal).spriteID));
+            } else {
+                if (this.model.appearance.normal.text != null) {
+                    this._text = GAME_ENGINE.game.add.text(0, 0, this.model.appearance.normal.text.text, {
+                        font: 'Courier New',
+                        fontSize: '12px',
+                        fill: '#ffffff',
+                        wordWrap: true
+                    });
+                    this._text.name = "" + (3100 - this._treeHeight);
+                }
+                if (this.model.appearance.normal.sprite != null) {
+                    this._sprite = new EntitySpriteWrapper();
+                    this._sprite.reset(GAME_ENGINE.globalData.spriteSpecs.getSpriteSpecs("ui", this.model.appearance.normal.sprite.spriteID));
+                    this._sprite.underlyingSprite.name = "" + (2100 - this._treeHeight);
+                }
             }
         }
 
@@ -59,19 +77,29 @@ module TurtleTime {
                 }
                 graphics.drawRect(this.screenDimensions.x, this.screenDimensions.y, this.screenDimensions.width, this.screenDimensions.height);
                 graphics.endFill();
-            } else if (this.model.visible) {
-                if (this._text != null) {
-                    this._text.visible = this.model.visible;
-                    this._text.text = (<UIText>this.model.appearance.normal).text;
-                    this._text.tint = (<UIText>this.model.appearance.normal).tint;
-                } else if (this._sprite != null) {
-                    this._sprite.visible = this.model.visible;
-                    this._sprite.tint = (<UISprite>this.model.appearance.normal).tint;
+            } else {
+                if (this.model.appearance.normal.text != null) {
+                    this._text.visible = parentVisible && this.model.visible;
+                    this._text.text = this.model.appearance.normal.text.text;
+                    this._text.tint = this.model.appearance.normal.text.tint;
+                }
+                if (this.model.appearance.normal.sprite != null) {
+                    this._sprite.visible = parentVisible && this.model.visible;
+                    this._sprite.tint = this.model.appearance.normal.sprite.tint;
+                }
+                if (this.model.appearance.normal.geometry != null && parentVisible && this.model.visible) {
+                    var geometry : UIGeometry = this.model.appearance.normal.geometry;
+                    graphics.lineStyle(geometry.lineWeight, geometry.lineColor, 1.0);
+                    graphics.beginFill(geometry.fillColor, 1.0);
+                    if (geometry.cornerRadius == 0) {
+                        graphics.drawRect(this.screenDimensions.x, this.screenDimensions.y, this.screenDimensions.width, this.screenDimensions.height);
+                    } else {
+                        graphics.drawRoundedRect(this.screenDimensions.x, this.screenDimensions.y, this.screenDimensions.width, this.screenDimensions.height, geometry.cornerRadius);
+                    }
+                    graphics.endFill();
                 }
             }
-            if (this._editMode || this.model.visible) {
-                this.children.forEach((child : UIViewNode) : void => child.draw(graphics, interactionModel, this.model.visible && parentVisible));
-            }
+            this.children.forEach((child : UIViewNode) : void => child.draw(graphics, interactionModel, this.model.visible && parentVisible));
         }
 
         update():void {
@@ -102,6 +130,7 @@ module TurtleTime {
             super();
             this._interactionModel = interactionModel;
             this._graphics = GAME_ENGINE.game.add.graphics(0, 0);
+            this._graphics.name = "1000";
             this._rootNode = new UIViewNode(model);
             this._rootNode.assignScreenDimensions(
                 new Rectangle(0, 0, GAME_ENGINE.globalData.screenSize.x, GAME_ENGINE.globalData.screenSize.y));

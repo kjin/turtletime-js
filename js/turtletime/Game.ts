@@ -52,7 +52,7 @@ namespace TurtleTime {
                     localStorage.removeItem('userData');
                 }
             }
-            var uiData : UIData = game.cache.getJSON('uiData');
+            var uiData : UIDataCollection = game.cache.getJSON('uiData');
             if (checkGlobalOption('uiEdit')) {
                 userData = game.cache.getJSON('emptyUserData');
                 uiData = JSON.parse(localStorage.getItem('uiData'));
@@ -62,7 +62,7 @@ namespace TurtleTime {
                 selectionModel : new SelectionModel(),
                 cameraModel : new CameraModel(),
                 entities : {
-                    turtles : new EntityCollection(Turtle, userData.cafeState.turtles),
+                    turtles : new TurtleEntityCollection(userData.cafeState.turtles),
                     chairs : new EntityCollection(Chair, userData.cafeState.chairs),
                     tables: new EntityCollection(Table, userData.cafeState.tables),
                     doors: new EntityCollection(Door, userData.cafeState.doors),
@@ -70,7 +70,7 @@ namespace TurtleTime {
                     food: new EntityCollection(Food, userData.cafeState.food)
                 },
                 roomModel: new RoomModel(userData.room),
-                uiModel: new UIModel(uiData),
+                uiModel: new UIModel(uiData.layout, listToMap(uiData.templates, (item : UIData) => item.id)),
                 uiInteractionModel: new UIInteractionModel()
             };
         }

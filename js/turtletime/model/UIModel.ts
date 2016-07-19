@@ -7,14 +7,20 @@ module TurtleTime {
         container : UIContainer;
         children : Array<UIModel>;
         visible : boolean = true;
-        appearance : UIAppearance;
+        appearance : UIAppearanceCollection;
 
-        constructor(data : UIData) {
+        constructor(data : UIData, templates : Map<string, UIData>) {
             super();
+            if (data.hasOwnProperty("template")) {
+                var template : UIData = templates.get(data.template);
+                data.container = template.container;
+                data.children = template.children;
+                data.appearance = template.appearance;
+            }
             this.container = new UIContainer(data.container);
             this.id = data.id;
-            this.children = data.children.map((childData : UIData) : UIModel => new UIModel(childData));
-            this.appearance = new UIAppearance(data.appearance);
+            this.children = data.children.map((childData : UIData) : UIModel => new UIModel(childData, templates));
+            this.appearance = new UIAppearanceCollection(data.appearance);
             if (data.hasOwnProperty("visible")) {
                 this.visible = data["visible"];
             }

@@ -176,6 +176,14 @@ module TurtleTime {
         point.y = (y - GAME_ENGINE.cameraPosition.y) / GAME_ENGINE.globalData.roomScale[1];
     }
 
+    export function listToMap<T>(list : Array<T>, keyFunction : (item : T) => string) : Map<string, T> {
+        var result : Map<string, T> = new Map<string, T>();
+        list.forEach((item : T) : void => {
+            result.set(keyFunction(item), item);
+        });
+        return result;
+    }
+
     /**
      * Given start and end points on a 2D grid, as well as a method of evaluating whether a space may be moved to,
      * return the best direction for an object at the start point to move in order to most efficiently get to the end

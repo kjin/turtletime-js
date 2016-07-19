@@ -15,6 +15,7 @@ module TurtleTime {
             };
             this._writeState = {
                 selectionModel: gameState.selectionModel,
+                cameraModel: gameState.cameraModel,
                 infoboxModel: gameState.uiModel.getChild("infobox"),
                 turtles: gameState.entities.turtles,
                 food : gameState.entities.food
@@ -105,8 +106,9 @@ module TurtleTime {
                 // conditions for selection
                 if (inputState.justPressed && this._writeState.selectionModel.entity != turtle) {
                     this._writeState.selectionModel.entity = turtle;
+                    this._writeState.cameraModel.pushTarget(new Point(turtle.position.x, turtle.position.y));
                     this._writeState.selectionModel.selectedOnClick = this._readState.inputState.clickNumber;
-                    this._writeState.infoboxModel.getChild("text").appearance.normal.text = (() : string => {
+                    this._writeState.infoboxModel.getChild("text").appearance.normal.text.text = (() : string => {
                         var turtleData : TurtleData = GAME_ENGINE.globalData.turtleData.get(turtle.appearanceID);
                         return "Name: " + turtleData.name + "\n" +
                             "Description: " + turtleData.description + "\n" +
@@ -120,9 +122,10 @@ module TurtleTime {
             else if (inputState.justPressed &&
                 this._writeState.selectionModel.entity == turtle &&
                 this._writeState.selectionModel.selectedOnClick != this._readState.inputState.clickNumber) {
+                this._writeState.cameraModel.popTarget();
                 this._writeState.selectionModel.entity = null;
                 this._writeState.infoboxModel.visible = false;
-                this._writeState.infoboxModel.getChild("text").appearance.normal.text = "";
+                this._writeState.infoboxModel.getChild("text").appearance.normal.text.text = "";
             }
         }
 

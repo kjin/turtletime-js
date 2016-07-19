@@ -50,6 +50,8 @@ function setup(file, storageKey, globalOptions, insertMaterial) {
         localStorage.setItem(storageKey, editor.getValue());
         localStorage.setItem("globalOptions", globalOptions);
         document.getElementById("frame").src = "index.html";
+        document.getElementById("frame").style.width = parseInt(document.getElementById("width").value) + "px";
+        document.getElementById("frame").style.height = parseInt(document.getElementById("height").value) + "px";
     };
 
     reset = function() {

@@ -1,231 +1,248 @@
 {
-  "id": "root",
-  "container": {
-    "anchor": [0.0, 0.0],
-    "position": ["0%", "0%"],
-    "size": ["100%", "100%"]
-  },
-  "appearance": { "normal": {} },
-  "children": [
-    {
-      "id": "infobox",
-      "container": {
-        "anchor": [0.5, 1.0],
-        "position": ["50%", "100%"],
-        "size": ["100%", "20%"],
-        "maxSizePixels": [600, 150]
-      },
-      "appearance": { "normal": {} },
-      "visible": false,
-      "children": [
-        {
-          "id": "picture",
-          "container": {
-            "anchor": [0.0, 0.0],
-            "position": ["0%", "0%"],
-            "size": ["100px", "100%"]
-          },
-          "appearance": { "normal": {} },
-          "children": []
+  "templates": [],
+  "layout": {
+    "id": "root",
+    "container": {
+      "anchor": [0.0, 0.0],
+      "position": ["0%", "0%"],
+      "size": ["100%", "100%"]
+    },
+    "appearance": { "normal": {} },
+    "children": [
+      {
+        "id": "infobox",
+        "container": {
+          "anchor": [0.5, 1.0],
+          "position": ["50%", "100%"],
+          "size": ["100%", "20%"],
+          "maxSizePixels": [600, 150]
         },
-        {
-          "id": "text",
-          "container": {
-            "anchor": [0.0, 0.0],
-            "position": ["100px", "0%"],
-            "size": ["100%-100px", "100%"]
+        "appearance": {
+          "normal": {
+            "geometry": {}
+          }
+        },
+        "visible": false,
+        "children": [
+          {
+            "id": "picture",
+            "container": {
+              "anchor": [0.0, 0.0],
+              "position": ["0%", "0%"],
+              "size": ["100px", "100%"]
+            },
+            "appearance": {
+              "normal": {
+                "geometry": {}
+              }
+            },
+            "children": []
           },
-          "appearance": {
-            "normal": {
-              "text": "",
-              "justify": [0.0, 0.0],
+          {
+            "id": "text",
+            "container": {
+              "anchor": [0.0, 0.0],
+              "position": ["100px", "0%"],
+              "size": ["100%-100px", "100%"]
+            },
+            "appearance": {
+              "normal": {
+                "text": {
+                  "text": "",
+                  "justify": [0.0, 0.0],
+                  "tint": "0xFFFFFF"
+                }
+              }
+            },
+            "children": []
+          }
+        ]
+      },
+      {
+        "id": "menuButton",
+        "container": {
+          "anchor": [0.5, 0.5],
+          "position": ["30px", "30px"],
+          "size": ["50px", "50px"]
+        },
+        "appearance": {
+          "normal": {
+            "sprite": {
+              "spriteID": "menuButton",
               "tint": "0xFFFFFF"
             }
-          },
-          "children": []
-        }
-      ]
-    },
-    {
-      "id": "menuButton",
-      "container": {
-        "anchor": [0.5, 0.5],
-        "position": ["30px", "30px"],
-        "size": ["50px", "50px"]
-      },
-      "appearance": { "normal": {
-        "spriteID": "menuButton",
-        "tint": "0xFFFFFF"
-      } },
-      "children": []
-    },
-    {
-      "id": "menu",
-      "container": {
-        "anchor": [0.5, 0.5],
-        "position": ["50%", "50%"],
-        "size": ["100%", "50%"],
-        "maxSizePixels": [500, 650]
-      },
-      "visible": false,
-      "appearance": { "normal": {} },
-      "children": [
-        {
-          "id": "header",
-          "container": {
-            "anchor": [0, 0],
-            "position": ["5px", "5px"],
-            "size": ["100%-45px", "30px"]
-          },
-          "appearance": { "normal": {} },
-          "children": []
+          }
         },
-        {
-          "id": "exit",
-          "container": {
-            "anchor": [1, 0],
-            "position": ["100%", "0%"],
-            "size": ["40px", "40px"]
-          },
-          "appearance": { "normal": {} },
-          "children": []
+        "children": []
+      },
+      {
+        "id": "menu",
+        "container": {
+          "anchor": [0.5, 0.5],
+          "position": ["50%", "50%"],
+          "size": ["100%", "50%"],
+          "maxSizePixels": [500, 650]
         },
-        {
-          "id": "body",
-          "container": {
-            "anchor": [0, 1],
-            "position": ["0%", "100%"],
-            "size": ["100%", "100%-40px"]
+        "visible": false,
+        "appearance": { "normal": {} },
+        "children": [
+          {
+            "id": "header",
+            "container": {
+              "anchor": [0, 0],
+              "position": ["5px", "5px"],
+              "size": ["100%-45px", "30px"]
+            },
+            "appearance": { "normal": {} },
+            "children": []
           },
-          "appearance": { "normal": {} },
-          "children": [
-            {
-              "id": "profile",
-              "container": {
-                "anchor": [0.5, 0.5],
-                "position": ["25%", "25%"],
-                "size": ["25%", "25%"]
-              },
-              "appearance": { "normal": {} },
-              "children": [
-                {
-                  "id": "icon",
-                  "container": {
-                    "anchor": [0.5, 0],
-                    "position": ["50%", "0%"],
-                    "size": ["64px", "64px"]
-                  },
-                  "appearance": { "normal": {} },
-                  "children": []
-                },
-                {
-                  "id": "text",
-                  "container": {
-                    "anchor": [0.5, 1],
-                    "position": ["50%", "100%"],
-                    "size": ["100%", "100%-72px"]
-                  },
-                  "appearance": { "normal": {} },
-                  "children": []
-                }
-              ]
+          {
+            "id": "exit",
+            "container": {
+              "anchor": [1, 0],
+              "position": ["100%", "0%"],
+              "size": ["40px", "40px"]
             },
-            {
-              "id": "menu",
-              "container": {
-                "anchor": [0.5, 0.5],
-                "position": ["75%", "25%"],
-                "size": ["25%", "25%"]
-              },
-              "appearance": { "normal": {} },
-              "children": [
-                {
-                  "id": "icon",
-                  "container": {
-                    "anchor": [0.5, 0],
-                    "position": ["50%", "0%"],
-                    "size": ["64px", "64px"]
-                  },
-                  "appearance": { "normal": {} },
-                  "children": []
-                },
-                {
-                  "id": "text",
-                  "container": {
-                    "anchor": [0.5, 1],
-                    "position": ["50%", "100%"],
-                    "size": ["100%", "100%-72px"]
-                  },
-                  "appearance": { "normal": {} },
-                  "children": []
-                }
-              ]
+            "appearance": { "normal": {} },
+            "children": []
+          },
+          {
+            "id": "body",
+            "container": {
+              "anchor": [0, 1],
+              "position": ["0%", "100%"],
+              "size": ["100%", "100%-40px"]
             },
-            {
-              "id": "turtles",
-              "container": {
-                "anchor": [0.5, 0.5],
-                "position": ["25%", "75%"],
-                "size": ["25%", "25%"]
-              },
-              "appearance": { "normal": {} },
-              "children": [
-                {
-                  "id": "icon",
-                  "container": {
-                    "anchor": [0.5, 0],
-                    "position": ["50%", "0%"],
-                    "size": ["64px", "64px"]
-                  },
-                  "appearance": { "normal": {} },
-                  "children": []
+            "appearance": { "normal": {} },
+            "children": [
+              {
+                "id": "profile",
+                "container": {
+                  "anchor": [0.5, 0.5],
+                  "position": ["25%", "25%"],
+                  "size": ["25%", "25%"]
                 },
-                {
-                  "id": "text",
-                  "container": {
-                    "anchor": [0.5, 1],
-                    "position": ["50%", "100%"],
-                    "size": ["100%", "100%-72px"]
+                "appearance": { "normal": {} },
+                "children": [
+                  {
+                    "id": "icon",
+                    "container": {
+                      "anchor": [0.5, 0],
+                      "position": ["50%", "0%"],
+                      "size": ["64px", "64px"]
+                    },
+                    "appearance": { "normal": {} },
+                    "children": []
                   },
-                  "appearance": { "normal": {} },
-                  "children": []
-                }
-              ]
-            },
-            {
-              "id": "settings",
-              "container": {
-                "anchor": [0.5, 0.5],
-                "position": ["75%", "75%"],
-                "size": ["25%", "25%"]
+                  {
+                    "id": "text",
+                    "container": {
+                      "anchor": [0.5, 1],
+                      "position": ["50%", "100%"],
+                      "size": ["100%", "100%-72px"]
+                    },
+                    "appearance": { "normal": {} },
+                    "children": []
+                  }
+                ]
               },
-              "appearance": { "normal": {} },
-              "children": [
-                {
-                  "id": "icon",
-                  "container": {
-                    "anchor": [0.5, 0],
-                    "position": ["50%", "0%"],
-                    "size": ["64px", "64px"]
-                  },
-                  "appearance": { "normal": {} },
-                  "children": []
+              {
+                "id": "menu",
+                "container": {
+                  "anchor": [0.5, 0.5],
+                  "position": ["75%", "25%"],
+                  "size": ["25%", "25%"]
                 },
-                {
-                  "id": "text",
-                  "container": {
-                    "anchor": [0.5, 1],
-                    "position": ["50%", "100%"],
-                    "size": ["100%", "100%-72px"]
+                "appearance": { "normal": {} },
+                "children": [
+                  {
+                    "id": "icon",
+                    "container": {
+                      "anchor": [0.5, 0],
+                      "position": ["50%", "0%"],
+                      "size": ["64px", "64px"]
+                    },
+                    "appearance": { "normal": {} },
+                    "children": []
                   },
-                  "appearance": { "normal": {} },
-                  "children": []
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    }
-  ]
+                  {
+                    "id": "text",
+                    "container": {
+                      "anchor": [0.5, 1],
+                      "position": ["50%", "100%"],
+                      "size": ["100%", "100%-72px"]
+                    },
+                    "appearance": { "normal": {} },
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "id": "turtles",
+                "container": {
+                  "anchor": [0.5, 0.5],
+                  "position": ["25%", "75%"],
+                  "size": ["25%", "25%"]
+                },
+                "appearance": { "normal": {} },
+                "children": [
+                  {
+                    "id": "icon",
+                    "container": {
+                      "anchor": [0.5, 0],
+                      "position": ["50%", "0%"],
+                      "size": ["64px", "64px"]
+                    },
+                    "appearance": { "normal": {} },
+                    "children": []
+                  },
+                  {
+                    "id": "text",
+                    "container": {
+                      "anchor": [0.5, 1],
+                      "position": ["50%", "100%"],
+                      "size": ["100%", "100%-72px"]
+                    },
+                    "appearance": { "normal": {} },
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "id": "settings",
+                "container": {
+                  "anchor": [0.5, 0.5],
+                  "position": ["75%", "75%"],
+                  "size": ["25%", "25%"]
+                },
+                "appearance": { "normal": {} },
+                "children": [
+                  {
+                    "id": "icon",
+                    "container": {
+                      "anchor": [0.5, 0],
+                      "position": ["50%", "0%"],
+                      "size": ["64px", "64px"]
+                    },
+                    "appearance": { "normal": {} },
+                    "children": []
+                  },
+                  {
+                    "id": "text",
+                    "container": {
+                      "anchor": [0.5, 1],
+                      "position": ["50%", "100%"],
+                      "size": ["100%", "100%-72px"]
+                    },
+                    "appearance": { "normal": {} },
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
 }

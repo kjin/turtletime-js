@@ -3,8 +3,7 @@
 
 module TurtleTime {
     export class DragController extends Controller<GameState> {
-        cameraXOnClick : number;
-        cameraYOnClick : number;
+        cameraOnClick : Point = new Point();
 
         initialize(gameState:GameState):void {
             this._readState = {
@@ -44,12 +43,11 @@ module TurtleTime {
                     this._writeState.selectionModel.isBeingDragged = false;
                 }
             } else if (input.isDragged) {
-                this._writeState.cameraModel.targetPosition.x = this.cameraXOnClick + input.inputX - input.atClickX;
-                this._writeState.cameraModel.targetPosition.y = this.cameraYOnClick + input.inputY - input.atClickY;
-                
+                this._writeState.cameraModel.peekTarget().x = this.cameraOnClick.x - (input.inputX - input.atClickX) / GAME_ENGINE.globalData.roomScale[0];
+                this._writeState.cameraModel.peekTarget().y = this.cameraOnClick.y - (input.inputY - input.atClickY) / GAME_ENGINE.globalData.roomScale[1];
             } else if (input.justPressed) {
-                this.cameraXOnClick = this._writeState.cameraModel.actualPosition.x;
-                this.cameraYOnClick = this._writeState.cameraModel.actualPosition.y;
+                this.cameraOnClick.x = this._writeState.cameraModel.peekTarget().x;
+                this.cameraOnClick.y = this._writeState.cameraModel.peekTarget().y;
             }
         }
     }

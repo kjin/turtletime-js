@@ -59,13 +59,17 @@ module TurtleTime {
 
         update(gameView : GameView) : void {
             this._preEntities.forEach((e : T) : void => {
-                gameView.add(new EntityView(e));
+                gameView.add(this.createEntityView(e));
                 this._entities.push(e);
             });
             this._postEntities.forEach((e : T) : void => gameView.remove(e.view));
             // clear both arrays
             this._preEntities.length = 0;
             this._postEntities.length = 0;
+        }
+
+        protected createEntityView(entity : T) : EntityView {
+            return new EntityView(entity);
         }
 
         forEach(callback: (value: T) => void) {
@@ -82,6 +86,16 @@ module TurtleTime {
 
         serialize() : Array<EntityData> {
             return this._entities.map((e: T, i : number, arr : Array<T>) : EntityData => e.serialize());
+        }
+    }
+
+    export class TurtleEntityCollection extends EntityCollection<Turtle> {
+        constructor(initialEntities : Array<EntityData> = []) {
+            super(Turtle, initialEntities);
+        }
+
+        protected createEntityView(entity : Turtle) {
+            return new TurtleView(entity);
         }
     }
 }

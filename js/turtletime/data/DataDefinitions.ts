@@ -24,24 +24,43 @@ module TurtleTime {
 
     export interface UISpriteData {
         spriteID: string,
-        tint : number
+        tint? : string
     }
 
     export interface UITextData {
-        text: string,
-        justify: Array<number>,
-        tint: string
+        text?: string,
+        justify?: Array<number>,
+        tint?: string
+    }
+
+    export interface UIGeometryData {
+        fillColor? : string;
+        lineColor? : string;
+        lineWeight? : string;
+        cornerRadius? : string;
     }
 
     export interface UIAppearanceData {
-        normal: UISpriteData|UITextData|{}
+        sprite? : UISpriteData,
+        text? : UITextData,
+        geometry? : UIGeometryData
+    }
+
+    export interface UIAppearanceCollectionData {
+        normal?: UIAppearanceData
     }
 
     export interface UIData {
         id: string,
-        container: UIContainerData,
-        appearance: UIAppearanceData,
-        children: Array<UIData>
+        container?: UIContainerData,
+        appearance?: UIAppearanceCollectionData,
+        children?: Array<UIData>,
+        template?: string
+    }
+
+    export interface UIDataCollection {
+        templates: Array<UIData>,
+        layout: UIData
     }
 
     /**
