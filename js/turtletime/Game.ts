@@ -8,8 +8,8 @@ namespace TurtleTime {
     export class TurtleTimeGame extends GameEngine {
         protected preloadAssets(game : Phaser.Game):void {
             game.load.spritesheet('turtle', 'assets/textures/turtle.png', 45, 60);
-            game.load.image('highlightCircle', 'assets/textures/highlightCircle.png');
             game.load.spritesheet('tableandchair', 'assets/textures/tableandchair.png', 52, 52);
+            game.load.image('highlightCircle', 'assets/textures/highlightCircle.png');
             game.load.image('tile', 'assets/textures/tile.png');
             game.load.image('brick', 'assets/textures/brick.png');
             game.load.image('brick_top', 'assets/textures/bricktop.png');
@@ -18,6 +18,13 @@ namespace TurtleTime {
             game.load.image('banana', 'assets/textures/banana.png');
             game.load.image('grandson', 'assets/textures/grandson.png');
             game.load.image('shadow', 'assets/textures/shadow.png');
+            game.load.image('speechBubble', 'assets/textures/speechbubble.png');
+            game.load.image('emoji-angry', 'assets/textures/emoji-angry.png');
+            game.load.image('emoji-coffee', 'assets/textures/emoji-coffee.png');
+            game.load.image('emoji-fork', 'assets/textures/emoji-fork.png');
+            game.load.image('emoji-heart', 'assets/textures/emoji-heart.png');
+            game.load.image('emoji-skull', 'assets/textures/emoji-skull.png');
+            game.load.image('emoji-smiley', 'assets/textures/emoji-smiley.png');
             game.load.json('newUserData', 'assets/json/new_user_data.json');
             game.load.json('emptyUserData', 'assets/json/empty_user_data.json');
             game.load.json('turtleData', 'assets/json/turtles.json');

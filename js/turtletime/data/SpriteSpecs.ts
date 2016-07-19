@@ -11,11 +11,11 @@ module TurtleTime {
 
     export interface SpriteSpecs {
         spriteID : string,
-        path : string,
-        scale : number,
-        dimensions : Array<number>,
-        anchor: Array<number>,
-        animations : Array<SpriteAnimation>
+        path? : string,
+        scale? : number,
+        dimensions? : Array<number>,
+        anchor?: Array<number>,
+        animations? : Array<SpriteAnimation>
     }
 
     export class SpriteData {

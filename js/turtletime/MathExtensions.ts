@@ -47,4 +47,21 @@ namespace MathExtensions {
         }
         return x - Math.floor(x);
     }
+
+    export function triangleWaveFactory(peak : number) : (x : number) => number {
+        if (peak == 0) {
+            return (x : number) : number => 1 - sawtoothWave(x);
+        } else if (peak == 1) {
+            return sawtoothWave;
+        } else {
+            return (x : number) : number => {
+                x = sawtoothWave(x);
+                if (x < peak) {
+                    return x / peak;
+                } else {
+                    return (1 - x) / (1 - peak);
+                }
+            };
+        }
+    }
 }

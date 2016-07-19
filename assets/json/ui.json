@@ -67,9 +67,9 @@
         },
         "appearance": {
           "normal": {
-            "sprite": {
-              "spriteID": "menuButton",
-              "tint": "0xFFFFFF"
+            "geometry": {},
+            "text": {
+              "text": "MENU"
             }
           }
         },

@@ -31,7 +31,7 @@ namespace TurtleTime {
             this.game = new Phaser.Game(window.innerWidth * scale_factor, window.innerHeight * scale_factor, Phaser.AUTO, '', {
                 preload: () => this.preloadAssets(this.game),
                 create: this.create.bind(this),
-                update: this.update.bind(this)});
+                update: this.update.bind(this)}, false, false);
             window.addEventListener("resize", (() => {
                 var oldWidth = this.game.width;
                 var oldHeight = this.game.height;
