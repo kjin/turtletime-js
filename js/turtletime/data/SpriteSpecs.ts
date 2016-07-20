@@ -11,7 +11,6 @@ module TurtleTime {
 
     export interface SpriteSpecs {
         spriteID : string,
-        path? : string,
         scale? : number,
         dimensions? : Array<number>,
         anchor?: Array<number>,
@@ -42,6 +41,27 @@ module TurtleTime {
                 return this.specMap.get(category).get(element);
             }
             return null;
+        }
+    }
+
+    export interface TextureAssetEntry {
+        id: string,
+        fileType?: string,
+        frameSize?: Array<number>
+    }
+
+    export interface JSONAssetEntry {
+        id: string
+    }
+
+    export interface AssetDocument {
+        textures : {
+            root: string,
+            files: Array<TextureAssetEntry>
+        },
+        json : {
+            root: string,
+            files: Array<JSONAssetEntry>
         }
     }
 }

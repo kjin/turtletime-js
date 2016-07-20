@@ -8,13 +8,13 @@ module TurtleTime {
 
         constructor(model : EntityModel) {
             super(model);
-            this._highlightCircle = GAME_ENGINE.game.add.sprite(0, 0, 'highlightCircle');
+            this._highlightCircle = GAME_ENGINE.game.add.sprite(0, 0, 'core/highlightCircle');
             this._highlightCircle.anchor = new Point(0.5, 0.5);
-            this._attentionBubble = GAME_ENGINE.game.add.sprite(0, 0, 'speechBubble');
+            this._attentionBubble = GAME_ENGINE.game.add.sprite(0, 0, 'core/speechBubble');
             this._attentionBubble.anchor = new Point(0.5, 1);
             this._attentionBubble.scale.x = 2;
             this._attentionBubble.scale.y = 2;
-            this._emoji = GAME_ENGINE.game.add.sprite(0, 0, 'emoji-angry');
+            this._emoji = GAME_ENGINE.game.add.sprite(0, 0, 'emoji/angry');
             this._emoji.anchor = new Point(0.5, 0.5);
             this._emoji.scale.x = 2;
             this._emoji.scale.y = 2;

@@ -2,12 +2,19 @@
 
 module TurtleTime {
     import Rectangle = Phaser.Rectangle;
+
+    // describes how user interacts with the UI component
+    export enum UIType {
+        Dummy, Container, Button, ScrollingContainer, TabbedContainer
+    }
+
     export class UIModel extends VisibleModel {
         id : string;
         fullID : string;
         container : UIContainer;
         children : Array<UIModel>;
         visible : boolean = true;
+        type : UIType;
         appearance : UIAppearanceCollection;
 
         constructor(data : UIData, templates : Map<string, UIData>, parentFullID : string = null) {
@@ -39,12 +46,12 @@ module TurtleTime {
             }
         }
 
-        getDeepestElementContaining(x : number, y : number) : UIModel {
+        getDeepestElementContaining(x : number, y : number, onlyVisible : boolean) : UIModel {
             // probe into view
-            if (this.visible && this.view.contains(x, y)) {
+            if ((this.visible || !onlyVisible) && this.view.contains(x, y)) {
                 var result : UIModel = this;
                 this.children.forEach((child : UIModel) => {
-                    var childResult = child.getDeepestElementContaining(x, y);
+                    var childResult = child.getDeepestElementContaining(x, y, onlyVisible);
                     if (childResult != null) {
                         result = childResult;
                     }

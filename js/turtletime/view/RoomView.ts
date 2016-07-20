@@ -19,9 +19,9 @@ module TurtleTime {
                 topLeft.y,
                 bottomRight.x - topLeft.x,
                 bottomRight.y - topLeft.y,
-                this.model.floorPattern);
+                "room/" + this.model.floorPattern);
             if (this.model.wallHeight > 0) {
-                var wallTop = this.model.wallPattern + "_top";
+                var wallTop = "room/" + this.model.wallPattern + "top";
                 this._topHeight = GAME_ENGINE.game.cache.getBaseTexture(wallTop).height;
                 this._wallTileTop = GAME_ENGINE.game.add.tileSprite(
                     topLeft.x,
@@ -30,13 +30,13 @@ module TurtleTime {
                     this._topHeight,
                     wallTop);
                 if (this.model.wallHeight > 1) {
-                    this._sectionHeight = GAME_ENGINE.game.cache.getBaseTexture(this.model.wallPattern).height;
+                    this._sectionHeight = GAME_ENGINE.game.cache.getBaseTexture("room/" + this.model.wallPattern).height;
                     this._wallTile = GAME_ENGINE.game.add.tileSprite(
                         topLeft.x,
                         topLeft.y - this._sectionHeight * (this.model.wallHeight - 1),
                         bottomRight.x - topLeft.x,
                         this._sectionHeight * (this.model.wallHeight - 1),
-                        this.model.wallPattern);
+                        "room/" + this.model.wallPattern);
                 }
             }
             this._graphics = GAME_ENGINE.game.add.graphics(0, 0);

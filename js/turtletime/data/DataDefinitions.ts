@@ -60,7 +60,8 @@ module TurtleTime {
         container?: UIContainerData,
         appearance?: UIAppearanceCollectionData,
         children?: Array<UIData>,
-        template?: UITemplateData
+        template?: UITemplateData,
+        type?: string
     }
 
     export interface UIDataCollection {

@@ -28,18 +28,36 @@ namespace TurtleTime {
 
         constructor() {
             var scale_factor : number = (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) ? 1 : 1;
-            this.game = new Phaser.Game(window.innerWidth * scale_factor, window.innerHeight * scale_factor, Phaser.AUTO, '', {
-                preload: () => this.preloadAssets(this.game),
-                create: this.create.bind(this),
-                update: this.update.bind(this)}, false, false);
-            window.addEventListener("resize", (() => {
-                var oldWidth = this.game.width;
-                var oldHeight = this.game.height;
-                this.game.scale.setGameSize(window.innerWidth * scale_factor, window.innerHeight * scale_factor);
-                this.globalData.screenSize.x = this.game.width;
-                this.globalData.screenSize.y = this.game.height;
-                this.views.onResizeViewport(oldWidth, oldHeight, this.game.width, this.game.height);
+
+            httpGet("assets/assets.json", ((response : string): void => {
+                this.game = new Phaser.Game(window.innerWidth * scale_factor, window.innerHeight * scale_factor, Phaser.AUTO, '', {
+                    preload: () => this.preloadAssets(this.game, JSON.parse(response)),
+                    create: this.create.bind(this),
+                    update: this.update.bind(this)}, false, false);
+                window.addEventListener("resize", (() => {
+                    var oldWidth = this.game.width;
+                    var oldHeight = this.game.height;
+                    this.game.scale.setGameSize(window.innerWidth * scale_factor, window.innerHeight * scale_factor);
+                    this.globalData.screenSize.x = this.game.width;
+                    this.globalData.screenSize.y = this.game.height;
+                    this.views.onResizeViewport(oldWidth, oldHeight, this.game.width, this.game.height);
+                }).bind(this));
             }).bind(this));
+        }
+
+        private preloadAssets(game : Phaser.Game, assets : AssetDocument):void {
+            assets.textures.files.forEach((entry : TextureAssetEntry) : void => {
+                if (!entry.hasOwnProperty("fileType")) { entry.fileType = "png"; }
+                var path = assets.textures.root + '/' + entry.id + '.' + entry.fileType;
+                if (!entry.hasOwnProperty("frameSize")) {
+                    game.load.image(entry.id, path);
+                } else {
+                    game.load.spritesheet(entry.id, path, entry.frameSize[0], entry.frameSize[1]);
+                }
+            });
+            assets.json.files.forEach((entry : JSONAssetEntry) : void => {
+                game.load.json(entry.id, assets.json.root + '/' + entry.id + '.json');
+            });
         }
 
         private create() : void {
@@ -74,8 +92,6 @@ namespace TurtleTime {
         debugPrintln(text : any) {
             this.debugText += "" + text + "\n";
         }
-
-        protected abstract preloadAssets(game : Phaser.Game) : void;
 
         protected abstract loadData(game : Phaser.Game) : GameData;
 

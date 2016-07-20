@@ -40,6 +40,48 @@
           "children": []
         }
       ]
+    },
+    {
+      "id": "foodItem",
+      "container": {
+        "anchor": [0, 0.5],
+        "position": ["$0", "$1"],
+        "size": ["200px", "50px"]
+      },
+      "appearance": { "normal": {} },
+      "children": [
+        {
+          "id": "icon",
+          "container": {
+            "anchor": [0, 0.5],
+            "position": ["0%", "50%"],
+            "size": ["50px", "50px"]
+          },
+          "appearance": {
+            "normal": {
+              "geometry": {}
+            }
+          },
+          "children": []
+        },
+        {
+          "id": "text",
+          "container": {
+            "anchor": [1, 0.5],
+            "position": ["100%", "50%"],
+            "size": ["100%-50px", "100%"]
+          },
+          "appearance": {
+            "normal": {
+              "text": {
+                "text": "$2",
+                "justify": "left"
+              }
+            }
+          },
+          "children": []
+        }
+      ]
     }
   ],
   "layout": {
@@ -173,32 +215,84 @@
             "appearance": { "normal": { "geometry": {} } },
             "children": [
               {
-                "id": "profile",
-                "template": {
-                  "id": "mainMenuButton",
-                  "subs": [ "25%", "25%", "profile" ]
-                }
+                "id": "mainMenu",
+                "container": {
+                  "anchor": [0.5, 0.5],
+                  "position": ["50%", "50%"],
+                  "size": ["100%", "100%"]
+                },
+                "appearance": { "normal": {} },
+                "visible": false,
+                "children": [
+                  {
+                    "id": "profile",
+                    "template": {
+                      "id": "mainMenuButton",
+                      "subs": [ "25%", "25%", "profile" ]
+                    }
+                  },
+                  {
+                    "id": "foodMenu",
+                    "template": {
+                      "id": "mainMenuButton",
+                      "subs": [ "75%", "25%", "menu" ]
+                    }
+                  },
+                  {
+                    "id": "turtles",
+                    "template": {
+                      "id": "mainMenuButton",
+                      "subs": [ "25%", "75%", "turtles" ]
+                    }
+                  },
+                  {
+                    "id": "settings",
+                    "template": {
+                      "id": "mainMenuButton",
+                      "subs": [ "75%", "75%", "settings" ]
+                    }
+                  }
+                ]
               },
               {
-                "id": "menu",
-                "template": {
-                  "id": "mainMenuButton",
-                  "subs": [ "75%", "25%", "menu" ]
-                }
-              },
-              {
-                "id": "turtles",
-                "template": {
-                  "id": "mainMenuButton",
-                  "subs": [ "25%", "75%", "turtles" ]
-                }
-              },
-              {
-                "id": "settings",
-                "template": {
-                  "id": "mainMenuButton",
-                  "subs": [ "75%", "75%", "settings" ]
-                }
+                "id": "foodMenu",
+                "container": {
+                  "anchor": [0.5, 0.5],
+                  "position": ["50%", "50%"],
+                  "size": ["100%", "100%"]
+                },
+                "appearance": { "normal": {} },
+                "visible": false,
+                "children": [
+                  {
+                    "id": "muffin",
+                    "template": {
+                      "id": "foodItem",
+                      "subs": [ "5%", "15%", "Muffin" ]
+                    }
+                  },
+                  {
+                    "id": "potato",
+                    "template": {
+                      "id": "foodItem",
+                      "subs": [ "5%", "35%", "Potato" ]
+                    }
+                  },
+                  {
+                    "id": "coffee",
+                    "template": {
+                      "id": "foodItem",
+                      "subs": [ "5%", "55%", "Coffee" ]
+                    }
+                  },
+                  {
+                    "id": "ketchup",
+                    "template": {
+                      "id": "foodItem",
+                      "subs": [ "5%", "75%", "Ketchup" ]
+                    }
+                  }
+                ]
               }
             ]
           }

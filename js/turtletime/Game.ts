@@ -6,32 +6,6 @@
 
 namespace TurtleTime {
     export class TurtleTimeGame extends GameEngine {
-        protected preloadAssets(game : Phaser.Game):void {
-            game.load.spritesheet('turtle', 'assets/textures/turtle.png', 45, 60);
-            game.load.spritesheet('tableandchair', 'assets/textures/tableandchair.png', 52, 52);
-            game.load.image('highlightCircle', 'assets/textures/highlightCircle.png');
-            game.load.image('tile', 'assets/textures/tile.png');
-            game.load.image('brick', 'assets/textures/brick.png');
-            game.load.image('brick_top', 'assets/textures/bricktop.png');
-            game.load.image('blackboard', 'assets/textures/blackboard.png');
-            game.load.image('aloe', 'assets/textures/aloe.png');
-            game.load.image('banana', 'assets/textures/banana.png');
-            game.load.image('grandson', 'assets/textures/grandson.png');
-            game.load.image('shadow', 'assets/textures/shadow.png');
-            game.load.image('speechBubble', 'assets/textures/speechbubble.png');
-            game.load.image('emoji-angry', 'assets/textures/emoji-angry.png');
-            game.load.image('emoji-coffee', 'assets/textures/emoji-coffee.png');
-            game.load.image('emoji-fork', 'assets/textures/emoji-fork.png');
-            game.load.image('emoji-heart', 'assets/textures/emoji-heart.png');
-            game.load.image('emoji-skull', 'assets/textures/emoji-skull.png');
-            game.load.image('emoji-smiley', 'assets/textures/emoji-smiley.png');
-            game.load.json('newUserData', 'assets/json/new_user_data.json');
-            game.load.json('emptyUserData', 'assets/json/empty_user_data.json');
-            game.load.json('turtleData', 'assets/json/turtles.json');
-            game.load.json('spriteData', 'assets/json/sprites.json');
-            game.load.json('uiData', 'assets/json/ui.json');
-        }
-
         protected loadData(game:Phaser.Game):GameData {
             return {
                 turtleData: ((json : any) : Map<string, TurtleData> => {
@@ -43,8 +17,8 @@ namespace TurtleTime {
                         }
                     }
                     return result;
-                })(game.cache.getJSON('turtleData')),
-                spriteSpecs: new SpriteData(game.cache.getJSON('spriteData')),
+                })(game.cache.getJSON('turtles')),
+                spriteSpecs: new SpriteData(game.cache.getJSON('sprites')),
                 roomScale: [32, 24],
                 maxRoomSize: new Point(12, 16),
                 screenSize: new Point(game.width, game.height)
@@ -59,7 +33,7 @@ namespace TurtleTime {
                     localStorage.removeItem('userData');
                 }
             }
-            var uiData : UIDataCollection = game.cache.getJSON('uiData');
+            var uiData : UIDataCollection = game.cache.getJSON('ui');
             if (checkGlobalOption('uiEdit')) {
                 userData = game.cache.getJSON('emptyUserData');
                 uiData = JSON.parse(localStorage.getItem('uiData'));

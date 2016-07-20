@@ -1,8 +1,7 @@
 {
   "turtle": {
     "greenie": {
-      "spriteID": "turtle",
-      "path": "turtle.png",
+      "spriteID": "turtle/turtle",
       "scale": 1.0,
       "dimensions": [1, 1],
       "anchor": [0.5, 0.8],
@@ -19,8 +18,7 @@
       ]
     },
     "greenie2": {
-      "spriteID": "turtle",
-      "path": "turtle.png",
+      "spriteID": "turtle/turtle",
       "scale": 1.0,
       "dimensions": [1, 1],
       "anchor": [0.5, 0.8],
@@ -39,8 +37,7 @@
   },
   "chair": {
     "chairBasic": {
-      "spriteID": "tableandchair",
-      "path": "tableandchair.png",
+      "spriteID": "decor/tableandchair",
       "scale": 1,
       "dimensions": [1, 1],
       "anchor": [0.5, 0.5],
@@ -49,8 +46,7 @@
   },
   "table": {
     "tableBasic": {
-      "spriteID": "tableandchair",
-      "path": "tableandchair.png",
+      "spriteID": "decor/tableandchair",
       "scale": 1,
       "dimensions": [2, 2],
       "anchor": [0.5, 0.5],
@@ -59,8 +55,7 @@
   },
   "door": {
     "doorBasic": {
-      "spriteID": "tableandchair",
-      "path": "tableandchair.png",
+      "spriteID": "decor/tableandchair",
       "scale": 1,
       "dimensions": [1, 1],
       "anchor": [0.5, 0.5],
@@ -69,8 +64,7 @@
   },
   "wallDecor": {
     "blackboard": {
-      "spriteID": "blackboard",
-      "path": "blackboard.png",
+      "spriteID": "decor/blackboard",
       "scale": 1,
       "dimensions": [2, 2],
       "anchor": [0.5, 0.25],
@@ -79,45 +73,33 @@
   },
   "food": {
     "aloe": {
-      "spriteID": "aloe",
-      "path": "aloe.png",
+      "spriteID": "food/aloe",
       "scale": 2,
       "dimensions": [1, 1],
       "anchor": [0.5, 0.75],
       "animations": [ { "name": "default", "frames": [ {"direction": "all", "frames": [0] } ] } ]
     },
     "banana": {
-      "spriteID": "banana",
-      "path": "banana.png",
+      "spriteID": "food/banana",
       "scale": 2,
       "dimensions": [1, 1],
       "anchor": [0.5, 0.5],
       "animations": [ { "name": "default", "frames": [ {"direction": "all", "frames": [0] } ] } ]
     },
     "grandson": {
-      "spriteID": "grandson",
-      "path": "grandson.png",
+      "spriteID": "food/grandson",
       "scale": 2,
       "dimensions": [1, 1],
       "anchor": [0.5, 0.5],
       "animations": [ { "name": "default", "frames": [ {"direction": "all", "frames": [0] } ] } ]
     }
   },
-  "ui": {
-    "menuButton": {
-      "spriteID": "grandson",
-      "path": "grandson.png",
-      "scale": 2,
-      "dimensions": [1, 1],
-      "anchor": [0.5, 0.5],
-      "animations": [ { "name": "default", "frames": [ {"direction": "all", "frames": [0] } ] } ]
-    }
-  },
+  "ui": {},
   "emoji": {
-    "angry": { "spriteID": "emoji-angry" },
-    "thirsty": { "spriteID": "emoji-coffee" },
-    "hungry": { "spriteID": "emoji-fork" },
-    "love": { "spriteID": "emoji-heart" },
-    "happy": { "spriteID": "emoji-smiley" }
+    "angry": { "spriteID": "emoji/angry" },
+    "thirsty": { "spriteID": "emoji/coffee" },
+    "hungry": { "spriteID": "emoji/fork" },
+    "love": { "spriteID": "emoji/heart" },
+    "happy": { "spriteID": "emoji/smiley" }
   }
 }

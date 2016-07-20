@@ -127,6 +127,15 @@ module TurtleTime {
         return globalOptions.includes(value);
     }
 
+    export function httpGet(url : string, callback : (response : string) => void) {
+        var oReq : XMLHttpRequest = new XMLHttpRequest();
+        oReq.onload = function () {
+            callback(oReq.response);
+        };
+        oReq.open("GET", url);
+        oReq.send();
+    }
+
     export function getRandomElement<T>(arr : Array<T>) : T {
         return arr[Math.floor(Math.random() * arr.length)];
     }

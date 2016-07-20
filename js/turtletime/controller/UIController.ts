@@ -14,22 +14,27 @@ module TurtleTime {
             this._writeState.uiInteractionModel.activeUIModel =
                 this._writeState.rootUI.getDeepestElementContaining(
                     this._readState.inputModel.inputX,
-                    this._readState.inputModel.inputY
+                    this._readState.inputModel.inputY,
+                    true
                 );
             
             // specific to turtle time
             var justPressed = this._readState.inputModel.justPressed;
             if (justPressed) {
                 var active:UIModel = this._writeState.uiInteractionModel.activeUIModel;
+                var root:UIModel = this._writeState.rootUI;
                 if (active.fullID == "menuButton") {
-                    var menu:UIModel = this._writeState.rootUI.getChild("menu");
-                    menu.visible = !menu.visible;
-                    this._writeState.rootUI.getChild("game").visible = !menu.visible;
+                    root.getChild("menu").visible = true;
+                    root.getChild("menu.body.mainMenu").visible = true;
+                    root.getChild("game").visible = false;
                 }
                 else if (active.fullID == "menu.exit") {
-                    var menu:UIModel = this._writeState.rootUI.getChild("menu");
-                    menu.visible = false;
-                    this._writeState.rootUI.getChild("game").visible = !menu.visible;
+                    root.getChild("menu").visible = false;
+                    root.getChild("game").visible = true;
+                }
+                else if (active.fullID == "menu.body.mainMenu.foodMenu.icon") {
+                    root.getChild("menu.body.mainMenu").visible = false;
+                    root.getChild("menu.body.foodMenu").visible = true;
                 }
             }
         }
