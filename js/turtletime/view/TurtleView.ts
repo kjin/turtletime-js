@@ -36,7 +36,7 @@ module TurtleTime {
         }
 
         enumerateGameObjects() : Array<PIXI.DisplayObject> {
-            return super.enumerateGameObjects().concat(this._highlightCircle);
+            return super.enumerateGameObjects().concat(this._highlightCircle, this._attentionBubble, this._emoji);
         }
     }
 }

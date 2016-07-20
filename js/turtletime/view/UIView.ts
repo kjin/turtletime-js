@@ -36,6 +36,8 @@ module TurtleTime {
                         fill: '#ffffff',
                         wordWrap: true
                     });
+                    this._text.align = this.model.appearance.normal.text.justify;
+                    this._text.boundsAlignH = this.model.appearance.normal.text.justify;
                     this._text.name = "" + (3100 - this._treeHeight);
                 }
                 if (this.model.appearance.normal.sprite != null) {

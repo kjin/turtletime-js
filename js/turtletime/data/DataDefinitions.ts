@@ -16,6 +16,11 @@ module TurtleTime {
         wallPattern: string
     }
 
+    export interface UITemplateData {
+        id: string,
+        subs?: Array<string>
+    }
+
     export interface UIContainerData {
         anchor: Array<number>,
         position: Array<string>,
@@ -29,7 +34,7 @@ module TurtleTime {
 
     export interface UITextData {
         text?: string,
-        justify?: Array<number>,
+        justify?: string,
         tint?: string
     }
 
@@ -55,7 +60,7 @@ module TurtleTime {
         container?: UIContainerData,
         appearance?: UIAppearanceCollectionData,
         children?: Array<UIData>,
-        template?: string
+        template?: UITemplateData
     }
 
     export interface UIDataCollection {

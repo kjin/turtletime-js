@@ -11,7 +11,8 @@ module TurtleTime {
             this._readState = {
                 inputState: gameState.inputState,
                 selectionModel: gameState.selectionModel,
-                roomModel: gameState.roomModel
+                roomModel: gameState.roomModel,
+                gameUI : gameState.uiModel.getChild("game")
             };
             this._writeState = {
                 selectionModel: gameState.selectionModel,
@@ -140,13 +141,15 @@ module TurtleTime {
         }
 
         update(dt : number) : void {
-            this._writeState.turtles.forEach(
-                (turtle : Turtle) : void => {
-                    this.processMovement(turtle);
-                    this.processInput(turtle);
-                    this.processEatingFood(turtle);
-                }
-            );
+            if (this._readState.gameUI.visible) {
+                this._writeState.turtles.forEach(
+                    (turtle:Turtle):void => {
+                        this.processMovement(turtle);
+                        this.processInput(turtle);
+                        this.processEatingFood(turtle);
+                    }
+                );
+            }
         }
     }
 }

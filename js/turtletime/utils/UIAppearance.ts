@@ -13,12 +13,12 @@ module TurtleTime {
     
     export class UIText {
         text : string;
-        justify : Point;
+        justify : string;
         tint : number;
         
         constructor(data : UITextData) {
             this.text = data.hasOwnProperty("text") ? data.text : "";
-            this.justify = data.hasOwnProperty("justify") ? new Point(data.justify[0], data.justify[1]) : new Point(0.5, 0.5);
+            this.justify = data.hasOwnProperty("justify") ? data.justify : "center";
             this.tint = data.hasOwnProperty("tint") ? parseInt(data.tint) : 0xFFFFFF;
         }
     }

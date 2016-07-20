@@ -4,22 +4,35 @@ module TurtleTime {
     import Rectangle = Phaser.Rectangle;
     export class UIModel extends VisibleModel {
         id : string;
+        fullID : string;
         container : UIContainer;
         children : Array<UIModel>;
         visible : boolean = true;
         appearance : UIAppearanceCollection;
 
-        constructor(data : UIData, templates : Map<string, UIData>) {
+        constructor(data : UIData, templates : Map<string, UIData>, parentFullID : string = null) {
             super();
             if (data.hasOwnProperty("template")) {
-                var template : UIData = templates.get(data.template);
-                data.container = template.container;
+                // do a deep copy of the whole template in order to substitute values
+                var rawTemplate : string = JSON.stringify(templates.get(data.template.id));
+                if (data.template.hasOwnProperty("subs")) {
+                    for (var i : number = 0; i < data.template.subs.length; i++) {
+                        rawTemplate = rawTemplate.replace(new RegExp("\\$" + i, "g"), data.template.subs[i]);
+                    }
+                }
+                var template : UIData = JSON.parse(rawTemplate);
                 data.children = template.children;
+                data.container = template.container;
                 data.appearance = template.appearance;
             }
             this.container = new UIContainer(data.container);
             this.id = data.id;
-            this.children = data.children.map((childData : UIData) : UIModel => new UIModel(childData, templates));
+            if (parentFullID == null) {
+                this.fullID = "";
+            } else {
+                this.fullID = parentFullID == "" ? data.id : parentFullID + "." + data.id;
+            }
+            this.children = data.children.map((childData : UIData) : UIModel => new UIModel(childData, templates, this.fullID));
             this.appearance = new UIAppearanceCollection(data.appearance);
             if (data.hasOwnProperty("visible")) {
                 this.visible = data["visible"];

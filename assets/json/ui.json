@@ -1,5 +1,47 @@
 {
-  "templates": [],
+  "templates": [
+    {
+      "id": "mainMenuButton",
+      "container": {
+        "anchor": [0.5, 0.5],
+        "position": ["$0", "$1"],
+        "size": ["25%", "25%"]
+      },
+      "appearance": { "normal": {} },
+      "children": [
+        {
+          "id": "icon",
+          "container": {
+            "anchor": [0.5, 0],
+            "position": ["50%", "0%"],
+            "size": ["64px", "64px"]
+          },
+          "appearance": {
+            "normal": {
+              "geometry": {}
+            }
+          },
+          "children": []
+        },
+        {
+          "id": "text",
+          "container": {
+            "anchor": [0.5, 1],
+            "position": ["50%", "100%"],
+            "size": ["100%", "100%-72px"]
+          },
+          "appearance": {
+            "normal": {
+              "text": {
+                "text": "$2"
+              }
+            }
+          },
+          "children": []
+        }
+      ]
+    }
+  ],
   "layout": {
     "id": "root",
     "container": {
@@ -9,6 +51,16 @@
     },
     "appearance": { "normal": {} },
     "children": [
+      {
+        "id": "game",
+        "container": {
+          "anchor": [0.5, 0.5],
+          "position": ["0%", "0%"],
+          "size": ["0%", "0%"]
+        },
+        "appearance": { "normal": {} },
+        "children": []
+      },
       {
         "id": "infobox",
         "container": {
@@ -49,7 +101,6 @@
               "normal": {
                 "text": {
                   "text": "",
-                  "justify": [0.0, 0.0],
                   "tint": "0xFFFFFF"
                 }
               }
@@ -93,7 +144,13 @@
               "position": ["5px", "5px"],
               "size": ["100%-45px", "30px"]
             },
-            "appearance": { "normal": {} },
+            "appearance": {
+              "normal": {
+                "text": {
+                  "text": "Main Menu"
+                }
+              }
+            },
             "children": []
           },
           {
@@ -103,7 +160,7 @@
               "position": ["100%", "0%"],
               "size": ["40px", "40px"]
             },
-            "appearance": { "normal": {} },
+            "appearance": { "normal": { "geometry": {} } },
             "children": []
           },
           {
@@ -113,131 +170,35 @@
               "position": ["0%", "100%"],
               "size": ["100%", "100%-40px"]
             },
-            "appearance": { "normal": {} },
+            "appearance": { "normal": { "geometry": {} } },
             "children": [
               {
                 "id": "profile",
-                "container": {
-                  "anchor": [0.5, 0.5],
-                  "position": ["25%", "25%"],
-                  "size": ["25%", "25%"]
-                },
-                "appearance": { "normal": {} },
-                "children": [
-                  {
-                    "id": "icon",
-                    "container": {
-                      "anchor": [0.5, 0],
-                      "position": ["50%", "0%"],
-                      "size": ["64px", "64px"]
-                    },
-                    "appearance": { "normal": {} },
-                    "children": []
-                  },
-                  {
-                    "id": "text",
-                    "container": {
-                      "anchor": [0.5, 1],
-                      "position": ["50%", "100%"],
-                      "size": ["100%", "100%-72px"]
-                    },
-                    "appearance": { "normal": {} },
-                    "children": []
-                  }
-                ]
+                "template": {
+                  "id": "mainMenuButton",
+                  "subs": [ "25%", "25%", "profile" ]
+                }
               },
               {
                 "id": "menu",
-                "container": {
-                  "anchor": [0.5, 0.5],
-                  "position": ["75%", "25%"],
-                  "size": ["25%", "25%"]
-                },
-                "appearance": { "normal": {} },
-                "children": [
-                  {
-                    "id": "icon",
-                    "container": {
-                      "anchor": [0.5, 0],
-                      "position": ["50%", "0%"],
-                      "size": ["64px", "64px"]
-                    },
-                    "appearance": { "normal": {} },
-                    "children": []
-                  },
-                  {
-                    "id": "text",
-                    "container": {
-                      "anchor": [0.5, 1],
-                      "position": ["50%", "100%"],
-                      "size": ["100%", "100%-72px"]
-                    },
-                    "appearance": { "normal": {} },
-                    "children": []
-                  }
-                ]
+                "template": {
+                  "id": "mainMenuButton",
+                  "subs": [ "75%", "25%", "menu" ]
+                }
               },
               {
                 "id": "turtles",
-                "container": {
-                  "anchor": [0.5, 0.5],
-                  "position": ["25%", "75%"],
-                  "size": ["25%", "25%"]
-                },
-                "appearance": { "normal": {} },
-                "children": [
-                  {
-                    "id": "icon",
-                    "container": {
-                      "anchor": [0.5, 0],
-                      "position": ["50%", "0%"],
-                      "size": ["64px", "64px"]
-                    },
-                    "appearance": { "normal": {} },
-                    "children": []
-                  },
-                  {
-                    "id": "text",
-                    "container": {
-                      "anchor": [0.5, 1],
-                      "position": ["50%", "100%"],
-                      "size": ["100%", "100%-72px"]
-                    },
-                    "appearance": { "normal": {} },
-                    "children": []
-                  }
-                ]
+                "template": {
+                  "id": "mainMenuButton",
+                  "subs": [ "25%", "75%", "turtles" ]
+                }
               },
               {
                 "id": "settings",
-                "container": {
-                  "anchor": [0.5, 0.5],
-                  "position": ["75%", "75%"],
-                  "size": ["25%", "25%"]
-                },
-                "appearance": { "normal": {} },
-                "children": [
-                  {
-                    "id": "icon",
-                    "container": {
-                      "anchor": [0.5, 0],
-                      "position": ["50%", "0%"],
-                      "size": ["64px", "64px"]
-                    },
-                    "appearance": { "normal": {} },
-                    "children": []
-                  },
-                  {
-                    "id": "text",
-                    "container": {
-                      "anchor": [0.5, 1],
-                      "position": ["50%", "100%"],
-                      "size": ["100%", "100%-72px"]
-                    },
-                    "appearance": { "normal": {} },
-                    "children": []
-                  }
-                ]
+                "template": {
+                  "id": "mainMenuButton",
+                  "subs": [ "75%", "75%", "settings" ]
+                }
               }
             ]
           }
