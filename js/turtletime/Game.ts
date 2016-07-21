@@ -19,7 +19,7 @@ namespace TurtleTime {
                     return result;
                 })(game.cache.getJSON('turtles')),
                 spriteSpecs: new SpriteData(game.cache.getJSON('sprites')),
-                roomScale: [32, 24],
+                roomScale: [32, 32],
                 maxRoomSize: new Point(12, 16),
                 screenSize: new Point(game.width, game.height)
             };
@@ -71,7 +71,8 @@ namespace TurtleTime {
                     new InputController(),
                     new TurtleSpawnController(),
                     new DragController(),
-                    new UIController()
+                    new UIController(),
+                    new FoodSpawnController()
                 ];
             }
         }

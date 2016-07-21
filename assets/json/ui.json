@@ -82,6 +82,38 @@
           "children": []
         }
       ]
+    },
+    {
+      "id": "foodMenu",
+      "container": {
+        "anchor": [0, 0],
+        "position": ["0%", "0%"],
+        "size": ["100%", "100%"]
+      },
+      "appearance": { "normal": {} },
+      "children": [
+        {
+          "id": "aloe",
+          "template": {
+            "id": "foodItem",
+            "subs": [ "5%", "15%", "aloe" ]
+          }
+        },
+        {
+          "id": "banana",
+          "template": {
+            "id": "foodItem",
+            "subs": [ "5%", "35%", "banana" ]
+          }
+        },
+        {
+          "id": "grandson",
+          "template": {
+            "id": "foodItem",
+            "subs": [ "5%", "55%", "Grandson" ]
+          }
+        }
+      ]
     }
   ],
   "layout": {
@@ -93,64 +125,6 @@
     },
     "appearance": { "normal": {} },
     "children": [
-      {
-        "id": "game",
-        "container": {
-          "anchor": [0.5, 0.5],
-          "position": ["0%", "0%"],
-          "size": ["0%", "0%"]
-        },
-        "appearance": { "normal": {} },
-        "children": []
-      },
-      {
-        "id": "infobox",
-        "container": {
-          "anchor": [0.5, 1.0],
-          "position": ["50%", "100%"],
-          "size": ["100%", "20%"],
-          "maxSizePixels": [600, 150]
-        },
-        "appearance": {
-          "normal": {
-            "geometry": {}
-          }
-        },
-        "visible": false,
-        "children": [
-          {
-            "id": "picture",
-            "container": {
-              "anchor": [0.0, 0.0],
-              "position": ["0%", "0%"],
-              "size": ["100px", "100%"]
-            },
-            "appearance": {
-              "normal": {
-                "geometry": {}
-              }
-            },
-            "children": []
-          },
-          {
-            "id": "text",
-            "container": {
-              "anchor": [0.0, 0.0],
-              "position": ["100px", "0%"],
-              "size": ["100%-100px", "100%"]
-            },
-            "appearance": {
-              "normal": {
-                "text": {
-                  "text": "",
-                  "tint": "0xFFFFFF"
-                }
-              }
-            },
-            "children": []
-          }
-        ]
-      },
       {
         "id": "menuButton",
         "container": {
@@ -182,9 +156,9 @@
           {
             "id": "header",
             "container": {
-              "anchor": [0, 0],
-              "position": ["5px", "5px"],
-              "size": ["100%-45px", "30px"]
+              "anchor": [0.5, 0],
+              "position": ["50%", "5px"],
+              "size": ["100%-100px", "30px"]
             },
             "appearance": {
               "normal": {
@@ -196,10 +170,20 @@
             "children": []
           },
           {
-            "id": "exit",
+            "id": "exitButton",
             "container": {
               "anchor": [1, 0],
               "position": ["100%", "0%"],
+              "size": ["40px", "40px"]
+            },
+            "appearance": { "normal": { "geometry": {} } },
+            "children": []
+          },
+          {
+            "id": "backButton",
+            "container": {
+              "anchor": [0, 0],
+              "position": ["0%", "0%"],
               "size": ["40px", "40px"]
             },
             "appearance": { "normal": { "geometry": {} } },
@@ -256,43 +240,93 @@
               },
               {
                 "id": "foodMenu",
-                "container": {
-                  "anchor": [0.5, 0.5],
-                  "position": ["50%", "50%"],
-                  "size": ["100%", "100%"]
+                "template": {
+                  "id": "foodMenu"
                 },
-                "appearance": { "normal": {} },
-                "visible": false,
-                "children": [
-                  {
-                    "id": "muffin",
-                    "template": {
-                      "id": "foodItem",
-                      "subs": [ "5%", "15%", "Muffin" ]
-                    }
-                  },
-                  {
-                    "id": "potato",
-                    "template": {
-                      "id": "foodItem",
-                      "subs": [ "5%", "35%", "Potato" ]
-                    }
-                  },
-                  {
-                    "id": "coffee",
-                    "template": {
-                      "id": "foodItem",
-                      "subs": [ "5%", "55%", "Coffee" ]
-                    }
-                  },
-                  {
-                    "id": "ketchup",
-                    "template": {
-                      "id": "foodItem",
-                      "subs": [ "5%", "75%", "Ketchup" ]
+                "visible": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "game",
+        "container": {
+          "anchor": [0, 0],
+          "position": ["0%", "0%"],
+          "size": ["100%", "100%"]
+        },
+        "appearance": { "normal": {} },
+        "children": [
+          {
+            "id": "foodMenuContainer",
+            "container": {
+              "anchor": [0.5, 0.0],
+              "position": ["50%", "10px"],
+              "size": ["100%-20px", "40%"],
+              "maxSizePixels": [600, 10000]
+            },
+            "appearance": {
+              "normal": {
+                "geometry": {}
+              }
+            },
+            "visible": false,
+            "children": [
+              {
+                "id": "foodMenu",
+                "template": {
+                  "id": "foodMenu"
+                }
+              }
+            ]
+          },
+          {
+            "id": "infobox",
+            "container": {
+              "anchor": [0.5, 1.0],
+              "position": ["50%", "100%"],
+              "size": ["100%", "20%"],
+              "maxSizePixels": [600, 150]
+            },
+            "appearance": {
+              "normal": {
+                "geometry": {}
+              }
+            },
+            "visible": false,
+            "children": [
+              {
+                "id": "picture",
+                "container": {
+                  "anchor": [0.0, 0.0],
+                  "position": ["0%", "0%"],
+                  "size": ["100px", "100%"]
+                },
+                "appearance": {
+                  "normal": {
+                    "geometry": {}
+                  }
+                },
+                "children": []
+              },
+              {
+                "id": "text",
+                "container": {
+                  "anchor": [0.0, 0.0],
+                  "position": ["100px", "0%"],
+                  "size": ["100%-100px", "100%"]
+                },
+                "appearance": {
+                  "normal": {
+                    "text": {
+                      "text": "",
+                      "justify": "left",
+                      "tint": "0xFFFFFF"
                     }
                   }
-                ]
+                },
+                "children": []
               }
             ]
           }

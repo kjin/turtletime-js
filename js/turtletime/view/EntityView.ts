@@ -18,10 +18,10 @@ module TurtleTime {
             this._mainSprite.reset(model.spriteSpecs);
             this._width = this._mainSprite.width;
             this._height = this._mainSprite.height;
-            this._shadow = GAME_ENGINE.game.add.sprite(0, 0, 'shadow');
-            this._shadow.scale.x = this.model.dimensions.x * this._mainSprite.width / GAME_ENGINE.globalData.roomScale[0] / 2;
-            this._shadow.scale.y = this.model.dimensions.y * this._mainSprite.height / GAME_ENGINE.globalData.roomScale[0] / 2;
-            this._shadow.anchor = new Point(0.5, 0.25);
+            this._shadow = GAME_ENGINE.game.add.sprite(0, 0, 'core/shadow');
+            this._shadow.scale.x = (this._mainSprite.width) / this._shadow.width;
+            this._shadow.scale.y = this._mainSprite.height / this._shadow.height;
+            this._shadow.anchor = new Point(this._mainSprite.anchorX, this._mainSprite.anchorY);
             if (this.model.getEntityClass() == EntityType.WallDecor) {
                 this._shadow.visible = false;
             }
@@ -53,7 +53,7 @@ module TurtleTime {
             this._mainSprite.y = screenPos.y;
             this._mainSprite.animation = this.model.animationString;
             this._shadow.x = screenPos.x;
-            this._shadow.y = screenPos.y;
+            this._shadow.y = screenPos.y + 4;
             setTintAndAlpha(this._shadow, 0x00000033);
             // sort values
             var sortValue : number = (10000 + this.model.position.y) * 100 + this.model.getEntityClass() * 10;

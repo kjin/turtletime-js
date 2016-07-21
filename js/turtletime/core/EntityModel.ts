@@ -30,8 +30,9 @@ module TurtleTime {
                 .getSpriteSpecs(EntityType.toString(this.getEntityClass()), entityData.appearanceID);
             // set default specs in case they're not filled in
             if (!this.spriteSpecs.hasOwnProperty("anchor")) { this.spriteSpecs.anchor = [0.5, 0.5]; }
-            if (!this.spriteSpecs.hasOwnProperty("anchor")) { this.spriteSpecs.dimensions = [1, 1]; }
+            if (!this.spriteSpecs.hasOwnProperty("dimensions")) { this.spriteSpecs.dimensions = [1, 1]; }
             if (!this.spriteSpecs.hasOwnProperty("scale")) { this.spriteSpecs.scale = 1; }
+            if (!this.spriteSpecs.hasOwnProperty("tint")) { this.spriteSpecs.tint = "0xFFFFFF"; }
             if (!this.spriteSpecs.hasOwnProperty("animations")) { this.spriteSpecs.animations = [ { name: "default",  frames: [ { direction: "all",  frames: [0] } ] } ]; }
             this.dimensions = new Point(this.spriteSpecs.dimensions[0], this.spriteSpecs.dimensions[1]);
             this.appearanceID = entityData.appearanceID;

@@ -17,7 +17,10 @@ module TurtleTime {
             this._writeState = {
                 selectionModel: gameState.selectionModel,
                 cameraModel: gameState.cameraModel,
-                infoboxModel: gameState.uiModel.getChild("infobox"),
+                gameUIModel: gameState.uiModel.getChild("game"),
+                infoboxModel: gameState.uiModel.getChild("game.infobox"),
+                foodMenuModel: gameState.uiModel.getChild("game.foodMenuContainer"),
+                uiInteractionModel : gameState.uiInteractionModel,
                 turtles: gameState.entities.turtles,
                 food : gameState.entities.food
             };
@@ -87,6 +90,9 @@ module TurtleTime {
 
         private processInput(turtle : Turtle) : void {
             var inputState : InputModel = this._readState.inputState;
+            if (!this._writeState.uiInteractionModel.mouseOver(this._writeState.gameUIModel)) {
+                return;
+            }
             if (this._writeState.selectionModel.isBeingDragged) {
                 return;
             } else if (this._writeState.selectionModel.entity == turtle) {
@@ -117,6 +123,9 @@ module TurtleTime {
                             "Dislikes: " + turtleData.dislikes;
                     })();
                     this._writeState.infoboxModel.visible = true;
+                    if (turtle.chair != null) {
+                        this._writeState.foodMenuModel.visible = true;
+                    }
                 }
             }
             // conditions for deselection
@@ -126,6 +135,7 @@ module TurtleTime {
                 this._writeState.cameraModel.popTarget();
                 this._writeState.selectionModel.entity = null;
                 this._writeState.infoboxModel.visible = false;
+                this._writeState.foodMenuModel.visible = false;
                 this._writeState.infoboxModel.getChild("text").appearance.normal.text.text = "";
             }
         }

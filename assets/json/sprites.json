@@ -37,11 +37,27 @@
   },
   "chair": {
     "chairBasic": {
-      "spriteID": "decor/tableandchair",
-      "scale": 1,
+      "spriteID": "decor/chair",
+      "scale": 2,
       "dimensions": [1, 1],
       "anchor": [0.5, 0.5],
-      "animations": [ { "name": "default", "frames": [ {"direction": "all", "frames": [1] } ] } ]
+      "animations": [ { "name": "default", "frames": [ {"direction": "right", "frames": [0] } ] } ]
+    },
+    "pinkCouch": {
+      "spriteID": "decor/couch",
+      "scale": 2,
+      "dimensions": [4, 1],
+      "anchor": [0.5, 0.8],
+      "tint": "0xFFCCCC",
+      "animations": [ { "name": "default", "frames": [ {"direction": "up", "frames": [0] }, {"direction": "down", "frames": [1] } ] } ]
+    },
+    "greenCouch": {
+      "spriteID": "decor/couch",
+      "scale": 2,
+      "dimensions": [4, 1],
+      "anchor": [0.5, 0.8],
+      "tint": "0x99FF99",
+      "animations": [ { "name": "default", "frames": [ {"direction": "up", "frames": [0] }, {"direction": "down", "frames": [1] } ] } ]
     }
   },
   "table": {
@@ -97,9 +113,10 @@
   "ui": {},
   "emoji": {
     "angry": { "spriteID": "emoji/angry" },
-    "thirsty": { "spriteID": "emoji/coffee" },
-    "hungry": { "spriteID": "emoji/fork" },
-    "love": { "spriteID": "emoji/heart" },
-    "happy": { "spriteID": "emoji/smiley" }
+    "coffee": { "spriteID": "emoji/coffee" },
+    "fork": { "spriteID": "emoji/fork" },
+    "heart": { "spriteID": "emoji/heart" },
+    "smiley": { "spriteID": "emoji/smiley" },
+    "skull": { "spriteID": "emoji/skull" }
   }
 }

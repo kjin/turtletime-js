@@ -4,8 +4,13 @@
 module TurtleTime {
     // A helper class
     import Sprite = Phaser.Sprite;
+    export enum MirrorDirection {
+        None, Left, Right
+    }
+
     export class EntitySpriteWrapper {
         private _sprite : Sprite;
+        private _mirror : MirrorDirection = MirrorDirection.None;
 
         constructor() {
             this._sprite = GAME_ENGINE.game.add.sprite(0, 0);
@@ -15,12 +20,21 @@ module TurtleTime {
             this._sprite.loadTexture(specs.spriteID);
             this._sprite.anchor = new Point(specs.anchor[0], specs.anchor[1]);
             this._sprite.scale = new Point(specs.scale, specs.scale);
+            this._sprite.tint = parseInt(specs.tint);
+            this._mirror = MirrorDirection.None;
             // add animations
             specs.animations.forEach((animation : SpriteAnimation) : void => {
                 animation.frames.forEach((frameData : SpriteDirectionalFrameData) : void => {
                     var numericalDirection : Direction = Direction.getDirection(frameData.direction);
-                    if (numericalDirection & Direction.Left) { this._sprite.animations.add('left-' + animation.name, frameData.frames); }
-                    if (numericalDirection & Direction.Right) { this._sprite.animations.add('right-' + animation.name, frameData.frames); }
+                    if (numericalDirection & Direction.Left || numericalDirection & Direction.Right) {
+                        this._sprite.animations.add('left-' + animation.name, frameData.frames);
+                        this._sprite.animations.add('right-' + animation.name, frameData.frames);
+                        if (!(numericalDirection & Direction.Right)) {
+                            this._mirror = MirrorDirection.Right;
+                        } else if (!(numericalDirection & Direction.Left)) {
+                            this._mirror = MirrorDirection.Left;
+                        }
+                    }
                     if (numericalDirection & Direction.Up) { this._sprite.animations.add('up-' + animation.name, frameData.frames); }
                     if (numericalDirection & Direction.Down) { this._sprite.animations.add('down-' + animation.name, frameData.frames); }
                 });
@@ -84,6 +98,12 @@ module TurtleTime {
         }
 
         set animation(value : string) {
+            if (value.startsWith("left") && this._mirror == MirrorDirection.Left ||
+                value.startsWith("right") && this._mirror == MirrorDirection.Right) {
+                this._sprite.scale.x = -Math.abs(this._sprite.scale.x);
+            } else {
+                this._sprite.scale.x = Math.abs(this._sprite.scale.x);
+            }
             this._sprite.play(value);
         }
 

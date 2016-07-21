@@ -6,21 +6,18 @@ module TurtleTime {
     class UIViewNode extends View<UIModel> {
         screenDimensions : Rectangle;
         children : Array<UIViewNode>;
+        private _graphics : Graphics;
         private _text : Phaser.Text;
         private _sprite : EntitySpriteWrapper;
         private _editMode : boolean;
-        protected _treeHeight : number;
+        protected _level : number;
 
-        constructor(model : UIModel) {
+        constructor(model : UIModel, level : number = 0) {
             super(model);
             this._editMode = checkGlobalOption('uiEdit');
             this.screenDimensions = new Rectangle(0, 0, 0, 0);
-            this.children = model.children.map((childData : UIModel) : UIViewNode => new UIViewNode(childData));
-            if (this.children.length > 0) {
-                this._treeHeight = this.children[0]._treeHeight + 1;
-            } else {
-                this._treeHeight = 0;
-            }
+            this._level = level;
+            this.children = model.children.map((childData : UIModel) : UIViewNode => new UIViewNode(childData, level + 1));
             if (this._editMode) {
                 this._text = GAME_ENGINE.game.add.text(0, 0, "", {
                     font: 'Courier New',
@@ -28,6 +25,7 @@ module TurtleTime {
                     fill: '#ffffff',
                     wordWrap: true
                 });
+                this._graphics = GAME_ENGINE.game.add.graphics(0, 0);
             } else {
                 if (this.model.appearance.normal.text != null) {
                     this._text = GAME_ENGINE.game.add.text(0, 0, this.model.appearance.normal.text.text, {
@@ -38,12 +36,16 @@ module TurtleTime {
                     });
                     this._text.align = this.model.appearance.normal.text.justify;
                     this._text.boundsAlignH = this.model.appearance.normal.text.justify;
-                    this._text.name = "" + (3100 - this._treeHeight);
+                    this._text.name = "" + (100 + this._level * 10 + 3);
                 }
                 if (this.model.appearance.normal.sprite != null) {
                     this._sprite = new EntitySpriteWrapper();
                     this._sprite.reset(GAME_ENGINE.globalData.spriteSpecs.getSpriteSpecs("ui", this.model.appearance.normal.sprite.spriteID));
-                    this._sprite.underlyingSprite.name = "" + (2100 - this._treeHeight);
+                    this._sprite.underlyingSprite.name = "" + (100 + this._level * 10 + 2);
+                }
+                if (this.model.appearance.normal.geometry != null) {
+                    this._graphics = GAME_ENGINE.game.add.graphics(0, 0);
+                    this._graphics.name = "" + (100 + this._level * 10 + 1);
                 }
             }
         }
@@ -64,21 +66,22 @@ module TurtleTime {
             return this.screenDimensions.contains(x, y);
         }
 
-        draw(graphics : Graphics, interactionModel : UIInteractionModel, parentVisible : boolean = true):void {
+        draw(interactionModel : UIInteractionModel, parentVisible : boolean = true):void {
             if (this._editMode) {
-                graphics.lineStyle(2, 0xffffff, 1.0);
+                this._graphics.clear();
+                this._graphics.lineStyle(2, 0xffffff, 1.0);
                 if (interactionModel.mouseOver(this.model)) {
                     this._text.text = this.model.id;
-                    graphics.beginFill(0xff0000, 0.2);
+                    this._graphics.beginFill(0xff0000, 0.2);
                 } else if (this.model.visible && parentVisible) {
                     this._text.text = "";
-                    graphics.beginFill(0xffffff, 0.05);
+                    this._graphics.beginFill(0xffffff, 0.05);
                 } else {
-                    graphics.lineStyle(1, 0xffffff, 0.5);
-                    graphics.beginFill(0x000000, 0.05);
+                    this._graphics.lineStyle(1, 0xffffff, 0.5);
+                    this._graphics.beginFill(0x000000, 0.05);
                 }
-                graphics.drawRect(this.screenDimensions.x, this.screenDimensions.y, this.screenDimensions.width, this.screenDimensions.height);
-                graphics.endFill();
+                this._graphics.drawRect(this.screenDimensions.x, this.screenDimensions.y, this.screenDimensions.width, this.screenDimensions.height);
+                this._graphics.endFill();
             } else {
                 if (this.model.appearance.normal.text != null) {
                     this._text.visible = parentVisible && this.model.visible;
@@ -89,19 +92,22 @@ module TurtleTime {
                     this._sprite.visible = parentVisible && this.model.visible;
                     this._sprite.tint = this.model.appearance.normal.sprite.tint;
                 }
-                if (this.model.appearance.normal.geometry != null && parentVisible && this.model.visible) {
-                    var geometry : UIGeometry = this.model.appearance.normal.geometry;
-                    graphics.lineStyle(geometry.lineWeight, geometry.lineColor, 1.0);
-                    graphics.beginFill(geometry.fillColor, 1.0);
-                    if (geometry.cornerRadius == 0) {
-                        graphics.drawRect(this.screenDimensions.x, this.screenDimensions.y, this.screenDimensions.width, this.screenDimensions.height);
-                    } else {
-                        graphics.drawRoundedRect(this.screenDimensions.x, this.screenDimensions.y, this.screenDimensions.width, this.screenDimensions.height, geometry.cornerRadius);
+                if (this.model.appearance.normal.geometry != null) {
+                    this._graphics.clear();
+                    if (parentVisible && this.model.visible) {
+                        var geometry:UIGeometry = this.model.appearance.normal.geometry;
+                        this._graphics.lineStyle(geometry.lineWeight, geometry.lineColor, 1.0);
+                        this._graphics.beginFill(geometry.fillColor, 1.0);
+                        if (geometry.cornerRadius == 0) {
+                            this._graphics.drawRect(this.screenDimensions.x, this.screenDimensions.y, this.screenDimensions.width, this.screenDimensions.height);
+                        } else {
+                            this._graphics.drawRoundedRect(this.screenDimensions.x, this.screenDimensions.y, this.screenDimensions.width, this.screenDimensions.height, geometry.cornerRadius);
+                        }
+                        this._graphics.endFill();
                     }
-                    graphics.endFill();
                 }
             }
-            this.children.forEach((child : UIViewNode) : void => child.draw(graphics, interactionModel, this.model.visible && parentVisible));
+            this.children.forEach((child : UIViewNode) : void => child.draw(interactionModel, this.model.visible && parentVisible));
         }
 
         update():void {
@@ -110,9 +116,13 @@ module TurtleTime {
         enumerateGameObjects():Array<PIXI.DisplayObject> {
             var result : Array<PIXI.DisplayObject> = [];
             if (this._text != null) {
-                result = [ this._text ];
-            } else if (this._sprite != null) {
-                result = [ this._sprite.underlyingSprite ];
+                result.push(this._text);
+            }
+            if (this._sprite != null) {
+                result.push(this._sprite.underlyingSprite);
+            }
+            if (this._graphics != null) {
+                result.push(this._graphics);
             }
             // I hate this code why did it take me so much time to write this
             this.children.map((child : UIViewNode) : Array<PIXI.DisplayObject> => child.enumerateGameObjects())
@@ -123,7 +133,6 @@ module TurtleTime {
     }
 
     export class UIView extends BaseView {
-        private _graphics : Graphics;
         private _rootNode : UIViewNode;
         private _editMode : boolean;
         private _interactionModel : UIInteractionModel;
@@ -131,8 +140,6 @@ module TurtleTime {
         constructor(model : UIModel, interactionModel : UIInteractionModel) {
             super();
             this._interactionModel = interactionModel;
-            this._graphics = GAME_ENGINE.game.add.graphics(0, 0);
-            this._graphics.name = "1000";
             this._rootNode = new UIViewNode(model);
             this._rootNode.assignScreenDimensions(
                 new Rectangle(0, 0, GAME_ENGINE.globalData.screenSize.x, GAME_ENGINE.globalData.screenSize.y));
@@ -140,8 +147,7 @@ module TurtleTime {
         }
 
         update():void {
-            this._graphics.clear();
-            this._rootNode.draw(this._graphics, this._interactionModel);
+            this._rootNode.draw(this._interactionModel);
         }
 
         contains(x:number, y:number):boolean {
@@ -153,7 +159,7 @@ module TurtleTime {
         }
 
         enumerateGameObjects():Array<PIXI.DisplayObject> {
-            return this._rootNode.enumerateGameObjects().concat(this._graphics);
+            return this._rootNode.enumerateGameObjects();
         }
 
         onResizeViewport(oldWidth : number, oldHeight : number, newWidth : number, newHeight : number):void {

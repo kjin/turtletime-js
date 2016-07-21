@@ -15,6 +15,7 @@ module TurtleTime {
             this.currentStatus = 'normal';
             this.intermediateTargetPosition = new Point(this.position.x, this.position.y);
             this.targetPosition = new Point(entityData.additionalData.targetPosition[0], entityData.additionalData.targetPosition[1]);
+            // this.mood =
             this.sleep = 0;
         }
 
@@ -23,6 +24,7 @@ module TurtleTime {
         getAdditionalData() : any {
             return {
                 targetPosition: [this.targetPosition.x, this.targetPosition.y]
+                // mood: this.mood
             };
         }
     }

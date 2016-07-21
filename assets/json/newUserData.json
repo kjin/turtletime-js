@@ -18,7 +18,9 @@
       { "position": [4, 9], "direction": "right", "appearanceID": "chairBasic", "actionStatus": "default", "additionalData": {} },
       { "position": [7, 9], "direction": "left", "appearanceID": "chairBasic", "actionStatus": "default", "additionalData": {} },
       { "position": [11, 9], "direction": "right", "appearanceID": "chairBasic", "actionStatus": "default", "additionalData": {} },
-      { "position": [14, 9], "direction": "left", "appearanceID": "chairBasic", "actionStatus": "default", "additionalData": {} }
+      { "position": [14, 9], "direction": "left", "appearanceID": "chairBasic", "actionStatus": "default", "additionalData": {} },
+      { "position": [0, 0], "direction": "down", "appearanceID": "pinkCouch", "actionStatus": "default", "additionalData": {} },
+      { "position": [14, 15], "direction": "up", "appearanceID": "greenCouch", "actionStatus": "default", "additionalData": {} }
     ],
     "tables": [
       { "position": [5, 8], "direction": "down", "appearanceID": "tableBasic", "actionStatus": "default", "additionalData": {} },
@@ -38,7 +40,7 @@
     ]
   },
   "room": {
-    "size": [24, 16],
+    "size": [20, 16],
     "wallHeight": 2,
     "floorPattern": "tile",
     "wallPattern": "brick"

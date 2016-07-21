@@ -13,7 +13,8 @@ module TurtleTime {
         spriteID : string,
         scale? : number,
         dimensions? : Array<number>,
-        anchor?: Array<number>,
+        anchor? : Array<number>,
+        tint? : string,
         animations? : Array<SpriteAnimation>
     }
 
