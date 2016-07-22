@@ -3,6 +3,7 @@ module TurtleTime {
     export class TurtleView extends EntityView {
         private _highlightCircle : Sprite;
         private _attentionBubble : Sprite;
+        private _currentMood : string;
         private _emoji : Sprite;
         private _attentionTriangle : (x : number) => number;
 
@@ -14,7 +15,8 @@ module TurtleTime {
             this._attentionBubble.anchor = new Point(0.5, 1);
             this._attentionBubble.scale.x = 2;
             this._attentionBubble.scale.y = 2;
-            this._emoji = GAME_ENGINE.game.add.sprite(0, 0, 'emoji/angry');
+            this._currentMood = (<Turtle>this.model).mood;
+            this._emoji = GAME_ENGINE.game.add.sprite(0, 0, GAME_ENGINE.globalData.spriteSpecs.getSpriteSpecs('emoji', this._currentMood).spriteID);
             this._emoji.anchor = new Point(0.5, 0.5);
             this._emoji.scale.x = 2;
             this._emoji.scale.y = 2;
@@ -33,6 +35,10 @@ module TurtleTime {
             this._emoji.x = this._attentionBubble.x;
             this._emoji.y = this._attentionBubble.y - 19;
             this._emoji.name = "" + (sortValue + 1);
+            if ((<Turtle>this.model).mood != this._currentMood) {
+                this._currentMood = (<Turtle>this.model).mood;
+                this._emoji.loadTexture(GAME_ENGINE.globalData.spriteSpecs.getSpriteSpecs('emoji', this._currentMood).spriteID);
+            }
         }
 
         enumerateGameObjects() : Array<PIXI.DisplayObject> {

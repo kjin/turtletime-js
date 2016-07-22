@@ -116,7 +116,7 @@
     "coffee": { "spriteID": "emoji/coffee" },
     "fork": { "spriteID": "emoji/fork" },
     "heart": { "spriteID": "emoji/heart" },
-    "smiley": { "spriteID": "emoji/smiley" },
+    "happy": { "spriteID": "emoji/smiley" },
     "skull": { "spriteID": "emoji/skull" }
   }
 }

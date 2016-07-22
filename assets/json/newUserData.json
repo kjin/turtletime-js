@@ -1,8 +1,8 @@
 {
   "cafeState": {
     "turtles": [
-      { "position": [5, 6], "direction": "down", "appearanceID": "greenie", "actionStatus": "stand", "additionalData": { "targetPosition": [5, 6] } },
-      { "position": [3, 6], "direction": "down", "appearanceID": "greenie2", "actionStatus": "stand", "additionalData": { "targetPosition": [7, 6] } }
+      { "position": [5, 6], "direction": "down", "appearanceID": "greenie", "actionStatus": "stand", "additionalData": { "targetPosition": [5, 6], "mood": "happy" } },
+      { "position": [3, 6], "direction": "down", "appearanceID": "greenie2", "actionStatus": "stand", "additionalData": { "targetPosition": [3, 10], "mood": "angry" } }
     ],
     "chairs": [
       { "position": [0, 15], "direction": "up", "appearanceID": "chairBasic", "actionStatus": "default", "additionalData": {} },

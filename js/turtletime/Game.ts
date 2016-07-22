@@ -72,7 +72,8 @@ namespace TurtleTime {
                     new TurtleSpawnController(),
                     new DragController(),
                     new UIController(),
-                    new FoodSpawnController()
+                    new FoodSpawnController(),
+                    new InGameUIController()
                 ];
             }
         }
