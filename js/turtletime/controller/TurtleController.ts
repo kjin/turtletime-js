@@ -143,6 +143,12 @@ module TurtleTime {
                 if (turtle.chair.food.hp == 0) {
                     this._writeState.food.remove(turtle.chair.food);
                     turtle.chair.food = null;
+                    turtle.mood.setMoodLevel("fork", 0);
+                    turtle.mood.incrementMoodLevel("happy", 1);
+                }
+            } else {
+                if (Math.random() <= 0.01) {
+                    turtle.mood.incrementMoodLevel("fork", 1);
                 }
             }
         }

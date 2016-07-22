@@ -25,7 +25,7 @@ module TurtleTime {
                         appearanceID: this._writeState.uiInteractionModel.currentFood,
                         actionStatus: "default",
                         additionalData: {
-                            hp: 1000
+                            hp: 100
                         }
                     });
                     this._writeState.uiInteractionModel.currentFood = null;
