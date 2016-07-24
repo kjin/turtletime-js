@@ -7,4 +7,18 @@ module TurtleTime {
 
         abstract update(dt : number) : void;
     }
+
+    export abstract class QuickController<T> extends Controller<T> {
+        private _gameState : T;
+
+        initialize(gameState : T) : void {
+            this._gameState = gameState;
+        }
+
+        update(dt : number) : void {
+            this.updateInternal(this._gameState, dt);
+        }
+
+        protected abstract updateInternal(gameState : T, dt : number) : void;
+    }
 }

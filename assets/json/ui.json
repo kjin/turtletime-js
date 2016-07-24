@@ -126,6 +126,107 @@
     "appearance": { "normal": {} },
     "children": [
       {
+        "id": "game",
+        "container": {
+          "anchor": [0, 0],
+          "position": ["0%", "0%"],
+          "size": ["100%", "100%"]
+        },
+        "appearance": { "normal": {} },
+        "children": [
+          {
+            "id": "foodMenuContainer",
+            "container": {
+              "anchor": [0.5, 0.0],
+              "position": ["50%", "10px"],
+              "size": ["100%-20px", "40%"],
+              "maxSizePixels": [600, 10000]
+            },
+            "appearance": {
+              "normal": {
+                "geometry": {}
+              }
+            },
+            "visible": false,
+            "children": [
+              {
+                "id": "foodMenu",
+                "template": {
+                  "id": "foodMenu"
+                }
+              }
+            ]
+          },
+          {
+            "id": "infobox",
+            "container": {
+              "anchor": [0.5, 1.0],
+              "position": ["50%", "100%"],
+              "size": ["100%", "20%"],
+              "maxSizePixels": [600, 150]
+            },
+            "appearance": {
+              "normal": {
+                "geometry": {}
+              }
+            },
+            "visible": false,
+            "children": [
+              {
+                "id": "picture",
+                "container": {
+                  "anchor": [0.0, 0.0],
+                  "position": ["0%", "0%"],
+                  "size": ["100px", "100%"]
+                },
+                "appearance": {
+                  "normal": {
+                    "geometry": {}
+                  }
+                },
+                "children": []
+              },
+              {
+                "id": "text",
+                "container": {
+                  "anchor": [0.0, 0.0],
+                  "position": ["100px", "0%"],
+                  "size": ["100%-100px", "100%"]
+                },
+                "appearance": {
+                  "normal": {
+                    "text": {
+                      "text": "",
+                      "justify": "left",
+                      "tint": "0xFFFFFF"
+                    }
+                  }
+                },
+                "children": []
+              }
+            ]
+          },
+          {
+            "id": "dragNote",
+            "container": {
+              "anchor": [0.5, 1],
+              "position": ["50%", "100%-10px"],
+              "size": ["100%-20px", "50px"],
+              "maxSizePixels": [600, 50]
+            },
+            "appearance": {
+              "normal": {
+                "geometry": {},
+                "text": {
+                  "text": "drag to move"
+                }
+              }
+            },
+            "children": []
+          }
+        ]
+      },
+      {
         "id": "menuButton",
         "container": {
           "anchor": [0.5, 0.5],
@@ -246,107 +347,6 @@
                 "visible": false
               }
             ]
-          }
-        ]
-      },
-      {
-        "id": "game",
-        "container": {
-          "anchor": [0, 0],
-          "position": ["0%", "0%"],
-          "size": ["100%", "100%"]
-        },
-        "appearance": { "normal": {} },
-        "children": [
-          {
-            "id": "foodMenuContainer",
-            "container": {
-              "anchor": [0.5, 0.0],
-              "position": ["50%", "10px"],
-              "size": ["100%-20px", "40%"],
-              "maxSizePixels": [600, 10000]
-            },
-            "appearance": {
-              "normal": {
-                "geometry": {}
-              }
-            },
-            "visible": false,
-            "children": [
-              {
-                "id": "foodMenu",
-                "template": {
-                  "id": "foodMenu"
-                }
-              }
-            ]
-          },
-          {
-            "id": "infobox",
-            "container": {
-              "anchor": [0.5, 1.0],
-              "position": ["50%", "100%"],
-              "size": ["100%", "20%"],
-              "maxSizePixels": [600, 150]
-            },
-            "appearance": {
-              "normal": {
-                "geometry": {}
-              }
-            },
-            "visible": false,
-            "children": [
-              {
-                "id": "picture",
-                "container": {
-                  "anchor": [0.0, 0.0],
-                  "position": ["0%", "0%"],
-                  "size": ["100px", "100%"]
-                },
-                "appearance": {
-                  "normal": {
-                    "geometry": {}
-                  }
-                },
-                "children": []
-              },
-              {
-                "id": "text",
-                "container": {
-                  "anchor": [0.0, 0.0],
-                  "position": ["100px", "0%"],
-                  "size": ["100%-100px", "100%"]
-                },
-                "appearance": {
-                  "normal": {
-                    "text": {
-                      "text": "",
-                      "justify": "left",
-                      "tint": "0xFFFFFF"
-                    }
-                  }
-                },
-                "children": []
-              }
-            ]
-          },
-          {
-            "id": "dragNote",
-            "container": {
-              "anchor": [0.5, 1],
-              "position": ["50%", "100%-10px"],
-              "size": ["100%-20px", "50px"],
-              "maxSizePixels": [600, 50]
-            },
-            "appearance": {
-              "normal": {
-                "geometry": {},
-                "text": {
-                  "text": "drag to move"
-                }
-              }
-            },
-            "children": []
           }
         ]
       }

@@ -56,6 +56,7 @@ module TurtleTime {
     }
 
     export interface AssetDocument {
+        loadingBar: TextureAssetEntry,
         textures : {
             root: string,
             files: Array<TextureAssetEntry>

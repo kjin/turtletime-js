@@ -1,11 +1,14 @@
 {
+  "loadingBar": {
+    "id": "core/loading", "fileType": "png"
+  },
   "textures": {
     "root": "textures",
     "files": [
       { "id": "core/highlightCircle", "fileType": "png" },
       { "id": "core/shadow", "fileType": "png" },
       { "id": "core/speechBubble", "fileType": "png" },
-      { "id": "turtle/turtle", "fileType": "png", "frameSize": [45, 60] },
+      { "id": "turtle/turtle", "fileType": "png", "frameSize": [45, 60], "filter": {} },
       { "id": "decor/chair", "fileType": "png" },
       { "id": "decor/tableandchair", "fileType": "png", "frameSize": [52, 52] },
       { "id": "decor/blackboard", "fileType": "png" },

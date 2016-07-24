@@ -17,7 +17,11 @@ module TurtleTime {
         }
 
         reset(specs : SpriteSpecs) : void {
-            this._sprite.loadTexture(specs.spriteID);
+            if (specs.hasOwnProperty('filter')) {
+                this._sprite.loadTexture(specs.spriteID + '-filter');
+            } else {
+                this._sprite.loadTexture(specs.spriteID);
+            }
             this._sprite.anchor = new Point(specs.anchor[0], specs.anchor[1]);
             this._sprite.scale = new Point(specs.scale, specs.scale);
             this._sprite.tint = parseInt(specs.tint);
@@ -39,10 +43,6 @@ module TurtleTime {
                     if (numericalDirection & Direction.Down) { this._sprite.animations.add('down-' + animation.name, frameData.frames); }
                 });
             });
-        }
-
-        bringToTop() : void {
-            this._sprite.bringToTop();
         }
 
         destroy() : void {

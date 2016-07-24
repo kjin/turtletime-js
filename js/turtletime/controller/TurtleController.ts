@@ -19,8 +19,7 @@ module TurtleTime {
                 cameraModel: gameState.cameraModel,
                 uiInteractionModel : gameState.uiInteractionModel,
                 turtles: gameState.entities.turtles,
-                food : gameState.entities.food,
-                infoboxModelText: gameState.uiModel.getChild("game.infobox.text")
+                food : gameState.entities.food
             };
         }
 
@@ -73,7 +72,7 @@ module TurtleTime {
             // move the camera to the turtle's location if it's selected
             if (this._writeState.selectionModel.entity == turtle) {
                 this._writeState.cameraModel.peekTarget().x = turtle.position.x;
-                this._writeState.cameraModel.peekTarget().y = turtle.position.y;
+                this._writeState.cameraModel.peekTarget().y = turtle.position.y - 2;
             }
             if (turtle.position.distance(turtle.intermediateTargetPosition) < TURTLE_SPEED) {
                 turtle.position.set(
@@ -116,16 +115,8 @@ module TurtleTime {
                 // conditions for selection
                 if (inputState.justPressed && this._writeState.selectionModel.entity != turtle) {
                     this._writeState.selectionModel.entity = turtle;
-                    this._writeState.cameraModel.pushTarget(new Point(turtle.position.x, turtle.position.y));
+                    this._writeState.cameraModel.pushTarget(new Point(turtle.position.x, turtle.position.y - 2));
                     this._writeState.selectionModel.selectedOnClick = this._readState.inputState.clickNumber;
-                    // update infobox
-                    this._writeState.infoboxModelText.appearance.normal.text.text = (() : string => {
-                        var turtleData : TurtleData = GAME_ENGINE.globalData.turtleData.get(turtle.appearanceID);
-                        return "Name: " + turtleData.name + "\n" +
-                            "Description: " + turtleData.description + "\n" +
-                            "Likes: " + turtleData.likes + "\n" +
-                            "Dislikes: " + turtleData.dislikes;
-                    })();
                 }
             }
             // conditions for deselection

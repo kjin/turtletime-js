@@ -15,7 +15,8 @@
             { "direction": "up", "frames": [3] }
           ]
         }
-      ]
+      ],
+      "filter": {}
     },
     "greenie2": {
       "spriteID": "turtle/turtle",
