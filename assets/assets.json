@@ -42,5 +42,11 @@
       { "id": "turtles" },
       { "id": "ui" }
     ]
+  },
+  "fonts": {
+    "root": "fonts",
+    "files": [
+      { "id": "8bit-wonder" }
+    ]
   }
 }

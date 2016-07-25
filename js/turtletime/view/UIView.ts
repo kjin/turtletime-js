@@ -7,6 +7,7 @@ module TurtleTime {
         screenDimensions : Rectangle;
         children : Array<UIViewNode>;
         private _graphics : Graphics;
+        private _bitmapText : Phaser.BitmapText;
         private _text : Phaser.Text;
         private _sprite : EntitySpriteWrapper;
         private _editMode : boolean;
@@ -28,15 +29,23 @@ module TurtleTime {
                 this._graphics = GAME_ENGINE.game.add.graphics(0, 0);
             } else {
                 if (this.model.appearance.normal.text != null) {
-                    this._text = GAME_ENGINE.game.add.text(0, 0, this.model.appearance.normal.text.text, {
-                        font: 'Courier New',
-                        fontSize: '12px',
-                        fill: '#ffffff',
-                        wordWrap: true
-                    });
-                    this._text.align = this.model.appearance.normal.text.justify;
-                    this._text.boundsAlignH = this.model.appearance.normal.text.justify;
-                    this._text.name = "" + (100 + this._level * 10 + 3);
+                    if (this.model.appearance.normal.text.font != "") {
+                        this._bitmapText = GAME_ENGINE.game.add.bitmapText(0, 0,
+                            this.model.appearance.normal.text.font, "",
+                            this.model.appearance.normal.text.size);
+                        this._bitmapText.align = this.model.appearance.normal.text.justify;
+                        this._bitmapText.name = "" + (100 + this._level * 10 + 3);
+                    } else { // fallback
+                        this._text = GAME_ENGINE.game.add.text(0, 0, this.model.appearance.normal.text.text, {
+                            font: 'Courier New',
+                            fontSize: '' + this.model.appearance.normal.text.size + 'px',
+                            fill: '#ffffff',
+                            wordWrap: true
+                        });
+                        this._text.align = this.model.appearance.normal.text.justify;
+                        this._text.boundsAlignH = this.model.appearance.normal.text.justify;
+                        this._text.name = "" + (100 + this._level * 10 + 3);
+                    }
                 }
                 if (this.model.appearance.normal.sprite != null) {
                     this._sprite = new EntitySpriteWrapper();
@@ -55,7 +64,25 @@ module TurtleTime {
             if (this._text != null) {
                 this._text.setTextBounds(this.screenDimensions.x, this.screenDimensions.y, this.screenDimensions.width, this.screenDimensions.height);
                 this._text.wordWrapWidth = this.screenDimensions.width;
-            } else if (this._sprite != null) {
+            } else if (this._bitmapText != null) {
+                switch (this._bitmapText.align) {
+                    case 'left':
+                        this._bitmapText.x = this.screenDimensions.x;
+                        this._bitmapText.anchor.x = 0;
+                        break;
+                    case 'center':
+                        this._bitmapText.x = this.screenDimensions.x + this.screenDimensions.width / 2;
+                        this._bitmapText.anchor.x = 0.5;
+                        break;
+                    case 'right':
+                        this._bitmapText.x = this.screenDimensions.x + this.screenDimensions.width;
+                        this._bitmapText.anchor.x = 1;
+                        break;
+                }
+                this._bitmapText.y = this.screenDimensions.y;
+                this._bitmapText.maxWidth = this.screenDimensions.width;
+            }
+            if (this._sprite != null) {
                 this._sprite.x = this.screenDimensions.x + this.screenDimensions.width * this.model.container.anchorX;
                 this._sprite.y = this.screenDimensions.y + this.screenDimensions.height * this.model.container.anchorY;
             }
@@ -83,16 +110,21 @@ module TurtleTime {
                 this._graphics.drawRect(this.screenDimensions.x, this.screenDimensions.y, this.screenDimensions.width, this.screenDimensions.height);
                 this._graphics.endFill();
             } else {
-                if (this.model.appearance.normal.text != null) {
+                if (this._text != null) {
                     this._text.visible = parentVisible && this.model.visible;
                     this._text.text = this.model.appearance.normal.text.text;
                     this._text.tint = this.model.appearance.normal.text.tint;
                 }
-                if (this.model.appearance.normal.sprite != null) {
+                if (this._bitmapText != null) {
+                    this._bitmapText.visible = parentVisible && this.model.visible;
+                    this._bitmapText.text = this.model.appearance.normal.text.text;
+                    this._bitmapText.tint = this.model.appearance.normal.text.tint;
+                }
+                if (this._sprite != null) {
                     this._sprite.visible = parentVisible && this.model.visible;
                     this._sprite.tint = this.model.appearance.normal.sprite.tint;
                 }
-                if (this.model.appearance.normal.geometry != null) {
+                if (this._graphics != null) {
                     this._graphics.clear();
                     if (parentVisible && this.model.visible) {
                         var geometry:UIGeometry = this.model.appearance.normal.geometry;
@@ -117,6 +149,9 @@ module TurtleTime {
             var result : Array<PIXI.DisplayObject> = [];
             if (this._text != null) {
                 result.push(this._text);
+            }
+            if (this._bitmapText != null) {
+                result.push(this._bitmapText);
             }
             if (this._sprite != null) {
                 result.push(this._sprite.underlyingSprite);

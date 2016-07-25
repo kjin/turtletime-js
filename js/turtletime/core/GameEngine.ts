@@ -92,26 +92,39 @@ namespace TurtleTime {
                     game.load.spritesheet(entry.id, path, entry.frameSize[0], entry.frameSize[1]);
                 }
             });
-            assets.json.files.forEach((entry : JSONAssetEntry) : void => {
+            assets.json.files.forEach((entry : AssetEntry) : void => {
                 game.load.json(entry.id, assets.json.root + '/' + entry.id + '.json');
+            });
+            assets.fonts.files.forEach((entry : AssetEntry) : void => {
+                game.load.bitmapFont(entry.id,
+                    assets.fonts.root + '/' + entry.id + '.png',
+                    assets.fonts.root + '/' + entry.id + '.fnt' // courtesy of littera
+                );
             });
         }
         
         private generateDynamicAssets(game : Phaser.Game, assets : AssetDocument) : void {
+            var assetCache = {};
+            if (localStorage.getItem('dynamicAssetCache')) {
+                assetCache = JSON.parse(localStorage.getItem('dynamicAssetCache'));
+            }
             assets.textures.derivedFiles.forEach((entry : DerivedTextureAssetEntry) : void => {
                 var texture:BaseTexture = game.cache.getBaseTexture(entry.original);
-                var bitmapData : BitmapData = game.make.bitmapData(texture.width, texture.height);
-                bitmapData.copy(entry.original);
-                bitmapData.update();
-                BitmapFilters.rotateHueFactory(entry.filter.hueRotation)(bitmapData);
-                var url = bitmapData.baseTexture.source["toDataURL"](); // typescript complains otherwise
+                if (!assetCache.hasOwnProperty(entry.id)) {
+                    var bitmapData:BitmapData = game.make.bitmapData(texture.width, texture.height);
+                    bitmapData.copy(entry.original);
+                    bitmapData.update();
+                    BitmapFilters.rotateHueFactory(entry.filter.hueRotation)(bitmapData);
+                    assetCache[entry.id] = bitmapData.baseTexture.source["toDataURL"]();
+                }
                 var singleFrame : Frame = game.cache.getFrameData(entry.original).getFrame(0);
                 if (texture.width == singleFrame.width && texture.height == singleFrame.height) {
-                    game.load.image(entry.id, url);
+                    game.load.image(entry.id, assetCache[entry.id]);
                 } else {
-                    game.load.spritesheet(entry.id, url, singleFrame.width, singleFrame.height);
+                    game.load.spritesheet(entry.id, assetCache[entry.id], singleFrame.width, singleFrame.height);
                 }
             });
+            localStorage.setItem('dynamicAssetCache', JSON.stringify(assetCache));
         }
 
         private create() : void {

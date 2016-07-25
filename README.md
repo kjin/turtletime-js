@@ -29,3 +29,6 @@ Open the root folder in WebStorm. While WebStorm is open, you should be able to 
 
 You'll likely need to set your node.js path first in `File > Settings > Languages & Frameworks > TypeScript > Compiler`.
 
+### Plain Old TSC
+
+Run `tsc` in the `js` folder. This produces the file `js/main.js`, which is the only compiled file you need to run the game.

@@ -190,8 +190,8 @@
                 "id": "text",
                 "container": {
                   "anchor": [0.0, 0.0],
-                  "position": ["100px", "0%"],
-                  "size": ["100%-100px", "100%"]
+                  "position": ["105px", "5px"],
+                  "size": ["100%-110px", "100%-10px"]
                 },
                 "appearance": {
                   "normal": {
@@ -237,7 +237,8 @@
           "normal": {
             "geometry": {},
             "text": {
-              "text": "MENU"
+              "text": "MENU",
+              "font": "8bit-wonder"
             }
           }
         },

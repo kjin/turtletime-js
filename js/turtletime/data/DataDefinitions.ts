@@ -34,6 +34,8 @@ module TurtleTime {
 
     export interface UITextData {
         text?: string,
+        font?: string,
+        size?: string,
         justify?: string,
         tint?: string
     }

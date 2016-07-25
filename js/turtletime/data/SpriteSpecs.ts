@@ -62,7 +62,7 @@ module TurtleTime {
         frameSize?: Array<number>,
     }
 
-    export interface JSONAssetEntry {
+    export interface AssetEntry {
         id: string
     }
 
@@ -75,7 +75,11 @@ module TurtleTime {
         },
         json : {
             root: string,
-            files: Array<JSONAssetEntry>
+            files: Array<AssetEntry>
+        },
+        fonts : {
+            root: string,
+            files: Array<AssetEntry>
         }
     }
 }
