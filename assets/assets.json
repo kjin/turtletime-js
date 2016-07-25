@@ -1,30 +1,36 @@
 {
-  "loadingBar": {
-    "id": "core/loading", "fileType": "png"
-  },
+  "loadingBar": { "id": "core/loading", "fileType": "png" },
   "textures": {
     "root": "textures",
     "files": [
-      { "id": "core/highlightCircle", "fileType": "png" },
-      { "id": "core/shadow", "fileType": "png" },
-      { "id": "core/speechBubble", "fileType": "png" },
-      { "id": "turtle/turtle", "fileType": "png", "frameSize": [45, 60], "filter": {} },
-      { "id": "decor/chair", "fileType": "png" },
-      { "id": "decor/tableandchair", "fileType": "png", "frameSize": [52, 52] },
-      { "id": "decor/blackboard", "fileType": "png" },
-      { "id": "decor/couch", "fileType": "png", "frameSize": [60, 28] },
-      { "id": "room/tile", "fileType": "png" },
-      { "id": "room/brick", "fileType": "png" },
-      { "id": "room/bricktop", "fileType": "png" },
-      { "id": "food/aloe", "fileType": "png" },
-      { "id": "food/banana", "fileType": "png" },
-      { "id": "food/grandson", "fileType": "png" },
-      { "id": "emoji/angry", "fileType": "png" },
-      { "id": "emoji/coffee", "fileType": "png" },
-      { "id": "emoji/fork", "fileType": "png" },
-      { "id": "emoji/heart", "fileType": "png" },
-      { "id": "emoji/skull", "fileType": "png" },
-      { "id": "emoji/smiley", "fileType": "png" }
+      { "id": "core/highlightCircle" },
+      { "id": "core/shadow" },
+      { "id": "core/speechBubble" },
+      { "id": "turtle/turtle", "frameSize": [45, 60] },
+      { "id": "decor/chair" },
+      { "id": "decor/tableandchair", "frameSize": [52, 52] },
+      { "id": "decor/blackboard" },
+      { "id": "decor/couch", "frameSize": [60, 28] },
+      { "id": "room/tile" },
+      { "id": "room/brick" },
+      { "id": "room/bricktop" },
+      { "id": "food/aloe" },
+      { "id": "food/banana" },
+      { "id": "food/grandson" },
+      { "id": "emoji/angry" },
+      { "id": "emoji/coffee" },
+      { "id": "emoji/fork" },
+      { "id": "emoji/heart" },
+      { "id": "emoji/skull" },
+      { "id": "emoji/smiley" }
+    ],
+    "derivedFiles": [
+      { "id": "turtle/turtle-green", "original": "turtle/turtle", "filter": { "hueRotation": 0 } },
+      { "id": "turtle/turtle-blue", "original": "turtle/turtle", "filter": { "hueRotation": 60 } },
+      { "id": "turtle/turtle-purple", "original": "turtle/turtle", "filter": { "hueRotation": 120 } },
+      { "id": "turtle/turtle-magenta", "original": "turtle/turtle", "filter": { "hueRotation": 180 } },
+      { "id": "turtle/turtle-red", "original": "turtle/turtle", "filter": { "hueRotation": 240 } },
+      { "id": "turtle/turtle-yellow", "original": "turtle/turtle", "filter": { "hueRotation": 300 } }
     ]
   },
   "json": {

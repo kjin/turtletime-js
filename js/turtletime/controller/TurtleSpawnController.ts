@@ -18,7 +18,7 @@ module TurtleTime {
 
         update(dt:number):void {
             // temporary - if greenie2 is already there, just stop everything
-            if (this._writeState.turtles.underlyingArray.length == 2) {
+            if (this._writeState.turtles.underlyingArray.length > 1) {
                 return;
             }
 

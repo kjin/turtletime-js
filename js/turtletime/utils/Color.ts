@@ -92,14 +92,21 @@ namespace TurtleTime {
             return (bitmapData : BitmapData) : void => {
                 for (var x = 0; x < bitmapData.width; x++) {
                     for (var y = 0; y < bitmapData.height; y++) {
-                        var rgba : number = bitmapData.getPixel32(x, y);
+                        // IT's FREAKING LITTLE ENDIAN!!
+                        var rgba : number = MathExtensions.flipEndianness32(bitmapData.getPixel32(x, y));
                         var alpha : number = rgba & 0xFF;
                         if (alpha != 0) {
                             var rgb:number = (rgba & 0xFFFFFF00) >>> 8;
                             var hsvObject:HSVColor = new RGBColor(rgb).toHSV();
                             hsvObject.h += amount;
+                            if (hsvObject.h > 360) {
+                                hsvObject.h -= 360;
+                            }
                             var rgbObject:RGBColor = hsvObject.toRGB();
-                            bitmapData.setPixel32(x, y, rgbObject.r, rgbObject.g, rgbObject.b, alpha);
+                            bitmapData.setPixel32(x, y,
+                                Math.floor(rgbObject.r * 255),
+                                Math.floor(rgbObject.g * 255),
+                                Math.floor(rgbObject.b * 255), alpha);
                         }
                     }
                 }

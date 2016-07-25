@@ -64,4 +64,11 @@ namespace MathExtensions {
             };
         }
     }
+
+    export function flipEndianness32(num : number) : number {
+        return ((num & 0xFF000000) >>> 24) +
+               ((num & 0xFF0000) >>> 8) +
+               ((num & 0xFF00) << 8) +
+               ((num & 0xFF) << 24);
+    }
 }

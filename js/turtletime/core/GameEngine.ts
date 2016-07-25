@@ -84,6 +84,7 @@ namespace TurtleTime {
 
             assets.textures.files.forEach((entry : TextureAssetEntry) : void => {
                 if (!entry.hasOwnProperty("fileType")) { entry.fileType = "png"; }
+                if (!entry.hasOwnProperty("fileID")) { entry.fileID = entry.id; }
                 var path = assets.textures.root + '/' + entry.id + '.' + entry.fileType;
                 if (!entry.hasOwnProperty("frameSize")) {
                     game.load.image(entry.id, path);
@@ -97,20 +98,18 @@ namespace TurtleTime {
         }
         
         private generateDynamicAssets(game : Phaser.Game, assets : AssetDocument) : void {
-            assets.textures.files.forEach((entry : TextureAssetEntry) : void => {
-                if (entry.hasOwnProperty('filter')) {
-                    var texture:BaseTexture = game.cache.getBaseTexture(entry.id);
-                    var bitmapData : BitmapData = game.make.bitmapData(texture.width, texture.height);
-                    bitmapData.copy(entry.id);
-                    bitmapData.update();
-                    BitmapFilters.rotateHueFactory(180)(bitmapData);
-                    var url = bitmapData.baseTexture.source["toDataURL"](); // typescript complains otherwise
-                    var singleFrame : Frame = game.cache.getFrameData(entry.id).getFrame(0);
-                    if (texture.width == singleFrame.width && texture.height == singleFrame.height) {
-                        game.load.image(entry.id + '-filter', url);
-                    } else {
-                        game.load.spritesheet(entry.id + '-filter', url, singleFrame.width, singleFrame.height);
-                    }
+            assets.textures.derivedFiles.forEach((entry : DerivedTextureAssetEntry) : void => {
+                var texture:BaseTexture = game.cache.getBaseTexture(entry.original);
+                var bitmapData : BitmapData = game.make.bitmapData(texture.width, texture.height);
+                bitmapData.copy(entry.original);
+                bitmapData.update();
+                BitmapFilters.rotateHueFactory(entry.filter.hueRotation)(bitmapData);
+                var url = bitmapData.baseTexture.source["toDataURL"](); // typescript complains otherwise
+                var singleFrame : Frame = game.cache.getFrameData(entry.original).getFrame(0);
+                if (texture.width == singleFrame.width && texture.height == singleFrame.height) {
+                    game.load.image(entry.id, url);
+                } else {
+                    game.load.spritesheet(entry.id, url, singleFrame.width, singleFrame.height);
                 }
             });
         }

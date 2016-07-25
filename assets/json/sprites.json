@@ -1,40 +1,11 @@
 {
   "turtle": {
-    "greenie": {
-      "spriteID": "turtle/turtle",
-      "scale": 1.0,
-      "dimensions": [1, 1],
-      "anchor": [0.5, 0.8],
-      "animations": [
-        {
-          "name": "stand",
-          "frames": [
-            { "direction": "left", "frames": [0] },
-            { "direction": "down", "frames": [1] },
-            { "direction": "right", "frames": [2] },
-            { "direction": "up", "frames": [3] }
-          ]
-        }
-      ],
-      "filter": {}
-    },
-    "greenie2": {
-      "spriteID": "turtle/turtle",
-      "scale": 1.0,
-      "dimensions": [1, 1],
-      "anchor": [0.5, 0.8],
-      "animations": [
-        {
-          "name": "stand",
-          "frames": [
-            { "direction": "left", "frames": [0] },
-            { "direction": "down", "frames": [1] },
-            { "direction": "right", "frames": [2] },
-            { "direction": "up", "frames": [3] }
-          ]
-        }
-      ]
-    }
+    "green": { "spriteID": "turtle/turtle-green", "anchor": [0.5, 0.8], "animations": [ { "name": "stand", "frames": [ { "direction": "left", "frames": [0] }, { "direction": "down", "frames": [1] }, { "direction": "right", "frames": [2] },  { "direction": "up", "frames": [3] } ] } ] },
+    "blue": { "spriteID": "turtle/turtle-blue", "anchor": [0.5, 0.8], "animations": [ { "name": "stand", "frames": [ { "direction": "left", "frames": [0] }, { "direction": "down", "frames": [1] }, { "direction": "right", "frames": [2] },  { "direction": "up", "frames": [3] } ] } ] },
+    "purple": { "spriteID": "turtle/turtle-purple", "anchor": [0.5, 0.8], "animations": [ { "name": "stand", "frames": [ { "direction": "left", "frames": [0] }, { "direction": "down", "frames": [1] }, { "direction": "right", "frames": [2] },  { "direction": "up", "frames": [3] } ] } ] },
+    "magenta": { "spriteID": "turtle/turtle-magenta", "anchor": [0.5, 0.8], "animations": [ { "name": "stand", "frames": [ { "direction": "left", "frames": [0] }, { "direction": "down", "frames": [1] }, { "direction": "right", "frames": [2] },  { "direction": "up", "frames": [3] } ] } ] },
+    "red": { "spriteID": "turtle/turtle-red", "anchor": [0.5, 0.8], "animations": [ { "name": "stand", "frames": [ { "direction": "left", "frames": [0] }, { "direction": "down", "frames": [1] }, { "direction": "right", "frames": [2] },  { "direction": "up", "frames": [3] } ] } ] },
+    "yellow": { "spriteID": "turtle/turtle-yellow", "anchor": [0.5, 0.8], "animations": [ { "name": "stand", "frames": [ { "direction": "left", "frames": [0] }, { "direction": "down", "frames": [1] }, { "direction": "right", "frames": [2] },  { "direction": "up", "frames": [3] } ] } ] }
   },
   "chair": {
     "chairBasic": {

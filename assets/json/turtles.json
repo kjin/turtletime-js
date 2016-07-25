@@ -1,6 +1,6 @@
 {
   "turtles": {
-    "greenie": {
+    "green": {
       "name": "Greenie",
       "description": "Loves the color green, but ironically colorblind",
       "likes": [
@@ -10,14 +10,54 @@
         "Ham"
       ]
     },
-    "greenie2": {
-      "name": "Greenie 2",
-      "description": "Like Greenie, except adds the number 2 to the end of every uttered sentence, and also not that crazy about green",
+    "blue": {
+      "name": "Ka-Bluie",
+      "description": "Explosive personality",
       "likes": [
-        "Green Eggs 2"
+        "Puns"
       ],
       "dislikes": [
-        "Ham 2"
+        "Relaxing"
+      ]
+    },
+    "purple": {
+      "name": "King Violet",
+      "description": "Acts all kingly and snobbish after reading that purple is a royal color on MeaningOfColors.biz",
+      "likes": [
+        "King Crab"
+      ],
+      "dislikes": [
+        "Peasant Lobster"
+      ]
+    },
+    "magenta": {
+      "name": "Pinky",
+      "description": "As close to a pinky finger as a personality can get",
+      "likes": [
+        "Being the skinniest in a group of five turtles"
+      ],
+      "dislikes": [
+        "Flexing"
+      ]
+    },
+    "red": {
+      "name": "Mars",
+      "description": "Fourth planet from the sun",
+      "likes": [
+        "Phobos and Deimos"
+      ],
+      "dislikes": [
+        "Cockroaches"
+      ]
+    },
+    "yellow": {
+      "name": "Watermello",
+      "description": "Looks like a watermelon and acts like one too",
+      "likes": [
+        "Watermelon"
+      ],
+      "dislikes": [
+        "Other Melons"
       ]
     }
   }

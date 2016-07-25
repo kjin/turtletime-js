@@ -45,10 +45,21 @@ module TurtleTime {
         }
     }
 
+    export interface TextureFilterData {
+        hueRotation: number
+    }
+
+    export interface DerivedTextureAssetEntry {
+        id: string,
+        original: string,
+        filter: TextureFilterData
+    }
+
     export interface TextureAssetEntry {
         id: string,
+        fileID?: string,
         fileType?: string,
-        frameSize?: Array<number>
+        frameSize?: Array<number>,
     }
 
     export interface JSONAssetEntry {
@@ -59,7 +70,8 @@ module TurtleTime {
         loadingBar: TextureAssetEntry,
         textures : {
             root: string,
-            files: Array<TextureAssetEntry>
+            files: Array<TextureAssetEntry>,
+            derivedFiles: Array<DerivedTextureAssetEntry>
         },
         json : {
             root: string,
