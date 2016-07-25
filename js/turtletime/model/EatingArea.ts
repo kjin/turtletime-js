@@ -1,6 +1,8 @@
 namespace TurtleTime {
     export class EatingArea {
-        chair : Chair;
-        table : Table;
+        private _chair : Chair;
+        private _table : Table;
+        private _chairPosition : Point;
+        private _tablePosition : Point;
     }
 }

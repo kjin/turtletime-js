@@ -2,6 +2,15 @@
 ///<reference path="../data/Constants.ts"/>
 
 module TurtleTime {
+    export class RoomNode {
+        staticModels : Array<EntityModel> = [];
+        turtles : Array<EntityModel> = [];
+
+        hasModel() : boolean {
+            return this.staticModels.length + this.turtles.length > 0;
+        }
+    }
+
     export class RoomModel extends VisibleModel {
         width : number;
         height : number;
@@ -10,7 +19,7 @@ module TurtleTime {
         wallPattern : string;
 
         // Room layout
-        roomLayout : Array<Array<Array<EntityModel>>>;
+        roomLayout : Array<Array<RoomNode>>;
 
         constructor(data : RoomData) {
             super();
@@ -21,11 +30,11 @@ module TurtleTime {
             this.wallHeight = data.wallHeight;
             this.layerNumber = LAYER_FLOOR;
 
-            this.roomLayout = new Array<Array<Array<EntityModel>>>(this.width);
+            this.roomLayout = new Array<Array<RoomNode>>(this.width);
             for (var i : number = 0; i < this.width; i++) {
-                this.roomLayout[i] = new Array<Array<EntityModel>>(this.height);
+                this.roomLayout[i] = new Array<RoomNode>(this.height);
                 for (var j : number = 0; j < this.height; j++) {
-                    this.roomLayout[i][j] = [];
+                    this.roomLayout[i][j] = new RoomNode;
                 }
             }
         }
@@ -35,7 +44,7 @@ module TurtleTime {
         }
 
         isUnoccupiedSpaceXY(x : number, y : number) : boolean {
-            return this.isInRoomXY(x, y) && this.roomLayout[x][y].length == 0;
+            return this.isInRoomXY(x, y) && !this.roomLayout[x][y].hasModel();
         }
 
         clamp(point : Point) : void {

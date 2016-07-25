@@ -42,12 +42,14 @@ module TurtleTime {
         update() : void {
             var screenPos : Point;
             var onWall = false;
+            var onTable = false;
             if (this.model.getEntityClass() == EntityType.WallDecor) {
                 onWall = true;
                 screenPos = wallToScreen(this.model.position.x + this.model.width / 2, this.model.position.y + this.model.height / 2);
             } else {
                 screenPos = roomToScreen(this.model.position.x + this.model.width / 2, this.model.position.y + this.model.height / 2);
                 if (this.model.getEntityClass() == EntityType.Food && (<Food>this.model).table) {
+                    onTable = true;
                     screenPos.y -= 10; // account for the height of the table
                 }
             }
@@ -59,7 +61,7 @@ module TurtleTime {
             setTintAndAlpha(this._shadow, 0x00000033);
             // sort values
             // TODO please do this right
-            var sortValue : number = ((onWall ? 10000 : 20000) + this.model.position.y + this.model.height - 1) * 100 + this.model.getEntityClass() * 10;
+            var sortValue : number = ((onTable ? 30000 : (onWall ? 10000 : 20000)) + this.model.position.y + this.model.height - 1) * 100 + this.model.getEntityClass() * 10;
             this._mainSprite.underlyingSprite.name = "" + sortValue;
             this._shadow.name = "" + (sortValue - 1);
             this.updatePrivate(screenPos, sortValue);

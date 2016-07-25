@@ -44,6 +44,7 @@ module TurtleTime {
                         });
                         this._text.align = this.model.appearance.normal.text.justify;
                         this._text.boundsAlignH = this.model.appearance.normal.text.justify;
+                        this._text.boundsAlignV = this.model.appearance.normal.text.valign;
                         this._text.name = "" + (100 + this._level * 10 + 3);
                     }
                 }
@@ -79,7 +80,20 @@ module TurtleTime {
                         this._bitmapText.anchor.x = 1;
                         break;
                 }
-                this._bitmapText.y = this.screenDimensions.y;
+                switch (this.model.appearance.normal.text.valign) {
+                    case 'top':
+                        this._bitmapText.y = this.screenDimensions.y;
+                        this._bitmapText.anchor.y = 0;
+                        break;
+                    case 'middle':
+                        this._bitmapText.y = this.screenDimensions.y + this.screenDimensions.height / 2;
+                        this._bitmapText.anchor.y = 0.5;
+                        break;
+                    case 'bottom':
+                        this._bitmapText.y = this.screenDimensions.y + this.screenDimensions.height;
+                        this._bitmapText.anchor.y = 1;
+                        break;
+                }
                 this._bitmapText.maxWidth = this.screenDimensions.width;
             }
             if (this._sprite != null) {

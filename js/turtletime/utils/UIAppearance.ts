@@ -15,6 +15,7 @@ module TurtleTime {
         text : string;
         font : string;
         size : number;
+        valign : string;
         justify : string;
         tint : number;
         
@@ -23,6 +24,7 @@ module TurtleTime {
             this.font = data.hasOwnProperty("font") ? data.font : "";
             this.size = data.hasOwnProperty("size") ? data.size : 12;
             this.justify = data.hasOwnProperty("justify") ? data.justify : "center";
+            this.valign = data.hasOwnProperty("valign") ? data.valign : "middle";
             this.tint = data.hasOwnProperty("tint") ? parseInt(data.tint) : 0xFFFFFF;
         }
     }

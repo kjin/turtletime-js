@@ -230,14 +230,19 @@
         "id": "menuButton",
         "container": {
           "anchor": [0.5, 0.5],
-          "position": ["30px", "30px"],
-          "size": ["50px", "50px"]
+          "position": ["45px", "25px"],
+          "size": ["80px", "40px"]
         },
         "appearance": {
           "normal": {
-            "geometry": {},
+            "geometry": {
+              "lineWidth": 2,
+              "fillColor": "0xFF6699",
+              "cornerRadius": 5
+            },
             "text": {
               "text": "MENU",
+              "valign": "middle",
               "font": "8bit-wonder"
             }
           }

@@ -84,6 +84,10 @@ module TurtleTime {
             return this._entities;
         }
 
+        get length() : number {
+            return this._entities.length;
+        }
+
         serialize() : Array<EntityData> {
             return this._entities.map((e: T, i : number, arr : Array<T>) : EntityData => e.serialize());
         }

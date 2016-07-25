@@ -37,6 +37,7 @@ module TurtleTime {
         font?: string,
         size?: number,
         justify?: string,
+        valign?: string,
         tint?: string
     }
 
