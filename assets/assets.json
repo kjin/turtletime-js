@@ -11,6 +11,7 @@
       { "id": "decor/tableandchair", "frameSize": [52, 52] },
       { "id": "decor/blackboard" },
       { "id": "decor/couch", "frameSize": [60, 28] },
+      { "id": "decor/counter" },
       { "id": "room/tile" },
       { "id": "room/brick" },
       { "id": "room/bricktop" },

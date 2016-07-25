@@ -197,6 +197,7 @@ module TurtleTime {
      * Given start and end points on a 2D grid, as well as a method of evaluating whether a space may be moved to,
      * return the best direction for an object at the start point to move in order to most efficiently get to the end
      * point.
+     * TODO: This only works for 1x1 objects.
      * @param start The start point for the traversal.
      * @param end The end point for the traversal.
      * @param maxX The maximum x-value of the search space.

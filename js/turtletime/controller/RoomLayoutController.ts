@@ -15,11 +15,13 @@ module TurtleTime {
                 collection.forEachModel((entity : EntityModel) => {
                     var minX = Math.floor(entity.position.x);
                     var minY = Math.floor(entity.position.y);
-                    var maxX = Math.ceil(entity.position.x + entity.dimensions.x);
-                    var maxY = Math.ceil(entity.position.y + entity.dimensions.y);
+                    var maxX = Math.ceil(entity.position.x + entity.width);
+                    var maxY = Math.ceil(entity.position.y + entity.height);
                     for (var x : number = minX; x < maxX; x++) {
                         for (var y : number = minY; y < maxY; y++) {
-                            this._writeState.roomModel.roomLayout[x][y].push(entity);
+                            if (entity.occupiesSpace(x, y)) {
+                                this._writeState.roomModel.roomLayout[x][y].push(entity);
+                            }
                         }
                     }
                 });

@@ -38,7 +38,18 @@
       "scale": 1,
       "dimensions": [2, 2],
       "anchor": [0.5, 0.5],
-      "animations": [ { "name": "default", "frames": [ {"direction": "all", "frames": [0] } ] } ]
+      "animations": [ { "name": "default", "frames": [ {"direction": "down", "frames": [0] } ] } ]
+    },
+    "counter": {
+      "spriteID": "decor/counter",
+      "scale": 2,
+      "dimensions": [8, 2],
+      "shape": [
+        "00000011",
+        "11111111"
+      ],
+      "anchor": [0.5, 0.6],
+      "animations": [ { "name": "default", "frames": [ {"direction": "down", "frames": [0] } ] } ]
     }
   },
   "door": {
@@ -56,7 +67,7 @@
       "scale": 1,
       "dimensions": [2, 2],
       "anchor": [0.5, 0.25],
-      "animations": [ { "name": "default", "frames": [ {"direction": "all", "frames": [0] } ] } ]
+      "animations": [ { "name": "default", "frames": [ {"direction": "down", "frames": [0] } ] } ]
     }
   },
   "food": {

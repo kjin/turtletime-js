@@ -13,11 +13,20 @@ module TurtleTime {
     export abstract class EntityModel extends VisibleModel {
         public position : Point;
         public direction : Direction;
-        public dimensions : Point;
+        public shape : Array<boolean>;
+        private dimensions : Point;
         public currentAction : string;
         public currentStatus : string;
         public spriteSpecs : SpriteSpecs;
         public appearanceID : string;
+
+        get width() : number {
+            return (this.direction & Direction.Horizontal) ? this.dimensions.y : this.dimensions.x;
+        }
+
+        get height() : number {
+            return (this.direction & Direction.Horizontal) ? this.dimensions.x : this.dimensions.y;
+        }
 
         get animationString() : string {
             return Direction.getDirectionalString(this.direction) + "-" + this.currentAction;
@@ -25,7 +34,7 @@ module TurtleTime {
 
         initialize(entityData : EntityData) : void {
             this.position = new Point(entityData.position[0], entityData.position[1]);
-            this.direction = Direction.getDirection(entityData.direction);
+            this.direction = entityData.hasOwnProperty("direction") ? Direction.getDirection(entityData.direction) : Direction.Down;
             this.spriteSpecs = GAME_ENGINE.globalData.spriteSpecs
                 .getSpriteSpecs(EntityType.toString(this.getEntityClass()), entityData.appearanceID);
             // set default specs in case they're not filled in
@@ -35,17 +44,54 @@ module TurtleTime {
             if (!this.spriteSpecs.hasOwnProperty("tint")) { this.spriteSpecs.tint = "0xFFFFFF"; }
             if (!this.spriteSpecs.hasOwnProperty("animations")) { this.spriteSpecs.animations = [ { name: "default",  frames: [ { direction: "all",  frames: [0] } ] } ]; }
             this.dimensions = new Point(this.spriteSpecs.dimensions[0], this.spriteSpecs.dimensions[1]);
+            if (!this.spriteSpecs.hasOwnProperty("shape")) {
+                this.spriteSpecs.shape = new Array<string>(this.dimensions.y).fill('1'.repeat(this.dimensions.x));
+            }
+            this.shape = new Array<boolean>(this.dimensions.x * this.dimensions.y); // i kind of hate this
+            for (var y = 0; y < this.dimensions.y; y++) {
+                for (var x = 0; x < this.dimensions.x; x++) {
+                    this.shape[y * this.dimensions.x + x] = this.spriteSpecs.shape[y].charAt(x) == '1';
+                }
+            }
             this.appearanceID = entityData.appearanceID;
-            this.currentAction = entityData.actionStatus;
+            this.currentAction = entityData.hasOwnProperty("actionStatus") ? entityData.actionStatus : "default";
             this.currentStatus = "hidden";
             this.layerNumber = LAYER_SPRITE;
         }
 
         abstract getEntityClass() : EntityType;
 
-        overlaps(other : EntityModel) : boolean {
-            return new Rectangle(this.position.x, this.position.y, this.dimensions.x - 0.5, this.dimensions.y - 0.5)
-                .intersects(new Rectangle(other.position.x, other.position.y, other.dimensions.x - 0.5, other.dimensions.y - 0.5), 0);
+        overlaps(other : EntityModel, precise : boolean = false) : boolean {
+            if (!precise) {
+                return this.collisionRectangle.intersects(other.collisionRectangle, 0);
+            } else {
+                var myRectangle : Rectangle = this.collisionRectangle;
+                if (!myRectangle.intersects(other.collisionRectangle, 0)) {
+                    return false;
+                }
+                for (var x = myRectangle.left; x < myRectangle.right; x++) {
+                    for (var y = myRectangle.top; y < myRectangle.bottom; y++) {
+                        if (this.occupiesSpace(x, y) && other.occupiesSpace(x, y)) {
+                            return true;
+                        }
+                    }
+                }
+                return false;
+            }
+        }
+
+        private get collisionRectangle() : Rectangle {
+            return new Rectangle (this.position.x, this.position.y, this.width - 0.5, this.height - 0.5);
+        }
+
+        occupiesSpace(x : number, y : number) : boolean {
+            if (x < this.position.x || x >= this.position.x + this.width ||
+                y < this.position.y || y >= this.position.y + this.height) {
+                return false;
+            }
+            var ax = Math.floor(x - this.position.x);
+            var ay = Math.floor(y - this.position.y);
+            return this.shape[ay * this.dimensions.x + ax];
         }
 
         protected abstract getAdditionalData() : any;

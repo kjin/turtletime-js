@@ -3,10 +3,10 @@
 module TurtleTime {
     export interface EntityData {
         position:Array<number>,
-        direction:string,
-        actionStatus:string,
+        direction?:string,
+        actionStatus?:string,
         appearanceID:string,
-        additionalData:any
+        additionalData?:any
     }
 
     export interface RoomData {
@@ -35,7 +35,7 @@ module TurtleTime {
     export interface UITextData {
         text?: string,
         font?: string,
-        size?: string,
+        size?: number,
         justify?: string,
         tint?: string
     }
