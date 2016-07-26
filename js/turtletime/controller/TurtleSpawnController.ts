@@ -6,6 +6,10 @@
 
 module TurtleTime {
     export class TurtleSpawnController extends Controller<GameState> {
+        turtles : Array<TurtleData>;
+        currentIndex : number = 0;
+        time : number = 0;
+
         initialize(gameState:GameState):void {
             this._readState = {
                 doors: gameState.entities.doors,
@@ -14,16 +18,38 @@ module TurtleTime {
             this._writeState = {
                 turtles: gameState.entities.turtles
             };
+            this.turtles = [];
+            GAME_ENGINE.globalData.turtleData.forEach((turtle : TurtleData) => {
+                this.turtles.push(turtle);
+            });
+        }
+
+        private static rarityToProbability(rarity : number) : number {
+            return Math.pow(1 - rarity / 100.0, 8);
         }
 
         update(dt:number):void {
-            // temporary - if greenie2 is already there, just stop everything
-            if (this._writeState.turtles.underlyingArray.length > 1) {
+            if (this.time < 1) {
+                this.time += dt;
                 return;
             }
-
-            var TURTLE_SPAWN_PROBABILITY_PER_FRAME = 1 - Math.pow(1 - TURTLE_SPAWN_PROBABILITY_PER_SECOND, dt); // hacky ._.
-            if (Math.random() < TURTLE_SPAWN_PROBABILITY_PER_FRAME) {
+            this.time--;
+            this.currentIndex++;
+            if (this.currentIndex >= this.turtles.length) {
+                this.currentIndex = 0;
+            }
+            var possibleTurtle : TurtleData = this.turtles[this.currentIndex];
+            // check if the turtle's already there by any chance
+            var exists = false;
+            this._writeState.turtles.forEach((turtle : Turtle) : void => {
+                if (turtle.appearanceID == possibleTurtle.id) {
+                    exists = true;
+                }
+            });
+            if (exists) {
+                return;
+            }
+            if (Math.random() < TurtleSpawnController.rarityToProbability(possibleTurtle.rarity)) {
                 // pick a random door
                 var door : Door = getRandomElement<Door>(this._readState.doors.underlyingArray);
                 // pick a random seat to move to
@@ -31,10 +57,11 @@ module TurtleTime {
                 this._writeState.turtles.add({
                     position: [door.position.x, door.position.y],
                     direction: Direction.getDirectionalString(door.direction),
-                    appearanceID: "greenie2",
+                    appearanceID: possibleTurtle.id,
                     actionStatus: "stand",
                     additionalData: {
-                        targetPosition: [chair.position.x, chair.position.y]
+                        targetPosition: [chair.position.x, chair.position.y],
+                        mood: { happy: 3 }
                     }
                 });
             }

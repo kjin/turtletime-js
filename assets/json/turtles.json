@@ -1,6 +1,7 @@
 {
-  "turtles": {
-    "green": {
+  "turtles": [
+    {
+      "id": "green",
       "name": "Greenie",
       "description": "Loves the color green, but ironically colorblind",
       "likes": [
@@ -8,9 +9,11 @@
       ],
       "dislikes": [
         "Ham"
-      ]
+      ],
+      "rarity": 0
     },
-    "blue": {
+    {
+      "id": "blue",
       "name": "Ka-Bluie",
       "description": "Explosive personality",
       "likes": [
@@ -18,9 +21,11 @@
       ],
       "dislikes": [
         "Relaxing"
-      ]
+      ],
+      "rarity": 5
     },
-    "purple": {
+    {
+      "id": "purple",
       "name": "King Violet",
       "description": "Acts all kingly and snobbish after reading that purple is a royal color on MeaningOfColors.biz",
       "likes": [
@@ -28,9 +33,11 @@
       ],
       "dislikes": [
         "Peasant Lobster"
-      ]
+      ],
+      "rarity": 10
     },
-    "magenta": {
+    {
+      "id": "magenta",
       "name": "Pinky",
       "description": "As close to a pinky finger as a personality can get",
       "likes": [
@@ -38,9 +45,11 @@
       ],
       "dislikes": [
         "Flexing"
-      ]
+      ],
+      "rarity": 15
     },
-    "red": {
+    {
+      "id": "red",
       "name": "Mars",
       "description": "Fourth planet from the sun",
       "likes": [
@@ -48,9 +57,11 @@
       ],
       "dislikes": [
         "Cockroaches"
-      ]
+      ],
+      "rarity": 20
     },
-    "yellow": {
+    {
+      "id": "yellow",
       "name": "Watermello",
       "description": "Looks like a watermelon and acts like one too",
       "likes": [
@@ -58,7 +69,8 @@
       ],
       "dislikes": [
         "Other Melons"
-      ]
+      ],
+      "rarity": 30
     }
-  }
+  ]
 }

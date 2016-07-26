@@ -8,14 +8,11 @@ namespace TurtleTime {
     export class TurtleTimeGame extends GameEngine {
         protected loadData(game:Phaser.Game):GameData {
             return {
-                turtleData: ((json : any) : Map<string, TurtleData> => {
+                turtleData: ((json : {turtles: Array<TurtleData>}) : Map<string, TurtleData> => {
                     var result : Map<string, TurtleData> = new Map();
-                    var turtles = json["turtles"];
-                    for (var turtle in turtles) {
-                        if (turtles.hasOwnProperty(turtle)) {
-                            result.set(turtle, turtles[turtle]);
-                        }
-                    }
+                    json.turtles.forEach((turtle : TurtleData) : void => {
+                        result.set(turtle.id, turtle);
+                    });
                     return result;
                 })(game.cache.getJSON('turtles')),
                 spriteSpecs: new SpriteData(game.cache.getJSON('sprites')),

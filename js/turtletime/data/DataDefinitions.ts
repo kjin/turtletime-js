@@ -76,10 +76,12 @@ module TurtleTime {
      * Data about each individual turtle.
      */
     export interface TurtleData {
+        id: string,
         name: string,
         description: string,
         likes: Array<string>,
-        dislikes: Array<string>
+        dislikes: Array<string>,
+        rarity: number
     }
 
     /**
