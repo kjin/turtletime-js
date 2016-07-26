@@ -94,6 +94,18 @@ module TurtleTime {
             return this.shape[ay * this.dimensions.x + ax];
         }
 
+        getAllSpaces() : Array<Point> {
+            var result : Array<Point> = [];
+            for (var x = this.position.x; x < this.position.x + this.width; x++) {
+                for (var y = this.position.y; y < this.position.y + this.height; y++) {
+                    if (this.occupiesSpace(x, y)) {
+                        result.push(new Point(x, y));
+                    }
+                }
+            }
+            return result;
+        }
+
         protected abstract getAdditionalData() : any;
         
         serialize() : EntityData {

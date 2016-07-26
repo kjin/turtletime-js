@@ -19,7 +19,8 @@ module TurtleTime {
                 cameraModel: gameState.cameraModel,
                 uiInteractionModel : gameState.uiInteractionModel,
                 turtles: gameState.entities.turtles,
-                food : gameState.entities.food
+                food : gameState.entities.food,
+                eatingAreas : gameState.eatingAreas
             };
         }
 
@@ -31,23 +32,11 @@ module TurtleTime {
             // Assume that turtle is at intermediateTargetPosition and wants to get to targetPosition
             var distanceFromTarget : number = turtle.intermediateTargetPosition.distance(turtle.targetPosition);
             if (distanceFromTarget < 1) {
-                var onObjects : Array<EntityModel> =
-                    this._readState.roomModel.roomLayout[turtle.targetPosition.x][turtle.targetPosition.y];
-                for (var i : number = 0; i < onObjects.length; i++) {
-                    if (onObjects[i].getEntityClass() == EntityType.Chair) {
-                        turtle.direction = onObjects[i].direction;
-                        turtle.chair = <Chair>onObjects[i];
-                        turtle.chair.turtle = turtle;
-                        break;
-                    }
-                }
+                this._readState.roomModel.roomLayout[turtle.targetPosition.x][turtle.targetPosition.y].staticModels.forEach(
+                    (model : EntityModel) => turtle.direction = model.direction
+                );
                 turtle.intermediateTargetPosition.set(turtle.targetPosition.x, turtle.targetPosition.y);
                 return;
-            } else {
-                if (turtle.chair != null) {
-                    turtle.chair.turtle = null;
-                }
-                turtle.chair = null;
             }
             if (turtle.sleep == 0) {
                 // goal: set turtle.intermediateTargetPosition according to the best path
@@ -128,29 +117,15 @@ module TurtleTime {
             }
         }
 
-        processEatingFood(turtle : Turtle) {
-            if (turtle.chair != null && turtle.chair.food != null) {
-                turtle.chair.food.hp--;
-                if (turtle.chair.food.hp == 0) {
-                    this._writeState.food.remove(turtle.chair.food);
-                    turtle.chair.food = null;
-                    turtle.mood.setMoodLevel("fork", 0);
-                    turtle.mood.incrementMoodLevel("happy", 1);
-                }
-            } else {
-                if (Math.random() <= 0.01) {
-                    turtle.mood.incrementMoodLevel("fork", 1);
-                }
-            }
-        }
-
         update(dt : number) : void {
             if (this._readState.gameUI.visible) {
                 this._writeState.turtles.forEach(
                     (turtle:Turtle):void => {
                         this.processMovement(turtle);
                         this.processInput(turtle);
-                        this.processEatingFood(turtle);
+                        if (Math.random() <= 0.01) {
+                            turtle.mood.incrementMoodLevel("fork", 1);
+                        }
                     }
                 );
             }

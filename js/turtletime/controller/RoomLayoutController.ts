@@ -3,11 +3,12 @@ module TurtleTime {
         initialize(gameState:GameState):void {
             this._readState = {
                 staticEntities: [gameState.entities.chairs, gameState.entities.doors, gameState.entities.tables],
-                dynamicEntities: [gameState.entities.turtles]
+                turtles: [gameState.entities.turtles],
+                food: [gameState.entities.food]
             };
             this._writeState = {
                 roomModel: gameState.roomModel
-            };
+            }
         }
 
         private numStaticEntities : number = 0;
@@ -42,9 +43,12 @@ module TurtleTime {
                 });
                 this.numStaticEntities = sum;
             }
-            twoDForEach(this._writeState.roomModel.roomLayout, (e : RoomNode) => e.turtles.length = 0);
-            RoomLayoutController.populate(this._readState.dynamicEntities, (entity, x, y) : void => {
-                this._writeState.roomModel.roomLayout[x][y].turtles.push(entity);
+            twoDForEach(this._writeState.roomModel.roomLayout, (e : RoomNode) => e.turtle = null);
+            RoomLayoutController.populate(this._readState.turtles, (entity, x, y) : void => {
+                this._writeState.roomModel.roomLayout[x][y].turtle = entity;
+            });
+            RoomLayoutController.populate(this._readState.food, (entity, x, y) : void => {
+                this._writeState.roomModel.roomLayout[x][y].food = entity;
             });
         }
     }

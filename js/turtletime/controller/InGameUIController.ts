@@ -19,11 +19,9 @@ namespace TurtleTime {
                 if (this._readState.selectionModel.isBeingDragged) {
                     this._writeState.dragNote.visible = true;
                     this._writeState.infoboxModel.visible = false;
-                    this._writeState.foodMenu.visible = false;
                 } else {
                     this._writeState.dragNote.visible = false;
                     this._writeState.infoboxModel.visible = true;
-                    this._writeState.foodMenu.visible = turtle.chair != null;
                     // update infobox
                     this._writeState.infoboxModelText.appearance.normal.text.text = (() : string => {
                         var turtleData : TurtleData = GAME_ENGINE.globalData.turtleData.get(turtle.appearanceID);

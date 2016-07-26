@@ -1,7 +1,7 @@
 {
   "loadingBar": { "id": "core/loading", "fileType": "png" },
   "textures": {
-    "root": "textures",
+    "root": "assets/textures",
     "files": [
       { "id": "core/highlightCircle" },
       { "id": "core/shadow" },
@@ -35,7 +35,7 @@
     ]
   },
   "json": {
-    "root": "json",
+    "root": "assets/json",
     "files": [
       { "id": "emptyUserData" },
       { "id": "newUserData" },
@@ -45,7 +45,7 @@
     ]
   },
   "fonts": {
-    "root": "fonts",
+    "root": "assets/fonts",
     "files": [
       { "id": "8bit-wonder" }
     ]

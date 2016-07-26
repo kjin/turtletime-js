@@ -48,7 +48,7 @@ module TurtleTime {
                 screenPos = wallToScreen(this.model.position.x + this.model.width / 2, this.model.position.y + this.model.height / 2);
             } else {
                 screenPos = roomToScreen(this.model.position.x + this.model.width / 2, this.model.position.y + this.model.height / 2);
-                if (this.model.getEntityClass() == EntityType.Food && (<Food>this.model).table) {
+                if (this.model.getEntityClass() == EntityType.Food && (<Food>this.model).heightFromGround > 0) {
                     onTable = true;
                     screenPos.y -= 10; // account for the height of the table
                 }

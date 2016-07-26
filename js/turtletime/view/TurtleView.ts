@@ -24,7 +24,7 @@ module TurtleTime {
         }
         
         protected updatePrivate(screenPos : Point, sortValue : number) : void {
-            this._mainSprite.y -= 2 * MathExtensions.squareWave(((<Turtle>this.model).chair != null && (<Turtle>this.model).chair.food != null ? 16 : 2) * GAME_ENGINE.time);
+            this._mainSprite.y -= 2 * MathExtensions.squareWave(2 * GAME_ENGINE.time);
             this._highlightCircle.x = screenPos.x;
             this._highlightCircle.y = screenPos.y - 2 * GAME_ENGINE.globalData.roomScale[1] * this.model.spriteSpecs.scale;
             setTintAndAlpha(this._highlightCircle, EffectCircleDictionary[this.model.currentStatus]);

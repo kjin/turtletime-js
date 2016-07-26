@@ -47,6 +47,7 @@ namespace TurtleTime {
                     wallDecor: new EntityCollection(WallDecoration, userData.cafeState.wallDecor),
                     food: new EntityCollection(Food, userData.cafeState.food)
                 },
+                eatingAreas: [],
                 roomModel: new RoomModel(userData.room),
                 uiModel: new UIModel(uiData.layout, listToMap(uiData.templates, (item : UIData) => item.id)),
                 uiInteractionModel: new UIInteractionModel()
@@ -70,6 +71,7 @@ namespace TurtleTime {
                     new DragController(),
                     new UIController(),
                     new FoodSpawnController(),
+                    new EatingAreaController(),
                     new InGameUIController()
                 ];
             }

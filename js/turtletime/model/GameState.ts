@@ -18,6 +18,7 @@ module TurtleTime {
             wallDecor:EntityCollection<WallDecoration>,
             food:EntityCollection<Food>
         },
+        eatingAreas : Array<EatingArea>
         roomModel: RoomModel,
         uiModel: UIModel,
         uiInteractionModel: UIInteractionModel

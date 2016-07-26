@@ -1,7 +1,6 @@
 module TurtleTime {
     export class Food extends EntityModel {
-        table : Table;
-        chair : Chair;
+        heightFromGround : number;
         hp : number;
 
         initialize(data : EntityData) {

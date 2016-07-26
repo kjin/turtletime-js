@@ -4,10 +4,11 @@
 module TurtleTime {
     export class RoomNode {
         staticModels : Array<EntityModel> = [];
-        turtles : Array<EntityModel> = [];
+        turtle : Turtle = null;
+        food : Food = null;
 
         hasModel() : boolean {
-            return this.staticModels.length + this.turtles.length > 0;
+            return this.staticModels.length > 0 || this.turtle != null || this.food != null;
         }
     }
 
