@@ -58,7 +58,7 @@ module TurtleTime {
                     appearanceID: possibleTurtle.id,
                     actionStatus: "stand",
                     additionalData: {
-                        targetPosition: [0, 0], // doesn't matter
+                        targetPosition: [door.position.x, door.position.y], // doesn't matter
                         mood: { happy: 3 },
                         status: "justEntered"
                     }

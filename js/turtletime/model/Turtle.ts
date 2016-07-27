@@ -23,6 +23,10 @@ module TurtleTime {
             this.sleep = 0;
         }
 
+        atTargetPosition() : boolean {
+            return this.position.x == this.targetPosition.x && this.position.y == this.targetPosition.y;
+        }
+
         getEntityClass() : EntityType { return EntityType.Turtle; }
 
         getAdditionalData() : any {

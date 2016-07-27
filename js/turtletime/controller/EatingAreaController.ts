@@ -52,7 +52,7 @@ module TurtleTime {
                     this._writeState.food.remove(eatingArea.food);
                     eatingArea.food = null;
                     eatingArea.turtle.mood.setMoodLevel("fork", 0);
-                    eatingArea.turtle.mood.incrementMoodLevel("happy", 1);
+                    eatingArea.turtle.mood.incrementMoodLevel("heart", 10);
                 }
             }
         }

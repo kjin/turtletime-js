@@ -13,6 +13,7 @@ module TurtleTime {
                 selectionModel: gameState.selectionModel,
                 roomModel: gameState.roomModel,
                 chairs: gameState.entities.chairs,
+                doors: gameState.entities.doors,
                 gameUI : gameState.uiModel.getChild("game")
             };
             this._writeState = {
@@ -132,6 +133,7 @@ module TurtleTime {
                         if (turtle.timeUntilDecision == 0) {
                             switch (turtle.status) {
                                 case "justEntered":
+                                case "lookingAround":
                                     var candidates:Array<Point> = [];
                                     // find a seat
                                     this._writeState.eatingAreas.forEach((eatingArea:EatingArea):void => {
@@ -154,18 +156,47 @@ module TurtleTime {
                                         turtle.targetPosition = new Point(candidates[cNum].x, candidates[cNum].y);
                                         turtle.status = "navigatingToSeat";
                                     } else {
-                                        // DESTROY TURTLE
-                                        this._writeState.turtles.remove(turtle);
-                                        GAME_ENGINE.debugPrint("turtle was destroyed with extreme prejudice as it entered the door.");
+                                        if (turtle.status == "justEntered") {
+                                            var direction : Point = Direction.toVector(turtle.direction);
+                                            turtle.targetPosition.set(turtle.position.x + direction.x, turtle.position.y + direction.y);
+                                            turtle.status = "lookingAround";
+                                            turtle.timeUntilDecision = 60;
+                                        } else {
+                                            var door : Door = getRandomElement<Door>(this._readState.doors.underlyingArray);
+                                            turtle.targetPosition = new Point(door.position.x, door.position.y);
+                                            turtle.mood.setMoodLevel("angry", 50);
+                                            turtle.status = "exiting";
+                                        }
                                     }
                                     break;
+                                case "navigatingToSeat":
+                                    if (turtle.atTargetPosition()) {
+                                        turtle.status = "sitting";
+                                    }
+                                    break;
+                                case "sitting":
+                                    if (Math.random() <= 0.01) {
+                                        turtle.mood.incrementMoodLevel("fork", 1);
+                                    }
+                                    if (turtle.mood.getHighestMood() == "heart") {
+                                        // time to go
+                                        var door : Door = getRandomElement<Door>(this._readState.doors.underlyingArray);
+                                        turtle.targetPosition = new Point(door.position.x, door.position.y);
+                                        turtle.status = "exiting";
+                                    }
+                                    break;
+                                case "exiting":
+                                    if (turtle.atTargetPosition()) {
+                                        this._writeState.turtles.remove(turtle);
+                                    }
+                                    break;
+                                default:
                             }
+                        } else {
+                            turtle.timeUntilDecision--;
                         }
                         this.processMovement(turtle);
                         this.processInput(turtle);
-                        if (Math.random() <= 0.01) {
-                            turtle.mood.incrementMoodLevel("fork", 1);
-                        }
                     }
                 );
             }

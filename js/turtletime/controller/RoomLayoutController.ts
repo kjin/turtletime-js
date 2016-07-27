@@ -43,7 +43,7 @@ module TurtleTime {
                 });
                 this.numStaticEntities = sum;
             }
-            twoDForEach(this._writeState.roomModel.roomLayout, (e : RoomNode) => e.turtle = null);
+            twoDForEach(this._writeState.roomModel.roomLayout, (e : RoomNode) => { e.turtle = null; e.food = null; });
             RoomLayoutController.populate(this._readState.turtles, (entity, x, y) : void => {
                 this._writeState.roomModel.roomLayout[x][y].turtle = entity;
             });

@@ -2,27 +2,23 @@
   "cafeState": {
     "turtles": [],
     "chairs": [
-      { "position": [4, 8], "direction": "right", "appearanceID": "chairBasic" },
-      { "position": [7, 8], "direction": "left", "appearanceID": "chairBasic" }
+      { "position": [2, 2], "direction": "right", "appearanceID": "chairBasic" },
+      { "position": [5, 2], "direction": "left", "appearanceID": "chairBasic" }
     ],
     "tables": [
-      { "position": [5, 8], "appearanceID": "tableBasic" }
+      { "position": [3, 2], "appearanceID": "tableBasic" }
     ],
     "doors": [
-      { "position": [10, 15], "direction": "up", "appearanceID": "doorBasic" }
+      { "position": [6, 7], "direction": "up", "appearanceID": "doorBasic" }
     ],
     "wallDecor": [
       { "position": [4, 0], "appearanceID": "blackboard" }
     ],
     "roomDecor": [],
-    "food": [
-      { "position": [5, 8], "appearanceID": "aloe", "additionalData": { "hp": 100 } },
-      { "position": [5, 9], "appearanceID": "banana", "additionalData": { "hp": 50 } },
-      { "position": [13, 9], "appearanceID": "grandson", "additionalData": { "hp": 20 } }
-    ]
+    "food": []
   },
   "room": {
-    "size": [20, 16],
+    "size": [8, 8],
     "wallHeight": 2,
     "floorPattern": "tile",
     "wallPattern": "brick"
