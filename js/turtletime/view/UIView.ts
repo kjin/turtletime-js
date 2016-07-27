@@ -50,7 +50,7 @@ module TurtleTime {
                 }
                 if (this.model.appearance.normal.sprite != null) {
                     this._sprite = new EntitySpriteWrapper();
-                    this._sprite.reset(GAME_ENGINE.globalData.spriteSpecs.getSpriteSpecs("ui", this.model.appearance.normal.sprite.spriteID));
+                    this._sprite.reset(GAME_ENGINE.globalData.spriteSpecs.getSpriteSpecs(this.model.appearance.normal.sprite.category, this.model.appearance.normal.sprite.spriteID));
                     this._sprite.underlyingSprite.name = "" + (100 + this._level * 10 + 2);
                 }
                 if (this.model.appearance.normal.geometry != null) {
@@ -97,8 +97,8 @@ module TurtleTime {
                 this._bitmapText.maxWidth = this.screenDimensions.width;
             }
             if (this._sprite != null) {
-                this._sprite.x = this.screenDimensions.x + this.screenDimensions.width * this.model.container.anchorX;
-                this._sprite.y = this.screenDimensions.y + this.screenDimensions.height * this.model.container.anchorY;
+                this._sprite.x = this.screenDimensions.x + this.screenDimensions.width / 2;
+                this._sprite.y = this.screenDimensions.y + this.screenDimensions.height / 2;
             }
             this.children.forEach((child : UIViewNode) : void => child.assignScreenDimensions(this.screenDimensions));
         }
@@ -157,6 +157,15 @@ module TurtleTime {
         }
 
         update():void {
+            this.model.children.forEach((child : UIModel) : void => {
+                if (!child.view) {
+                    var viewNode : UIViewNode = new UIViewNode(child, this._level + 1);
+                    child.view = viewNode;
+                    this.children.push(viewNode);
+                    viewNode.assignScreenDimensions(this.screenDimensions);
+                }
+            });
+            this.children.forEach((child : UIViewNode) : void => child.update());
         }
 
         enumerateGameObjects():Array<PIXI.DisplayObject> {
@@ -197,6 +206,7 @@ module TurtleTime {
 
         update():void {
             this._rootNode.draw(this._interactionModel);
+            this._rootNode.update();
         }
 
         contains(x:number, y:number):boolean {

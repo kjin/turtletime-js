@@ -1,0 +1,22 @@
+{
+  "food": [
+    {
+      "id": "aloe",
+      "name": "Aloe",
+      "description": "Ancient tribes used this plant on their skin to relieve itchiness from mosquito bites. Today, we still use this plant on our skin to relieve itchiness from mosquito bites. We are such Neanderthals",
+      "hp": 100
+    },
+    {
+      "id": "banana",
+      "name": "Banana",
+      "description": "Extremely poor source of calcium",
+      "hp": 50
+    },
+    {
+      "id": "grandson",
+      "name": "Grandson",
+      "description": "Someone's grandson. Attempting to eat it is a surefire way to get on the local news.",
+      "hp": 25
+    }
+  ]
+}

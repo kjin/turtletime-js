@@ -44,7 +44,7 @@
     {
       "id": "foodItem",
       "container": {
-        "anchor": [0, 0.5],
+        "anchor": [0, 0],
         "position": ["$0", "$1"],
         "size": ["200px", "50px"]
       },
@@ -55,11 +55,14 @@
           "container": {
             "anchor": [0, 0.5],
             "position": ["0%", "50%"],
-            "size": ["50px", "50px"]
+            "size": ["32px", "32px"]
           },
           "appearance": {
             "normal": {
-              "geometry": {}
+              "sprite": {
+                "spriteID": "$2",
+                "category": "food"
+              }
             }
           },
           "children": []
@@ -69,13 +72,14 @@
           "container": {
             "anchor": [1, 0.5],
             "position": ["100%", "50%"],
-            "size": ["100%-50px", "100%"]
+            "size": ["100%-32px", "100%"]
           },
           "appearance": {
             "normal": {
               "text": {
-                "text": "$2",
-                "justify": "left"
+                "text": "$3",
+                "justify": "left",
+                "valign": "middle"
               }
             }
           },
@@ -90,30 +94,9 @@
         "position": ["0%", "0%"],
         "size": ["100%", "100%"]
       },
+      "generate": "foodItems",
       "appearance": { "normal": {} },
-      "children": [
-        {
-          "id": "aloe",
-          "template": {
-            "id": "foodItem",
-            "subs": [ "5%", "15%", "aloe" ]
-          }
-        },
-        {
-          "id": "banana",
-          "template": {
-            "id": "foodItem",
-            "subs": [ "5%", "35%", "banana" ]
-          }
-        },
-        {
-          "id": "grandson",
-          "template": {
-            "id": "foodItem",
-            "subs": [ "5%", "55%", "Grandson" ]
-          }
-        }
-      ]
+      "children": []
     }
   ],
   "layout": {

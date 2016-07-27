@@ -8,14 +8,10 @@ namespace TurtleTime {
     export class TurtleTimeGame extends GameEngine {
         protected loadData(game:Phaser.Game):GameData {
             return {
-                turtleData: ((json : {turtles: Array<TurtleData>}) : Map<string, TurtleData> => {
-                    var result : Map<string, TurtleData> = new Map();
-                    json.turtles.forEach((turtle : TurtleData) : void => {
-                        result.set(turtle.id, turtle);
-                    });
-                    return result;
-                })(game.cache.getJSON('turtles')),
+                turtleData: listToMap(game.cache.getJSON('turtles').turtles, (data : TurtleData) : string => data.id),
+                foodData: listToMap(game.cache.getJSON('food').food, (data : FoodData) : string => data.id),
                 spriteSpecs: new SpriteData(game.cache.getJSON('sprites')),
+                uiTemplates : listToMap(game.cache.getJSON('ui').templates, (item : UIData) => item.id),
                 roomScale: [32, 32],
                 maxRoomSize: new Point(12, 16),
                 screenSize: new Point(game.width, game.height)
@@ -49,7 +45,7 @@ namespace TurtleTime {
                 },
                 eatingAreas: [],
                 roomModel: new RoomModel(userData.room),
-                uiModel: new UIModel(uiData.layout, listToMap(uiData.templates, (item : UIData) => item.id)),
+                uiModel: new UIModel(uiData.layout),
                 uiInteractionModel: new UIInteractionModel()
             };
         }

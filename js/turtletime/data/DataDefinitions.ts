@@ -28,7 +28,8 @@ module TurtleTime {
     }
 
     export interface UISpriteData {
-        spriteID: string,
+        spriteID?: string,
+        category?: string,
         tint? : string
     }
 
@@ -64,6 +65,7 @@ module TurtleTime {
         appearance?: UIAppearanceCollectionData,
         children?: Array<UIData>,
         template?: UITemplateData,
+        generate?: string,
         type?: string
     }
 
@@ -82,6 +84,13 @@ module TurtleTime {
         likes: Array<string>,
         dislikes: Array<string>,
         rarity: number
+    }
+
+    export interface FoodData {
+        id: string,
+        name: string,
+        description: string,
+        hp: number
     }
 
     /**
@@ -105,8 +114,10 @@ module TurtleTime {
      */
     export interface GameData {
         turtleData: Map<string, TurtleData>,
+        foodData: Map<string, FoodData>,
         spriteSpecs: SpriteData,
         roomScale: Array<number>,
+        uiTemplates: Map<string, UIData>,
         maxRoomSize: Point,
         screenSize: Point
     }

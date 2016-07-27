@@ -3,10 +3,12 @@
 module TurtleTime {
     export class UISprite {
         spriteID : string;
+        category : string;
         tint : number;
         
         constructor(data : UISpriteData) {
             this.spriteID = data.hasOwnProperty("spriteID") ? data.spriteID : "";
+            this.category = data.hasOwnProperty("category") ? data.category : "ui";
             this.tint = data.hasOwnProperty("tint") ? parseInt(data.tint) : 0xFFFFFF;
         }
     }

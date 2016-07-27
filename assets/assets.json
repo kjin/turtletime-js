@@ -41,6 +41,7 @@
       { "id": "newUserData" },
       { "id": "sprites" },
       { "id": "turtles" },
+      { "id": "food" },
       { "id": "ui" }
     ]
   },

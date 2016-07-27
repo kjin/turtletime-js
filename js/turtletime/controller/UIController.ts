@@ -10,6 +10,24 @@ module TurtleTime {
                 rootUI: gameState.uiModel,
                 uiInteractionModel: gameState.uiInteractionModel
             };
+            // TODO figure out where to put this
+            // food generation
+            this._writeState.rootUI.getEntireTree().forEach((node : UIModel) => {
+                switch (node.generate) {
+                    case "foodItems":
+                        var num = 0;
+                        GAME_ENGINE.globalData.foodData.forEach((food : FoodData) => {
+                            node.addChild({
+                                id: food.id,
+                                template: {
+                                    id: "foodItem",
+                                    subs: ["5%", "5%+" + (num++ * 60) + "px", food.id, food.name]
+                                }
+                            });
+                        });
+                        break;
+                }
+            });
             this.onClick = new Map<UIModel, (root : UIModel, state : UIInteractionModel) => void>();
             // initialize the actions that fire on click
             this.initializeOnClick();
