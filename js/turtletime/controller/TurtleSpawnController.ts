@@ -52,16 +52,15 @@ module TurtleTime {
             if (Math.random() < TurtleSpawnController.rarityToProbability(possibleTurtle.rarity)) {
                 // pick a random door
                 var door : Door = getRandomElement<Door>(this._readState.doors.underlyingArray);
-                // pick a random seat to move to
-                var chair : Chair = getRandomElement<Chair>(this._readState.chairs.underlyingArray);
                 this._writeState.turtles.add({
                     position: [door.position.x, door.position.y],
                     direction: Direction.getDirectionalString(door.direction),
                     appearanceID: possibleTurtle.id,
                     actionStatus: "stand",
                     additionalData: {
-                        targetPosition: [chair.position.x, chair.position.y],
-                        mood: { happy: 3 }
+                        targetPosition: [0, 0], // doesn't matter
+                        mood: { happy: 3 },
+                        status: "justEntered"
                     }
                 });
             }

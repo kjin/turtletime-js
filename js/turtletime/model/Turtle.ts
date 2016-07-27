@@ -9,13 +9,17 @@ module TurtleTime {
         // put turtle to sleep if it can't find a path to an object
         sleep : number;
         mood : Mood;
+        timeUntilDecision : number;
+        status : string;
 
         initialize(entityData : EntityData) : void {
             super.initialize(entityData);
-            this.currentStatus = 'normal';
+            this.selectionStatus = 'normal';
             this.intermediateTargetPosition = new Point(this.position.x, this.position.y);
             this.targetPosition = new Point(entityData.additionalData.targetPosition[0], entityData.additionalData.targetPosition[1]);
             this.mood = new Mood(entityData.additionalData.mood);
+            this.status = entityData.additionalData.status;
+            this.timeUntilDecision = 0;
             this.sleep = 0;
         }
 
@@ -24,7 +28,8 @@ module TurtleTime {
         getAdditionalData() : any {
             return {
                 targetPosition: [this.targetPosition.x, this.targetPosition.y],
-                mood: this.mood.serialize()
+                mood: this.mood.serialize(),
+                status: this.status
             };
         }
     }

@@ -16,7 +16,7 @@ module TurtleTime {
         public shape : Array<boolean>;
         private dimensions : Point;
         public currentAction : string;
-        public currentStatus : string;
+        public selectionStatus : string;
         public spriteSpecs : SpriteSpecs;
         public appearanceID : string;
 
@@ -55,7 +55,7 @@ module TurtleTime {
             }
             this.appearanceID = entityData.appearanceID;
             this.currentAction = entityData.hasOwnProperty("actionStatus") ? entityData.actionStatus : "default";
-            this.currentStatus = "hidden";
+            this.selectionStatus = "unselectable";
             this.layerNumber = LAYER_SPRITE;
         }
 

@@ -12,6 +12,7 @@ module TurtleTime {
                 inputState: gameState.inputState,
                 selectionModel: gameState.selectionModel,
                 roomModel: gameState.roomModel,
+                chairs: gameState.entities.chairs,
                 gameUI : gameState.uiModel.getChild("game")
             };
             this._writeState = {
@@ -81,46 +82,85 @@ module TurtleTime {
 
         private processInput(turtle : Turtle) : void {
             var inputState : InputModel = this._readState.inputState;
+            var selectionModel : SelectionModel = this._writeState.selectionModel;
             if (!this._writeState.uiInteractionModel.mouseOver(this._readState.gameUI)) {
                 return;
             }
-            if (this._writeState.selectionModel.isBeingDragged) {
+            if (selectionModel.isBeingDragged) {
                 return;
-            } else if (this._writeState.selectionModel.entity == turtle) {
-                if (this._writeState.selectionModel.currentDragPosition != null) {
-                    this._writeState.selectionModel.currentDragPosition = null;
-                    turtle.targetPosition.x = this._writeState.selectionModel.currentDragPositionInRoom.x;
-                    turtle.targetPosition.y = this._writeState.selectionModel.currentDragPositionInRoom.y;
+            } else if (selectionModel.entity == turtle) {
+                if (selectionModel.currentDragPosition != null) {
+                    selectionModel.currentDragPosition = null;
+                    turtle.targetPosition.x = selectionModel.currentDragPositionInRoom.x;
+                    turtle.targetPosition.y = selectionModel.currentDragPositionInRoom.y;
                     this._readState.roomModel.clamp(turtle.targetPosition);
                 }
             }
             if (this._readState.selectionModel.entity == turtle) {
-                turtle.currentStatus = "selected";
+                turtle.selectionStatus = "selected";
             } else {
-                turtle.currentStatus = "normal";
+                turtle.selectionStatus = "normal";
             }
             if (turtle.view.contains(inputState.inputX, inputState.inputY)) {
-                turtle.currentStatus = "over";
+                turtle.selectionStatus = "over";
                 // conditions for selection
-                if (inputState.justPressed && this._writeState.selectionModel.entity != turtle) {
-                    this._writeState.selectionModel.entity = turtle;
+                if (inputState.justPressed && selectionModel.entity != turtle) {
+                    selectionModel.entity = turtle;
                     this._writeState.cameraModel.pushTarget(new Point(turtle.position.x, turtle.position.y - 2));
-                    this._writeState.selectionModel.selectedOnClick = this._readState.inputState.clickNumber;
+                    selectionModel.selectedOnClick = this._readState.inputState.clickNumber;
                 }
             }
             // conditions for deselection
             else if (inputState.justPressed &&
-                this._writeState.selectionModel.entity == turtle &&
-                this._writeState.selectionModel.selectedOnClick != this._readState.inputState.clickNumber) {
+                selectionModel.entity == turtle &&
+                selectionModel.selectedOnClick != this._readState.inputState.clickNumber) {
                 this._writeState.cameraModel.popTarget();
-                this._writeState.selectionModel.entity = null;
+                selectionModel.entity = null;
             }
+        }
+
+        private canSetTargetDestination(position : Point) : boolean {
+            return !this._writeState.turtles.underlyingArray.find((otherTurtle : Turtle) : boolean =>
+                (otherTurtle.position.x == position.x && otherTurtle.position.y == position.y) ||
+                (otherTurtle.targetPosition.x == position.x && otherTurtle.targetPosition.y == position.y));
         }
 
         update(dt : number) : void {
             if (this._readState.gameUI.visible) {
                 this._writeState.turtles.forEach(
                     (turtle:Turtle):void => {
+                        if (turtle.timeUntilDecision == 0) {
+                            switch (turtle.status) {
+                                case "justEntered":
+                                    var candidates:Array<Point> = [];
+                                    // find a seat
+                                    this._writeState.eatingAreas.forEach((eatingArea:EatingArea):void => {
+                                        if (this.canSetTargetDestination(eatingArea.chair.atPosition)) {
+                                            candidates.push(eatingArea.chair.atPosition);
+                                        }
+                                    });
+                                    if (candidates.length == 0) {
+                                        // find any position that's a chair
+                                        this._readState.chairs.forEach((chair:Chair):void => {
+                                            chair.getAllSpaces().forEach((point:Point) => {
+                                                if (this.canSetTargetDestination(point)) {
+                                                    candidates.push(point);
+                                                }
+                                            });
+                                        });
+                                    }
+                                    if (candidates.length > 0) {
+                                        var cNum = Math.floor(Math.random() * candidates.length);
+                                        turtle.targetPosition = new Point(candidates[cNum].x, candidates[cNum].y);
+                                        turtle.status = "navigatingToSeat";
+                                    } else {
+                                        // DESTROY TURTLE
+                                        this._writeState.turtles.remove(turtle);
+                                        GAME_ENGINE.debugPrint("turtle was destroyed with extreme prejudice as it entered the door.");
+                                    }
+                                    break;
+                            }
+                        }
                         this.processMovement(turtle);
                         this.processInput(turtle);
                         if (Math.random() <= 0.01) {

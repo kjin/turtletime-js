@@ -154,10 +154,12 @@ namespace TurtleTime {
 
         debugPrint(text : any) {
             this.debugText += "" + text;
+            console.debug(text);
         }
 
         debugPrintln(text : any) {
             this.debugText += "" + text + "\n";
+            console.debug(text + "\n");
         }
 
         protected abstract loadData(game : Phaser.Game) : GameData;

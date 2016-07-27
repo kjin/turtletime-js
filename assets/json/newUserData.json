@@ -2,27 +2,11 @@
   "cafeState": {
     "turtles": [],
     "chairs": [
-      { "position": [0, 15], "direction": "up", "appearanceID": "chairBasic" },
-      { "position": [1, 15], "direction": "up", "appearanceID": "chairBasic" },
-      { "position": [2, 15], "direction": "up", "appearanceID": "chairBasic" },
-      { "position": [3, 15], "direction": "up", "appearanceID": "chairBasic" },
-      { "position": [4, 15], "direction": "up", "appearanceID": "chairBasic" },
-      { "position": [5, 15], "direction": "up", "appearanceID": "chairBasic" },
       { "position": [4, 8], "direction": "right", "appearanceID": "chairBasic" },
-      { "position": [7, 8], "direction": "left", "appearanceID": "chairBasic" },
-      { "position": [11, 8], "direction": "right", "appearanceID": "chairBasic" },
-      { "position": [14, 8], "direction": "left", "appearanceID": "chairBasic" },
-      { "position": [4, 9], "direction": "right", "appearanceID": "chairBasic" },
-      { "position": [7, 9], "direction": "left", "appearanceID": "chairBasic" },
-      { "position": [11, 9], "direction": "right", "appearanceID": "chairBasic" },
-      { "position": [14, 9], "direction": "left", "appearanceID": "chairBasic" },
-      { "position": [14, 0], "direction": "down", "appearanceID": "pinkCouch" },
-      { "position": [14, 15], "direction": "up", "appearanceID": "greenCouch" }
+      { "position": [7, 8], "direction": "left", "appearanceID": "chairBasic" }
     ],
     "tables": [
-      { "position": [5, 8], "appearanceID": "tableBasic" },
-      { "position": [12, 8], "appearanceID": "tableBasic" },
-      { "position": [1, 0], "appearanceID": "counter" }
+      { "position": [5, 8], "appearanceID": "tableBasic" }
     ],
     "doors": [
       { "position": [10, 15], "direction": "up", "appearanceID": "doorBasic" }
