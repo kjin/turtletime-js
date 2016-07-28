@@ -1,8 +1,8 @@
 module TurtleTime {
     import Rectangle = Phaser.Rectangle;
     class PercentageAndPixel {
-        private _percentage : number = 0;
-        private _pixel : number = 0;
+        percentage : number = 0;
+        pixel : number = 0;
 
         constructor(str : string) {
             var matchedArray : RegExpMatchArray = str.match("(\\+|-|)(\\d*\\.{0,1}\\d*)(%|px)\\s*(\\+|-)(\\s*\\d*\\.{0,1}\\d*)(%|px)");
@@ -14,22 +14,22 @@ module TurtleTime {
             }
             if (matchedArray.length >= 3) {
                 if (matchedArray[3] == "%") {
-                    this._percentage += parseFloat(matchedArray[1] + matchedArray[2]) / 100;
+                    this.percentage += parseFloat(matchedArray[1] + matchedArray[2]) / 100;
                 } else {
-                    this._pixel += parseFloat(matchedArray[1] + matchedArray[2]);
+                    this.pixel += parseFloat(matchedArray[1] + matchedArray[2]);
                 }
             }
             if (matchedArray.length >= 6) {
                 if (matchedArray[6] == "%") {
-                    this._percentage += parseFloat(matchedArray[4] + matchedArray[5]) / 100;
+                    this.percentage += parseFloat(matchedArray[4] + matchedArray[5]) / 100;
                 } else {
-                    this._pixel += parseFloat(matchedArray[4] + matchedArray[5]);
+                    this.pixel += parseFloat(matchedArray[4] + matchedArray[5]);
                 }
             }
         }
 
         eval(outerValue : number) : number {
-            return outerValue * this._percentage + this._pixel;
+            return outerValue * this.percentage + this.pixel;
         }
     }
 
@@ -48,6 +48,12 @@ module TurtleTime {
 
         evalY(outerHeight : number) : number {
             return this._y.eval(outerHeight);
+        }
+
+        // erases percentage
+        setAbsolutePosition(x : number, y : number) : void {
+            this._x.pixel = x;
+            this._y.pixel = y;
         }
     }
 
@@ -86,6 +92,10 @@ module TurtleTime {
 
         get anchorY() : number {
             return this._anchor.y;
+        }
+
+        setAbsolutePosition(x : number, y : number) : void {
+            this._position.setAbsolutePosition(x, y);
         }
     }
 }

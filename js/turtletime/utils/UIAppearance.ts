@@ -68,8 +68,12 @@ module TurtleTime {
         toggled : UIAppearance;
 
         constructor(data : UIAppearanceCollectionData) {
-            this.normal = new UIAppearance(data.normal);
-            this.toggled = data.hasOwnProperty("toggled") ? new UIAppearance(data.toggled) : null;
+            if (data == null || data.normal == null) {
+                this.normal = new UIAppearance({});
+            } else {
+                this.normal = new UIAppearance(data.normal);
+                this.toggled = data.hasOwnProperty("toggled") ? new UIAppearance(data.toggled) : null;
+            }
         }
     }
 }

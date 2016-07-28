@@ -68,7 +68,9 @@ module TurtleTime {
         children?: Array<UIData>,
         template?: UITemplateData,
         generate?: string,
-        type?: string
+        type?: string,
+        visible?: boolean,
+        mobile?: boolean
     }
 
     export interface UIDataCollection {

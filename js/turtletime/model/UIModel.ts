@@ -12,6 +12,7 @@ module TurtleTime {
         generate : string;
         type : string;
         appearance : UIAppearanceCollection;
+        mobile : boolean;
 
         //ephemeral state
         visualState: string;
@@ -33,6 +34,8 @@ module TurtleTime {
                 if (template.hasOwnProperty("appearance")) { data.appearance = template.appearance; }
                 if (template.hasOwnProperty("generate")) { data.generate = template.generate; }
                 if (template.hasOwnProperty("type")) { data.type = template.type; }
+                if (template.hasOwnProperty("visible")) { data.visible = template.visible; }
+                if (template.hasOwnProperty("mobile")) { data.mobile = template.mobile; }
             }
             this.container = new UIContainer(data.container);
             this.id = data.id;
@@ -43,11 +46,16 @@ module TurtleTime {
                 this.fullID = parentFullID == "" ? data.id : parentFullID + "." + data.id;
             }
             this.type = data.hasOwnProperty("type") ? data.type : "panel";
-            this.children = data.children.map((childData : UIData) : UIModel => new UIModel(childData, this.fullID));
+            if (data.children != null) {
+                this.children = data.children.map((childData:UIData):UIModel => new UIModel(childData, this.fullID));
+            } else {
+                this.children = [];
+            }
             this.appearance = new UIAppearanceCollection(data.appearance);
             if (data.hasOwnProperty("visible")) {
                 this.visible = data["visible"];
             }
+            this.mobile = data.hasOwnProperty("mobile") ? data.mobile : false;
             // store state based on type
             this.visualState = "normal";
             switch (this.type) {

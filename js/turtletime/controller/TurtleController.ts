@@ -18,7 +18,6 @@ module TurtleTime {
             };
             this._writeState = {
                 selectionModel: gameState.selectionModel,
-                cameraModel: gameState.cameraModel,
                 uiInteractionModel : gameState.uiInteractionModel,
                 turtles: gameState.entities.turtles,
                 food : gameState.entities.food,
@@ -61,10 +60,6 @@ module TurtleTime {
 
         private processMovement(turtle : Turtle) : void {
             // move the camera to the turtle's location if it's selected
-            if (this._writeState.selectionModel.entity == turtle) {
-                this._writeState.cameraModel.peekTarget().x = turtle.position.x;
-                this._writeState.cameraModel.peekTarget().y = turtle.position.y - 2;
-            }
             if (turtle.position.distance(turtle.intermediateTargetPosition) < TURTLE_SPEED) {
                 turtle.position.set(
                     turtle.intermediateTargetPosition.x,
@@ -107,7 +102,6 @@ module TurtleTime {
                 // conditions for selection
                 if (inputState.justPressed && selectionModel.entity != turtle) {
                     selectionModel.entity = turtle;
-                    this._writeState.cameraModel.pushTarget(new Point(turtle.position.x, turtle.position.y - 2));
                     selectionModel.selectedOnClick = this._readState.inputState.clickNumber;
                 }
             }
@@ -115,7 +109,6 @@ module TurtleTime {
             else if (inputState.justPressed &&
                 selectionModel.entity == turtle &&
                 selectionModel.selectedOnClick != this._readState.inputState.clickNumber) {
-                this._writeState.cameraModel.popTarget();
                 selectionModel.entity = null;
             }
         }

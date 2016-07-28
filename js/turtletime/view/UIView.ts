@@ -172,6 +172,9 @@ module TurtleTime {
                     this.children.push(viewNode);
                     viewNode.assignScreenDimensions(this.screenDimensions);
                 }
+                if (child.mobile) {
+                    (<UIViewNode>child.view).assignScreenDimensions(this.screenDimensions);
+                }
             });
             this.children.forEach((child : UIViewNode) : void => child.update());
         }
@@ -198,7 +201,7 @@ module TurtleTime {
         }
     }
 
-    export class UIView extends BaseView {
+    export class MainUIView extends BaseView {
         private _rootNode : UIViewNode;
         private _editMode : boolean;
         private _interactionModel : UIInteractionModel;
@@ -213,8 +216,8 @@ module TurtleTime {
         }
 
         update():void {
-            this._rootNode.draw(this._interactionModel);
             this._rootNode.update();
+            this._rootNode.draw(this._interactionModel);
         }
 
         contains(x:number, y:number):boolean {
