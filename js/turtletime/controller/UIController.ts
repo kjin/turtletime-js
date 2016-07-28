@@ -89,7 +89,18 @@ module TurtleTime {
             });
             this._writeState.rootUI.getChild("game.foodMenuContainer.foodMenu").children.forEach((child : UIModel) : void => {
                 this.assign(child.getChild("icon").fullID, (root, state) => {
-                    state.currentFood = child.id;
+                    if (!child.getChild("icon").data.toggled) {
+                        this._writeState.rootUI.getChild("game.foodMenuContainer.foodMenu").children.forEach((competingChild:UIModel) => {
+                            competingChild.getChild("icon").visualState = "normal";
+                            competingChild.getChild("icon").data.toggled = false;
+                        });
+                        child.getChild("icon").visualState = "toggled";
+                        child.getChild("icon").data.toggled = true;
+                    } else {
+                        child.getChild("icon").visualState = "normal";
+                        child.getChild("icon").data.toggled = false;
+                    }
+                    // state.currentFood = child.id;
                 });
             });
         }

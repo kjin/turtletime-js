@@ -30,6 +30,7 @@ module TurtleTime {
     export interface UISpriteData {
         spriteID?: string,
         category?: string,
+        animation?: string,
         tint? : string
     }
 
@@ -57,6 +58,7 @@ module TurtleTime {
 
     export interface UIAppearanceCollectionData {
         normal?: UIAppearanceData
+        toggled?: UIAppearanceData
     }
 
     export interface UIData {

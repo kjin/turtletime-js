@@ -18,14 +18,14 @@ module TurtleTime {
         update() : void {
             this._allGroup.sort('name');
             this._groups.forEach((group : Group) : void => {
-                group.sort('name', Group.SORT_ASCENDING);
+                group.sort('data', Group.SORT_ASCENDING);
             });
             this._views.forEach(function (view : BaseView) { view.update(); });
         }
 
         add(view : BaseView) : void {
             if (!this._groups.has(view.getLayerNumber())) {
-                this._groups.set(view.getLayerNumber(), GAME_ENGINE.game.add.group(null, "" + (view.getLayerNumber() + 10000))); // to sort easily
+                this._groups.set(view.getLayerNumber(), GAME_ENGINE.game.add.group(null, "" + view.getLayerNumber())); // to sort easily
                 this._allGroup.add(this._groups.get(view.getLayerNumber()));
             }
             var group : Group = this._groups.get(view.getLayerNumber());

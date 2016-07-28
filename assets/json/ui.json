@@ -57,11 +57,22 @@
             "position": ["0%", "50%"],
             "size": ["32px", "32px"]
           },
+          "type": "toggle",
           "appearance": {
             "normal": {
               "sprite": {
                 "spriteID": "$2",
                 "category": "food"
+              },
+              "geometry": {
+                "lineWeight": 0
+              }
+            },
+            "toggled": {
+              "sprite": {},
+              "geometry": {
+                "lineColor": "0xFF0000",
+                "lineWeight": 5
               }
             }
           },

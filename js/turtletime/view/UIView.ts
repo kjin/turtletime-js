@@ -28,13 +28,18 @@ module TurtleTime {
                 });
                 this._graphics = GAME_ENGINE.game.add.graphics(0, 0);
             } else {
+                for (var field in this.model.appearance) {
+                    if (this.model.appearance.hasOwnProperty(field)) {
+
+                    }
+                }
                 if (this.model.appearance.normal.text != null) {
                     if (this.model.appearance.normal.text.font != "") {
                         this._bitmapText = GAME_ENGINE.game.add.bitmapText(0, 0,
                             this.model.appearance.normal.text.font, "",
                             this.model.appearance.normal.text.size);
                         this._bitmapText.align = this.model.appearance.normal.text.justify;
-                        this._bitmapText.name = "" + (100 + this._level * 10 + 3);
+                        this._bitmapText.data = this._level * 10 + 3;
                     } else { // fallback
                         this._text = GAME_ENGINE.game.add.text(0, 0, this.model.appearance.normal.text.text, {
                             font: 'Courier New',
@@ -45,17 +50,17 @@ module TurtleTime {
                         this._text.align = this.model.appearance.normal.text.justify;
                         this._text.boundsAlignH = this.model.appearance.normal.text.justify;
                         this._text.boundsAlignV = this.model.appearance.normal.text.valign;
-                        this._text.name = "" + (100 + this._level * 10 + 3);
+                        this._text.data = this._level * 10 + 3;
                     }
                 }
                 if (this.model.appearance.normal.sprite != null) {
                     this._sprite = new EntitySpriteWrapper();
                     this._sprite.reset(GAME_ENGINE.globalData.spriteSpecs.getSpriteSpecs(this.model.appearance.normal.sprite.category, this.model.appearance.normal.sprite.spriteID));
-                    this._sprite.underlyingSprite.name = "" + (100 + this._level * 10 + 2);
+                    this._sprite.underlyingSprite.data = this._level * 10 + 2;
                 }
                 if (this.model.appearance.normal.geometry != null) {
                     this._graphics = GAME_ENGINE.game.add.graphics(0, 0);
-                    this._graphics.name = "" + (100 + this._level * 10 + 1);
+                    this._graphics.data = this._level * 10 + 1;
                 }
             }
         }
@@ -124,24 +129,26 @@ module TurtleTime {
                 this._graphics.drawRect(this.screenDimensions.x, this.screenDimensions.y, this.screenDimensions.width, this.screenDimensions.height);
                 this._graphics.endFill();
             } else {
+                var currentAppearance : UIAppearance = this.model.appearance[this.model.visualState];
                 if (this._text != null) {
                     this._text.visible = parentVisible && this.model.visible;
-                    this._text.text = this.model.appearance.normal.text.text;
-                    this._text.tint = this.model.appearance.normal.text.tint;
+                    this._text.text = currentAppearance.text.text;
+                    this._text.tint = currentAppearance.text.tint;
                 }
                 if (this._bitmapText != null) {
                     this._bitmapText.visible = parentVisible && this.model.visible;
-                    this._bitmapText.text = this.model.appearance.normal.text.text;
-                    this._bitmapText.tint = this.model.appearance.normal.text.tint;
+                    this._bitmapText.text = currentAppearance.text.text;
+                    this._bitmapText.tint = currentAppearance.text.tint;
                 }
                 if (this._sprite != null) {
                     this._sprite.visible = parentVisible && this.model.visible;
-                    this._sprite.tint = this.model.appearance.normal.sprite.tint;
+                    this._sprite.animation = currentAppearance.sprite.animation;
+                    this._sprite.tint = currentAppearance.sprite.tint;
                 }
                 if (this._graphics != null) {
                     this._graphics.clear();
                     if (parentVisible && this.model.visible) {
-                        var geometry:UIGeometry = this.model.appearance.normal.geometry;
+                        var geometry:UIGeometry = currentAppearance.geometry;
                         this._graphics.lineStyle(geometry.lineWeight, geometry.lineColor, 1.0);
                         this._graphics.beginFill(geometry.fillColor, 1.0);
                         if (geometry.cornerRadius == 0) {
@@ -160,6 +167,7 @@ module TurtleTime {
             this.model.children.forEach((child : UIModel) : void => {
                 if (!child.view) {
                     var viewNode : UIViewNode = new UIViewNode(child, this._level + 1);
+                    GAME_ENGINE.views.add(viewNode);
                     child.view = viewNode;
                     this.children.push(viewNode);
                     viewNode.assignScreenDimensions(this.screenDimensions);

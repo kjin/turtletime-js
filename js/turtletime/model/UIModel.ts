@@ -3,11 +3,6 @@
 module TurtleTime {
     import Rectangle = Phaser.Rectangle;
 
-    // describes how user interacts with the UI component
-    export enum UIType {
-        Dummy, Container, Button, ScrollingContainer, TabbedContainer
-    }
-
     export class UIModel extends VisibleModel {
         id : string;
         fullID : string;
@@ -15,8 +10,12 @@ module TurtleTime {
         children : Array<UIModel>;
         visible : boolean = true;
         generate : string;
-        type : UIType;
+        type : string;
         appearance : UIAppearanceCollection;
+
+        //ephemeral state
+        visualState: string;
+        data : any;
 
         constructor(data : UIData, parentFullID : string = null) {
             super();
@@ -29,12 +28,11 @@ module TurtleTime {
                     }
                 }
                 var template : UIData = JSON.parse(rawTemplate);
-                data.children = template.children;
-                data.container = template.container;
-                data.appearance = template.appearance;
-                if (template.hasOwnProperty("generate")) {
-                    data.generate = template.generate;
-                }
+                if (template.hasOwnProperty("children")) { data.children = template.children; }
+                if (template.hasOwnProperty("container")) { data.container = template.container; }
+                if (template.hasOwnProperty("appearance")) { data.appearance = template.appearance; }
+                if (template.hasOwnProperty("generate")) { data.generate = template.generate; }
+                if (template.hasOwnProperty("type")) { data.type = template.type; }
             }
             this.container = new UIContainer(data.container);
             this.id = data.id;
@@ -44,10 +42,18 @@ module TurtleTime {
             } else {
                 this.fullID = parentFullID == "" ? data.id : parentFullID + "." + data.id;
             }
+            this.type = data.hasOwnProperty("type") ? data.type : "panel";
             this.children = data.children.map((childData : UIData) : UIModel => new UIModel(childData, this.fullID));
             this.appearance = new UIAppearanceCollection(data.appearance);
             if (data.hasOwnProperty("visible")) {
                 this.visible = data["visible"];
+            }
+            // store state based on type
+            this.visualState = "normal";
+            switch (this.type) {
+                case "toggle":
+                    this.data = { toggled: false };
+                    break;
             }
         }
 

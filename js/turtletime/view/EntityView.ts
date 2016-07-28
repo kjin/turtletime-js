@@ -62,8 +62,8 @@ module TurtleTime {
             // sort values
             // TODO please do this right
             var sortValue : number = ((onTable ? 30000 : (onWall ? 10000 : 20000)) + this.model.position.y + this.model.height - 1) * 100 + this.model.getEntityClass() * 10;
-            this._mainSprite.underlyingSprite.name = "" + sortValue;
-            this._shadow.name = "" + (sortValue - 1);
+            this._mainSprite.underlyingSprite.data = sortValue;
+            this._shadow.data = (sortValue - 1);
             this.updatePrivate(screenPos, sortValue);
         }
 

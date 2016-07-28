@@ -10,7 +10,7 @@ namespace TurtleTime {
     export abstract class GameEngine {
         private gameState : GameState;
         private controllers : Array<Controller<GameState>>;
-        private views : GameView;
+        views : GameView;
         debugText : string = "";
         /**
          * The current time.
