@@ -8,7 +8,8 @@ module TurtleTime {
             };
             this._writeState = {
                 rootUI: gameState.uiModel,
-                uiInteractionModel: gameState.uiInteractionModel
+                uiInteractionModel: gameState.uiInteractionModel,
+                selectionModel: gameState.selectionModel
             };
             // TODO figure out where to put this
             // food generation
@@ -102,6 +103,9 @@ module TurtleTime {
                     }
                     // state.currentFood = child.id;
                 });
+            });
+            this.assign("game.popMenu.drag", (root, state) => {
+                this._writeState.selectionModel.startDrag();
             });
         }
     }

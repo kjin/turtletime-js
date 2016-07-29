@@ -79,18 +79,8 @@ module TurtleTime {
         private processInput(turtle : Turtle) : void {
             var inputState : InputModel = this._readState.inputState;
             var selectionModel : SelectionModel = this._writeState.selectionModel;
-            if (!this._writeState.uiInteractionModel.mouseOver(this._readState.gameUI)) {
-                return;
-            }
             if (selectionModel.isBeingDragged) {
                 return;
-            } else if (selectionModel.entity == turtle) {
-                if (selectionModel.currentDragPosition != null) {
-                    selectionModel.currentDragPosition = null;
-                    turtle.targetPosition.x = selectionModel.currentDragPositionInRoom.x;
-                    turtle.targetPosition.y = selectionModel.currentDragPositionInRoom.y;
-                    this._readState.roomModel.clamp(turtle.targetPosition);
-                }
             }
             if (this._readState.selectionModel.entity == turtle) {
                 turtle.selectionStatus = "selected";

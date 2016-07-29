@@ -17,7 +17,7 @@ module TurtleTime {
         private _text : Phaser.Text;
         private _sprite : EntitySpriteWrapper;
         private _editMode : boolean;
-        private _timeSinceVisiblityChanged : number = 0;
+        private _timeSinceVisiblityChanged : number = 100;
         private _cachedVisibility : boolean = false;
         protected _level : number;
 
@@ -178,7 +178,7 @@ module TurtleTime {
                     }
                 }
             }
-            this.children.forEach((child : UIViewNode) : void => child.draw(dt, interactionModel, parentFadeData, this.model.visible && parentVisible));
+            this.children.forEach((child : UIViewNode) : void => child.draw(dt, interactionModel, fadeData, this.model.visible && parentVisible));
         }
 
         update():void {

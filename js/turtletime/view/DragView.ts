@@ -20,7 +20,7 @@ module TurtleTime {
             if (this.model.isBeingDragged) {
                 if (this._sprite.alpha == 0) {
                     this._sprite.reset(this.model.entity.spriteSpecs);
-                    this._sprite.anchorY -= 0.5;
+                    this._sprite.anchorY -= UI_DRAG_Y_OFFSET / this._sprite.height;
                     this._sprite.alpha = 0.5;
                 }
                 this._sprite.x = this.model.currentDragPosition.x;

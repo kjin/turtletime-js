@@ -105,6 +105,11 @@ module TurtleTime {
             }
             return result;
         }
+        
+        setTargetPosition(x : number, y : number) : void {
+            this.position.x = x;
+            this.position.y = y;
+        }
 
         protected abstract getAdditionalData() : any;
         

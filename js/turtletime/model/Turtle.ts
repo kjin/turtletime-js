@@ -29,6 +29,11 @@ module TurtleTime {
 
         getEntityClass() : EntityType { return EntityType.Turtle; }
 
+        setTargetPosition(x : number, y : number) : void {
+            this.targetPosition.x = x;
+            this.targetPosition.y = y;
+        }
+
         getAdditionalData() : any {
             return {
                 targetPosition: [this.targetPosition.x, this.targetPosition.y],
