@@ -114,8 +114,9 @@
       "container": {
         "anchor": [0.5, 0.5],
         "position": ["$0", "$1"],
-        "size": ["40px", "40px"]
+        "size": ["48px", "48px"]
       },
+      "fadeVector": ["$2", "$3"],
       "appearance": {
         "normal": {
           "geometry": {
@@ -125,7 +126,7 @@
             "cornerRadius": 10
           },
           "text": {
-            "text": "$2",
+            "text": "$4",
             "valign": "middle",
             "tint": "0xFF0000"
           }
@@ -135,9 +136,9 @@
     {
       "id": "popMenu",
       "container": {
-        "anchor": [0.5, 1],
+        "anchor": [0.5, 0.5],
         "position": ["$0", "$1"],
-        "size": ["192px", "96px"]
+        "size": ["192px", "192px"]
       },
       "visible": false,
       "mobile": true,
@@ -146,21 +147,21 @@
           "id": "drag",
           "template": {
             "id": "popItem",
-            "subs": ["96px", "24px", "drag"]
+            "subs": ["96px", "24px", "0", "72", "drag"]
           }
         },
         {
           "id": "profile",
           "template": {
             "id": "popItem",
-            "subs": ["45px", "45px", "profile"]
+            "subs": ["163.5px", "57px", "-67.5", "39", "profile"]
           }
         },
         {
           "id": "menu",
           "template": {
             "id": "popItem",
-            "subs": ["147px", "45px", "menu"]
+            "subs": ["163.5px", "135px", "-67.5", "-39", "menu"]
           }
         }
       ]

@@ -3,6 +3,12 @@
 module TurtleTime {
     import Rectangle = Phaser.Rectangle;
     import Graphics = Phaser.Graphics;
+    interface UIFadeData {
+        xOffset : number;
+        yOffset : number;
+        alpha : number;
+    }
+
     class UIViewNode extends View<UIModel> {
         screenDimensions : Rectangle;
         children : Array<UIViewNode>;
@@ -11,6 +17,8 @@ module TurtleTime {
         private _text : Phaser.Text;
         private _sprite : EntitySpriteWrapper;
         private _editMode : boolean;
+        private _timeSinceVisiblityChanged : number = 0;
+        private _cachedVisibility : boolean = false;
         protected _level : number;
 
         constructor(model : UIModel, level : number = 0) {
@@ -28,11 +36,6 @@ module TurtleTime {
                 });
                 this._graphics = GAME_ENGINE.game.add.graphics(0, 0);
             } else {
-                for (var field in this.model.appearance) {
-                    if (this.model.appearance.hasOwnProperty(field)) {
-
-                    }
-                }
                 if (this.model.appearance.normal.text != null) {
                     if (this.model.appearance.normal.text.font != "") {
                         this._bitmapText = GAME_ENGINE.game.add.bitmapText(0, 0,
@@ -68,42 +71,10 @@ module TurtleTime {
         assignScreenDimensions(parentDimensions : Rectangle) : void {
             this.screenDimensions = this.model.container.eval(parentDimensions);
             if (this._text != null) {
-                this._text.setTextBounds(this.screenDimensions.x, this.screenDimensions.y, this.screenDimensions.width, this.screenDimensions.height);
+                this._text.setTextBounds(0, 0, this.screenDimensions.width, this.screenDimensions.height);
                 this._text.wordWrapWidth = this.screenDimensions.width;
             } else if (this._bitmapText != null) {
-                switch (this._bitmapText.align) {
-                    case 'left':
-                        this._bitmapText.x = this.screenDimensions.x;
-                        this._bitmapText.anchor.x = 0;
-                        break;
-                    case 'center':
-                        this._bitmapText.x = this.screenDimensions.x + this.screenDimensions.width / 2;
-                        this._bitmapText.anchor.x = 0.5;
-                        break;
-                    case 'right':
-                        this._bitmapText.x = this.screenDimensions.x + this.screenDimensions.width;
-                        this._bitmapText.anchor.x = 1;
-                        break;
-                }
-                switch (this.model.appearance.normal.text.valign) {
-                    case 'top':
-                        this._bitmapText.y = this.screenDimensions.y;
-                        this._bitmapText.anchor.y = 0;
-                        break;
-                    case 'middle':
-                        this._bitmapText.y = this.screenDimensions.y + this.screenDimensions.height / 2;
-                        this._bitmapText.anchor.y = 0.5;
-                        break;
-                    case 'bottom':
-                        this._bitmapText.y = this.screenDimensions.y + this.screenDimensions.height;
-                        this._bitmapText.anchor.y = 1;
-                        break;
-                }
                 this._bitmapText.maxWidth = this.screenDimensions.width;
-            }
-            if (this._sprite != null) {
-                this._sprite.x = this.screenDimensions.x + this.screenDimensions.width / 2;
-                this._sprite.y = this.screenDimensions.y + this.screenDimensions.height / 2;
             }
             this.children.forEach((child : UIViewNode) : void => child.assignScreenDimensions(this.screenDimensions));
         }
@@ -112,7 +83,8 @@ module TurtleTime {
             return this.screenDimensions.contains(x, y);
         }
 
-        draw(interactionModel : UIInteractionModel, parentVisible : boolean = true):void {
+        draw(dt : number, interactionModel : UIInteractionModel, parentFadeData : UIFadeData = null, parentVisible : boolean = true):void {
+            var fadeData : UIFadeData = null;
             if (this._editMode) {
                 this._graphics.clear();
                 this._graphics.lineStyle(2, 0xffffff, 1.0);
@@ -130,37 +102,83 @@ module TurtleTime {
                 this._graphics.endFill();
             } else {
                 var currentAppearance : UIAppearance = this.model.appearance[this.model.visualState];
+                if (this._cachedVisibility != (parentVisible && this.model.visible)) {
+                    this._timeSinceVisiblityChanged = 0;
+                    this._cachedVisibility = parentVisible && this.model.visible;
+                } else {
+                    this._timeSinceVisiblityChanged++;
+                }
+                var t : number = Math.min(this._timeSinceVisiblityChanged * dt / UI_FADE_TIME, 1);
+                t = Math.sqrt(t);
+                t = this._cachedVisibility ? (1 - t) : t;
+                fadeData = {
+                    xOffset: t * this.model.fadeVector.x + (!parentFadeData ? 0 : parentFadeData.xOffset),
+                    yOffset: t * this.model.fadeVector.y + (!parentFadeData ? 0 : parentFadeData.yOffset),
+                    alpha: (1 - t) * (!parentFadeData ? 1 : parentFadeData.alpha)
+                };
                 if (this._text != null) {
-                    this._text.visible = parentVisible && this.model.visible;
+                    this._text.x = this.screenDimensions.x + fadeData.xOffset;
+                    this._text.y = this.screenDimensions.y + fadeData.yOffset;
                     this._text.text = currentAppearance.text.text;
                     this._text.tint = currentAppearance.text.tint;
+                    this._text.alpha = fadeData.alpha;
                 }
                 if (this._bitmapText != null) {
-                    this._bitmapText.visible = parentVisible && this.model.visible;
+                    switch (this._bitmapText.align) {
+                        case 'left':
+                            this._bitmapText.x = this.screenDimensions.x + fadeData.xOffset;
+                            this._bitmapText.anchor.x = 0;
+                            break;
+                        case 'center':
+                            this._bitmapText.x = this.screenDimensions.x + this.screenDimensions.width / 2 + fadeData.xOffset;
+                            this._bitmapText.anchor.x = 0.5;
+                            break;
+                        case 'right':
+                            this._bitmapText.x = this.screenDimensions.x + this.screenDimensions.width + fadeData.xOffset;
+                            this._bitmapText.anchor.x = 1;
+                            break;
+                    }
+                    switch (this.model.appearance.normal.text.valign) {
+                        case 'top':
+                            this._bitmapText.y = this.screenDimensions.y + fadeData.yOffset;
+                            this._bitmapText.anchor.y = 0;
+                            break;
+                        case 'middle':
+                            this._bitmapText.y = this.screenDimensions.y + this.screenDimensions.height / 2 + fadeData.yOffset;
+                            this._bitmapText.anchor.y = 0.5;
+                            break;
+                        case 'bottom':
+                            this._bitmapText.y = this.screenDimensions.y + this.screenDimensions.height + fadeData.yOffset;
+                            this._bitmapText.anchor.y = 1;
+                            break;
+                    }
                     this._bitmapText.text = currentAppearance.text.text;
                     this._bitmapText.tint = currentAppearance.text.tint;
+                    this._bitmapText.alpha = fadeData.alpha;
                 }
                 if (this._sprite != null) {
-                    this._sprite.visible = parentVisible && this.model.visible;
+                    this._sprite.x = this.screenDimensions.x + this.screenDimensions.width / 2 + fadeData.xOffset;
+                    this._sprite.y = this.screenDimensions.y + this.screenDimensions.height / 2 + fadeData.yOffset;
                     this._sprite.animation = currentAppearance.sprite.animation;
                     this._sprite.tint = currentAppearance.sprite.tint;
+                    this._sprite.alpha = fadeData.alpha;
                 }
                 if (this._graphics != null) {
                     this._graphics.clear();
-                    if (parentVisible && this.model.visible) {
+                    if (fadeData.alpha > 0) {
                         var geometry:UIGeometry = currentAppearance.geometry;
-                        this._graphics.lineStyle(geometry.lineWeight, geometry.lineColor, 1.0);
-                        this._graphics.beginFill(geometry.fillColor, 1.0);
+                        this._graphics.lineStyle(geometry.lineWeight, geometry.lineColor, fadeData.alpha);
+                        this._graphics.beginFill(geometry.fillColor, fadeData.alpha);
                         if (geometry.cornerRadius == 0) {
-                            this._graphics.drawRect(this.screenDimensions.x, this.screenDimensions.y, this.screenDimensions.width, this.screenDimensions.height);
+                            this._graphics.drawRect(this.screenDimensions.x + fadeData.xOffset, this.screenDimensions.y + fadeData.yOffset, this.screenDimensions.width, this.screenDimensions.height);
                         } else {
-                            this._graphics.drawRoundedRect(this.screenDimensions.x, this.screenDimensions.y, this.screenDimensions.width, this.screenDimensions.height, geometry.cornerRadius);
+                            this._graphics.drawRoundedRect(this.screenDimensions.x + fadeData.xOffset, this.screenDimensions.y + fadeData.yOffset, this.screenDimensions.width, this.screenDimensions.height, geometry.cornerRadius);
                         }
                         this._graphics.endFill();
                     }
                 }
             }
-            this.children.forEach((child : UIViewNode) : void => child.draw(interactionModel, this.model.visible && parentVisible));
+            this.children.forEach((child : UIViewNode) : void => child.draw(dt, interactionModel, parentFadeData, this.model.visible && parentVisible));
         }
 
         update():void {
@@ -217,7 +235,7 @@ module TurtleTime {
 
         update():void {
             this._rootNode.update();
-            this._rootNode.draw(this._interactionModel);
+            this._rootNode.draw(1.0/60, this._interactionModel);
         }
 
         contains(x:number, y:number):boolean {

@@ -13,6 +13,7 @@ module TurtleTime {
         type : string;
         appearance : UIAppearanceCollection;
         mobile : boolean;
+        fadeVector : Point;
 
         //ephemeral state
         visualState: string;
@@ -36,6 +37,7 @@ module TurtleTime {
                 if (template.hasOwnProperty("type")) { data.type = template.type; }
                 if (template.hasOwnProperty("visible")) { data.visible = template.visible; }
                 if (template.hasOwnProperty("mobile")) { data.mobile = template.mobile; }
+                if (template.hasOwnProperty("fadeVector")) { data.fadeVector = template.fadeVector; }
             }
             this.container = new UIContainer(data.container);
             this.id = data.id;
@@ -62,6 +64,15 @@ module TurtleTime {
                 case "toggle":
                     this.data = { toggled: false };
                     break;
+            }
+            if (data.hasOwnProperty("fadeVector")) {
+                if (data.fadeVector[0].hasOwnProperty("length")) { // is string TODO crappy check
+                    this.fadeVector = new Point(parseInt(<string>data.fadeVector[0]), parseInt(<string>data.fadeVector[1]));
+                } else {
+                    this.fadeVector = new Point(<number>data.fadeVector[0], <number>data.fadeVector[1]);
+                }
+            } else {
+                this.fadeVector = new Point(0, 0);
             }
         }
 

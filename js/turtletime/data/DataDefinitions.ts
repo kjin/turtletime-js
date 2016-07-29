@@ -70,6 +70,7 @@ module TurtleTime {
         generate?: string,
         type?: string,
         visible?: boolean,
+        fadeVector?: Array<number|string>,
         mobile?: boolean
     }
 
