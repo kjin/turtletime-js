@@ -19,6 +19,15 @@
           { "direction": "right", "frames": [8] },
           { "direction": "up", "frames": [0] }
         ]
+      },
+      {
+        "name": "walk",
+        "frames": [
+          { "direction": "down", "frames": [4, 5, 6, 7] },
+          { "direction": "right", "frames": [8, 9, 10, 11] },
+          { "direction": "up", "frames": [0, 1, 2, 3] }
+        ],
+        "frameRate": 4
       }
     ]
   }

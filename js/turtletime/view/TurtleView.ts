@@ -24,13 +24,15 @@ module TurtleTime {
         }
         
         protected updatePrivate(screenPos : Point, sortValue : number) : void {
-            this._mainSprite.y -= 2 * MathExtensions.squareWave(2 * GAME_ENGINE.time);
+            if (this.model.currentAction == "stand") {
+                this._mainSprite.y -= 2 * MathExtensions.squareWave(1.5 * GAME_ENGINE.time);
+            }
             this._highlightCircle.x = screenPos.x;
-            this._highlightCircle.y = screenPos.y - 2 * GAME_ENGINE.globalData.roomScale[1] * this.model.spriteSpecs.scale;
+            this._highlightCircle.y = screenPos.y - 2 * GAME_ENGINE.globalData.roomScale[1];
             setTintAndAlpha(this._highlightCircle, EffectCircleDictionary[this.model.selectionStatus]);
             this._highlightCircle.data = sortValue;
             this._attentionBubble.x = screenPos.x;
-            this._attentionBubble.y = screenPos.y - 2 * GAME_ENGINE.globalData.roomScale[1] * this.model.spriteSpecs.scale - 3 * this._attentionTriangle(2.4 * GAME_ENGINE.time);
+            this._attentionBubble.y = screenPos.y - 2 * GAME_ENGINE.globalData.roomScale[1] - 3 * this._attentionTriangle(2.4 * GAME_ENGINE.time);
             this._attentionBubble.data = sortValue;
             this._emoji.x = this._attentionBubble.x;
             this._emoji.y = this._attentionBubble.y - 19;

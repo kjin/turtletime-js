@@ -28,19 +28,20 @@ module TurtleTime {
             this._mirror = MirrorDirection.None;
             // add animations
             specs.animations.forEach((animation : SpriteAnimation) : void => {
+                var frameRate = animation.hasOwnProperty("frameRate") ? animation.frameRate : 1;
                 animation.frames.forEach((frameData : SpriteDirectionalFrameData) : void => {
                     var numericalDirection : Direction = Direction.getDirection(frameData.direction);
                     if (numericalDirection & Direction.Left || numericalDirection & Direction.Right) {
-                        this._sprite.animations.add('left-' + animation.name, frameData.frames);
-                        this._sprite.animations.add('right-' + animation.name, frameData.frames);
+                        this._sprite.animations.add('left-' + animation.name, frameData.frames, frameRate);
+                        this._sprite.animations.add('right-' + animation.name, frameData.frames, frameRate);
                         if (!(numericalDirection & Direction.Right)) {
                             this._mirror = MirrorDirection.Right;
                         } else if (!(numericalDirection & Direction.Left)) {
                             this._mirror = MirrorDirection.Left;
                         }
                     }
-                    if (numericalDirection & Direction.Up) { this._sprite.animations.add('up-' + animation.name, frameData.frames); }
-                    if (numericalDirection & Direction.Down) { this._sprite.animations.add('down-' + animation.name, frameData.frames); }
+                    if (numericalDirection & Direction.Up) { this._sprite.animations.add('up-' + animation.name, frameData.frames, frameRate); }
+                    if (numericalDirection & Direction.Down) { this._sprite.animations.add('down-' + animation.name, frameData.frames, frameRate); }
                 });
             });
         }

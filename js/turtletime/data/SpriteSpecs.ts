@@ -6,7 +6,8 @@ module TurtleTime {
 
     export interface SpriteAnimation {
         name : string,
-        frames : Array<SpriteDirectionalFrameData>
+        frames : Array<SpriteDirectionalFrameData>,
+        frameRate? : number
     }
 
     export interface SpriteSpecs {

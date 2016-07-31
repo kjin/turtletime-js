@@ -180,6 +180,11 @@ module TurtleTime {
                         }
                         this.processMovement(turtle);
                         this.processInput(turtle);
+                        if (turtle.atTargetPosition()) {
+                            turtle.currentAction = "stand";
+                        } else {
+                            turtle.currentAction = "walk";
+                        }
                     }
                 );
             }
