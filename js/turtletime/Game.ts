@@ -14,7 +14,8 @@ namespace TurtleTime {
                 uiTemplates : listToMap(game.cache.getJSON('ui').templates, (item : UIData) => item.id),
                 roomScale: [32, 32],
                 maxRoomSize: new Point(12, 16),
-                screenSize: new Point(game.width, game.height)
+                screenSize: new Point(game.width, game.height),
+                animations: objectToMap(game.cache.getJSON('animations').animations)
             };
         }
 

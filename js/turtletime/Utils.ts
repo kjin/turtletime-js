@@ -185,6 +185,16 @@ module TurtleTime {
         point.y = (y - GAME_ENGINE.cameraPosition.y) / GAME_ENGINE.globalData.roomScale[1];
     }
 
+    export function objectToMap<T>(object : any) : Map<string, T> {
+        var result : Map<string, T> = new Map<string, T>();
+        for (var property in object) {
+            if (object.hasOwnProperty(property)) {
+                result.set(property, object[property]);
+            }
+        }
+        return result;
+    }
+
     export function listToMap<T>(list : Array<T>, keyFunction : (item : T) => string) : Map<string, T> {
         var result : Map<string, T> = new Map<string, T>();
         list.forEach((item : T) : void => {

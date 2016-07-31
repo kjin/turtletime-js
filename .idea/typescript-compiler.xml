@@ -1,8 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="TypeScriptCompiler">
-    <option name="isCompilerEnabled" value="true" />
-    <option name="nodeInterpreterTextField" value="/usr/lib/node-linux-armv7l/bin/node" />
-    <option name="useConfig" value="true" />
-  </component>
-</project>
+version https://git-lfs.github.com/spec/v1
+oid sha256:944d47d582f82b0c392a847cc13f65a0f31ea0a7a7c02873d22526a1956d456d
+size 230

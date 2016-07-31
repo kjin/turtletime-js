@@ -6,7 +6,6 @@
       { "id": "core/highlightCircle" },
       { "id": "core/shadow" },
       { "id": "core/speechBubble" },
-      { "id": "turtle/turtle", "frameSize": [45, 60] },
       { "id": "decor/chair" },
       { "id": "decor/tableandchair", "frameSize": [52, 52] },
       { "id": "decor/blackboard" },
@@ -18,6 +17,11 @@
       { "id": "food/aloe" },
       { "id": "food/banana" },
       { "id": "food/grandson" },
+      { "id": "turtle/turtle" },
+      { "id": "turtle/walking.0" },
+      { "id": "turtle/walking.1" },
+      { "id": "turtle/walking.2" },
+      { "id": "turtle/walking.3" },
       { "id": "emoji/angry" },
       { "id": "emoji/coffee" },
       { "id": "emoji/fork" },
@@ -26,12 +30,13 @@
       { "id": "emoji/smiley" }
     ],
     "derivedFiles": [
-      { "id": "turtle/turtle-green", "original": "turtle/turtle", "filter": { "hueRotation": 0 } },
-      { "id": "turtle/turtle-blue", "original": "turtle/turtle", "filter": { "hueRotation": 60 } },
-      { "id": "turtle/turtle-purple", "original": "turtle/turtle", "filter": { "hueRotation": 120 } },
-      { "id": "turtle/turtle-magenta", "original": "turtle/turtle", "filter": { "hueRotation": 180 } },
-      { "id": "turtle/turtle-red", "original": "turtle/turtle", "filter": { "hueRotation": 240 } },
-      { "id": "turtle/turtle-yellow", "original": "turtle/turtle", "filter": { "hueRotation": 300 } }
+      { "id": "turtle/turtle-complete", "source": [ "turtle/walking.0", "turtle/walking.1", "turtle/walking.2", "turtle/walking.3" ], "action": { "name": "stack" } },
+      { "id": "turtle/turtle-green", "source": [ "turtle/turtle-complete" ], "action": { "name": "hueRotation", "params": [0] }, "frameSize": [22, 30] },
+      { "id": "turtle/turtle-blue", "source": [ "turtle/turtle-complete" ], "action": { "name": "hueRotation", "params": [60] }, "frameSize": [22, 30] },
+      { "id": "turtle/turtle-purple", "source": [ "turtle/turtle-complete" ], "action": { "name": "hueRotation", "params": [120] }, "frameSize": [22, 30] },
+      { "id": "turtle/turtle-magenta", "source": [ "turtle/turtle-complete" ], "action": { "name": "hueRotation", "params": [180] }, "frameSize": [22, 30] },
+      { "id": "turtle/turtle-red", "source": [ "turtle/turtle-complete" ], "action": { "name": "hueRotation", "params": [240] }, "frameSize": [22, 30] },
+      { "id": "turtle/turtle-yellow", "source": [ "turtle/turtle-complete" ], "action": { "name": "hueRotation", "params": [300] }, "frameSize": [22, 30] }
     ]
   },
   "json": {
@@ -39,6 +44,7 @@
     "files": [
       { "id": "emptyUserData" },
       { "id": "newUserData" },
+      { "id": "animations" },
       { "id": "sprites" },
       { "id": "turtles" },
       { "id": "food" },

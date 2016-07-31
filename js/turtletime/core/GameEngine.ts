@@ -38,6 +38,10 @@ namespace TurtleTime {
                 this.game = new Phaser.Game(window.innerWidth * scale_factor, window.innerHeight * scale_factor, Phaser.AUTO, '', null, false, false);
 
                 var assets : AssetDocument = JSON.parse(response);
+                var assetCache = {};
+                if (localStorage.getItem('dynamicAssetCache')) {
+                    assetCache = JSON.parse(localStorage.getItem('dynamicAssetCache'));
+                }
                 this.game.state.add('loadPhase0', {
                     preload: (() => {
                         this.game.load.image(assets.loadingBar.id, assets.textures.root + '/' + assets.loadingBar.id + '.' + assets.loadingBar.fileType);
@@ -52,10 +56,13 @@ namespace TurtleTime {
                         this.game.state.start('loadPhase2')
                     }).bind(this)
                 });
+                // Generate dynamic assets
+                // TODO: Hash dynamic asset JSON to determine whether cache is stale
+                var complete = false;
                 this.game.state.add('loadPhase2', {
-                    preload: () => this.generateDynamicAssets(this.game, assets),
+                    preload: () => { complete = this.generateDynamicAssets(this.game, assetCache, assets) },
                     create: (() => {
-                        this.game.state.start('main')
+                        this.game.state.start(complete ? 'main' : 'loadPhase2')
                     }).bind(this)
                 });
                 this.game.state.add('main', {
@@ -103,28 +110,38 @@ namespace TurtleTime {
             });
         }
         
-        private generateDynamicAssets(game : Phaser.Game, assets : AssetDocument) : void {
-            var assetCache = {};
-            if (localStorage.getItem('dynamicAssetCache')) {
-                assetCache = JSON.parse(localStorage.getItem('dynamicAssetCache'));
-            }
+        private generateDynamicAssets(game : Phaser.Game, assetCache : any, assets : AssetDocument) : boolean {
+            var complete : boolean = true;
             assets.textures.derivedFiles.forEach((entry : DerivedTextureAssetEntry) : void => {
-                var texture:BaseTexture = game.cache.getBaseTexture(entry.original);
-                if (!assetCache.hasOwnProperty(entry.id)) {
-                    var bitmapData:BitmapData = game.make.bitmapData(texture.width, texture.height);
-                    bitmapData.copy(entry.original);
-                    bitmapData.update();
-                    BitmapFilters.rotateHueFactory(entry.filter.hueRotation)(bitmapData);
-                    assetCache[entry.id] = bitmapData.baseTexture.source["toDataURL"]();
+                // satisfy pre-requisites
+                var shouldLoad : boolean = !game.cache.checkImageKey(entry.id);
+                if (shouldLoad) {
+                    for (var i = 0; i < entry.source.length; i++) {
+                        shouldLoad = shouldLoad && game.cache.checkImageKey(entry.source[i]);
+                        if (!shouldLoad) {
+                            break;
+                        }
+                    }
+                    if (!shouldLoad) {
+                        complete = false;
+                        return;
+                    }
                 }
-                var singleFrame : Frame = game.cache.getFrameData(entry.original).getFrame(0);
-                if (texture.width == singleFrame.width && texture.height == singleFrame.height) {
+                if (!assetCache.hasOwnProperty(entry.id)) {
+                    this.debugPrintln("Generating " + entry.id + "...");
+                    var bitmapData:BitmapData = ImageProcessing.SINGLETON[entry.action.name](game, entry.source, entry.action.params);
+                    assetCache[entry.id] = bitmapData.baseTexture.source["toDataURL"]();
+                } else {
+                    this.debugPrintln("Retrieving " + entry.id + " from cache...");
+                }
+                if (!entry.hasOwnProperty("frameSize")) {
                     game.load.image(entry.id, assetCache[entry.id]);
                 } else {
-                    game.load.spritesheet(entry.id, assetCache[entry.id], singleFrame.width, singleFrame.height);
+                    game.load.spritesheet(entry.id, assetCache[entry.id], entry.frameSize[0], entry.frameSize[1]);
                 }
             });
             localStorage.setItem('dynamicAssetCache', JSON.stringify(assetCache));
+            return complete;
         }
 
         private create() : void {

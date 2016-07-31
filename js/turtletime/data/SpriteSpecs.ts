@@ -16,7 +16,8 @@ module TurtleTime {
         shape? : Array<string>,
         anchor? : Array<number>,
         tint? : string,
-        animations? : Array<SpriteAnimation>
+        animations? : Array<SpriteAnimation>,
+        animationTemplate? : string
     }
 
     export class SpriteData {
@@ -43,44 +44,6 @@ module TurtleTime {
                 return this.specMap.get(category).get(element);
             }
             return null;
-        }
-    }
-
-    export interface TextureFilterData {
-        hueRotation: number
-    }
-
-    export interface DerivedTextureAssetEntry {
-        id: string,
-        original: string,
-        filter: TextureFilterData
-    }
-
-    export interface TextureAssetEntry {
-        id: string,
-        fileID?: string,
-        fileType?: string,
-        frameSize?: Array<number>,
-    }
-
-    export interface AssetEntry {
-        id: string
-    }
-
-    export interface AssetDocument {
-        loadingBar: TextureAssetEntry,
-        textures : {
-            root: string,
-            files: Array<TextureAssetEntry>,
-            derivedFiles: Array<DerivedTextureAssetEntry>
-        },
-        json : {
-            root: string,
-            files: Array<AssetEntry>
-        },
-        fonts : {
-            root: string,
-            files: Array<AssetEntry>
         }
     }
 }

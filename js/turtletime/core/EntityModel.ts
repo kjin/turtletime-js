@@ -42,7 +42,13 @@ module TurtleTime {
             if (!this.spriteSpecs.hasOwnProperty("dimensions")) { this.spriteSpecs.dimensions = [1, 1]; }
             if (!this.spriteSpecs.hasOwnProperty("scale")) { this.spriteSpecs.scale = 1; }
             if (!this.spriteSpecs.hasOwnProperty("tint")) { this.spriteSpecs.tint = "0xFFFFFF"; }
-            if (!this.spriteSpecs.hasOwnProperty("animations")) { this.spriteSpecs.animations = [ { name: "default",  frames: [ { direction: "all",  frames: [0] } ] } ]; }
+            if (!this.spriteSpecs.hasOwnProperty("animations")) {
+                if (!this.spriteSpecs.hasOwnProperty("animationTemplate")) {
+                    this.spriteSpecs.animations = [{name: "default", frames: [{direction: "all", frames: [0]}]}];
+                } else {
+                    this.spriteSpecs.animations = GAME_ENGINE.globalData.animations.get(this.spriteSpecs.animationTemplate);
+                }
+            }
             this.dimensions = new Point(this.spriteSpecs.dimensions[0], this.spriteSpecs.dimensions[1]);
             if (!this.spriteSpecs.hasOwnProperty("shape")) {
                 this.spriteSpecs.shape = new Array<string>(this.dimensions.y).fill('1'.repeat(this.dimensions.x));

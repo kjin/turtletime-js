@@ -32,18 +32,25 @@ function setup(file, storageKey, globalOptions, insertMaterial) {
     });
 
     var defData = "";
-    if (localStorage.getItem(storageKey) != null) {
-        editor.setValue(localStorage.getItem(storageKey));
-        editor.clearSelection();
-        httpGet(file, function (resp) {
-            defData = resp;
-        });
-    } else {
-        httpGet(file, function (resp) {
-            defData = resp;
-            editor.setValue(defData);
+    if (file != null && file != "") {
+        if (localStorage.getItem(storageKey) != null) {
+            editor.setValue(localStorage.getItem(storageKey));
             editor.clearSelection();
-        });
+            httpGet(file, function (resp) {
+                defData = resp;
+            });
+        } else {
+            httpGet(file, function (resp) {
+                defData = resp;
+                editor.setValue(defData);
+                editor.clearSelection();
+            });
+        }
+    } else {
+        if (localStorage.getItem(storageKey) != null) {
+            editor.setValue(JSON.stringify(JSON.parse(localStorage.getItem(storageKey)), null, 2));
+            editor.clearSelection();
+        }
     }
 
     load = function() {

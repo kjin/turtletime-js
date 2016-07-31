@@ -1,0 +1,25 @@
+{
+  "animations": {
+    "turtle-old": [
+      {
+        "name": "stand",
+        "frames": [
+          { "direction": "left", "frames": [0] },
+          { "direction": "down", "frames": [1] },
+          { "direction": "right", "frames": [2] },
+          { "direction": "up", "frames": [3] }
+        ]
+      }
+    ],
+    "turtle": [
+      {
+        "name": "stand",
+        "frames": [
+          { "direction": "down", "frames": [4] },
+          { "direction": "right", "frames": [8] },
+          { "direction": "up", "frames": [0] }
+        ]
+      }
+    ]
+  }
+}
