@@ -4,11 +4,12 @@
 module TurtleTime {
     export class RoomNode {
         staticModels : Array<EntityModel> = [];
+        eatingArea : EatingArea = null;
         turtle : Turtle = null;
         food : Food = null;
 
         hasModel() : boolean {
-            return this.staticModels.length > 0 || this.turtle != null || this.food != null;
+            return this.staticModels.length > 0 || this.turtle != null || this.food != null; // eating area is already part of static models
         }
     }
 
@@ -38,6 +39,10 @@ module TurtleTime {
                     this.roomLayout[i][j] = new RoomNode;
                 }
             }
+        }
+
+        getRoomNode(position : Point) : RoomNode {
+            return this.roomLayout[position.x][position.y];
         }
 
         isInRoomXY(x : number, y : number) : boolean {

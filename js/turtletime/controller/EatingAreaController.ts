@@ -3,12 +3,11 @@ module TurtleTime {
         initialize(gameState:TurtleTime.GameState):void {
             this._readState = {
                 chairs: gameState.entities.chairs,
-                tables: gameState.entities.tables,
-                roomModel: gameState.roomModel
+                tables: gameState.entities.tables
             };
             this._writeState = {
                 eatingAreas: gameState.eatingAreas,
-                food: gameState.entities.food
+                roomModel: gameState.roomModel
             }
         }
 
@@ -33,6 +32,8 @@ module TurtleTime {
                                     }
                                 };
                                 this._writeState.eatingAreas.push(e);
+                                this._writeState.roomModel.roomLayout[e.chair.atPosition.x][e.chair.atPosition.y].eatingArea = e;
+                                this._writeState.roomModel.roomLayout[e.table.atPosition.x][e.table.atPosition.y].eatingArea = e;
                             }
                         });
                     });
@@ -40,32 +41,11 @@ module TurtleTime {
             });
         }
 
-        private processLinks(eatingArea : EatingArea) {
-            eatingArea.turtle = this._readState.roomModel.roomLayout[eatingArea.chair.atPosition.x][eatingArea.chair.atPosition.y].turtle;
-            eatingArea.food = this._readState.roomModel.roomLayout[eatingArea.table.atPosition.x][eatingArea.table.atPosition.y].food;
-        }
-
-        private processEatingFood(eatingArea : EatingArea) {
-            if (eatingArea.turtle != null && eatingArea.food != null) {
-                eatingArea.food.hp--;
-                if (eatingArea.food.hp == 0) {
-                    this._writeState.food.remove(eatingArea.food);
-                    eatingArea.food = null;
-                    eatingArea.turtle.mood.setMoodLevel("fork", 0);
-                    eatingArea.turtle.mood.incrementMoodLevel("heart", 10);
-                }
-            }
-        }
-
         update(dt:number):void {
             if (this._writeState.eatingAreas.length == 0) {
                 // populate it
                 this.populateEatingAreas();
             }
-            this._writeState.eatingAreas.forEach((eatingArea : EatingArea) => {
-                this.processLinks(eatingArea);
-                this.processEatingFood(eatingArea);
-            });
         }
     }
 }

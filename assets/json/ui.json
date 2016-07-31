@@ -105,9 +105,37 @@
         "position": ["0%", "0%"],
         "size": ["100%", "100%"]
       },
-      "generate": "foodItems",
       "appearance": { "normal": {} },
-      "children": []
+      "children": [
+        {
+          "id": "foodMenu",
+          "container": {
+            "anchor": [0, 0],
+            "position": ["0%", "0%"],
+            "size": ["100%", "70%"]
+          },
+          "generate": "foodItems",
+          "appearance": { "normal": {} }
+        },
+        {
+          "id": "foodDescription",
+          "container": {
+            "anchor": [0, 0],
+            "position": ["0%", "70%"],
+            "size": ["100%", "20%"]
+          },
+          "appearance": { "normal": { "text": {} } }
+        },
+        {
+          "id": "confirmButton",
+          "container": {
+            "anchor": [0.5, 0.5],
+            "position": ["50%", "95%"],
+            "size": ["100px", "10%-10px"]
+          },
+          "appearance": { "normal": { "geometry": {}, "text": { "text": "confirm" } } }
+        }
+      ]
     },
     {
       "id": "popItem",
@@ -186,27 +214,30 @@
         "appearance": { "normal": {} },
         "children": [
           {
-            "id": "foodMenuContainer",
+            "id": "dragNote",
             "container": {
-              "anchor": [0.5, 0.0],
-              "position": ["50%", "10px"],
-              "size": ["100%-20px", "40%"],
-              "maxSizePixels": [600, 10000]
+              "anchor": [0.5, 1],
+              "position": ["50%", "100%-10px"],
+              "size": ["100%-20px", "50px"],
+              "maxSizePixels": [600, 50]
             },
+            "fadeVector": [0, 50],
             "appearance": {
               "normal": {
-                "geometry": {}
-              }
-            },
-            "visible": false,
-            "children": [
-              {
-                "id": "foodMenu",
-                "template": {
-                  "id": "foodMenu"
+                "geometry": {},
+                "text": {
+                  "text": "drag to move"
                 }
               }
-            ]
+            },
+            "children": []
+          },
+          {
+            "id": "popMenu",
+            "template": {
+              "id": "popMenu",
+              "subs": ["0px", "0px"]
+            }
           },
           {
             "id": "infobox",
@@ -256,32 +287,6 @@
                 "children": []
               }
             ]
-          },
-          {
-            "id": "dragNote",
-            "container": {
-              "anchor": [0.5, 1],
-              "position": ["50%", "100%-10px"],
-              "size": ["100%-20px", "50px"],
-              "maxSizePixels": [600, 50]
-            },
-            "fadeVector": [0, 50],
-            "appearance": {
-              "normal": {
-                "geometry": {},
-                "text": {
-                  "text": "drag to move"
-                }
-              }
-            },
-            "children": []
-          },
-          {
-            "id": "popMenu",
-            "template": {
-              "id": "popMenu",
-              "subs": ["0px", "0px"]
-            }
           }
         ]
       },
@@ -343,7 +348,7 @@
               "position": ["100%", "0%"],
               "size": ["40px", "40px"]
             },
-            "appearance": { "normal": { "geometry": {} } },
+            "appearance": { "normal": { "geometry": {}, "text": { "text": "close" } } },
             "children": []
           },
           {
@@ -353,7 +358,7 @@
               "position": ["0%", "0%"],
               "size": ["40px", "40px"]
             },
-            "appearance": { "normal": { "geometry": {} } },
+            "appearance": { "normal": { "geometry": {}, "text": { "text": "back" } } },
             "children": []
           },
           {

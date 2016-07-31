@@ -3,7 +3,5 @@ namespace TurtleTime {
         chair : { chair : Chair, atPosition : Point };
         table : { table : Table, atPosition : Point };
         acrossFrom? : EatingArea; // for now, unused
-        turtle? : Turtle;
-        food? : Food;
     }
 }

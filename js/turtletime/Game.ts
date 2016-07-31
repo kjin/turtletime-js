@@ -15,7 +15,7 @@ namespace TurtleTime {
                 roomScale: [32, 32],
                 maxRoomSize: new Point(12, 16),
                 screenSize: new Point(game.width, game.height),
-                animations: objectToMap(game.cache.getJSON('animations').animations)
+                animations: objectToMap<Array<SpriteAnimation> >(game.cache.getJSON('animations').animations)
             };
         }
 

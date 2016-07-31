@@ -86,26 +86,36 @@ module TurtleTime {
                 state.menuStack.pop();
             });
             this.assign("menu.body.mainMenu.foodMenu.icon", (root, state) => {
+                root.getChild("menu.body.foodMenu.confirmButton").visible = false;
                 state.menuStack.push(root.getChild("menu.body.foodMenu"));
             });
-            this._writeState.rootUI.getChild("game.foodMenuContainer.foodMenu").children.forEach((child : UIModel) : void => {
+            this._writeState.rootUI.getChild("menu.body.foodMenu.foodMenu").children.forEach((child : UIModel) : void => {
                 this.assign(child.getChild("icon").fullID, (root, state) => {
                     if (!child.getChild("icon").data.toggled) {
-                        this._writeState.rootUI.getChild("game.foodMenuContainer.foodMenu").children.forEach((competingChild:UIModel) => {
+                        this._writeState.rootUI.getChild("menu.body.foodMenu.foodMenu").children.forEach((competingChild:UIModel) => {
                             competingChild.getChild("icon").visualState = "normal";
                             competingChild.getChild("icon").data.toggled = false;
                         });
                         child.getChild("icon").visualState = "toggled";
                         child.getChild("icon").data.toggled = true;
+                        this._writeState.rootUI.getChild("menu.body.foodMenu.foodDescription").appearance.normal.text.text =
+                            GAME_ENGINE.globalData.foodData.get(child.id).description;
                     } else {
                         child.getChild("icon").visualState = "normal";
                         child.getChild("icon").data.toggled = false;
+                        this._writeState.rootUI.getChild("menu.body.foodMenu.foodDescription").appearance.normal.text.text = "";
                     }
                     // state.currentFood = child.id;
                 });
             });
             this.assign("game.popMenu.drag", (root, state) => {
                 this._writeState.selectionModel.startDrag();
+            });
+            this.assign("game.popMenu.menu", (root, state) => {
+                root.getChild("menu").visible = true;
+                root.getChild("menu.body.foodMenu.confirmButton").visible = true;
+                state.menuStack.push(root.getChild("menu.body.foodMenu"));
+                root.getChild("game").visible = false;
             });
         }
     }

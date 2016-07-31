@@ -103,6 +103,24 @@ module TurtleTime {
             }
         }
 
+        private processEating(turtle : Turtle) : void {
+            if (turtle.atTargetPosition()) {
+                var eatingArea : EatingArea = this._readState.roomModel.getRoomNode(turtle.position).eatingArea;
+                if (eatingArea != null && Point.equals(turtle.position, eatingArea.chair.atPosition)) {
+                    var food : Food = this._readState.roomModel.getRoomNode(eatingArea.table.atPosition).food;
+                    if (food != null) {
+                        food.hp--;
+                        if (food.hp == 0) {
+                            this._writeState.food.remove(food);
+                            food = null;
+                            turtle.mood.setMoodLevel("fork", 0);
+                            turtle.mood.incrementMoodLevel("heart", 10);
+                        }
+                    }
+                }
+            }
+        }
+
         private canSetTargetDestination(position : Point) : boolean {
             return !this._writeState.turtles.underlyingArray.find((otherTurtle : Turtle) : boolean =>
                 (otherTurtle.position.x == position.x && otherTurtle.position.y == position.y) ||
@@ -180,6 +198,7 @@ module TurtleTime {
                         }
                         this.processMovement(turtle);
                         this.processInput(turtle);
+                        this.processEating(turtle);
                         if (turtle.atTargetPosition()) {
                             turtle.currentAction = "stand";
                         } else {
