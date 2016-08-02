@@ -43,8 +43,16 @@ module TurtleTime {
         getSpriteSpecs(category : string, element : string) : SpriteSpecs {
             if (this.specMap.has(category) && this.specMap.get(category).has(element)) {
                 return this.specMap.get(category).get(element);
+            } else {
+                return {
+                    spriteID: "core/loading",
+                    scale: 1,
+                    dimensions: [1, 1],
+                    anchor: [0, 0],
+                    tint: "0xFFFFFF",
+                    animations: []
+                }; // dummy
             }
-            return null;
         }
     }
 }

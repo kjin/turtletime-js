@@ -10,6 +10,7 @@ module TurtleTime {
 
     export class EntitySpriteWrapper {
         private _sprite : Sprite;
+        private _spriteID : string;
         private _mirror : MirrorDirection = MirrorDirection.None;
 
         constructor() {
@@ -17,11 +18,8 @@ module TurtleTime {
         }
 
         reset(specs : SpriteSpecs) : void {
-            if (specs.hasOwnProperty('filter')) {
-                this._sprite.loadTexture(specs.spriteID + '-filter');
-            } else {
-                this._sprite.loadTexture(specs.spriteID);
-            }
+            this._sprite.loadTexture(specs.spriteID);
+            this._spriteID = specs.spriteID;
             this._sprite.anchor = new Point(specs.anchor[0], specs.anchor[1]);
             this._sprite.scale = new Point(specs.scale, specs.scale);
             this._sprite.tint = parseInt(specs.tint);
@@ -48,6 +46,10 @@ module TurtleTime {
 
         destroy() : void {
             this._sprite.destroy(); // careful
+        }
+
+        get spriteID() : string {
+            return this._spriteID;
         }
 
         get x() : number {

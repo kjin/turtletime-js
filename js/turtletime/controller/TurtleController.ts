@@ -92,6 +92,7 @@ module TurtleTime {
                 // conditions for selection
                 if (inputState.justPressed && selectionModel.entity != turtle) {
                     selectionModel.entity = turtle;
+                    this._writeState.uiInteractionModel.currentTurtle = turtle.appearanceID;
                     selectionModel.selectedOnClick = this._readState.inputState.clickNumber;
                 }
             }

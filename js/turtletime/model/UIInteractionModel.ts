@@ -4,6 +4,7 @@ module TurtleTime {
         activeUIModel : UIModel;
         menuStack : UIStack = new UIStack();
         currentFood : string = null;
+        currentTurtle : string = null;
 
         mouseOver(ui : UIModel) : boolean {
             return this.activeUIModel == ui;

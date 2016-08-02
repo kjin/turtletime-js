@@ -42,6 +42,44 @@
       ]
     },
     {
+      "id": "profile",
+      "container": {
+        "anchor": [0, 0],
+        "position": ["0%", "0%"],
+        "size": ["100%", "100%"]
+      },
+      "appearance": { "normal": {} },
+      "children": [
+        {
+          "id": "view",
+          "container": {
+            "anchor": [0.0, 0.0],
+            "position": ["10px", "10px"],
+            "size": ["60px", "90px"]
+          },
+          "appearance": { "normal": { "sprite": { "category": "turtle", "animation": "down-profile" } } }
+        },
+        {
+          "id": "name",
+          "container": {
+            "anchor": [1.0, 0.0],
+            "position": ["100%-10px", "10px"],
+            "size": ["100%-90px", "90px"]
+          },
+          "appearance": { "normal": { "text": { "text": "Name goes here", "justify": "left" } } }
+        },
+        {
+          "id": "description",
+          "container": {
+            "anchor": [0.0, 0.0],
+            "position": ["10px", "110px"],
+            "size": ["100%-20px", "100%-120px"]
+          },
+          "appearance": { "normal": { "text": { "text": "Description goes here", "justify": "left", "valign": "top" } } }
+        }
+      ]
+    },
+    {
       "id": "foodItem",
       "container": {
         "anchor": [0, 0],
@@ -414,6 +452,13 @@
                 "id": "foodMenu",
                 "template": {
                   "id": "foodMenu"
+                },
+                "visible": false
+              },
+              {
+                "id": "profile",
+                "template": {
+                  "id": "profile"
                 },
                 "visible": false
               }

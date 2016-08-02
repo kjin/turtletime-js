@@ -108,10 +108,36 @@ module TurtleTime {
                     // state.currentFood = child.id;
                 });
             });
+            this.assign("menu.body.foodMenu.confirmButton", (root, state) => {
+                var food = this._writeState.rootUI
+                    .getChild("menu.body.foodMenu.foodMenu").getAllChildren()
+                    .find((child : UIModel) => child.getChild("icon").data.toggled);
+                if (food != null) {
+                    state.menuStack.pop();
+                    state.currentFood = food.id;
+                    root.getChild("menu").visible = false;
+                    root.getChild("game").visible = true;
+                }
+            });
             this.assign("game.popMenu.drag", (root, state) => {
                 this._writeState.selectionModel.startDrag();
             });
+            this.assign("game.popMenu.profile", (root, state) => {
+                root.getChild("menu").visible = true;
+                var turtleData : TurtleData = GAME_ENGINE.globalData.turtleData.get(state.currentTurtle);
+                root.getChild("menu.body.profile.view").appearance.normal.sprite.spriteID = turtleData.id;
+                root.getChild("menu.body.profile.name").appearance.normal.text.text = turtleData.name;
+                root.getChild("menu.body.profile.description").appearance.normal.text.text = "Description: " + turtleData.description + "\n" +
+                    "Likes: " + turtleData.likes + "\n" +
+                    "Dislikes: " + turtleData.dislikes;
+                state.menuStack.push(root.getChild("menu.body.profile"));
+                root.getChild("game").visible = false;
+            });
             this.assign("game.popMenu.menu", (root, state) => {
+                root.getChild("menu.body.foodMenu.foodMenu").children.forEach((child:UIModel) => {
+                    child.getChild("icon").visualState = "normal";
+                    child.getChild("icon").data.toggled = false;
+                });
                 root.getChild("menu").visible = true;
                 root.getChild("menu.body.foodMenu.confirmButton").visible = true;
                 state.menuStack.push(root.getChild("menu.body.foodMenu"));

@@ -20,7 +20,7 @@ module TurtleTime {
                     var eatingArea : EatingArea = this._readState.roomModel.getRoomNode(turtle.position).eatingArea;
                     if (eatingArea != null && Point.equals(turtle.position, eatingArea.chair.atPosition)) {
                         var food : Food = this._readState.roomModel.getRoomNode(eatingArea.table.atPosition).food;
-                        if (food != null) {
+                        if (food == null) {
                             var chairDirectionVector:Point = Direction.toVector(eatingArea.chair.chair.direction);
                             this._writeState.foods.add({
                                 position: [eatingArea.chair.chair.position.x + chairDirectionVector.x, eatingArea.chair.chair.position.y + chairDirectionVector.y],

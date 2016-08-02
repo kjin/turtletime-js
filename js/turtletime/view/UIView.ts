@@ -16,6 +16,7 @@ module TurtleTime {
         private _bitmapText : Phaser.BitmapText;
         private _text : Phaser.Text;
         private _sprite : EntitySpriteWrapper;
+        private _currentSpriteID : string;
         private _editMode : boolean;
         private _timeSinceVisiblityChanged : number = 100;
         private _cachedVisibility : boolean = false;
@@ -59,6 +60,7 @@ module TurtleTime {
                 if (this.model.appearance.normal.sprite != null) {
                     this._sprite = new EntitySpriteWrapper();
                     this._sprite.reset(GAME_ENGINE.globalData.spriteSpecs.getSpriteSpecs(this.model.appearance.normal.sprite.category, this.model.appearance.normal.sprite.spriteID));
+                    this._currentSpriteID = this.model.appearance.normal.sprite.spriteID; // todo: this doesn't check for category
                     this._sprite.underlyingSprite.data = this._level * 10 + 2;
                 }
                 if (this.model.appearance.normal.geometry != null) {
@@ -157,6 +159,10 @@ module TurtleTime {
                     this._bitmapText.alpha = fadeData.alpha;
                 }
                 if (this._sprite != null) {
+                    if (this._currentSpriteID != currentAppearance.sprite.spriteID) {
+                        this._sprite.reset(GAME_ENGINE.globalData.spriteSpecs.getSpriteSpecs(currentAppearance.sprite.category, currentAppearance.sprite.spriteID));
+                        this._currentSpriteID = currentAppearance.sprite.spriteID; // todo: this doesn't check for category
+                    }
                     this._sprite.x = this.screenDimensions.x + this.screenDimensions.width / 2 + fadeData.xOffset;
                     this._sprite.y = this.screenDimensions.y + this.screenDimensions.height / 2 + fadeData.yOffset;
                     this._sprite.animation = currentAppearance.sprite.animation;

@@ -35,7 +35,7 @@ namespace TurtleTime {
             var scale_factor : number = (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) ? 1 : 1;
 
             httpGet("assets/assets.json", ((response : string): void => {
-                this.game = new Phaser.Game(window.innerWidth * scale_factor, window.innerHeight * scale_factor, Phaser.AUTO, '', null, false, false);
+                this.game = new Phaser.Game(window.innerWidth * scale_factor, window.innerHeight * scale_factor, Phaser.AUTO, '', null, false, true);
 
                 var assets : AssetDocument = JSON.parse(response);
                 var assetCache = {};
