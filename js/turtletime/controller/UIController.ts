@@ -138,6 +138,7 @@ module TurtleTime {
                     child.getChild("icon").visualState = "normal";
                     child.getChild("icon").data.toggled = false;
                 });
+                root.getChild("menu.body.foodMenu.foodDescription").appearance.normal.text.text = "";
                 root.getChild("menu").visible = true;
                 root.getChild("menu.body.foodMenu.confirmButton").visible = true;
                 state.menuStack.push(root.getChild("menu.body.foodMenu"));

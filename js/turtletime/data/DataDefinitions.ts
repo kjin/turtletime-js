@@ -50,7 +50,8 @@ module TurtleTime {
             roomDecor: Array<EntityData>,
             food: Array<EntityData>
         },
-        room: RoomData
+        room: RoomData,
+        progress: UserProgress
     }
 
     /**

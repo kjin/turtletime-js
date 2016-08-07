@@ -116,8 +116,8 @@ namespace TurtleTime {
                 // satisfy pre-requisites
                 var shouldLoad : boolean = !game.cache.checkImageKey(entry.id);
                 if (shouldLoad) {
-                    for (var i = 0; i < entry.source.length; i++) {
-                        shouldLoad = shouldLoad && game.cache.checkImageKey(entry.source[i]);
+                    for (var i = 0; i < entry.sources.length; i++) {
+                        shouldLoad = shouldLoad && game.cache.checkImageKey(entry.sources[i]);
                         if (!shouldLoad) {
                             break;
                         }
@@ -129,7 +129,7 @@ namespace TurtleTime {
                 }
                 if (!assetCache.hasOwnProperty(entry.id)) {
                     this.debugPrintln("Generating " + entry.id + "...");
-                    var bitmapData:BitmapData = ImageProcessing.SINGLETON[entry.action.name](game, entry.source, entry.action.params);
+                    var bitmapData:BitmapData = ImageProcessing.SINGLETON[entry.action.name](game, entry.sources, entry.action.params);
                     assetCache[entry.id] = bitmapData.baseTexture.source["toDataURL"]();
                 } else {
                     this.debugPrintln("Retrieving " + entry.id + " from cache...");

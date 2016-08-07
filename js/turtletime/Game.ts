@@ -47,7 +47,8 @@ namespace TurtleTime {
                 eatingAreas: [],
                 roomModel: new RoomModel(userData.room),
                 uiModel: new UIModel(uiData.layout),
-                uiInteractionModel: new UIInteractionModel()
+                uiInteractionModel: new UIInteractionModel(),
+                userProgress: userData.progress
             };
         }
 

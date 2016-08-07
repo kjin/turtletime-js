@@ -13,5 +13,8 @@
     "wallHeight": 0,
     "floorPattern": "",
     "wallPattern": ""
+  },
+  "progress": {
+
   }
 }

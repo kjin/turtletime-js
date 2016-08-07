@@ -21,6 +21,7 @@ module TurtleTime {
         eatingAreas : Array<EatingArea>
         roomModel: RoomModel,
         uiModel: UIModel,
-        uiInteractionModel: UIInteractionModel
+        uiInteractionModel: UIInteractionModel,
+        userProgress: UserProgress
     }
 }

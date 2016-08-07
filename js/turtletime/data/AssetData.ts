@@ -6,7 +6,7 @@ namespace TurtleTime {
 
     export interface DerivedTextureAssetEntry {
         id: string,
-        source: Array<string>,
+        sources: Array<string>,
         action: TextureFilterData,
         frameSize?: Array<number>
     }

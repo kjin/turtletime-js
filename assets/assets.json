@@ -30,13 +30,13 @@
       { "id": "emoji/smiley" }
     ],
     "derivedFiles": [
-      { "id": "turtle/turtle-complete", "source": [ "turtle/walking.0", "turtle/walking.1", "turtle/walking.2", "turtle/walking.3" ], "action": { "name": "stack" } },
-      { "id": "turtle/turtle-green", "source": [ "turtle/turtle-complete" ], "action": { "name": "hueRotation", "params": [0] }, "frameSize": [22, 30] },
-      { "id": "turtle/turtle-blue", "source": [ "turtle/turtle-complete" ], "action": { "name": "hueRotation", "params": [60] }, "frameSize": [22, 30] },
-      { "id": "turtle/turtle-purple", "source": [ "turtle/turtle-complete" ], "action": { "name": "hueRotation", "params": [120] }, "frameSize": [22, 30] },
-      { "id": "turtle/turtle-magenta", "source": [ "turtle/turtle-complete" ], "action": { "name": "hueRotation", "params": [180] }, "frameSize": [22, 30] },
-      { "id": "turtle/turtle-red", "source": [ "turtle/turtle-complete" ], "action": { "name": "hueRotation", "params": [240] }, "frameSize": [22, 30] },
-      { "id": "turtle/turtle-yellow", "source": [ "turtle/turtle-complete" ], "action": { "name": "hueRotation", "params": [300] }, "frameSize": [22, 30] }
+      { "id": "turtle/turtle-complete", "sources": [ "turtle/walking.0", "turtle/walking.1", "turtle/walking.2", "turtle/walking.3" ], "action": { "name": "stack" } },
+      { "id": "turtle/turtle-green", "sources": [ "turtle/turtle-complete" ], "action": { "name": "hueRotation", "params": [0] }, "frameSize": [22, 30] },
+      { "id": "turtle/turtle-blue", "sources": [ "turtle/turtle-complete" ], "action": { "name": "hueRotation", "params": [60] }, "frameSize": [22, 30] },
+      { "id": "turtle/turtle-purple", "sources": [ "turtle/turtle-complete" ], "action": { "name": "hueRotation", "params": [120] }, "frameSize": [22, 30] },
+      { "id": "turtle/turtle-magenta", "sources": [ "turtle/turtle-complete" ], "action": { "name": "hueRotation", "params": [180] }, "frameSize": [22, 30] },
+      { "id": "turtle/turtle-red", "sources": [ "turtle/turtle-complete" ], "action": { "name": "hueRotation", "params": [240] }, "frameSize": [22, 30] },
+      { "id": "turtle/turtle-yellow", "sources": [ "turtle/turtle-complete" ], "action": { "name": "hueRotation", "params": [300] }, "frameSize": [22, 30] }
     ]
   },
   "json": {
