@@ -101,7 +101,8 @@ namespace TurtleTime {
                     roomDecor: [],
                     food: gameState.entities.food.serialize()
                 },
-                room: gameState.roomModel.serialize()
+                room: gameState.roomModel.serialize(),
+                progress: gameState.userProgress
             };
             localStorage.setItem('userData', JSON.stringify(userData));
         }

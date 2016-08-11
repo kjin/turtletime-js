@@ -30,6 +30,8 @@ namespace TurtleTime {
          * This value is used by a lot of objects, so it's probably not worth passing it around.
          */
         cameraPosition : Point = new Point();
+        private _saveRaised : boolean = false;
+        raiseSave() : void { this._saveRaised = true; }
 
         constructor() {
             var scale_factor : number = (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) ? 1 : 1;
@@ -167,6 +169,10 @@ namespace TurtleTime {
             }
             this.views.update();
             this.time += 1/60.0;
+            if (this._saveRaised) {
+                this.saveModel(this.gameState);
+                this._saveRaised = false;
+            }
         }
 
         debugPrint(text : any) {

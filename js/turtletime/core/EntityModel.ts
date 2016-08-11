@@ -112,7 +112,7 @@ module TurtleTime {
             return result;
         }
         
-        setTargetPosition(x : number, y : number) : void {
+        setTargetPosition(x : number, y : number, memo : string) : void {
             this.position.x = x;
             this.position.y = y;
         }

@@ -22,5 +22,10 @@
     "wallHeight": 2,
     "floorPattern": "tile",
     "wallPattern": "brick"
+  },
+  "progress": {
+    "ratingLog": [],
+    "turtles": [],
+    "food": []
   }
 }

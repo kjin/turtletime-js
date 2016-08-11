@@ -29,9 +29,13 @@ module TurtleTime {
 
         getEntityClass() : EntityType { return EntityType.Turtle; }
 
-        setTargetPosition(x : number, y : number) : void {
+        setTargetPosition(x : number, y : number, memo : string) : void {
             this.targetPosition.x = x;
             this.targetPosition.y = y;
+            if (memo == "drag") {
+                this.status = "preNavigation";
+                this.timeUntilDecision = 0;
+            }
         }
 
         getAdditionalData() : any {

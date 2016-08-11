@@ -3,13 +3,22 @@
 
 module TurtleTime {
     export class RoomNode {
+        position : Point;
         staticModels : Array<EntityModel> = [];
         eatingArea : EatingArea = null;
         turtle : Turtle = null;
         food : Food = null;
 
+        constructor(x : number, y : number) {
+            this.position = new Point(x, y);
+        }
+
         hasModel() : boolean {
             return this.staticModels.length > 0 || this.turtle != null || this.food != null; // eating area is already part of static models
+        }
+
+        isEatingSeat() : boolean {
+            return this.eatingArea != null && Point.equals(this.eatingArea.chair.atPosition, this.position);
         }
     }
 
@@ -36,7 +45,7 @@ module TurtleTime {
             for (var i : number = 0; i < this.width; i++) {
                 this.roomLayout[i] = new Array<RoomNode>(this.height);
                 for (var j : number = 0; j < this.height; j++) {
-                    this.roomLayout[i][j] = new RoomNode;
+                    this.roomLayout[i][j] = new RoomNode(i, j);
                 }
             }
         }

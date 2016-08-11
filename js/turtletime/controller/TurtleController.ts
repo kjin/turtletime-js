@@ -21,7 +21,8 @@ module TurtleTime {
                 uiInteractionModel : gameState.uiInteractionModel,
                 turtles: gameState.entities.turtles,
                 food : gameState.entities.food,
-                eatingAreas : gameState.eatingAreas
+                eatingAreas : gameState.eatingAreas,
+                userProgress : gameState.userProgress
             };
         }
 
@@ -156,7 +157,7 @@ module TurtleTime {
                                     if (candidates.length > 0) {
                                         var cNum = Math.floor(Math.random() * candidates.length);
                                         turtle.targetPosition = new Point(candidates[cNum].x, candidates[cNum].y);
-                                        turtle.status = "navigatingToSeat";
+                                        turtle.status = "preNavigation";
                                     } else {
                                         if (turtle.status == "justEntered") {
                                             var direction : Point = Direction.toVector(turtle.direction);
@@ -176,6 +177,17 @@ module TurtleTime {
                                         turtle.status = "sitting";
                                     }
                                     break;
+                                case "preNavigation":
+                                    GAME_ENGINE.raiseSave();
+                                    var roomNode : RoomNode = this._readState.roomModel.getRoomNode(turtle.targetPosition);
+                                    if (roomNode.isEatingSeat()) {
+                                        turtle.status = "navigatingToSeat";
+                                    } else if (roomNode.staticModels.find((model : EntityModel) => model.getEntityClass() == EntityType.Door)) {
+                                        turtle.status = "exiting";
+                                    } else {
+                                        turtle.status = "navigatingToPosition";
+                                    }
+                                    break;
                                 case "sitting":
                                     if (Math.random() <= 0.01) {
                                         turtle.mood.incrementMoodLevel("fork", 1);
@@ -189,10 +201,16 @@ module TurtleTime {
                                     break;
                                 case "exiting":
                                     if (turtle.atTargetPosition()) {
+                                        // turtle leaves cafe here
+                                        this._writeState.userProgress.ratingLog.push({
+                                            numStars: Math.floor(Math.random() * 5 + 1) // just let it rate 1-5 stars at random
+                                        });
                                         this._writeState.turtles.remove(turtle);
+                                        GAME_ENGINE.raiseSave();
                                     }
                                     break;
                                 default:
+                                    break;
                             }
                         } else {
                             turtle.timeUntilDecision--;

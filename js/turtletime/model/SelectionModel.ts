@@ -58,7 +58,7 @@ module TurtleTime {
 
         endDrag() {
             if (this.isBeingDragged) {
-                this.entity.setTargetPosition(this.currentDragPositionInRoom.x, this.currentDragPositionInRoom.y);
+                this.entity.setTargetPosition(this.currentDragPositionInRoom.x, this.currentDragPositionInRoom.y, "drag");
                 this.entity = null;
                 this.isBeingDragged = false;
             }
