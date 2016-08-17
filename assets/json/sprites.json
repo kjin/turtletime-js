@@ -1,11 +1,17 @@
 {
   "turtle": {
-    "green": { "spriteID": "turtle/turtle-green", "scale": 2, "anchor": [0.5, 0.8], "animationTemplate": "turtle" },
-    "blue": { "spriteID": "turtle/turtle-blue", "scale": 2, "anchor": [0.5, 0.8], "animationTemplate": "turtle" },
-    "purple": { "spriteID": "turtle/turtle-purple", "scale": 2, "anchor": [0.5, 0.8], "animationTemplate": "turtle" },
-    "magenta": { "spriteID": "turtle/turtle-magenta", "scale": 2, "anchor": [0.5, 0.8], "animationTemplate": "turtle" },
-    "red": { "spriteID": "turtle/turtle-red", "scale": 2, "anchor": [0.5, 0.8], "animationTemplate": "turtle" },
-    "yellow": { "spriteID": "turtle/turtle-yellow", "scale": 2, "anchor": [0.5, 0.8], "animationTemplate": "turtle" }
+    "t000": { "spriteID": "turtle/turtle-000", "scale": 2, "anchor": [0.5, 0.8], "animationTemplate": "turtle" },
+    "t030": { "spriteID": "turtle/turtle-030", "scale": 2, "anchor": [0.5, 0.8], "animationTemplate": "turtle" },
+    "t060": { "spriteID": "turtle/turtle-060", "scale": 2, "anchor": [0.5, 0.8], "animationTemplate": "turtle" },
+    "t090": { "spriteID": "turtle/turtle-090", "scale": 2, "anchor": [0.5, 0.8], "animationTemplate": "turtle" },
+    "t120": { "spriteID": "turtle/turtle-120", "scale": 2, "anchor": [0.5, 0.8], "animationTemplate": "turtle" },
+    "t150": { "spriteID": "turtle/turtle-150", "scale": 2, "anchor": [0.5, 0.8], "animationTemplate": "turtle" },
+    "t180": { "spriteID": "turtle/turtle-180", "scale": 2, "anchor": [0.5, 0.8], "animationTemplate": "turtle" },
+    "t210": { "spriteID": "turtle/turtle-210", "scale": 2, "anchor": [0.5, 0.8], "animationTemplate": "turtle" },
+    "t240": { "spriteID": "turtle/turtle-240", "scale": 2, "anchor": [0.5, 0.8], "animationTemplate": "turtle" },
+    "t270": { "spriteID": "turtle/turtle-270", "scale": 2, "anchor": [0.5, 0.8], "animationTemplate": "turtle" },
+    "t300": { "spriteID": "turtle/turtle-300", "scale": 2, "anchor": [0.5, 0.8], "animationTemplate": "turtle" },
+    "t330": { "spriteID": "turtle/turtle-330", "scale": 2, "anchor": [0.5, 0.8], "animationTemplate": "turtle" }
   },
   "chair": {
     "chairBasic": {

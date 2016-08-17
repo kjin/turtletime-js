@@ -1,7 +1,7 @@
 {
   "turtles": [
     {
-      "id": "green",
+      "id": "t000",
       "name": "Greenie",
       "description": "Loves the color green, but ironically colorblind",
       "likes": [
@@ -13,7 +13,19 @@
       "rarity": 0
     },
     {
-      "id": "blue",
+      "id": "t030",
+      "name": "Real Teal",
+      "description": "Keeping it real/teal",
+      "likes": [
+        "Rhymes"
+      ],
+      "dislikes": [
+        "Orange, silver, mouth, and some other word that I can't think of off the top of my head"
+      ],
+      "rarity": 5
+    },
+    {
+      "id": "t060",
       "name": "Ka-Bluie",
       "description": "Explosive personality",
       "likes": [
@@ -22,10 +34,34 @@
       "dislikes": [
         "Relaxing"
       ],
-      "rarity": 5
+      "rarity": 10
     },
     {
-      "id": "purple",
+      "id": "t090",
+      "name": "Cool Beans",
+      "description": "Unoriginal catchphrase",
+      "likes": [
+        "Beanie Babies"
+      ],
+      "dislikes": [
+        "Legume Lads"
+      ],
+      "rarity": 15
+    },
+    {
+      "id": "t120",
+      "name": "Indigogo",
+      "description": "Vocabulary limited to one word",
+      "likes": [
+        "Go go go go go"
+      ],
+      "dislikes": [
+        "Go go go go go go"
+      ],
+      "rarity": 10
+    },
+    {
+      "id": "t150",
       "name": "King Violet",
       "description": "Acts all kingly and snobbish after reading that purple is a royal color on MeaningOfColors.biz",
       "likes": [
@@ -34,10 +70,10 @@
       "dislikes": [
         "Peasant Lobster"
       ],
-      "rarity": 10
+      "rarity": 20
     },
     {
-      "id": "magenta",
+      "id": "t180",
       "name": "Pinky",
       "description": "As close to a pinky finger as a personality can get",
       "likes": [
@@ -49,7 +85,19 @@
       "rarity": 15
     },
     {
-      "id": "red",
+      "id": "t210",
+      "name": "Overgrown Raspberry",
+      "description": "Raspberry pretending to be a turtle (or turtle pretending to be a raspberry?)",
+      "likes": [
+        "Telling half-truths"
+      ],
+      "dislikes": [
+        "Fruit pickers"
+      ],
+      "rarity": 5
+    },
+    {
+      "id": "t240",
       "name": "Mars",
       "description": "Fourth planet from the sun",
       "likes": [
@@ -61,7 +109,19 @@
       "rarity": 20
     },
     {
-      "id": "yellow",
+      "id": "t270",
+      "name": "Earthworm",
+      "description": "Digs tunnels without telling nobody",
+      "likes": [
+        "Rain"
+      ],
+      "dislikes": [
+        "Sunny weather that immediately succeeds rain"
+      ],
+      "rarity": 25
+    },
+    {
+      "id": "t300",
       "name": "Watermello",
       "description": "Looks like a watermelon and acts like one too",
       "likes": [
@@ -71,6 +131,18 @@
         "Other Melons"
       ],
       "rarity": 30
+    },
+    {
+      "id": "t330",
+      "name": "Forest",
+      "description": "Hides behind trees in the presence of non-trees",
+      "likes": [
+        "Nature"
+      ],
+      "dislikes": [
+        "Chopsticks"
+      ],
+      "rarity": 10
     }
   ]
 }

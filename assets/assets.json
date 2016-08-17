@@ -31,12 +31,18 @@
     ],
     "derivedFiles": [
       { "id": "turtle/turtle-complete", "sources": [ "turtle/walking.0", "turtle/walking.1", "turtle/walking.2", "turtle/walking.3" ], "action": { "name": "stack" } },
-      { "id": "turtle/turtle-green", "sources": [ "turtle/turtle-complete" ], "action": { "name": "hueRotation", "params": [0] }, "frameSize": [22, 30] },
-      { "id": "turtle/turtle-blue", "sources": [ "turtle/turtle-complete" ], "action": { "name": "hueRotation", "params": [60] }, "frameSize": [22, 30] },
-      { "id": "turtle/turtle-purple", "sources": [ "turtle/turtle-complete" ], "action": { "name": "hueRotation", "params": [120] }, "frameSize": [22, 30] },
-      { "id": "turtle/turtle-magenta", "sources": [ "turtle/turtle-complete" ], "action": { "name": "hueRotation", "params": [180] }, "frameSize": [22, 30] },
-      { "id": "turtle/turtle-red", "sources": [ "turtle/turtle-complete" ], "action": { "name": "hueRotation", "params": [240] }, "frameSize": [22, 30] },
-      { "id": "turtle/turtle-yellow", "sources": [ "turtle/turtle-complete" ], "action": { "name": "hueRotation", "params": [300] }, "frameSize": [22, 30] }
+      { "id": "turtle/turtle-000", "sources": [ "turtle/turtle-complete" ], "action": { "name": "hueRotation", "params": [0] }, "frameSize": [22, 30] },
+      { "id": "turtle/turtle-030", "sources": [ "turtle/turtle-complete" ], "action": { "name": "hueRotation", "params": [30] }, "frameSize": [22, 30] },
+      { "id": "turtle/turtle-060", "sources": [ "turtle/turtle-complete" ], "action": { "name": "hueRotation", "params": [60] }, "frameSize": [22, 30] },
+      { "id": "turtle/turtle-090", "sources": [ "turtle/turtle-complete" ], "action": { "name": "hueRotation", "params": [90] }, "frameSize": [22, 30] },
+      { "id": "turtle/turtle-120", "sources": [ "turtle/turtle-complete" ], "action": { "name": "hueRotation", "params": [120] }, "frameSize": [22, 30] },
+      { "id": "turtle/turtle-150", "sources": [ "turtle/turtle-complete" ], "action": { "name": "hueRotation", "params": [150] }, "frameSize": [22, 30] },
+      { "id": "turtle/turtle-180", "sources": [ "turtle/turtle-complete" ], "action": { "name": "hueRotation", "params": [180] }, "frameSize": [22, 30] },
+      { "id": "turtle/turtle-210", "sources": [ "turtle/turtle-complete" ], "action": { "name": "hueRotation", "params": [210] }, "frameSize": [22, 30] },
+      { "id": "turtle/turtle-240", "sources": [ "turtle/turtle-complete" ], "action": { "name": "hueRotation", "params": [240] }, "frameSize": [22, 30] },
+      { "id": "turtle/turtle-270", "sources": [ "turtle/turtle-complete" ], "action": { "name": "hueRotation", "params": [270] }, "frameSize": [22, 30] },
+      { "id": "turtle/turtle-300", "sources": [ "turtle/turtle-complete" ], "action": { "name": "hueRotation", "params": [300] }, "frameSize": [22, 30] },
+      { "id": "turtle/turtle-330", "sources": [ "turtle/turtle-complete" ], "action": { "name": "hueRotation", "params": [330] }, "frameSize": [22, 30] }
     ]
   },
   "json": {
