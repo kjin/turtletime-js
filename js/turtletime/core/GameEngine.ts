@@ -146,6 +146,15 @@ namespace TurtleTime {
             return complete;
         }
 
+        private updateEntities() : void {
+            for (var property in this.gameState.entities) {
+                if (this.gameState.entities.hasOwnProperty(property)) {
+                    var entityCollection : AbstractEntityCollection = this.gameState.entities[property];
+                    entityCollection.update(this.views);
+                }
+            }
+        }
+
         private create() : void {
             // this.game.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT;
             this.time = 0;
@@ -155,18 +164,14 @@ namespace TurtleTime {
             this.views = this.createView(this.gameState);
             // Set controllers
             this.controllers.forEach((function (controller : Controller<GameState>) { controller.initialize(this.gameState); }).bind(this));
+            this.updateEntities();
         }
 
         private update() : void {
             this.debugText = "";
             // Update controllers
             this.controllers.forEach(function (controller : Controller<GameState>) { controller.update(1.0/60); });
-            for (var property in this.gameState.entities) {
-                if (this.gameState.entities.hasOwnProperty(property)) {
-                    var entityCollection : AbstractEntityCollection = this.gameState.entities[property];
-                    entityCollection.update(this.views);
-                }
-            }
+            this.updateEntities();
             this.views.update();
             this.time += 1/60.0;
             if (this._saveRaised) {

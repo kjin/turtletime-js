@@ -7,7 +7,7 @@ module TurtleTime {
     export abstract class AbstractEntityCollection {
         abstract update(gameView : GameView) : void;
 
-        abstract forEachModel(callback: (value: EntityModel) => void) : void;
+        abstract forEachModel(callback: (value: EntityModel) => void, includeUnprocessed : boolean) : void;
     }
 
     /**
@@ -31,17 +31,18 @@ module TurtleTime {
         }
 
         addAll(entityDataArray : Array<EntityData>) : void {
-            entityDataArray.forEach((e : EntityData) : void => this.add(e));
+            entityDataArray.forEach((e : EntityData) : void => { this.add(e); return });
         }
 
         /**
          * Instantiates the model represented by a given entity data.
          * @param entityData The data that represents the model's serialized form.
          */
-        add(entityData : EntityData) : void {
+        add(entityData : EntityData) : T {
             var newObject : T = new this._type();
             newObject.initialize(entityData);
             this._preEntities.push(newObject);
+            return newObject;
         }
 
         remove(entityModel : T) : void {
@@ -72,12 +73,15 @@ module TurtleTime {
             return new EntityView(entity);
         }
 
-        forEach(callback: (value: T) => void) {
+        forEach(callback: (value: T) => void, includeUnprocessed : boolean = false) {
             this._entities.forEach(callback);
+            if (includeUnprocessed) {
+                this._preEntities.forEach(callback);
+            }
         }
 
-        forEachModel(callback: (value: EntityModel) => void) : void {
-            this.forEach((value : T) => callback(value));
+        forEachModel(callback: (value: EntityModel) => void, includeUnprocessed : boolean = false) : void {
+            this.forEach((value : T) => callback(value), includeUnprocessed);
         }
 
         get underlyingArray() : Array<T> {
@@ -89,7 +93,8 @@ module TurtleTime {
         }
 
         serialize() : Array<EntityData> {
-            return this._entities.map((e: T, i : number, arr : Array<T>) : EntityData => e.serialize());
+            var saveFunc = (e: T, i : number, arr : Array<T>) : EntityData => e.serialize();
+            return this._preEntities.map(saveFunc).concat(this._entities.map(saveFunc));
         }
     }
 

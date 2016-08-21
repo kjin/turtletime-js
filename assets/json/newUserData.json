@@ -3,13 +3,22 @@
     "turtles": [],
     "chairs": [
       { "position": [2, 2], "direction": "right", "appearanceID": "chairBasic" },
-      { "position": [5, 2], "direction": "left", "appearanceID": "chairBasic" }
+      { "position": [5, 2], "direction": "left", "appearanceID": "chairBasic" },
+      { "position": [10, 2], "direction": "right", "appearanceID": "chairBasic" },
+      { "position": [13, 2], "direction": "left", "appearanceID": "chairBasic" },
+      { "position": [2, 7], "direction": "right", "appearanceID": "chairBasic" },
+      { "position": [5, 7], "direction": "left", "appearanceID": "chairBasic" },
+      { "position": [10, 7], "direction": "right", "appearanceID": "chairBasic" },
+      { "position": [13, 7], "direction": "left", "appearanceID": "chairBasic" }
     ],
     "tables": [
-      { "position": [3, 2], "appearanceID": "tableBasic" }
+      { "position": [3, 2], "appearanceID": "tableBasic" },
+      { "position": [11, 2], "appearanceID": "tableBasic" },
+      { "position": [3, 7], "appearanceID": "tableBasic" },
+      { "position": [11, 7], "appearanceID": "tableBasic" }
     ],
     "doors": [
-      { "position": [6, 7], "direction": "up", "appearanceID": "doorBasic" }
+      { "position": [0, 15], "direction": "up", "appearanceID": "doorBasic" }
     ],
     "wallDecor": [
       { "position": [4, 0], "appearanceID": "blackboard" }
@@ -18,7 +27,7 @@
     "food": []
   },
   "room": {
-    "size": [8, 8],
+    "size": [16, 16],
     "wallHeight": 2,
     "floorPattern": "tile",
     "wallPattern": "brick"
@@ -27,5 +36,10 @@
     "ratingLog": [],
     "turtles": [],
     "food": []
+  },
+  "timestamp": -1,
+  "spawnData": {
+    "currentIndex": 0,
+    "time": 0
   }
 }

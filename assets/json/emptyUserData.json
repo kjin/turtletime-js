@@ -18,5 +18,10 @@
     "ratingLog": [],
     "turtles": [],
     "food": []
+  },
+  "timestamp": -1,
+  "spawnData": {
+    "currentIndex": 0,
+    "time": 0
   }
 }

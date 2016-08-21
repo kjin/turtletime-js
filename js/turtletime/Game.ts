@@ -48,7 +48,15 @@ namespace TurtleTime {
                 roomModel: new RoomModel(userData.room),
                 uiModel: new UIModel(uiData.layout),
                 uiInteractionModel: new UIInteractionModel(),
-                userProgress: userData.progress
+                userProgress: userData.progress,
+                fastForward: (() => {
+                    if (userData.timestamp == -1) {
+                        return 0;
+                    } else {
+                        return Math.min((Date.now() - userData.timestamp) / 1000, 1000);
+                    }
+                })(),
+                spawnModel: userData.spawnData ? userData.spawnData : new TurtleSpawnModel()
             };
         }
 
@@ -63,13 +71,12 @@ namespace TurtleTime {
                     new CameraController(),
                     new AssociationController(),
                     new RoomLayoutController(),
+                    new EatingAreaController(),
                     new TurtleController(),
                     new InputController(),
-                    new TurtleSpawnController(),
                     new DragController(),
                     new UIController(),
                     new FoodSpawnController(),
-                    new EatingAreaController(),
                     new InGameUIController()
                 ];
             }
@@ -102,7 +109,9 @@ namespace TurtleTime {
                     food: gameState.entities.food.serialize()
                 },
                 room: gameState.roomModel.serialize(),
-                progress: gameState.userProgress
+                progress: gameState.userProgress,
+                timestamp: Date.now(),
+                spawnData: gameState.spawnModel
             };
             localStorage.setItem('userData', JSON.stringify(userData));
         }

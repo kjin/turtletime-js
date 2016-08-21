@@ -34,7 +34,7 @@ function setup(file, storageKey, globalOptions, insertMaterial) {
     var defData = "";
     if (file != null && file != "") {
         if (localStorage.getItem(storageKey) != null) {
-            editor.setValue(localStorage.getItem(storageKey));
+            editor.setValue(JSON.stringify(JSON.parse(localStorage.getItem(storageKey)), null, 2));
             editor.clearSelection();
             httpGet(file, function (resp) {
                 defData = resp;

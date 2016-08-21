@@ -13,11 +13,14 @@ module TurtleTime {
 
         initialize(gameState : T) : void {
             this._gameState = gameState;
+            this.initializeInternal(this._gameState);
         }
 
         update(dt : number) : void {
             this.updateInternal(this._gameState, dt);
         }
+
+        protected initializeInternal(gameState : T) : void {}
 
         protected abstract updateInternal(gameState : T, dt : number) : void;
     }

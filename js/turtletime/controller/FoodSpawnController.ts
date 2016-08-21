@@ -1,39 +1,31 @@
 module TurtleTime {
-    export class FoodSpawnController extends Controller<GameState> {
-        initialize(gameState:TurtleTime.GameState):void {
-            this._readState = {
-                selectionState: gameState.selectionModel,
-                roomModel: gameState.roomModel
-            };
-            this._writeState = {
-                uiInteractionModel: gameState.uiInteractionModel,
-                foods: gameState.entities.food
-            };
-        }
-
-        update(dt:number):void {
-            if (this._writeState.uiInteractionModel.currentFood != null) {
+    export class FoodSpawnController extends QuickController<GameState> {
+        protected updateInternal(gameState : GameState, dt:number):void {
+            if (gameState.uiInteractionModel.currentFood != null) {
                 // spawn the food incantation
-                if (this._readState.selectionState.entity != null &&
-                    this._readState.selectionState.entity instanceof Turtle) {
-                    var turtle : Turtle = (<Turtle>this._readState.selectionState.entity);
-                    var eatingArea : EatingArea = this._readState.roomModel.getRoomNode(turtle.position).eatingArea;
-                    if (eatingArea != null && Point.equals(turtle.position, eatingArea.chair.atPosition)) {
-                        var food : Food = this._readState.roomModel.getRoomNode(eatingArea.table.atPosition).food;
-                        if (food == null) {
-                            var chairDirectionVector:Point = Direction.toVector(eatingArea.chair.chair.direction);
-                            this._writeState.foods.add({
-                                position: [eatingArea.chair.chair.position.x + chairDirectionVector.x, eatingArea.chair.chair.position.y + chairDirectionVector.y],
-                                direction: Direction.getDirectionalString(eatingArea.chair.chair.direction),
-                                appearanceID: this._writeState.uiInteractionModel.currentFood,
-                                actionStatus: "default",
-                                additionalData: {
-                                    hp: 100
-                                }
-                            });
+                if (gameState.selectionModel.entity != null &&
+                    gameState.selectionModel.entity instanceof Turtle) {
+                    var turtle : Turtle = (<Turtle>gameState.selectionModel.entity);
+                    if (turtle.atTargetPosition()) {
+                        var eatingArea:EatingArea = gameState.roomModel.getRoomNode(turtle.position).eatingArea;
+                        if (eatingArea != null && Point.equals(turtle.position, eatingArea.chair.atPosition)) {
+                            var food:Food = gameState.roomModel.getRoomNode(eatingArea.table.atPosition).food;
+                            if (food == null) {
+                                var chairDirectionVector:Point = Direction.toVector(eatingArea.chair.chair.direction);
+                                gameState.entities.food.add({
+                                    position: [eatingArea.chair.chair.position.x + chairDirectionVector.x, eatingArea.chair.chair.position.y + chairDirectionVector.y],
+                                    direction: Direction.getDirectionalString(eatingArea.chair.chair.direction),
+                                    appearanceID: gameState.uiInteractionModel.currentFood,
+                                    actionStatus: "default",
+                                    additionalData: {
+                                        hp: 100
+                                    }
+                                });
+                                GAME_ENGINE.raiseSave();
+                            }
                         }
                     }
-                    this._writeState.uiInteractionModel.currentFood = null;
+                    gameState.uiInteractionModel.currentFood = null;
                 }
             }
         }

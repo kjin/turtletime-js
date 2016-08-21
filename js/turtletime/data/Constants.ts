@@ -2,7 +2,7 @@
  * Constant values used throughout the game
  */
 module TurtleTime {
-    export var TURTLE_SPEED : number = 0.035;
+    export var TURTLE_SPEED : number = 2.0;
     export var TURTLE_SPAWN_PROBABILITY_PER_SECOND : number = 0.1;
 
     export var UI_FADE_TIME : number = 0.2;

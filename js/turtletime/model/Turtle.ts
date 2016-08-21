@@ -15,7 +15,7 @@ module TurtleTime {
         initialize(entityData : EntityData) : void {
             super.initialize(entityData);
             this.selectionStatus = 'normal';
-            this.intermediateTargetPosition = new Point(this.position.x, this.position.y);
+            this.intermediateTargetPosition = new Point(Math.round(this.position.x), Math.round(this.position.y));
             this.targetPosition = new Point(entityData.additionalData.targetPosition[0], entityData.additionalData.targetPosition[1]);
             this.mood = new Mood(entityData.additionalData.mood);
             this.status = entityData.additionalData.status;

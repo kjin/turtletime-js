@@ -59,7 +59,7 @@ module TurtleTime {
         }
 
         isUnoccupiedSpaceXY(x : number, y : number) : boolean {
-            return this.isInRoomXY(x, y) && !this.roomLayout[x][y].hasModel();
+            return this.isInRoomXY(x, y) && !this.roomLayout[Math.round(x)][Math.round(y)].hasModel();
         }
 
         clamp(point : Point) : void {

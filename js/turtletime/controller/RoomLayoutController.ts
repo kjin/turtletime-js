@@ -28,7 +28,7 @@ module TurtleTime {
                             }
                         }
                     }
-                });
+                }, true);
             });
         }
 
