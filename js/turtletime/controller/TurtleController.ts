@@ -209,7 +209,7 @@ module TurtleTime {
                     case "exiting":
                         if (turtle.atTargetPosition()) {
                             // turtle leaves cafe here
-                            gameState.userProgress.ratingLog.push({
+                            gameState.userProgress.data.ratingLog.push({
                                 numStars: Math.floor(Math.random() * 5 + 1) // just let it rate 1-5 stars at random
                             });
                             gameState.entities.turtles.remove(turtle);
@@ -234,11 +234,11 @@ module TurtleTime {
             return Math.pow(1 - rarity / 100.0, 16);
         }
 
-        private static simulateTurtleActions(gameState, turtle, timeLeft) : void {
-            while (timeLeft > 0) {
+        private static simulateTurtleActions(gameState : GameState, turtle : Turtle, timeLeft : number) : void {
+            TurtleController.processInput(gameState, turtle);
+            while (timeLeft > 0 && gameState.selectionModel.entity == null) {
                 TurtleController.processBrain(gameState, turtle);
                 timeLeft = TurtleController.processMovement(gameState, turtle, timeLeft);
-                TurtleController.processInput(gameState, turtle);
                 timeLeft = TurtleController.processEating(gameState, turtle, timeLeft);
                 if (turtle.atTargetPosition()) {
                     turtle.currentAction = "stand";

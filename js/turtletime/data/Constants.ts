@@ -5,6 +5,8 @@ module TurtleTime {
     export var TURTLE_SPEED : number = 2.0;
     export var TURTLE_SPAWN_PROBABILITY_PER_SECOND : number = 0.1;
 
+    export var AUTOSAVE_RATE_SECONDS = 5.0;
+
     export var UI_FADE_TIME : number = 0.2;
     export var UI_DRAG_Y_OFFSET : number = 72;
 

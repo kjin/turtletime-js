@@ -22,7 +22,7 @@ module TurtleTime {
         roomModel: RoomModel,
         uiModel: UIModel,
         uiInteractionModel: UIInteractionModel,
-        userProgress: UserProgress,
+        userProgress: UserProgressModel,
         fastForward: number,
         spawnModel: TurtleSpawnModel
     }

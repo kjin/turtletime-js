@@ -48,7 +48,7 @@ namespace TurtleTime {
                 roomModel: new RoomModel(userData.room),
                 uiModel: new UIModel(uiData.layout),
                 uiInteractionModel: new UIInteractionModel(),
-                userProgress: userData.progress,
+                userProgress: new UserProgressModel(userData.progress),
                 fastForward: (() => {
                     if (userData.timestamp == -1) {
                         return 0;
@@ -109,7 +109,7 @@ namespace TurtleTime {
                     food: gameState.entities.food.serialize()
                 },
                 room: gameState.roomModel.serialize(),
-                progress: gameState.userProgress,
+                progress: gameState.userProgress.data,
                 timestamp: Date.now(),
                 spawnData: gameState.spawnModel
             };

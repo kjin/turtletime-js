@@ -2,12 +2,14 @@ namespace TurtleTime {
     export class InGameUIController extends Controller<GameState> {
         initialize(gameState:TurtleTime.GameState):void {
             this._readState = {
-                selectionModel: gameState.selectionModel
+                selectionModel: gameState.selectionModel,
+                userProgress: gameState.userProgress
             };
             this._writeState = {
                 gameUIModel: gameState.uiModel.getChild("game"),
                 dragNote: gameState.uiModel.getChild("game.dragNote"),
-                popMenu: gameState.uiModel.getChild("game.popMenu")
+                popMenu: gameState.uiModel.getChild("game.popMenu"),
+                ratingBar: gameState.uiModel.getChild("ratingBar")
             };
         }
 
@@ -35,6 +37,7 @@ namespace TurtleTime {
                 this._writeState.dragNote.visible = false;
                 this._writeState.popMenu.visible = false;
             }
+            this._writeState.ratingBar.appearance.normal.text.text = "Rating: " + this._readState.userProgress.averageRating;
         }
     }
 }

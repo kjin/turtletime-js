@@ -12,7 +12,7 @@ namespace TurtleTime {
         foodID : string
     }
 
-    export interface UserProgress {
+    export interface UserProgressData {
         ratingLog: Array<Rating>,
         turtles: Array<TurtleDiscoveryProgress>,
         food: Array<FoodDiscoveryProgress>

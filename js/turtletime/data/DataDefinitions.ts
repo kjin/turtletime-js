@@ -51,7 +51,7 @@ module TurtleTime {
             food: Array<EntityData>
         },
         room: RoomData,
-        progress: UserProgress,
+        progress: UserProgressData,
         timestamp: number,
         spawnData: TurtleSpawnModel
     }

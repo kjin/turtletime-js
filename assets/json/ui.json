@@ -329,6 +329,22 @@
         ]
       },
       {
+        "id": "ratingBar",
+        "container": {
+          "anchor": [0.0, 1.0],
+          "position": ["10px", "100%-10px"],
+          "size": ["100%-20px", "20px"]
+        },
+        "appearance": {
+          "normal": {
+            "text": {
+              "justify": "left"
+            }
+          }
+        },
+        "children": []
+      },
+      {
         "id": "menuButton",
         "container": {
           "anchor": [0.5, 0.5],
